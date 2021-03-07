@@ -130,7 +130,7 @@
     <Compile Include="Controllers\ConsultoresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
-    <Compile Include="Filters\Autenticacion.cs" />
+    <Compile Include="Filter\Autenticacion.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
