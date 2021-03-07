@@ -23,9 +23,9 @@ namespace SistVehiculo.Models
         public double montoTotal { get; set; }
         public int id_detalleFactura { get; set; }
     
-        public virtual Cliente Cliente { get; set; }
         public virtual detalle_Factura detalle_Factura { get; set; }
         public virtual Estado Estado { get; set; }
         public virtual VehiculosCliente VehiculosCliente { get; set; }
+        public virtual Cliente Cliente { get; set; }
     }
 }

@@ -29,7 +29,6 @@ namespace SistVehiculo.Models
         }
     
         public DbSet<Canton> Canton { get; set; }
-        public DbSet<Cliente> Cliente { get; set; }
         public DbSet<detalle_Factura> detalle_Factura { get; set; }
         public DbSet<Distrito> Distrito { get; set; }
         public DbSet<Estado> Estado { get; set; }
@@ -41,6 +40,7 @@ namespace SistVehiculo.Models
         public DbSet<TiposVehiculo> TiposVehiculo { get; set; }
         public DbSet<Vehiculos> Vehiculos { get; set; }
         public DbSet<VehiculosCliente> VehiculosCliente { get; set; }
+        public DbSet<Cliente> Cliente { get; set; }
     
         public virtual int pa_EliminaCliente(Nullable<int> idCliente)
         {

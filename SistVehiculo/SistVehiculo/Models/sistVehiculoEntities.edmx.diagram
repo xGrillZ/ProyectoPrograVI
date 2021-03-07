@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="866755e19f3d49269aa665892bc4f4bf" Name="Diagram1">
         <EntityTypeShape EntityType="mantvehiculosModel.Canton" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="mantvehiculosModel.Cliente" Width="1.5" PointX="7.5" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="mantvehiculosModel.detalle_Factura" Width="1.5" PointX="7.5" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="mantvehiculosModel.Distrito" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="mantvehiculosModel.Estado" Width="1.5" PointX="7.5" PointY="18.125" IsExpanded="true" />
@@ -20,11 +19,6 @@
         <EntityTypeShape EntityType="mantvehiculosModel.VehiculosCliente" Width="1.5" PointX="12.75" PointY="3.125" IsExpanded="true" />
         <AssociationConnector Association="mantvehiculosModel.Canton_ref_Provincia" ManuallyRouted="false" />
         <AssociationConnector Association="mantvehiculosModel.Distrito_ref_Canton" ManuallyRouted="false" />
-        <AssociationConnector Association="mantvehiculosModel.FK_Cliente_Canton" ManuallyRouted="false" />
-        <AssociationConnector Association="mantvehiculosModel.FK_Cliente_Distrito" ManuallyRouted="false" />
-        <AssociationConnector Association="mantvehiculosModel.FK_Cliente_Provincia" ManuallyRouted="false" />
-        <AssociationConnector Association="mantvehiculosModel.FK_Factura_Cliente" ManuallyRouted="false" />
-        <AssociationConnector Association="mantvehiculosModel.FK_VehiculosCliente_Cliente" ManuallyRouted="false" />
         <AssociationConnector Association="mantvehiculosModel.FK__Factura__id_deta__3B40CD36" ManuallyRouted="false" />
         <AssociationConnector Association="mantvehiculosModel.FK_detalleFactura_TipoServicio" ManuallyRouted="false" />
         <AssociationConnector Association="mantvehiculosModel.FK_Factura_Estado" ManuallyRouted="false" />
@@ -33,6 +27,12 @@
         <AssociationConnector Association="mantvehiculosModel.fk_vehiculos_marcavehiculo" ManuallyRouted="false" />
         <AssociationConnector Association="mantvehiculosModel.FK_Vehiculos_TiposVehiculo" ManuallyRouted="false" />
         <AssociationConnector Association="mantvehiculosModel.FK_VehiculosCliente_Vehiculo" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="mantvehiculosModel.Cliente" Width="1.5" PointX="7.5" PointY="1.875" />
+        <AssociationConnector Association="mantvehiculosModel.FK_Cliente_Canton" />
+        <AssociationConnector Association="mantvehiculosModel.FK_Cliente_Distrito" />
+        <AssociationConnector Association="mantvehiculosModel.FK_Cliente_Provincia" />
+        <AssociationConnector Association="mantvehiculosModel.FK_Factura_Cliente" />
+        <AssociationConnector Association="mantvehiculosModel.FK_VehiculosCliente_Cliente" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

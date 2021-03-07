@@ -29,15 +29,21 @@ namespace SistVehiculo.Controllers
             {
                 if (resultadoSp == null)
                 {
+                    this.Session.Add("idusuario", null);
+                    this.Session.Add("tipousuario", null);
+                    this.Session.Add("usuariologueado", null);
+
                     ViewBag.Error = "Correo electrónico o Contraseña inválida";
                     return View();
                 }
                 else
                 {
-                    Session["User"] = resultadoSp;
-                }
+                    this.Session.Add("idusuario", resultadoSp.idCliente);
+                    this.Session.Add("tipousuario", resultadoSp.tipoCliente);
+                    this.Session.Add("usuariologueado", true);
 
-                return RedirectToAction("Principal", "Inicio");
+                    return RedirectToAction("Principal", "Inicio");
+                }
             }
             catch (Exception ex)
             {
