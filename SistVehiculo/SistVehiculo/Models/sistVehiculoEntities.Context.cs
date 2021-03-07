@@ -296,5 +296,18 @@ namespace SistVehiculo.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ModificaCanton", id_CantonParameter, id_ProvinciaParameter, nombreParameter, id_CantonInecParameter);
         }
+    
+        public virtual ObjectResult<pa_RetornaClienteCorreoPwd_Result> pa_RetornaClienteCorreoPwd(string correoElectronico, string password)
+        {
+            var correoElectronicoParameter = correoElectronico != null ?
+                new ObjectParameter("correoElectronico", correoElectronico) :
+                new ObjectParameter("correoElectronico", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaClienteCorreoPwd_Result>("pa_RetornaClienteCorreoPwd", correoElectronicoParameter, passwordParameter);
+        }
     }
 }

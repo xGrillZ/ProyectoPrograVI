@@ -128,6 +128,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
+    <Compile Include="Filters\Autenticacion.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -153,6 +154,9 @@
       <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PaisFabricante.cs">
+      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_RetornaClienteCorreoPwd_Result.cs">
       <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaCliente_Result.cs">
@@ -263,6 +267,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Logeo.cshtml" />
     <Content Include="Views\Inicio\Inicio.cshtml" />
+    <Content Include="Views\Inicio\Principal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

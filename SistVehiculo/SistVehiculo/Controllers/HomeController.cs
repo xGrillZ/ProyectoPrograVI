@@ -10,7 +10,7 @@ namespace SistVehiculo.Controllers
     {
         public ActionResult Index()
         {
-            return View(); /*PRUEBA GIT*/
+            return View();
         }
 
         public ActionResult About()

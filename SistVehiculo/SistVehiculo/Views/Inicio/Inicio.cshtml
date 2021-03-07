@@ -13,7 +13,7 @@
         <img src="~/Content/img/LOGIN.svg" />
     </div>
     <div class="container-login">
-        <form id="form1" runat="server">
+        <form id="frmClienteLogin" method="post">
             <img class="avatar" src="~/Content/img/avatar.svg" />
             <h2>Inicio Sesión</h2>
             <div class="input-div one">
@@ -22,7 +22,7 @@
                 </div>
                 <div>
                     <h5>Correo Electrónico</h5>
-                    <input id="correoElectronico" type="email" class="input"/>
+                    <input id="correoElectronico" name="correoElectronico" type="email" class="input" />
                 </div>
             </div>
             <div class="input-div two">
@@ -31,10 +31,10 @@
                 </div>
                 <div>
                     <h5>Contraseña</h5>
-                    <input id="password" type="password" class="input"/>
+                    <input id="password" name="password" type="password" class="input" />
                 </div>
             </div>
-            <input type="submit" class="btn" value="Ingresar"/>
+            <input type="submit" class="btn" value="Ingresar" />
         </form>
     </div>
 </div>
