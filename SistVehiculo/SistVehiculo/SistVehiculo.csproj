@@ -276,15 +276,33 @@
     <Content Include="Views\Shared\Logeo.cshtml" />
     <Content Include="Views\Inicio\Inicio.cshtml" />
     <Content Include="Views\Inicio\Principal.cshtml" />
+    <Content Include="Views\MantClientes\ListaClientes.cshtml" />
+    <Content Include="Views\MantClientes\InsertarClientes.cshtml" />
+    <Content Include="Views\MantClientes\ModificarClientes.cshtml" />
+    <Content Include="Views\MantClientes\EliminarClientes.cshtml" />
+    <Content Include="Views\MantMarcaVehiculos\ListaMarcaVehiculos.cshtml" />
+    <Content Include="Views\MantMarcaVehiculos\InsertarMarcaVehiculos.cshtml" />
+    <Content Include="Views\MantMarcaVehiculos\ModificarMarcaVehiculos.cshtml" />
+    <Content Include="Views\MantMarcaVehiculos\EliminarMarcaVehiculos.cshtml" />
+    <Content Include="Views\MantVehiculos\ListaVehiculos.cshtml" />
+    <Content Include="Views\MantVehiculos\InsertarVehiculos.cshtml" />
+    <Content Include="Views\MantVehiculos\ModificarVehiculos.cshtml" />
+    <Content Include="Views\MantVehiculos\EliminarVehiculos.cshtml" />
+    <Content Include="Views\MantVehiculosCliente\ListaVehiculosCliente.cshtml" />
+    <Content Include="Views\MantVehiculosCliente\InsertarVehiculosCliente.cshtml" />
+    <Content Include="Views\MantVehiculosCliente\ModificarVehiculosCliente.cshtml" />
+    <Content Include="Views\MantVehiculosCliente\EliminarVehiculosCliente.cshtml" />
+    <Content Include="Views\MantTipoVehiculos\ListaTipoVehiculos.cshtml" />
+    <Content Include="Views\MantTipoVehiculos\InsertarTipoVehiculos.cshtml" />
+    <Content Include="Views\MantTipoVehiculos\ModificarTipoVehiculos.cshtml" />
+    <Content Include="Views\MantTipoVehiculos\EliminarTipoVehiculos.cshtml" />
+    <Content Include="Views\MantServiciosProductos\ListaServiciosProductos.cshtml" />
+    <Content Include="Views\MantServiciosProductos\InsertarServiciosProductos.cshtml" />
+    <Content Include="Views\MantServiciosProductos\ModificarServiciosProductos.cshtml" />
+    <Content Include="Views\MantServiciosProductos\EliminarServiciosProductos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\MantClientes\" />
-    <Folder Include="Views\MantMarcaVehiculos\" />
-    <Folder Include="Views\MantServiciosProductos\" />
-    <Folder Include="Views\MantTipoVehiculos\" />
-    <Folder Include="Views\MantVehiculosCliente\" />
-    <Folder Include="Views\MantVehiculos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
