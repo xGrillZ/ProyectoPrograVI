@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+    Layout = "~/Views/Shared/Logeo.cshtml";
+}
+
+<div class="container">
+    <div class="textoPrincipal">
+        <h1>SmartVehicle</h1>
+        <p>¡Deja tu vehículo en las mejores manos!</p>
+        <p>Ofrecemos todo tipo de mantenimiento y productos</p>
+    </div>
+    <div class="img">
+        <img src="~/Content/img/LOGIN.svg" />
+    </div>
+    <div class="container-login">
+        <form id="form1" runat="server">
+            <img class="avatar" src="~/Content/img/avatar.svg" />
+            <h2>Inicio Sesión</h2>
+            <div class="input-div one">
+                <div class="i">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <h5>Correo Electrónico</h5>
+                    <input id="correoElectronico" type="email" class="input"/>
+                </div>
+            </div>
+            <div class="input-div two">
+                <div class="i">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div>
+                    <h5>Contraseña</h5>
+                    <input id="password" type="password" class="input"/>
+                </div>
+            </div>
+            <input type="submit" class="btn" value="Ingresar"/>
+        </form>
+    </div>
+</div>
+
+<script src="~/Scripts/Logeo/Logeo.js"></script>
+
