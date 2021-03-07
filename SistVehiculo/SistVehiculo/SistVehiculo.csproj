@@ -130,6 +130,12 @@
     <Compile Include="Controllers\ConsultoresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
+    <Compile Include="Controllers\MantClientesController.cs" />
+    <Compile Include="Controllers\MantMarcaVehiculosController.cs" />
+    <Compile Include="Controllers\MantServiciosProductosController.cs" />
+    <Compile Include="Controllers\MantTipoVehiculosController.cs" />
+    <Compile Include="Controllers\MantVehiculosClienteController.cs" />
+    <Compile Include="Controllers\MantVehiculosController.cs" />
     <Compile Include="Filter\Autenticacion.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -270,35 +276,15 @@
     <Content Include="Views\Shared\Logeo.cshtml" />
     <Content Include="Views\Inicio\Inicio.cshtml" />
     <Content Include="Views\Inicio\Principal.cshtml" />
-    <Content Include="Views\Administradores\ListaServiciosProductos.cshtml" />
-    <Content Include="Views\Administradores\InsertarServiciosProductos.cshtml" />
-    <Content Include="Views\Administradores\ModificarServiciosProductos.cshtml" />
-    <Content Include="Views\Administradores\EliminarServiciosProductos.cshtml" />
-    <Content Include="Views\Consultores\ListaClientes.cshtml" />
-    <Content Include="Views\Consultores\ModificarClientes.cshtml" />
-    <Content Include="Views\Administradores\ListaTipoVehiculos.cshtml" />
-    <Content Include="Views\Administradores\InsertarTipoVehiculos.cshtml" />
-    <Content Include="Views\Administradores\ModificarTipoVehiculos.cshtml" />
-    <Content Include="Views\Administradores\EliminarTipoVehiculos.cshtml" />
-    <Content Include="Views\Administradores\ListaMarcaVehiculos.cshtml" />
-    <Content Include="Views\Administradores\InsertarMarcaVehiculos.cshtml" />
-    <Content Include="Views\Administradores\ModificarMarcaVehiculos.cshtml" />
-    <Content Include="Views\Administradores\EliminarMarcaVehiculos.cshtml" />
-    <Content Include="Views\Administradores\ListaClientes.cshtml" />
-    <Content Include="Views\Administradores\InsertarClientes.cshtml" />
-    <Content Include="Views\Administradores\ModificarClientes.cshtml" />
-    <Content Include="Views\Administradores\EliminarClientes.cshtml" />
-    <Content Include="Views\Administradores\ListaVehiculos.cshtml" />
-    <Content Include="Views\Administradores\InsertarVehiculos.cshtml" />
-    <Content Include="Views\Administradores\ModificarVehiculos.cshtml" />
-    <Content Include="Views\Administradores\EliminarVehiculos.cshtml" />
-    <Content Include="Views\Administradores\ListaVehiculosCliente.cshtml" />
-    <Content Include="Views\Administradores\InsertarVehiculosCliente.cshtml" />
-    <Content Include="Views\Administradores\ModificarVehiculosCliente.cshtml" />
-    <Content Include="Views\Administradores\EliminarVehiculosCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\MantClientes\" />
+    <Folder Include="Views\MantMarcaVehiculos\" />
+    <Folder Include="Views\MantServiciosProductos\" />
+    <Folder Include="Views\MantTipoVehiculos\" />
+    <Folder Include="Views\MantVehiculosCliente\" />
+    <Folder Include="Views\MantVehiculos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

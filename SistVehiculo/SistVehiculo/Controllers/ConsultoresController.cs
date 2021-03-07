@@ -12,11 +12,7 @@ namespace SistVehiculo.Controllers
         sistVehiculoEntities modeloBD = new sistVehiculoEntities();
         // GET: Consultores
 
-        public ActionResult ListaClientes()
-        {
-            return View();
-        }
-        public ActionResult ModificarClientes()
+        public ActionResult Index()
         {
             return View();
         }
