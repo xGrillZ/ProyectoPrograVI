@@ -38,9 +38,7 @@ namespace SistVehiculo.Controllers
                 }
                 else
                 {
-                    this.Session.Add("idusuario", resultadoSp.idCliente);
-                    this.Session.Add("tipousuario", resultadoSp.tipoCliente);
-                    this.Session.Add("usuariologueado", true);
+                    Session["User"] = resultadoSp;
 
                     return RedirectToAction("Principal", "Inicio");
                 }
