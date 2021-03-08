@@ -309,5 +309,14 @@ namespace SistVehiculo.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaClienteCorreoPwd_Result>("pa_RetornaClienteCorreoPwd", correoElectronicoParameter, passwordParameter);
         }
+    
+        public virtual ObjectResult<pa_RetornaClienteID_Result> pa_RetornaClienteID(Nullable<int> idCliente)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("idCliente", idCliente) :
+                new ObjectParameter("idCliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaClienteID_Result>("pa_RetornaClienteID", idClienteParameter);
+        }
     }
 }

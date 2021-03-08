@@ -375,6 +375,9 @@
           <Parameter Name="correoElectronico" Type="nvarchar" Mode="In" />
           <Parameter Name="password" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="pa_RetornaClienteID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCliente" Type="int" Mode="In" />
+        </Function>
         <Function Name="pa_RetornaVehiculos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="placa" Type="nvarchar" Mode="In" />
         </Function>
@@ -907,6 +910,9 @@
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
           </AssociationSet>
+          <FunctionImport Name="pa_RetornaClienteID" ReturnType="Collection(mantvehiculosModel.pa_RetornaClienteID_Result)">
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
           <Property Type="Int32" Name="idCliente" Nullable="false" />
@@ -1071,6 +1077,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="pa_RetornaClienteID_Result">
+          <Property Type="Int32" Name="idCliente" Nullable="false" />
+          <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="numCedula" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="genero" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="provincia" Nullable="false" />
+          <Property Type="String" Name="nombreProvincia" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="canton" Nullable="false" />
+          <Property Type="String" Name="nombreCanton" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="distrito" Nullable="false" />
+          <Property Type="String" Name="nombreDistrito" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="fechNacimiento" Nullable="false" Precision="23" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tipoCliente" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="ultimoIngreso" Nullable="false" Precision="23" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1345,6 +1370,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pa_RetornaClienteID" FunctionName="mantvehiculosModel.Store.pa_RetornaClienteID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="mantvehiculosModel.pa_RetornaClienteID_Result">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
+                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
+                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
+                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="nombreProvincia" ColumnName="nombreProvincia" />
+                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
+                <ScalarProperty Name="canton" ColumnName="canton" />
+                <ScalarProperty Name="nombreCanton" ColumnName="nombreCanton" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+                <ScalarProperty Name="nombreDistrito" ColumnName="nombreDistrito" />
+                <ScalarProperty Name="fechNacimiento" ColumnName="fechNacimiento" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
+                <ScalarProperty Name="ultimoIngreso" ColumnName="ultimoIngreso" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

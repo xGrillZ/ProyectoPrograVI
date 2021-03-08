@@ -168,6 +168,9 @@
     <Compile Include="Models\pa_RetornaClienteCorreoPwd_Result.cs">
       <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pa_RetornaClienteID_Result.cs">
+      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pa_RetornaCliente_Result.cs">
       <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
     </Compile>

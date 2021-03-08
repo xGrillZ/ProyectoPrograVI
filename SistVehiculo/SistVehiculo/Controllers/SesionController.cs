@@ -12,7 +12,7 @@ namespace SistVehiculo.Controllers
         public ActionResult Logout()
         {
             ///Cerrar la sesión
-            Session["User"] = null;
+            Session["usuariologueado"] = null;
             ///Retorna a la vista de logeo
             return RedirectToAction("Inicio","Inicio");
         }

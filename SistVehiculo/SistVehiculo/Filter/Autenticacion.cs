@@ -17,7 +17,7 @@ namespace SistVehiculo.Filter
                 base.OnActionExecuting(filterContext);
 
                 /*Filtro para evitar que salten páginas*/
-                if (HttpContext.Current.Session["User"] == null)
+                if (HttpContext.Current.Session["usuariologueado"] == null)
                 {
                     ///Inicio/Inicio es una vista que no requiere sesión
                     ///Si se ingresa a un vista de controlador que no sea InicioController
