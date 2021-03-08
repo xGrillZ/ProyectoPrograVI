@@ -25,6 +25,12 @@ namespace SistVehiculo
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/validacion").Include(
+                "~/Scripts/jquery-{version}.js",
+                "~/Scripts/jquery.validate*",
+                "~/Scripts/validacionesGenericas.js"
+                ));
         }
     }
 }

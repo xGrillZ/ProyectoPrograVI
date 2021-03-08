@@ -318,5 +318,18 @@ namespace SistVehiculo.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaClienteID_Result>("pa_RetornaClienteID", idClienteParameter);
         }
+    
+        public virtual int pa_ModificaUltimaSesionCliente(Nullable<int> idCliente, Nullable<System.DateTime> ultimoIngreso)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("idCliente", idCliente) :
+                new ObjectParameter("idCliente", typeof(int));
+    
+            var ultimoIngresoParameter = ultimoIngreso.HasValue ?
+                new ObjectParameter("ultimoIngreso", ultimoIngreso) :
+                new ObjectParameter("ultimoIngreso", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ModificaUltimaSesionCliente", idClienteParameter, ultimoIngresoParameter);
+        }
     }
 }

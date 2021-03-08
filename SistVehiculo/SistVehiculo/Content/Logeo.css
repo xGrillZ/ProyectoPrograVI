@@ -55,7 +55,6 @@ form{
     background-color: white;
 }
 
-
 .avatar {
     width: 100px;
 }
@@ -142,7 +141,7 @@ i{
 }
 
 .input{
-    position: absolute;
+    /*position: absolute; ELIMINAR*/
     width: 100%;
     height: 100%;
     top: 0;

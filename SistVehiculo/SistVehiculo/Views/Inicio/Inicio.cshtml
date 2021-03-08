@@ -39,5 +39,9 @@
     </div>
 </div>
 
-<script src="~/Scripts/Logeo/Logeo.js"></script>
+@section scripts{
+    @Scripts.Render("~/bundles/validacion")
+    <script src="~/Scripts/Logeo/verificacion.js"></script>
+    <script src="~/Scripts/Logeo/Logeo.js"></script>
+}
 
