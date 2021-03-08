@@ -19,10 +19,23 @@ namespace SistVehiculo.Filter
                 /*Filtro para evitar que salten páginas*/
                 if (HttpContext.Current.Session["User"] == null)
                 {
-                    /*Inicio/Inicio es una vista que no requiere sesión*/
+                    ///Inicio/Inicio es una vista que no requiere sesión
+                    ///Si se ingresa a un vista de controlador que no sea InicioController
+                    ///y no está con la sesión activa no lo dejará ingresar a la vista a entrar
                     if (filterContext.Controller is InicioController == false)
                     {
+                        ///Redirección de vista, si se ingresa a otra vista sin haber logeado
                         filterContext.HttpContext.Response.Redirect("/Inicio/Inicio");
+                    }
+                }
+                else
+                {
+                    ///Una vez iniciada la sesión, no se podrá devolver a la vista
+                    ///Inicio/Inicio, ya que cuenta con una sesión iniciada
+                    if (filterContext.Controller is InicioController == true)
+                    {
+                        ///Redirección de vista si se ingresa a la vista Inicio/Inicio
+                        filterContext.HttpContext.Response.Redirect("/Home/Inicio");
                     }
                 }
             }

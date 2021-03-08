@@ -40,7 +40,7 @@ namespace SistVehiculo.Controllers
                 {
                     Session["User"] = resultadoSp;
 
-                    return RedirectToAction("Principal", "Inicio");
+                    return RedirectToAction("Inicio", "Home");
                 }
             }
             catch (Exception ex)
