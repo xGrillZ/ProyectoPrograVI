@@ -1,34 +1,102 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <title>@ViewBag.Title - Sistema Vehículos</title>
     @Styles.Render("~/Content/css")
+    <link href="~/Content/Principal.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/07570749ac.js" crossorigin="anonymous"></script>
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <header>
+        @if (Session["tipousuario"].ToString() == "Administrador")
+        {
+            <div class="navbarAdministrador">
+                <div class="navbar navbar-light navbar-inverse navbar-fixed-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <a class="navbar-brand logo" href="/Inicio/Inicio">
+                                <img src="~/Content/img/logo-castro-carazo.png" />
+                            </a>
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            @Html.ActionLink("Sistema Vehículos", "Principal", "Home", new { area = "" }, new { @class = "navbar-brand opciones" })
+                        </div>
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink("Facturación", "Principal", "Home")</li>
+                                <li class="nav-item dropdown">
+                                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown">Mantenimiento</a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>@Html.ActionLink("Servicio y Productos", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Tipos vehículos", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Marcas de vehículos", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Clientes", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Vehículos", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Vehículos por cliente", "About", "Home")</li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown">Reportes</a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>@Html.ActionLink("Vehículos por cliente", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Servicios por cliente", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Servicios por vehículo", "About", "Home")</li>
+                                    </ul>
+                                </li>
+                                <li>@Html.ActionLink("Cerrar Sesión", "Logout", "Sesion")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Cerrar Sesión", "Logout", "Sesion")</li>
-                </ul>
+        }
+        else
+        {
+            <div class="navbarConsultor">
+                <div class="navbar navbar-light navbar-inverse navbar-fixed-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <a class="navbar-brand logo" href="/Inicio/Inicio">
+                                <img src="~/Content/img/logo-castro-carazo.png" />
+                            </a>
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            @Html.ActionLink("Sistema Vehículos", "Principal", "Home", new { area = "" }, new { @class = "navbar-brand opciones" })
+                        </div>
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li class="nav-item dropdown">
+                                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown">Reportes</a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>@Html.ActionLink("Vehículos por cliente", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Servicios por cliente", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Servicios por vehículo", "About", "Home")</li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown">Perfil</a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>@Html.ActionLink("Modificar datos", "About", "Home")</li>
+                                    </ul>
+                                </li>
+                                <li>@Html.ActionLink("Cerrar Sesión", "Logout", "Sesion")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+        }
+    </header>
     <div class="container body-content">
         @RenderBody()
         <hr />

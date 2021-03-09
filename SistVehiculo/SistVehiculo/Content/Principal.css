@@ -1,0 +1,58 @@
+﻿/* Estilos NavBar */
+.navbar-nav a {
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.navbar-light .navbar-brand {
+    color: #F63D66;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.logo:hover {
+    animation-duration: 3s;
+    animation-delay: 0s;
+    animation-name: heartBeat;
+}
+
+.logo{
+    width: 100px;
+    height: 100px;
+    padding-right: 200px;
+}
+
+.opciones{
+    padding-top: 50px;
+    padding-right: 100px;
+}
+
+.navbar-nav > li > a {
+    padding-top: 50px;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: #F63D66;
+}
+
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+    color: #F63D66;
+}
+
+.dropdown-menu {
+    background-color: #202020;
+    color: white;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{
+    color: #F63D66;
+    background-color: #FFEEDC;
+}
+
+.dropdown-menu > li > a{
+    color: white;
+}
+/* Fin Estilos NavBar */
