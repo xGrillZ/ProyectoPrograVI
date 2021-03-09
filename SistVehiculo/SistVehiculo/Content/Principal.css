@@ -1,4 +1,10 @@
 ﻿/* Estilos NavBar */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .navbar-nav a {
     font-size: 15px;
     text-transform: uppercase;

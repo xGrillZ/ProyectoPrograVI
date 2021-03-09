@@ -7,6 +7,7 @@
     <title>@ViewBag.Title - Sistema Vehículos</title>
     @Styles.Render("~/Content/css")
     <link href="~/Content/Principal.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/07570749ac.js" crossorigin="anonymous"></script>
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -99,12 +100,9 @@
     </header>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-        </footer>
     </div>
 
+    <script src="https://kit.fontawesome.com/07570749ac.js" crossorigin="anonymous"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
