@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using SistVehiculo.Models;
@@ -27,6 +29,8 @@ namespace SistVehiculo.Controllers
 
             string mensaje = "";
 
+           /* string encryptPass = this.GetSHA256(password);*/
+
             pa_RetornaClienteCorreoPwd_Result resultadoSp = this.modeloBD.pa_RetornaClienteCorreoPwd(correoElectronico, password).FirstOrDefault();
 
             try
@@ -37,7 +41,7 @@ namespace SistVehiculo.Controllers
                     this.Session.Add("tipousuario", null);
                     this.Session.Add("usuariologueado", null);
 
-                    mensaje = "Correo electrónico o Contraseña inválida";
+                    mensaje = $"Correo electrónico o Contraseña inválida";
                     ///Mensaje de error si cumple lo contrario del verificado de datos nulos
                     Response.Write("<script>alert('" + mensaje + "')</script>");
                     return View();
@@ -99,7 +103,17 @@ namespace SistVehiculo.Controllers
                                           retornaClienteID.ultimoIngreso);
         }
 
+        string GetSHA256(string password)
+        {
+            SHA256 oSha256 = SHA256Managed.Create();
+            ASCIIEncoding oEncoding = new ASCIIEncoding();
+            byte[] stream = null;
+            StringBuilder oStringBuilder = new StringBuilder();
+            stream = oSha256.ComputeHash(oEncoding.GetBytes(password));
+            for (int i = 0; i < stream.Length; i++) oStringBuilder.AppendFormat("{0:x2}", stream[i]);
 
+            return oStringBuilder.ToString();
+        }
 
         public ActionResult Principal()
         {

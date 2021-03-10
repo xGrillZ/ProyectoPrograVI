@@ -33,7 +33,7 @@ namespace SistVehiculo.Controllers
             int dataUser = int.Parse(Session["idusuario"].ToString());
 
             ///Variable fecha actual
-            string fechaActual = DateTime.Now.ToString();
+            DateTime fechaActual = DateTime.Now;
 
             int cantRegistrosAfectados = 0;
 
@@ -41,7 +41,7 @@ namespace SistVehiculo.Controllers
             
             try
             {
-                cantRegistrosAfectados = this.modeloBD.pa_ModificaUltimaSesionCliente(dataUser, DateTime.Parse(fechaActual));
+                cantRegistrosAfectados = this.modeloBD.pa_ModificaUltimaSesionCliente(dataUser, fechaActual);
             }
             catch (Exception capturaExcepcion)
             {
