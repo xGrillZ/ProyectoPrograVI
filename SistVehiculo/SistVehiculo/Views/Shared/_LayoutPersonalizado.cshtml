@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/Principal.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/07570749ac.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        @if (Session["tipousuario"].ToString() == "Administrador")
+        {
+            <div class="navbarAdministrador">
+                <div class="navbar navbar-light navbar-inverse navbar-fixed-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <a class="navbar-brand logo" href="/Inicio/Inicio">
+                                <img src="~/Content/img/logo-castro-carazo.png" />
+                            </a>
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            @Html.ActionLink("Sistema Vehículos", "Principal", "Home", new { area = "" }, new { @class = "navbar-brand opciones" })
+                        </div>
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li>@Html.ActionLink("Facturación", "Principal", "Home")</li>
+                                <li class="nav-item dropdown">
+                                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown">Mantenimiento</a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>@Html.ActionLink("Servicio y Productos", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Tipos vehículos", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Marcas de vehículos", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Clientes", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Vehículos", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Vehículos por cliente", "About", "Home")</li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown">Reportes</a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>@Html.ActionLink("Vehículos por cliente", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Servicios por cliente", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Servicios por vehículo", "About", "Home")</li>
+                                    </ul>
+                                </li>
+                                <li>@Html.ActionLink("Cerrar Sesión", "Logout", "Sesion")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="navbarConsultor">
+                <div class="navbar navbar-light navbar-inverse navbar-fixed-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <a class="navbar-brand logo" href="/Inicio/Inicio">
+                                <img src="~/Content/img/logo-castro-carazo.png" />
+                            </a>
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            @Html.ActionLink("Sistema Vehículos", "Principal", "Home", new { area = "" }, new { @class = "navbar-brand opciones" })
+                        </div>
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li class="nav-item dropdown">
+                                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown">Reportes</a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>@Html.ActionLink("Vehículos por cliente", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Servicios por cliente", "About", "Home")</li>
+                                        <li>@Html.ActionLink("Servicios por vehículo", "About", "Home")</li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="navbar-link dropdown-toggle" data-toggle="dropdown">Perfil</a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>@Html.ActionLink("Modificar datos", "About", "Home")</li>
+                                    </ul>
+                                </li>
+                                <li>@Html.ActionLink("Cerrar Sesión", "Logout", "Sesion")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </header>
+    <div class="containerBody body-content">
+        @RenderBody()
+    </div>
+    <footer>
+        <div class="containerfooter">
+            <div class="footer-content">
+                <div class="items">
+                    <img src="~/Content/img/logo-castro-carazo.png" class="logofooter" />
+                    <p>
+                        Disfruta de todos los beneficios que obtendrás al utilizar los servicios de nuestra empresa,
+                        brindamos todo tipo de servicio premium y básico.
+                    </p>
+                    <div class="social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="items">
+                    <h3> Servicios</h3>
+                    <ul>
+                        <li>Reparación Vehículos</li>
+                        <li>Limpieza</li>
+                        <li>Repuestos</li>
+                    </ul>
+                </div>
+
+                <div class="items">
+                    <h3>Contáctanos</h3>
+                    <ul>
+                        <li><a href="tel:60022020">60022020</a></li>
+                        <li><a href="mailto:soportevgt@castrocarazo.ac.cr">soportevgt@castrocarazo.ac.cr</a></li>
+                    </ul>
+                </div>
+                <div class="items">
+                    <h3>Ubicación</h3>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d245.62553102865036!2d-84.07577563798702!3d9.933249808257596!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0e366b31e1825%3A0xc7e80bd4f3a1e96e!2sUniversidad%20Castro%20Carazo%2C%20Edificio%20Biblioteca!5e0!3m2!1ses!2scr!4v1576036938514!5m2!1ses!2scr" width="300" height="200" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                </div>
+
+            </div>
+            <hr>
+            <p class="end">Copyright © 2021. Proyecto Programación VI.</p>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/07570749ac.js" crossorigin="anonymous"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
