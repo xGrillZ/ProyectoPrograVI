@@ -233,7 +233,7 @@
     <Content Include="Content\img\IMGLogin3.svg" />
     <Content Include="Content\img\LOGIN.svg" />
     <Content Include="Content\img\logo-castro-carazo.png" />
-    <Content Include="Content\img\wave.png" />
+    <Content Include="Content\img\Wave.png" />
     <Content Include="Content\Logeo.css" />
     <Content Include="Content\Principal.css" />
     <Content Include="Content\Principal\pagPrincipal.css" />
