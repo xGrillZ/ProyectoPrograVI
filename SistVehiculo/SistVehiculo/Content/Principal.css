@@ -4,6 +4,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+.bg-dark {
+    background-color: #222222 !important;
+}
 
 .navbar-nav a {
     font-size: 15px;
@@ -11,10 +14,11 @@
     font-weight: bold;
 }
 
-.navbar-light .navbar-brand {
+.navbar-dark .navbar-brand {
     color: #F63D66;
     font-size: 20px;
     text-transform: uppercase;
+    font-family: 'Poppins',sans-serif;
     font-weight: bold;
     letter-spacing: 2px;
 }
@@ -28,23 +32,18 @@
 .logo{
     width: 100px;
     height: 100px;
-    padding-right: 200px;
+    padding-right: 160px;
 }
 
 .opciones{
-    padding-top: 50px;
-    padding-right: 100px;
+    margin-right: 50px;
 }
 
-.navbar-nav > li > a {
-    padding-top: 50px;
-}
-
-.navbar-inverse .navbar-nav > li > a:hover {
+.navbar-dark .navbar-nav .nav-link:hover {
     color: #F63D66;
 }
 
-.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+.navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
     color: #F63D66;
 }
 
@@ -53,16 +52,39 @@
     color: white;
 }
 
-.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus{
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-item:hover{
     color: #F63D66;
     background-color: #FFEEDC;
+    text-decoration: none;
 }
 
-.dropdown-menu > li > a{
-    color: white;
+.dropdown-menu a:hover{
+    color: #F63D66;
 }
+
+.logout {
+    font-family: 'Poppins',sans-serif;
+    text-decoration: none;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.logout a{
+    color: #919191;
+}
+
+.logout a:hover{
+    text-decoration: none;
+}
+
+.navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show > .nav-link {
+    color: #F63D66;
+}
+/*.dropdown-menu > li > a{
+    color: #F63D66;
+}*/
 /* Fin Estilos NavBar */
-
 /* Inicio Estilos Footer */
 /*body{
     display: flex;
@@ -71,7 +93,6 @@
     min-height: 100vh;
     flex-direction: column;
 }*/
-
 body {
     padding-top: 100px;
     padding-bottom: 5px;
@@ -183,5 +204,12 @@ footer .end{
     margin: auto;
 }
 
+}
+
+@media (max-width:580px){
+    .navbar-brand.opciones {
+        display: none;
+        visibility: hidden;
+    }
 }
 /* Fin Estilos Footer */
