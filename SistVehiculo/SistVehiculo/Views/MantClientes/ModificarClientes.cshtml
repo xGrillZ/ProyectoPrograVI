@@ -5,3 +5,63 @@
 
 <h2>Modificar Clientes</h2>
 
+
+<form id="frmNuevaPersona" method="post">
+    <div class="form-group">
+        <label>Nombre Cliente:</label>
+        <input type="text" name="primerApellido" id="primerApellido" class="form-control" value="@Model.nomCliente" />
+    </div>
+
+    <div class="form-group">
+        <label>Primer Apellido:</label>
+        <input type="text" name="segundoApellido" id="segundoApellido" class="form-control" value="@Model.ape1Cliente" />
+    </div>
+    <div class="form-group">
+        <label>Segundo Apellido:</label>
+        <input type="text" name="segundoApellido" id="segundoApellido" class="form-control" value="@Model.ape2Cliente" />
+    </div>
+
+    <div class="form-group">
+        <label>Número Cédula:</label>
+        <input type="text" name="nombre" id="nombre" class="form-control" value="@Model.numCedula" />
+    </div>
+    <div class="form-group">
+        <label>Género :</label>
+        <input type="text" name="telefono" id="telefono" class="form-control" value="@Model.genero" />
+    </div>
+    <div class="form-group">
+        <label>Provincia :</label>
+        <input type="text" name="telefono" id="telefono" class="form-control" value="@Model.provincia" />
+    </div>
+    <div class="form-group">
+        <label>Fecha Nacimiento :</label>
+        <input type="text" name="telefono" id="telefono" class="form-control" value="@Model.fechNacimiento" />
+    </div>
+    <div class="form-group">
+        <label>Cantón :</label>
+        <input type="text" name="telefono" id="telefono" class="form-control" value="@Model.canton" />
+    </div>
+    <div class="form-group">
+        <label>Distrito :</label>
+        <input type="text" name="telefono" id="telefono" class="form-control" value="@Model.distrito" />
+    </div>
+    <div class="form-group">
+        <label>Email :</label>
+        <input type="text" name="telefono" id="telefono" class="form-control" value="@Model.email" />
+    </div>
+    <div class="form-group">
+        <label>Telefono :</label>
+        <input type="text" name="telefono" id="telefono" class="form-control" value="@Model.pTelefono" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Modificar" id="btnAceptar" />
+    </div>
+    <a href="~/xxxx/xxxxLista">Regresar a la lista</a>
+</form>
+
+@section scripts{
+    <script src="~/Scripts/xxxx/xxxxxx.js"></script>
+
+}
+
