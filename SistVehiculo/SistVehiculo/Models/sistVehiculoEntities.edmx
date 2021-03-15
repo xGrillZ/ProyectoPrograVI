@@ -356,6 +356,19 @@
           <Parameter Name="tipoVehiculo" Type="int" Mode="In" />
           <Parameter Name="marcaVehiculo" Type="int" Mode="In" />
         </Function>
+        <Function Name="pa_ModificaCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nomCliente" Type="nvarchar" Mode="In" />
+          <Parameter Name="ape1Cliente" Type="nvarchar" Mode="In" />
+          <Parameter Name="ape2Cliente" Type="nvarchar" Mode="In" />
+          <Parameter Name="numCedula" Type="nvarchar" Mode="In" />
+          <Parameter Name="genero" Type="nvarchar" Mode="In" />
+          <Parameter Name="provincia" Type="int" Mode="In" />
+          <Parameter Name="fechNacimiento" Type="datetime" Mode="In" />
+          <Parameter Name="canton" Type="int" Mode="In" />
+          <Parameter Name="distrito" Type="int" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="pTelefono" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="pa_ModificaPaisFabricante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idFabricante" Type="int" Mode="In" />
           <Parameter Name="codigo" Type="int" Mode="In" />
@@ -921,6 +934,19 @@
             <Parameter Name="idCliente" Mode="In" Type="Int32" />
             <Parameter Name="ultimoIngreso" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="pa_ModificaCliente">
+            <Parameter Name="nomCliente" Mode="In" Type="String" />
+            <Parameter Name="ape1Cliente" Mode="In" Type="String" />
+            <Parameter Name="ape2Cliente" Mode="In" Type="String" />
+            <Parameter Name="numCedula" Mode="In" Type="String" />
+            <Parameter Name="genero" Mode="In" Type="String" />
+            <Parameter Name="provincia" Mode="In" Type="Int32" />
+            <Parameter Name="fechNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="canton" Mode="In" Type="Int32" />
+            <Parameter Name="distrito" Mode="In" Type="Int32" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="pTelefono" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
           <Property Type="Int32" Name="idCliente" Nullable="false" />
@@ -1402,6 +1428,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_ModificaUltimaSesionCliente" FunctionName="mantvehiculosModel.Store.pa_ModificaUltimaSesionCliente" />
+          <FunctionImportMapping FunctionImportName="pa_ModificaCliente" FunctionName="mantvehiculosModel.Store.pa_ModificaCliente" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
