@@ -1,4 +1,29 @@
 ﻿/*Inicio Estilo Header*/
+.sprite {
+    display: inline-block;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-image: url(../img/spritePrincipalHeader.png);
+}
+
+.Login1 {
+    width: 550px;
+    height: 450px;
+    background-position: -0px -0px
+}
+
+.Login2 {
+    width: 550px;
+    height: 450px;
+    background-position: -550px -0px
+}
+
+.Login3 {
+    width: 550px;
+    height: 450px;
+    background-position: -1100px -0px
+}
+
 .containerHeader{
     display: flex;
     justify-content: flex-start;
@@ -38,8 +63,7 @@
     float: left;
     width: 550px !important;
     height: 450px !important;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-repeat: no-repeat !important;
 }
 
 .carousel-indicators {
@@ -48,10 +72,24 @@
     transform: translate(-60px, 140px);
 }
 
+.carousel-indicators li {
+    width:10px!important;
+    height:10px!important;
+    margin-right:5px!important;
+    margin-left:5px!important;
+    border-radius:50%!important;
+    border:0!important;
+    background-color:transparent!important;
+    box-shadow:0 0 0 .2rem white;
+}
+
 .info .btn-signup {
-    background: red;
+    background: #F63D66;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
     float: right;
-    margin-right: 8rem !important;
+    margin-right: 6rem !important;
     margin: 1rem;
 }
 
