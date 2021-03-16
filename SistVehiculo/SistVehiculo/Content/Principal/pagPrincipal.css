@@ -116,9 +116,41 @@
 /*Final Estilo Header*/
 
 /*Inicio Estilo Contenedor Mantenimiento*/
+.spriteCard {
+    display: inline-block;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-image: url(../img/Principal/spriteCard.png);
+}
+
+.cambioLlantas {
+    width: 340px;
+    height: 350px;
+    background-position: -0px -0px
+}
+
+.reparacionVehiculo {
+    width: 340px;
+    height: 350px;
+    background-position: -340px -0px
+}
+
+.repuestoVehiculo {
+    width: 340px;
+    height: 350px;
+    background-position: -680px -0px
+}
+
+.tiendaVehiculo {
+    width: 340px;
+    height: 350px;
+    background-position: -1020px -0px
+}
+
 .card-img-top {
     width: 340px !important;
     height: 350px !important;
+    background-repeat: no-repeat !important;
 }
 
 .card-title{
