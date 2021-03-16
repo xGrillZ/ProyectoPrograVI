@@ -28,7 +28,6 @@
           <Property Name="ape1Cliente" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ape2Cliente" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="numCedula" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="genero" Type="nvarchar" MaxLength="1" Nullable="false" />
           <Property Name="provincia" Type="int" Nullable="false" />
           <Property Name="fechNacimiento" Type="datetime" Nullable="false" />
           <Property Name="canton" Type="int" Nullable="false" />
@@ -38,6 +37,7 @@
           <Property Name="tipoCliente" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ultimoIngreso" Type="datetime" Nullable="false" />
           <Property Name="contrasena" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="genero" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="detalle_Factura">
           <Key>
@@ -81,6 +81,13 @@
           <Property Name="id_estado" Type="int" Nullable="false" />
           <Property Name="montoTotal" Type="float" Nullable="false" />
           <Property Name="id_detalleFactura" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genero">
+          <Key>
+            <PropertyRef Name="id_Genero" />
+          </Key>
+          <Property Name="id_Genero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_genero" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="MarcaVehiculo">
           <Key>
@@ -205,6 +212,18 @@
             </Principal>
             <Dependent Role="Cliente">
               <PropertyRef Name="distrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Genero">
+          <End Role="Genero" Type="Self.Genero" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genero">
+              <PropertyRef Name="id_Genero" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="genero" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -387,6 +406,11 @@
         </Function>
         <Function Name="pa_RetornaCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="numCedula" Type="nvarchar" Mode="In" />
+          <Parameter Name="nomCliente" Type="nvarchar" Mode="In" />
+          <Parameter Name="ape1Cliente" Type="nvarchar" Mode="In" />
+          <Parameter Name="ape2Cliente" Type="nvarchar" Mode="In" />
+          <Parameter Name="tipoCliente" Type="nvarchar" Mode="In" />
+          <Parameter Name="provincia" Type="varchar" Mode="In" />
         </Function>
         <Function Name="pa_RetornaClienteCorreoPwd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="correoElectronico" Type="nvarchar" Mode="In" />
@@ -434,6 +458,7 @@
           <EntitySet Name="Distrito" EntityType="Self.Distrito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genero" EntityType="Self.Genero" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MarcaVehiculo" EntityType="Self.MarcaVehiculo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaisFabricante" EntityType="Self.PaisFabricante" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
@@ -459,6 +484,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Cliente_Distrito" Association="Self.FK_Cliente_Distrito">
             <End Role="Distrito" EntitySet="Distrito" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Genero" Association="Self.FK_Cliente_Genero">
+            <End Role="Genero" EntitySet="Genero" />
             <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
           <AssociationSet Name="FK_Cliente_Provincia" Association="Self.FK_Cliente_Provincia">
@@ -867,9 +896,6 @@
             <Parameter Name="precio" Mode="In" Type="Double" />
             <Parameter Name="tipo" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="pa_RetornaCliente" ReturnType="Collection(mantvehiculosModel.pa_RetornaCliente_Result)">
-          <Parameter Name="numCedula" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="pa_RetornaVehiculos" ReturnType="Collection(mantvehiculosModel.pa_RetornaVehiculos_Result)">
           <Parameter Name="placa" Mode="In" Type="String" />
           </FunctionImport>
@@ -902,31 +928,6 @@
             <Parameter Name="nombre" Mode="In" Type="String" />
             <Parameter Name="id_CantonInec" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="pa_RetornaClienteCorreoPwd" ReturnType="Collection(mantvehiculosModel.pa_RetornaClienteCorreoPwd_Result)">
-            <Parameter Name="correoElectronico" Mode="In" Type="String" />
-            <Parameter Name="password" Mode="In" Type="String" />
-          </FunctionImport>
-          <EntitySet Name="Cliente" EntityType="mantvehiculosModel.Cliente" />
-          <AssociationSet Name="FK_Cliente_Canton" Association="mantvehiculosModel.FK_Cliente_Canton">
-            <End Role="Canton" EntitySet="Canton" />
-            <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cliente_Distrito" Association="mantvehiculosModel.FK_Cliente_Distrito">
-            <End Role="Distrito" EntitySet="Distrito" />
-            <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cliente_Provincia" Association="mantvehiculosModel.FK_Cliente_Provincia">
-            <End Role="Provincia" EntitySet="Provincia" />
-            <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Factura_Cliente" Association="mantvehiculosModel.FK_Factura_Cliente">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Factura" EntitySet="Factura" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VehiculosCliente_Cliente" Association="mantvehiculosModel.FK_VehiculosCliente_Cliente">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
-          </AssociationSet>
           <FunctionImport Name="pa_RetornaClienteID" ReturnType="Collection(mantvehiculosModel.pa_RetornaClienteID_Result)">
           <Parameter Name="idCliente" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -947,24 +948,45 @@
             <Parameter Name="email" Mode="In" Type="String" />
             <Parameter Name="pTelefono" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Cliente" EntityType="mantvehiculosModel.Cliente" />
+          <EntitySet Name="Genero" EntityType="mantvehiculosModel.Genero" />
+          <AssociationSet Name="FK_Cliente_Canton" Association="mantvehiculosModel.FK_Cliente_Canton">
+            <End Role="Canton" EntitySet="Canton" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Distrito" Association="mantvehiculosModel.FK_Cliente_Distrito">
+            <End Role="Distrito" EntitySet="Distrito" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Genero" Association="mantvehiculosModel.FK_Cliente_Genero">
+            <End Role="Genero" EntitySet="Genero" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Provincia" Association="mantvehiculosModel.FK_Cliente_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Cliente" Association="mantvehiculosModel.FK_Factura_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehiculosCliente_Cliente" Association="mantvehiculosModel.FK_VehiculosCliente_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
+          </AssociationSet>
+          <FunctionImport Name="pa_RetornaCliente" ReturnType="Collection(mantvehiculosModel.pa_RetornaCliente_Result)">
+            <Parameter Name="numCedula" Mode="In" Type="String" />
+            <Parameter Name="nomCliente" Mode="In" Type="String" />
+            <Parameter Name="ape1Cliente" Mode="In" Type="String" />
+            <Parameter Name="ape2Cliente" Mode="In" Type="String" />
+            <Parameter Name="tipoCliente" Mode="In" Type="String" />
+            <Parameter Name="provincia" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_RetornaClienteCorreoPwd" ReturnType="Collection(mantvehiculosModel.pa_RetornaClienteCorreoPwd_Result)">
+            <Parameter Name="correoElectronico" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="pa_RetornaCliente_Result">
-          <Property Type="Int32" Name="idCliente" Nullable="false" />
-          <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="numCedula" Nullable="false" MaxLength="20" />
-          <Property Type="String" Name="genero" Nullable="false" MaxLength="1" />
-          <Property Type="Int32" Name="provincia" Nullable="false" />
-          <Property Type="String" Name="nombreProvincia" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="canton" Nullable="false" />
-          <Property Type="String" Name="nombreCanton" Nullable="false" MaxLength="100" />
-          <Property Type="Int32" Name="distrito" Nullable="false" />
-          <Property Type="String" Name="nombreDistrito" Nullable="false" MaxLength="100" />
-          <Property Type="DateTime" Name="fechNacimiento" Nullable="false" Precision="23" />
-          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="pa_RetornaVehiculos_Result">
           <Property Type="Int32" Name="idVehiculos" Nullable="false" />
           <Property Type="Int32" Name="tipoVehiculo" Nullable="false" />
@@ -1006,7 +1028,7 @@
           <Property Type="DateTime" Name="fechaModifica" Nullable="true" Precision="23" />
           <Property Type="String" Name="vc_Estado" Nullable="true" MaxLength="3" />
         </ComplexType>
-        <ComplexType Name="pa_RetornaClienteCorreoPwd_Result">
+        <ComplexType Name="pa_RetornaClienteID_Result">
           <Property Type="Int32" Name="idCliente" Nullable="false" />
           <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
@@ -1022,7 +1044,6 @@
           <Property Type="String" Name="nombreDistrito" Nullable="false" MaxLength="100" />
           <Property Type="DateTime" Name="fechNacimiento" Nullable="false" Precision="23" />
           <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="contrasena" Nullable="false" MaxLength="500" />
           <Property Type="String" Name="tipoCliente" Nullable="false" MaxLength="50" />
           <Property Type="DateTime" Name="ultimoIngreso" Nullable="false" Precision="23" />
         </ComplexType>
@@ -1035,7 +1056,6 @@
           <Property Name="ape1Cliente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ape2Cliente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="numCedula" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="genero" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
           <Property Name="provincia" Type="Int32" Nullable="false" />
           <Property Name="fechNacimiento" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="canton" Type="Int32" Nullable="false" />
@@ -1045,11 +1065,21 @@
           <Property Name="tipoCliente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ultimoIngreso" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="contrasena" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="genero" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Canton1" Relationship="mantvehiculosModel.FK_Cliente_Canton" FromRole="Cliente" ToRole="Canton" />
           <NavigationProperty Name="Distrito1" Relationship="mantvehiculosModel.FK_Cliente_Distrito" FromRole="Cliente" ToRole="Distrito" />
+          <NavigationProperty Name="Genero1" Relationship="mantvehiculosModel.FK_Cliente_Genero" FromRole="Cliente" ToRole="Genero" />
           <NavigationProperty Name="Provincia1" Relationship="mantvehiculosModel.FK_Cliente_Provincia" FromRole="Cliente" ToRole="Provincia" />
           <NavigationProperty Name="Factura" Relationship="mantvehiculosModel.FK_Factura_Cliente" FromRole="Cliente" ToRole="Factura" />
           <NavigationProperty Name="VehiculosCliente" Relationship="mantvehiculosModel.FK_VehiculosCliente_Cliente" FromRole="Cliente" ToRole="VehiculosCliente" />
+        </EntityType>
+        <EntityType Name="Genero">
+          <Key>
+            <PropertyRef Name="id_Genero" />
+          </Key>
+          <Property Name="id_Genero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_genero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cliente" Relationship="mantvehiculosModel.FK_Cliente_Genero" FromRole="Genero" ToRole="Cliente" />
         </EntityType>
         <Association Name="FK_Cliente_Canton">
           <End Type="mantvehiculosModel.Canton" Role="Canton" Multiplicity="1" />
@@ -1072,6 +1102,18 @@
             </Principal>
             <Dependent Role="Cliente">
               <PropertyRef Name="distrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Genero">
+          <End Type="mantvehiculosModel.Genero" Role="Genero" Multiplicity="1" />
+          <End Type="mantvehiculosModel.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genero">
+              <PropertyRef Name="id_Genero" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="genero" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1111,13 +1153,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="pa_RetornaClienteID_Result">
+        <ComplexType Name="pa_RetornaCliente_Result">
           <Property Type="Int32" Name="idCliente" Nullable="false" />
           <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="numCedula" Nullable="false" MaxLength="20" />
-          <Property Type="String" Name="genero" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="genero" Nullable="false" />
+          <Property Type="String" Name="nombreGenero" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="provincia" Nullable="false" />
           <Property Type="String" Name="nombreProvincia" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
@@ -1127,6 +1170,27 @@
           <Property Type="String" Name="nombreDistrito" Nullable="false" MaxLength="100" />
           <Property Type="DateTime" Name="fechNacimiento" Nullable="false" Precision="23" />
           <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tipoCliente" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="ultimoIngreso" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaClienteCorreoPwd_Result">
+          <Property Type="Int32" Name="idCliente" Nullable="false" />
+          <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="numCedula" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="genero" Nullable="false" />
+          <Property Type="String" Name="nombreGenero" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="provincia" Nullable="false" />
+          <Property Type="String" Name="nombreProvincia" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="canton" Nullable="false" />
+          <Property Type="String" Name="nombreCanton" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="distrito" Nullable="false" />
+          <Property Type="String" Name="nombreDistrito" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="fechNacimiento" Nullable="false" Precision="23" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="contrasena" Nullable="false" MaxLength="500" />
           <Property Type="String" Name="tipoCliente" Nullable="false" MaxLength="50" />
           <Property Type="DateTime" Name="ultimoIngreso" Nullable="false" Precision="23" />
         </ComplexType>
@@ -1277,27 +1341,6 @@
           <FunctionImportMapping FunctionImportName="pa_InsertaVehiculos" FunctionName="mantvehiculosModel.Store.pa_InsertaVehiculos" />
           <FunctionImportMapping FunctionImportName="pa_ModificaPaisFabricante" FunctionName="mantvehiculosModel.Store.pa_ModificaPaisFabricante" />
           <FunctionImportMapping FunctionImportName="pa_ModificaTipoServicioProducto" FunctionName="mantvehiculosModel.Store.pa_ModificaTipoServicioProducto" />
-          <FunctionImportMapping FunctionImportName="pa_RetornaCliente" FunctionName="mantvehiculosModel.Store.pa_RetornaCliente">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="mantvehiculosModel.pa_RetornaCliente_Result">
-                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
-                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
-                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
-                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
-                <ScalarProperty Name="genero" ColumnName="genero" />
-                <ScalarProperty Name="provincia" ColumnName="provincia" />
-                <ScalarProperty Name="nombreProvincia" ColumnName="nombreProvincia" />
-                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
-                <ScalarProperty Name="canton" ColumnName="canton" />
-                <ScalarProperty Name="nombreCanton" ColumnName="nombreCanton" />
-                <ScalarProperty Name="distrito" ColumnName="distrito" />
-                <ScalarProperty Name="nombreDistrito" ColumnName="nombreDistrito" />
-                <ScalarProperty Name="fechNacimiento" ColumnName="fechNacimiento" />
-                <ScalarProperty Name="email" ColumnName="email" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_RetornaVehiculos" FunctionName="mantvehiculosModel.Store.pa_RetornaVehiculos">
             <ResultMapping>
               <ComplexTypeMapping TypeName="mantvehiculosModel.pa_RetornaVehiculos_Result">
@@ -1359,51 +1402,6 @@
           <FunctionImportMapping FunctionImportName="sp_InsertaCanton" FunctionName="mantvehiculosModel.Store.sp_InsertaCanton" />
           <FunctionImportMapping FunctionImportName="sp_InsertaDistrito" FunctionName="mantvehiculosModel.Store.sp_InsertaDistrito" />
           <FunctionImportMapping FunctionImportName="sp_ModificaCanton" FunctionName="mantvehiculosModel.Store.sp_ModificaCanton" />
-          <FunctionImportMapping FunctionImportName="pa_RetornaClienteCorreoPwd" FunctionName="mantvehiculosModel.Store.pa_RetornaClienteCorreoPwd">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="mantvehiculosModel.pa_RetornaClienteCorreoPwd_Result">
-                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
-                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
-                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
-                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
-                <ScalarProperty Name="genero" ColumnName="genero" />
-                <ScalarProperty Name="provincia" ColumnName="provincia" />
-                <ScalarProperty Name="nombreProvincia" ColumnName="nombreProvincia" />
-                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
-                <ScalarProperty Name="canton" ColumnName="canton" />
-                <ScalarProperty Name="nombreCanton" ColumnName="nombreCanton" />
-                <ScalarProperty Name="distrito" ColumnName="distrito" />
-                <ScalarProperty Name="nombreDistrito" ColumnName="nombreDistrito" />
-                <ScalarProperty Name="fechNacimiento" ColumnName="fechNacimiento" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
-                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
-                <ScalarProperty Name="ultimoIngreso" ColumnName="ultimoIngreso" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <EntitySetMapping Name="Cliente">
-            <EntityTypeMapping TypeName="mantvehiculosModel.Cliente">
-              <MappingFragment StoreEntitySet="Cliente">
-                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
-                <ScalarProperty Name="ultimoIngreso" ColumnName="ultimoIngreso" />
-                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
-                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="distrito" ColumnName="distrito" />
-                <ScalarProperty Name="canton" ColumnName="canton" />
-                <ScalarProperty Name="fechNacimiento" ColumnName="fechNacimiento" />
-                <ScalarProperty Name="provincia" ColumnName="provincia" />
-                <ScalarProperty Name="genero" ColumnName="genero" />
-                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
-                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
-                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
-                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
-                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="pa_RetornaClienteID" FunctionName="mantvehiculosModel.Store.pa_RetornaClienteID">
             <ResultMapping>
               <ComplexTypeMapping TypeName="mantvehiculosModel.pa_RetornaClienteID_Result">
@@ -1429,6 +1427,84 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_ModificaUltimaSesionCliente" FunctionName="mantvehiculosModel.Store.pa_ModificaUltimaSesionCliente" />
           <FunctionImportMapping FunctionImportName="pa_ModificaCliente" FunctionName="mantvehiculosModel.Store.pa_ModificaCliente" />
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="mantvehiculosModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="ultimoIngreso" ColumnName="ultimoIngreso" />
+                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
+                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+                <ScalarProperty Name="canton" ColumnName="canton" />
+                <ScalarProperty Name="fechNacimiento" ColumnName="fechNacimiento" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
+                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
+                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
+                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genero">
+            <EntityTypeMapping TypeName="mantvehiculosModel.Genero">
+              <MappingFragment StoreEntitySet="Genero">
+                <ScalarProperty Name="nom_genero" ColumnName="nom_genero" />
+                <ScalarProperty Name="id_Genero" ColumnName="id_Genero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pa_RetornaCliente" FunctionName="mantvehiculosModel.Store.pa_RetornaCliente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="mantvehiculosModel.pa_RetornaCliente_Result">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
+                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
+                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
+                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="nombreGenero" ColumnName="nombreGenero" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="nombreProvincia" ColumnName="nombreProvincia" />
+                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
+                <ScalarProperty Name="canton" ColumnName="canton" />
+                <ScalarProperty Name="nombreCanton" ColumnName="nombreCanton" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+                <ScalarProperty Name="nombreDistrito" ColumnName="nombreDistrito" />
+                <ScalarProperty Name="fechNacimiento" ColumnName="fechNacimiento" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
+                <ScalarProperty Name="ultimoIngreso" ColumnName="ultimoIngreso" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_RetornaClienteCorreoPwd" FunctionName="mantvehiculosModel.Store.pa_RetornaClienteCorreoPwd">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="mantvehiculosModel.pa_RetornaClienteCorreoPwd_Result">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
+                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
+                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
+                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="nombreGenero" ColumnName="nombreGenero" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="nombreProvincia" ColumnName="nombreProvincia" />
+                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
+                <ScalarProperty Name="canton" ColumnName="canton" />
+                <ScalarProperty Name="nombreCanton" ColumnName="nombreCanton" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+                <ScalarProperty Name="nombreDistrito" ColumnName="nombreDistrito" />
+                <ScalarProperty Name="fechNacimiento" ColumnName="fechNacimiento" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
+                <ScalarProperty Name="ultimoIngreso" ColumnName="ultimoIngreso" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

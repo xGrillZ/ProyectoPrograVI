@@ -161,6 +161,9 @@
     <Compile Include="Models\Factura.cs">
       <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Genero.cs">
+      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MarcaVehiculo.cs">
       <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
     </Compile>

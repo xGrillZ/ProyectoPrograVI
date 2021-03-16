@@ -27,13 +27,15 @@
         <AssociationConnector Association="mantvehiculosModel.fk_vehiculos_marcavehiculo" ManuallyRouted="false" />
         <AssociationConnector Association="mantvehiculosModel.FK_Vehiculos_TiposVehiculo" ManuallyRouted="false" />
         <AssociationConnector Association="mantvehiculosModel.FK_VehiculosCliente_Vehiculo" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="mantvehiculosModel.Cliente" Width="1.5" PointX="7.5" PointY="1.875" />
+        <EntityTypeShape EntityType="mantvehiculosModel.Cliente" Width="1.5" PointX="7.5" PointY="3" />
+        <EntityTypeShape EntityType="mantvehiculosModel.Genero" Width="1.5" PointX="5.25" PointY="0.75" />
         <AssociationConnector Association="mantvehiculosModel.FK_Cliente_Canton" />
         <AssociationConnector Association="mantvehiculosModel.FK_Cliente_Distrito" />
+        <AssociationConnector Association="mantvehiculosModel.FK_Cliente_Genero" />
         <AssociationConnector Association="mantvehiculosModel.FK_Cliente_Provincia" />
         <AssociationConnector Association="mantvehiculosModel.FK_Factura_Cliente" />
         <AssociationConnector Association="mantvehiculosModel.FK_VehiculosCliente_Cliente" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
