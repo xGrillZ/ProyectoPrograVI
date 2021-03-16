@@ -9,8 +9,8 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/Principal.css" rel="stylesheet" />
-    <link href="~/Content/Principal/pagPrincipal.css" rel="stylesheet" />
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    @RenderSection("css", required: false) <!--Permite incluir css para cada vista-->
 </head>
 <body>
     <header>
