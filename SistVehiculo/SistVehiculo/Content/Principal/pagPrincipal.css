@@ -89,14 +89,14 @@
     font-weight: bold;
     text-transform: uppercase;
     float: right;
-    margin-right: 6rem !important;
+    margin-right: 5rem !important;
     margin: 1rem;
 }
 
 .contenidoinfo {
     height: 55%;
     max-height: 280px;
-    margin-top: 5.5rem;
+    margin: 8.5rem 0rem 0rem 2.2rem;
 }
 
 .contenidoinfo h3, .contenidoinfo p {
@@ -114,3 +114,36 @@
     right: -100px;
 }
 /*Final Estilo Header*/
+
+/*Inicio Estilo Contenedor Mantenimiento*/
+.card-img-top {
+    width: 340px !important;
+    height: 350px !important;
+}
+
+.card-title{
+    text-align: center;
+}
+
+.card-deck{
+    margin: 20px 0px 20px 0px;
+}
+
+.card-deck .btn-card{
+    background: #F63D66;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin: 10px 0px 0px 0px;
+}
+
+.card-deck .btn-card:hover{
+    background: #FFEEDC;
+    color: #F63D66;
+}
+
+.card-deck .card:hover{
+    box-shadow: 0 4px 10px rgba(17, 29, 48, .26);
+}
+/*Final Estilo Contenedor Mantenimiento*/

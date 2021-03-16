@@ -233,6 +233,11 @@
     <Content Include="Content\img\IMGLogin3.svg" />
     <Content Include="Content\img\LOGIN.svg" />
     <Content Include="Content\img\logo-castro-carazo.png" />
+    <Content Include="Content\img\Principal\cambioLlantas.svg" />
+    <Content Include="Content\img\Principal\cardSprite.png" />
+    <Content Include="Content\img\Principal\reparacionVehiculo.svg" />
+    <Content Include="Content\img\Principal\repuestoVehiculo.svg" />
+    <Content Include="Content\img\Principal\tiendaVehiculo.svg" />
     <Content Include="Content\img\spritePrincipalHeader.png" />
     <Content Include="Content\img\Wave.png" />
     <Content Include="Content\Logeo.css" />
