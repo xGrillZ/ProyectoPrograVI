@@ -1,7 +1,48 @@
-﻿
+﻿<!--Indicar a la vista el modelo-->
+@model List<SistVehiculo.Models.pa_RetornaCliente_Result>
+
 @{
     ViewBag.Title = "ListaClientes";
+    Layout = "~/Views/Shared/_LayoutPersonalizado.cshtml";
 }
 
-<h2>ListaClientes</h2>
+<h2>Lista de Clientes</h2>
+<a href="~/Personas/PersonaNueva">Agregar Cliente</a>
+
+<table class="table">
+    <tr>
+        <th>Nombre Completo</th>
+        <th>Correo</th>
+        <th>Sexo</th>
+        <th>Provincia</th>
+        <th>Fecha Nacimiento</th>
+        <th>Teléfono</th>
+        <th>Tipo Usuario</th>
+        <th>Último Ingreso</th>
+        <th>Acciones</th>
+    </tr>
+    <!--Incluir código .net
+        Recorrido para la vista
+        -->
+    @{
+        foreach (SistVehiculo.Models.pa_RetornaCliente_Result posicionModelo in this.Model)
+        {
+            <tr>
+                <td>@posicionModelo.ape1Cliente @posicionModelo.ape2Cliente @posicionModelo.nomCliente</td>
+                <td>@posicionModelo.email</td>
+                <td>@posicionModelo.nombreGenero</td>
+                <td>@posicionModelo.nombreProvincia</td>
+                <td>@posicionModelo.fechNacimiento</td>
+                <td>@posicionModelo.pTelefono</td>
+                <td>@posicionModelo.nombreTipoCliente</td>
+                <td>@posicionModelo.ultimoIngreso</td>
+                <td>
+                    <a href="~/Personas/PersonaModifica?id_Persona=@posicionModelo.idCliente">Modificar</a>
+                    <br />
+                    <a href="~/Personas/PersonaElimina?id_Persona=@posicionModelo.idCliente">Eliminar</a>
+                </td>
+            </tr>
+        }
+    }
+</table>
 

@@ -8,6 +8,10 @@
     background-color: #222222 !important;
 }
 
+.navbarAdministrador .navbarConsultor {
+    margin-top: 20px;
+}
+
 .navbar-nav a {
     font-size: 15px;
     text-transform: uppercase;

@@ -439,6 +439,12 @@
         <Function Name="pa_RetornaClienteID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idCliente" Type="int" Mode="In" />
         </Function>
+        <Function Name="pa_RetornaGenero" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_RetornaTipoCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="pa_RetornaVehiculos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="placa" Type="nvarchar" Mode="In" />
         </Function>
@@ -1076,10 +1082,10 @@
             <Parameter Name="id_CantonInec" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_EliminaCliente">
-            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+          <Parameter Name="idCliente" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_EliminaTipoServicioProducto">
-            <Parameter Name="idTipoServicioProducto" Mode="In" Type="Int32" />
+          <Parameter Name="idTipoServicioProducto" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_InsertaCliente">
             <Parameter Name="nomCliente" Mode="In" Type="String" />
@@ -1132,7 +1138,13 @@
             <Parameter Name="tipo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_RetornaVehiculos" ReturnType="Collection(sistvehiculoviModel.pa_RetornaVehiculos_Result)">
-            <Parameter Name="placa" Mode="In" Type="String" />
+          <Parameter Name="placa" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_RetornaGenero" ReturnType="Collection(sistvehiculoviModel.pa_RetornaGenero_Result)">
+            <Parameter Name="nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_RetornaTipoCliente" ReturnType="Collection(sistvehiculoviModel.pa_RetornaTipoCliente_Result)">
+            <Parameter Name="nombre" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -1241,6 +1253,14 @@
           <Property Type="Int32" Name="numeroRueda" Nullable="false" />
           <Property Type="String" Name="marca" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="tipo" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaGenero_Result">
+          <Property Type="Int32" Name="id_Genero" Nullable="false" />
+          <Property Type="String" Name="nombreGenero" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaTipoCliente_Result">
+          <Property Type="Int32" Name="id_tipoCliente" Nullable="false" />
+          <Property Type="String" Name="nombreTipoCliente" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1563,6 +1583,22 @@
                 <ScalarProperty Name="numeroRueda" ColumnName="numeroRueda" />
                 <ScalarProperty Name="marca" ColumnName="marca" />
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_RetornaGenero" FunctionName="sistvehiculoviModel.Store.pa_RetornaGenero">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaGenero_Result">
+                <ScalarProperty Name="id_Genero" ColumnName="id_Genero" />
+                <ScalarProperty Name="nombreGenero" ColumnName="nombreGenero" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_RetornaTipoCliente" FunctionName="sistvehiculoviModel.Store.pa_RetornaTipoCliente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaTipoCliente_Result">
+                <ScalarProperty Name="id_tipoCliente" ColumnName="id_tipoCliente" />
+                <ScalarProperty Name="nombreTipoCliente" ColumnName="nombreTipoCliente" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
