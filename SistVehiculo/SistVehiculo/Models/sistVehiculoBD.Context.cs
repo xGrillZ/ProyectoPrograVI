@@ -177,5 +177,217 @@ namespace SistVehiculo.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ModificaCanton", id_CantonParameter, id_ProvinciaParameter, nombreParameter, id_CantonInecParameter);
         }
+    
+        public virtual int pa_EliminaCliente(Nullable<int> idCliente)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("idCliente", idCliente) :
+                new ObjectParameter("idCliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_EliminaCliente", idClienteParameter);
+        }
+    
+        public virtual int pa_EliminaTipoServicioProducto(Nullable<int> idTipoServicioProducto)
+        {
+            var idTipoServicioProductoParameter = idTipoServicioProducto.HasValue ?
+                new ObjectParameter("idTipoServicioProducto", idTipoServicioProducto) :
+                new ObjectParameter("idTipoServicioProducto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_EliminaTipoServicioProducto", idTipoServicioProductoParameter);
+        }
+    
+        public virtual int pa_InsertaCliente(string nomCliente, string ape1Cliente, string ape2Cliente, string numCedula, Nullable<int> genero, Nullable<int> provincia, Nullable<System.DateTime> fechNacimiento, Nullable<int> canton, Nullable<int> distrito, string email, string pTelefono, Nullable<int> tipoCliente, Nullable<System.DateTime> ultimoIngreso, string contrasena)
+        {
+            var nomClienteParameter = nomCliente != null ?
+                new ObjectParameter("nomCliente", nomCliente) :
+                new ObjectParameter("nomCliente", typeof(string));
+    
+            var ape1ClienteParameter = ape1Cliente != null ?
+                new ObjectParameter("ape1Cliente", ape1Cliente) :
+                new ObjectParameter("ape1Cliente", typeof(string));
+    
+            var ape2ClienteParameter = ape2Cliente != null ?
+                new ObjectParameter("ape2Cliente", ape2Cliente) :
+                new ObjectParameter("ape2Cliente", typeof(string));
+    
+            var numCedulaParameter = numCedula != null ?
+                new ObjectParameter("numCedula", numCedula) :
+                new ObjectParameter("numCedula", typeof(string));
+    
+            var generoParameter = genero.HasValue ?
+                new ObjectParameter("genero", genero) :
+                new ObjectParameter("genero", typeof(int));
+    
+            var provinciaParameter = provincia.HasValue ?
+                new ObjectParameter("provincia", provincia) :
+                new ObjectParameter("provincia", typeof(int));
+    
+            var fechNacimientoParameter = fechNacimiento.HasValue ?
+                new ObjectParameter("fechNacimiento", fechNacimiento) :
+                new ObjectParameter("fechNacimiento", typeof(System.DateTime));
+    
+            var cantonParameter = canton.HasValue ?
+                new ObjectParameter("canton", canton) :
+                new ObjectParameter("canton", typeof(int));
+    
+            var distritoParameter = distrito.HasValue ?
+                new ObjectParameter("distrito", distrito) :
+                new ObjectParameter("distrito", typeof(int));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var pTelefonoParameter = pTelefono != null ?
+                new ObjectParameter("pTelefono", pTelefono) :
+                new ObjectParameter("pTelefono", typeof(string));
+    
+            var tipoClienteParameter = tipoCliente.HasValue ?
+                new ObjectParameter("tipoCliente", tipoCliente) :
+                new ObjectParameter("tipoCliente", typeof(int));
+    
+            var ultimoIngresoParameter = ultimoIngreso.HasValue ?
+                new ObjectParameter("ultimoIngreso", ultimoIngreso) :
+                new ObjectParameter("ultimoIngreso", typeof(System.DateTime));
+    
+            var contrasenaParameter = contrasena != null ?
+                new ObjectParameter("contrasena", contrasena) :
+                new ObjectParameter("contrasena", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_InsertaCliente", nomClienteParameter, ape1ClienteParameter, ape2ClienteParameter, numCedulaParameter, generoParameter, provinciaParameter, fechNacimientoParameter, cantonParameter, distritoParameter, emailParameter, pTelefonoParameter, tipoClienteParameter, ultimoIngresoParameter, contrasenaParameter);
+        }
+    
+        public virtual int pa_InsertaVehiculos(string placa, Nullable<int> numeroPuerta, Nullable<int> numeroRuedas, Nullable<int> tipoVehiculo, Nullable<int> marcaVehiculo)
+        {
+            var placaParameter = placa != null ?
+                new ObjectParameter("placa", placa) :
+                new ObjectParameter("placa", typeof(string));
+    
+            var numeroPuertaParameter = numeroPuerta.HasValue ?
+                new ObjectParameter("numeroPuerta", numeroPuerta) :
+                new ObjectParameter("numeroPuerta", typeof(int));
+    
+            var numeroRuedasParameter = numeroRuedas.HasValue ?
+                new ObjectParameter("numeroRuedas", numeroRuedas) :
+                new ObjectParameter("numeroRuedas", typeof(int));
+    
+            var tipoVehiculoParameter = tipoVehiculo.HasValue ?
+                new ObjectParameter("tipoVehiculo", tipoVehiculo) :
+                new ObjectParameter("tipoVehiculo", typeof(int));
+    
+            var marcaVehiculoParameter = marcaVehiculo.HasValue ?
+                new ObjectParameter("marcaVehiculo", marcaVehiculo) :
+                new ObjectParameter("marcaVehiculo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_InsertaVehiculos", placaParameter, numeroPuertaParameter, numeroRuedasParameter, tipoVehiculoParameter, marcaVehiculoParameter);
+        }
+    
+        public virtual int pa_ModificaCliente(string nomCliente, string ape1Cliente, string ape2Cliente, string numCedula, Nullable<int> genero, Nullable<int> provincia, Nullable<System.DateTime> fechNacimiento, Nullable<int> canton, Nullable<int> distrito, string email, string pTelefono, Nullable<int> tipoCliente, string contrasena)
+        {
+            var nomClienteParameter = nomCliente != null ?
+                new ObjectParameter("nomCliente", nomCliente) :
+                new ObjectParameter("nomCliente", typeof(string));
+    
+            var ape1ClienteParameter = ape1Cliente != null ?
+                new ObjectParameter("ape1Cliente", ape1Cliente) :
+                new ObjectParameter("ape1Cliente", typeof(string));
+    
+            var ape2ClienteParameter = ape2Cliente != null ?
+                new ObjectParameter("ape2Cliente", ape2Cliente) :
+                new ObjectParameter("ape2Cliente", typeof(string));
+    
+            var numCedulaParameter = numCedula != null ?
+                new ObjectParameter("numCedula", numCedula) :
+                new ObjectParameter("numCedula", typeof(string));
+    
+            var generoParameter = genero.HasValue ?
+                new ObjectParameter("genero", genero) :
+                new ObjectParameter("genero", typeof(int));
+    
+            var provinciaParameter = provincia.HasValue ?
+                new ObjectParameter("provincia", provincia) :
+                new ObjectParameter("provincia", typeof(int));
+    
+            var fechNacimientoParameter = fechNacimiento.HasValue ?
+                new ObjectParameter("fechNacimiento", fechNacimiento) :
+                new ObjectParameter("fechNacimiento", typeof(System.DateTime));
+    
+            var cantonParameter = canton.HasValue ?
+                new ObjectParameter("canton", canton) :
+                new ObjectParameter("canton", typeof(int));
+    
+            var distritoParameter = distrito.HasValue ?
+                new ObjectParameter("distrito", distrito) :
+                new ObjectParameter("distrito", typeof(int));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var pTelefonoParameter = pTelefono != null ?
+                new ObjectParameter("pTelefono", pTelefono) :
+                new ObjectParameter("pTelefono", typeof(string));
+    
+            var tipoClienteParameter = tipoCliente.HasValue ?
+                new ObjectParameter("tipoCliente", tipoCliente) :
+                new ObjectParameter("tipoCliente", typeof(int));
+    
+            var contrasenaParameter = contrasena != null ?
+                new ObjectParameter("contrasena", contrasena) :
+                new ObjectParameter("contrasena", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ModificaCliente", nomClienteParameter, ape1ClienteParameter, ape2ClienteParameter, numCedulaParameter, generoParameter, provinciaParameter, fechNacimientoParameter, cantonParameter, distritoParameter, emailParameter, pTelefonoParameter, tipoClienteParameter, contrasenaParameter);
+        }
+    
+        public virtual int pa_ModificaPaisFabricante(Nullable<int> idFabricante, string codigo, string pais)
+        {
+            var idFabricanteParameter = idFabricante.HasValue ?
+                new ObjectParameter("idFabricante", idFabricante) :
+                new ObjectParameter("idFabricante", typeof(int));
+    
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
+    
+            var paisParameter = pais != null ?
+                new ObjectParameter("pais", pais) :
+                new ObjectParameter("pais", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ModificaPaisFabricante", idFabricanteParameter, codigoParameter, paisParameter);
+        }
+    
+        public virtual int pa_ModificaTipoServicioProducto(Nullable<int> idTipoServicioProducto, string codigo, string descripcion, Nullable<double> precio, string tipo)
+        {
+            var idTipoServicioProductoParameter = idTipoServicioProducto.HasValue ?
+                new ObjectParameter("idTipoServicioProducto", idTipoServicioProducto) :
+                new ObjectParameter("idTipoServicioProducto", typeof(int));
+    
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            var precioParameter = precio.HasValue ?
+                new ObjectParameter("precio", precio) :
+                new ObjectParameter("precio", typeof(double));
+    
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("tipo", tipo) :
+                new ObjectParameter("tipo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ModificaTipoServicioProducto", idTipoServicioProductoParameter, codigoParameter, descripcionParameter, precioParameter, tipoParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaVehiculos_Result> pa_RetornaVehiculos(string placa)
+        {
+            var placaParameter = placa != null ?
+                new ObjectParameter("placa", placa) :
+                new ObjectParameter("placa", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaVehiculos_Result>("pa_RetornaVehiculos", placaParameter);
+        }
     }
 }

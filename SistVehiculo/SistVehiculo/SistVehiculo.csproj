@@ -179,6 +179,9 @@
     <Compile Include="Models\pa_RetornaCliente_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pa_RetornaVehiculos_Result.cs">
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Provincia.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
