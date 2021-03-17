@@ -9,7 +9,7 @@ namespace SistVehiculo.Controllers
 {
     public class AdministradoresController : Controller
     {
-        sistVehiculoEntities modeloBD = new sistVehiculoEntities();
+        sistvehiculoviEntities modeloBD = new sistvehiculoviEntities();
         // GET: Administradores
         public ActionResult Index()
         {

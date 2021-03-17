@@ -18,9 +18,9 @@ namespace SistVehiculo.Models
         public string ape1Cliente { get; set; }
         public string ape2Cliente { get; set; }
         public string numCedula { get; set; }
+        public int provincia { get; set; }
         public int genero { get; set; }
         public string nombreGenero { get; set; }
-        public int provincia { get; set; }
         public string nombreProvincia { get; set; }
         public string pTelefono { get; set; }
         public int canton { get; set; }
@@ -29,8 +29,9 @@ namespace SistVehiculo.Models
         public string nombreDistrito { get; set; }
         public System.DateTime fechNacimiento { get; set; }
         public string email { get; set; }
-        public string contrasena { get; set; }
-        public string tipoCliente { get; set; }
+        public int tipoCliente { get; set; }
+        public string nombreTipoCliente { get; set; }
         public System.DateTime ultimoIngreso { get; set; }
+        public string contrasena { get; set; }
     }
 }

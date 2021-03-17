@@ -15,7 +15,7 @@ namespace SistVehiculo.Controllers
         /// <summary>
         /// Instancia del modelo de base de datos
         /// </summary>
-        sistVehiculoEntities modeloBD = new sistVehiculoEntities();
+        sistvehiculoviEntities modeloBD = new sistvehiculoviEntities();
 
         // GET: Inicio
         public ActionResult Inicio()

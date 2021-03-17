@@ -10,14 +10,18 @@
 namespace SistVehiculo.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class pa_RetornaVehiculos_Result
+    public partial class TipoCliente
     {
-        public int idVehiculos { get; set; }
-        public int tipoVehiculo { get; set; }
-        public int numeroPuerta { get; set; }
-        public int numeroRueda { get; set; }
-        public string marca { get; set; }
-        public string tipo { get; set; }
+        public TipoCliente()
+        {
+            this.Cliente = new HashSet<Cliente>();
+        }
+    
+        public int id_tipoCliente { get; set; }
+        public string nombreTipoCliente { get; set; }
+    
+        public virtual ICollection<Cliente> Cliente { get; set; }
     }
 }

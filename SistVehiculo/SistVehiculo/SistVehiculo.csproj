@@ -144,82 +144,82 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Canton.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cliente.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\detalle_Factura.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Distrito.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Estado.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Factura.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Genero.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MarcaVehiculo.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PaisFabricante.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaClienteCorreoPwd_Result.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaClienteID_Result.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaCliente_Result.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\pa_RetornaVehiculos_Result.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Provincia.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RetornaCantonesID_Result.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RetornaCantones_Result.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RetornaProvincias_Result.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sistVehiculoEntities.Context.cs">
+    <Compile Include="Models\sistVehiculoBD.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>sistVehiculoEntities.Context.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sistVehiculoEntities.cs">
+    <Compile Include="Models\sistVehiculoBD.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sistVehiculoEntities.Designer.cs">
+    <Compile Include="Models\sistVehiculoBD.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>sistVehiculoEntities.edmx</DependentUpon>
+      <DependentUpon>sistVehiculoBD.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoCliente.cs">
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoServicioProducto.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TiposVehiculo.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vehiculos.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VehiculosCliente.cs">
-      <DependentUpon>sistVehiculoEntities.tt</DependentUpon>
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -249,22 +249,15 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\sistVehiculoEntities.Context.tt">
+    <Content Include="Models\sistVehiculoBD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sistVehiculoEntities.edmx</DependentUpon>
-      <LastGenOutput>sistVehiculoEntities.Context.cs</LastGenOutput>
+      <DependentUpon>sistVehiculoBD.edmx</DependentUpon>
+      <LastGenOutput>sistVehiculoBD.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\sistVehiculoEntities.tt">
+    <Content Include="Models\sistVehiculoBD.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sistVehiculoEntities.edmx</DependentUpon>
-      <LastGenOutput>sistVehiculoEntities.cs</LastGenOutput>
-    </Content>
-    <EntityDeploy Include="Models\sistVehiculoEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>sistVehiculoEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\sistVehiculoEntities.edmx.diagram">
-      <DependentUpon>sistVehiculoEntities.edmx</DependentUpon>
+      <DependentUpon>sistVehiculoBD.edmx</DependentUpon>
+      <LastGenOutput>sistVehiculoBD.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -289,6 +282,13 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Models\sistVehiculoBD.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>sistVehiculoBD.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\sistVehiculoBD.edmx.diagram">
+      <DependentUpon>sistVehiculoBD.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

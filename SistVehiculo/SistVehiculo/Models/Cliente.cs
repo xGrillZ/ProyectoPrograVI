@@ -25,21 +25,22 @@ namespace SistVehiculo.Models
         public string ape1Cliente { get; set; }
         public string ape2Cliente { get; set; }
         public string numCedula { get; set; }
+        public int genero { get; set; }
         public int provincia { get; set; }
         public System.DateTime fechNacimiento { get; set; }
         public int canton { get; set; }
         public int distrito { get; set; }
         public string email { get; set; }
         public string pTelefono { get; set; }
-        public string tipoCliente { get; set; }
+        public int tipoCliente { get; set; }
         public System.DateTime ultimoIngreso { get; set; }
         public string contrasena { get; set; }
-        public int genero { get; set; }
     
         public virtual Canton Canton1 { get; set; }
         public virtual Distrito Distrito1 { get; set; }
         public virtual Genero Genero1 { get; set; }
         public virtual Provincia Provincia1 { get; set; }
+        public virtual TipoCliente TipoCliente1 { get; set; }
         public virtual ICollection<Factura> Factura { get; set; }
         public virtual ICollection<VehiculosCliente> VehiculosCliente { get; set; }
     }

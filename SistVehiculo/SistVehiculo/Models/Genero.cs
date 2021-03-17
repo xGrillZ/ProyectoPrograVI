@@ -20,7 +20,7 @@ namespace SistVehiculo.Models
         }
     
         public int id_Genero { get; set; }
-        public string nom_genero { get; set; }
+        public string nombreGenero { get; set; }
     
         public virtual ICollection<Cliente> Cliente { get; set; }
     }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="mantvehiculosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="sistvehiculoviModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Canton">
           <Key>
             <PropertyRef Name="id_Canton" />
@@ -28,22 +28,23 @@
           <Property Name="ape1Cliente" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ape2Cliente" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="numCedula" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="genero" Type="int" Nullable="false" />
           <Property Name="provincia" Type="int" Nullable="false" />
           <Property Name="fechNacimiento" Type="datetime" Nullable="false" />
           <Property Name="canton" Type="int" Nullable="false" />
           <Property Name="distrito" Type="int" Nullable="false" />
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="pTelefono" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="tipoCliente" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="tipoCliente" Type="int" Nullable="false" />
           <Property Name="ultimoIngreso" Type="datetime" Nullable="false" />
-          <Property Name="contrasena" Type="nvarchar" MaxLength="500" Nullable="false" />
-          <Property Name="genero" Type="int" Nullable="false" />
+          <Property Name="contrasena" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="detalle_Factura">
           <Key>
-            <PropertyRef Name="id_detalle" />
+            <PropertyRef Name="num_detalle" />
           </Key>
-          <Property Name="id_detalle" Type="int" Nullable="false" />
+          <Property Name="num_detalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="num_factura" Type="int" Nullable="false" />
           <Property Name="idTipoServicioProducto" Type="int" Nullable="false" />
           <Property Name="cantidadServicioProducto" Type="int" Nullable="false" />
           <Property Name="Precio" Type="float" Nullable="false" />
@@ -66,28 +67,27 @@
           <Key>
             <PropertyRef Name="id_estado" />
           </Key>
-          <Property Name="id_estado" Type="int" Nullable="false" />
-          <Property Name="estado" Type="nvarchar" MaxLength="50" />
+          <Property Name="id_estado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nomEstado" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Factura">
           <Key>
             <PropertyRef Name="id_factura" />
           </Key>
-          <Property Name="id_factura" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="id_factura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="num_factura" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="fecha" Type="datetime" Nullable="false" />
           <Property Name="idCliente" Type="int" Nullable="false" />
           <Property Name="idVehiculo" Type="int" Nullable="false" />
-          <Property Name="numFactura" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="id_estado" Type="int" Nullable="false" />
           <Property Name="montoTotal" Type="float" Nullable="false" />
-          <Property Name="id_detalleFactura" Type="int" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Genero">
           <Key>
             <PropertyRef Name="id_Genero" />
           </Key>
           <Property Name="id_Genero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nom_genero" Type="nvarchar" MaxLength="50" />
+          <Property Name="nombreGenero" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="MarcaVehiculo">
           <Key>
@@ -96,7 +96,7 @@
           <Property Name="idMarcaVehiculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="codigo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="idPaisFabricante" Type="int" Nullable="false" />
-          <Property Name="marca" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="marca" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="PaisFabricante">
           <Key>
@@ -118,13 +118,20 @@
           <Property Name="fechaModifica" Type="datetime" />
           <Property Name="vc_Estado" Type="varchar" MaxLength="3" />
         </EntityType>
+        <EntityType Name="TipoCliente">
+          <Key>
+            <PropertyRef Name="id_tipoCliente" />
+          </Key>
+          <Property Name="id_tipoCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreTipoCliente" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="TipoServicioProducto">
           <Key>
             <PropertyRef Name="idTipoServicioProducto" />
           </Key>
           <Property Name="idTipoServicioProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="codigo" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="descripcion" Type="nvarchar" MaxLength="200" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="precio" Type="float" Nullable="false" />
           <Property Name="tipo" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -179,15 +186,529 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Factura__id_deta__3B40CD36">
-          <End Role="detalle_Factura" Type="Self.detalle_Factura" Multiplicity="1" />
+        <Association Name="FK_Cliente_Canton">
+          <End Role="Canton" Type="Self.Canton" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Canton">
+              <PropertyRef Name="id_Canton" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="canton" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Distrito">
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distrito">
+              <PropertyRef Name="id_Distrito" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="distrito" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Genero">
+          <End Role="Genero" Type="Self.Genero" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genero">
+              <PropertyRef Name="id_Genero" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="genero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Provincia">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="id_Provincia" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="provincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_TipoCliente">
+          <End Role="TipoCliente" Type="Self.TipoCliente" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoCliente">
+              <PropertyRef Name="id_tipoCliente" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="tipoCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalleFactura_TipoServicio">
+          <End Role="TipoServicioProducto" Type="Self.TipoServicioProducto" Multiplicity="1" />
+          <End Role="detalle_Factura" Type="Self.detalle_Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoServicioProducto">
+              <PropertyRef Name="idTipoServicioProducto" />
+            </Principal>
+            <Dependent Role="detalle_Factura">
+              <PropertyRef Name="idTipoServicioProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_factura">
+          <End Role="Factura" Type="Self.Factura" Multiplicity="1" />
+          <End Role="detalle_Factura" Type="Self.detalle_Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factura">
+              <PropertyRef Name="id_factura" />
+            </Principal>
+            <Dependent Role="detalle_Factura">
+              <PropertyRef Name="num_factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
           <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="detalle_Factura">
-              <PropertyRef Name="id_detalle" />
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
             </Principal>
             <Dependent Role="Factura">
-              <PropertyRef Name="id_detalleFactura" />
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Estado">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Vehiculo">
+          <End Role="VehiculosCliente" Type="Self.VehiculosCliente" Multiplicity="1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehiculosCliente">
+              <PropertyRef Name="idVehiculosCliente" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="idVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MarcaVehiculo_PaisFabricante">
+          <End Role="PaisFabricante" Type="Self.PaisFabricante" Multiplicity="1" />
+          <End Role="MarcaVehiculo" Type="Self.MarcaVehiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaisFabricante">
+              <PropertyRef Name="idFabricante" />
+            </Principal>
+            <Dependent Role="MarcaVehiculo">
+              <PropertyRef Name="idPaisFabricante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehiculos_MarcaVehiculo">
+          <End Role="MarcaVehiculo" Type="Self.MarcaVehiculo" Multiplicity="1" />
+          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MarcaVehiculo">
+              <PropertyRef Name="idMarcaVehiculo" />
+            </Principal>
+            <Dependent Role="Vehiculos">
+              <PropertyRef Name="marcaVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehiculos_TiposVehiculo">
+          <End Role="TiposVehiculo" Type="Self.TiposVehiculo" Multiplicity="1" />
+          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposVehiculo">
+              <PropertyRef Name="idTipoVehiculo" />
+            </Principal>
+            <Dependent Role="Vehiculos">
+              <PropertyRef Name="tipoVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehiculosCliente_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="VehiculosCliente" Type="Self.VehiculosCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="VehiculosCliente">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehiculosCliente_Vehiculo">
+          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="1" />
+          <End Role="VehiculosCliente" Type="Self.VehiculosCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculos">
+              <PropertyRef Name="idVehiculos" />
+            </Principal>
+            <Dependent Role="VehiculosCliente">
+              <PropertyRef Name="idVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="pa_ModificaUltimaSesionCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCliente" Type="int" Mode="In" />
+          <Parameter Name="ultimoIngreso" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="pa_RetornaCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="numCedula" Type="nvarchar" Mode="In" />
+          <Parameter Name="nomCliente" Type="nvarchar" Mode="In" />
+          <Parameter Name="ape1Cliente" Type="nvarchar" Mode="In" />
+          <Parameter Name="ape2Cliente" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="pa_RetornaClienteCorreoPwd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="correoElectronico" Type="nvarchar" Mode="In" />
+          <Parameter Name="password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="pa_RetornaClienteID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCliente" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RetornaCantones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="id_Provincia" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RetornaCantonesID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Canton" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RetornaProvincias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_EliminaCanton" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Canton" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_InsertaCanton" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Provincia" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="id_CantonInec" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_ModificaCanton" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Canton" Type="int" Mode="In" />
+          <Parameter Name="id_Provincia" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="id_CantonInec" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="sistvehiculoviModelStoreContainer">
+          <EntitySet Name="Canton" EntityType="Self.Canton" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="detalle_Factura" EntityType="Self.detalle_Factura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Distrito" EntityType="Self.Distrito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genero" EntityType="Self.Genero" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MarcaVehiculo" EntityType="Self.MarcaVehiculo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaisFabricante" EntityType="Self.PaisFabricante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoCliente" EntityType="Self.TipoCliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoServicioProducto" EntityType="Self.TipoServicioProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiposVehiculo" EntityType="Self.TiposVehiculo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehiculos" EntityType="Self.Vehiculos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehiculosCliente" EntityType="Self.VehiculosCliente" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Canton_ref_Provincia" Association="Self.Canton_ref_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Canton" EntitySet="Canton" />
+          </AssociationSet>
+          <AssociationSet Name="Distrito_ref_Canton" Association="Self.Distrito_ref_Canton">
+            <End Role="Canton" EntitySet="Canton" />
+            <End Role="Distrito" EntitySet="Distrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Canton" Association="Self.FK_Cliente_Canton">
+            <End Role="Canton" EntitySet="Canton" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Distrito" Association="Self.FK_Cliente_Distrito">
+            <End Role="Distrito" EntitySet="Distrito" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Genero" Association="Self.FK_Cliente_Genero">
+            <End Role="Genero" EntitySet="Genero" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Provincia" Association="Self.FK_Cliente_Provincia">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_TipoCliente" Association="Self.FK_Cliente_TipoCliente">
+            <End Role="TipoCliente" EntitySet="TipoCliente" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_detalleFactura_TipoServicio" Association="Self.FK_detalleFactura_TipoServicio">
+            <End Role="TipoServicioProducto" EntitySet="TipoServicioProducto" />
+            <End Role="detalle_Factura" EntitySet="detalle_Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_factura" Association="Self.FK_factura">
+            <End Role="Factura" EntitySet="Factura" />
+            <End Role="detalle_Factura" EntitySet="detalle_Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Cliente" Association="Self.FK_Factura_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Estado" Association="Self.FK_Factura_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Vehiculo" Association="Self.FK_Factura_Vehiculo">
+            <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MarcaVehiculo_PaisFabricante" Association="Self.FK_MarcaVehiculo_PaisFabricante">
+            <End Role="PaisFabricante" EntitySet="PaisFabricante" />
+            <End Role="MarcaVehiculo" EntitySet="MarcaVehiculo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehiculos_MarcaVehiculo" Association="Self.FK_Vehiculos_MarcaVehiculo">
+            <End Role="MarcaVehiculo" EntitySet="MarcaVehiculo" />
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehiculos_TiposVehiculo" Association="Self.FK_Vehiculos_TiposVehiculo">
+            <End Role="TiposVehiculo" EntitySet="TiposVehiculo" />
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehiculosCliente_Cliente" Association="Self.FK_VehiculosCliente_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehiculosCliente_Vehiculo" Association="Self.FK_VehiculosCliente_Vehiculo">
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+            <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sistvehiculoviModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Canton">
+          <Key>
+            <PropertyRef Name="id_Canton" />
+          </Key>
+          <Property Name="id_Canton" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Provincia" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usuarioCrea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="usuarioModifica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="vc_Estado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="id_CantonInec" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Provincia" Relationship="Self.Canton_ref_Provincia" FromRole="Canton" ToRole="Provincia" />
+          <NavigationProperty Name="Distrito" Relationship="Self.Distrito_ref_Canton" FromRole="Canton" ToRole="Distrito" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Canton" FromRole="Canton" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ape1Cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ape2Cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="numCedula" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="genero" Type="Int32" Nullable="false" />
+          <Property Name="provincia" Type="Int32" Nullable="false" />
+          <Property Name="fechNacimiento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="canton" Type="Int32" Nullable="false" />
+          <Property Name="distrito" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pTelefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tipoCliente" Type="Int32" Nullable="false" />
+          <Property Name="ultimoIngreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="contrasena" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Canton1" Relationship="Self.FK_Cliente_Canton" FromRole="Cliente" ToRole="Canton" />
+          <NavigationProperty Name="Distrito1" Relationship="Self.FK_Cliente_Distrito" FromRole="Cliente" ToRole="Distrito" />
+          <NavigationProperty Name="Genero1" Relationship="Self.FK_Cliente_Genero" FromRole="Cliente" ToRole="Genero" />
+          <NavigationProperty Name="Provincia1" Relationship="Self.FK_Cliente_Provincia" FromRole="Cliente" ToRole="Provincia" />
+          <NavigationProperty Name="TipoCliente1" Relationship="Self.FK_Cliente_TipoCliente" FromRole="Cliente" ToRole="TipoCliente" />
+          <NavigationProperty Name="Factura" Relationship="Self.FK_Factura_Cliente" FromRole="Cliente" ToRole="Factura" />
+          <NavigationProperty Name="VehiculosCliente" Relationship="Self.FK_VehiculosCliente_Cliente" FromRole="Cliente" ToRole="VehiculosCliente" />
+        </EntityType>
+        <EntityType Name="detalle_Factura">
+          <Key>
+            <PropertyRef Name="num_detalle" />
+          </Key>
+          <Property Name="num_detalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="num_factura" Type="Int32" Nullable="false" />
+          <Property Name="idTipoServicioProducto" Type="Int32" Nullable="false" />
+          <Property Name="cantidadServicioProducto" Type="Int32" Nullable="false" />
+          <Property Name="Precio" Type="Double" Nullable="false" />
+          <NavigationProperty Name="TipoServicioProducto" Relationship="Self.FK_detalleFactura_TipoServicio" FromRole="detalle_Factura" ToRole="TipoServicioProducto" />
+          <NavigationProperty Name="Factura" Relationship="Self.FK_factura" FromRole="detalle_Factura" ToRole="Factura" />
+        </EntityType>
+        <EntityType Name="Distrito">
+          <Key>
+            <PropertyRef Name="id_Distrito" />
+          </Key>
+          <Property Name="id_Distrito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_Canton" Type="Int32" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usuarioCrea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="usuarioModifica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="vc_Estado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="id_DistritoInec" Type="Int32" />
+          <NavigationProperty Name="Canton" Relationship="Self.Distrito_ref_Canton" FromRole="Distrito" ToRole="Canton" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Distrito" FromRole="Distrito" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="Estado">
+          <Key>
+            <PropertyRef Name="id_estado" />
+          </Key>
+          <Property Name="id_estado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomEstado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Factura" Relationship="Self.FK_Factura_Estado" FromRole="Estado" ToRole="Factura" />
+        </EntityType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="id_factura" />
+          </Key>
+          <Property Name="id_factura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="num_factura" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="idVehiculo" Type="Int32" Nullable="false" />
+          <Property Name="montoTotal" Type="Double" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Factura_Cliente" FromRole="Factura" ToRole="Cliente" />
+          <NavigationProperty Name="detalle_Factura" Relationship="Self.FK_factura" FromRole="Factura" ToRole="detalle_Factura" />
+          <NavigationProperty Name="Estado1" Relationship="Self.FK_Factura_Estado" FromRole="Factura" ToRole="Estado" />
+          <NavigationProperty Name="VehiculosCliente" Relationship="Self.FK_Factura_Vehiculo" FromRole="Factura" ToRole="VehiculosCliente" />
+        </EntityType>
+        <EntityType Name="Genero">
+          <Key>
+            <PropertyRef Name="id_Genero" />
+          </Key>
+          <Property Name="id_Genero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreGenero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Genero" FromRole="Genero" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="MarcaVehiculo">
+          <Key>
+            <PropertyRef Name="idMarcaVehiculo" />
+          </Key>
+          <Property Name="idMarcaVehiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idPaisFabricante" Type="Int32" Nullable="false" />
+          <Property Name="marca" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PaisFabricante" Relationship="Self.FK_MarcaVehiculo_PaisFabricante" FromRole="MarcaVehiculo" ToRole="PaisFabricante" />
+          <NavigationProperty Name="Vehiculos" Relationship="Self.FK_Vehiculos_MarcaVehiculo" FromRole="MarcaVehiculo" ToRole="Vehiculos" />
+        </EntityType>
+        <EntityType Name="PaisFabricante">
+          <Key>
+            <PropertyRef Name="idFabricante" />
+          </Key>
+          <Property Name="idFabricante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pais" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="MarcaVehiculo" Relationship="Self.FK_MarcaVehiculo_PaisFabricante" FromRole="PaisFabricante" ToRole="MarcaVehiculo" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="id_Provincia" />
+          </Key>
+          <Property Name="id_Provincia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usuarioCrea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fechaCrea" Type="DateTime" Precision="3" />
+          <Property Name="usuarioModifica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fechaModifica" Type="DateTime" Precision="3" />
+          <Property Name="vc_Estado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Canton" Relationship="Self.Canton_ref_Provincia" FromRole="Provincia" ToRole="Canton" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_Provincia" FromRole="Provincia" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="TipoCliente">
+          <Key>
+            <PropertyRef Name="id_tipoCliente" />
+          </Key>
+          <Property Name="id_tipoCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreTipoCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Cliente_TipoCliente" FromRole="TipoCliente" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="TipoServicioProducto">
+          <Key>
+            <PropertyRef Name="idTipoServicioProducto" />
+          </Key>
+          <Property Name="idTipoServicioProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="precio" Type="Double" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="detalle_Factura" Relationship="Self.FK_detalleFactura_TipoServicio" FromRole="TipoServicioProducto" ToRole="detalle_Factura" />
+        </EntityType>
+        <EntityType Name="TiposVehiculo">
+          <Key>
+            <PropertyRef Name="idTipoVehiculo" />
+          </Key>
+          <Property Name="idTipoVehiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Vehiculos" Relationship="Self.FK_Vehiculos_TiposVehiculo" FromRole="TiposVehiculo" ToRole="Vehiculos" />
+        </EntityType>
+        <EntityType Name="Vehiculos">
+          <Key>
+            <PropertyRef Name="idVehiculos" />
+          </Key>
+          <Property Name="idVehiculos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="placa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="tipoVehiculo" Type="Int32" Nullable="false" />
+          <Property Name="marcaVehiculo" Type="Int32" Nullable="false" />
+          <Property Name="numeroPuerta" Type="Int32" Nullable="false" />
+          <Property Name="numeroRueda" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MarcaVehiculo1" Relationship="Self.FK_Vehiculos_MarcaVehiculo" FromRole="Vehiculos" ToRole="MarcaVehiculo" />
+          <NavigationProperty Name="TiposVehiculo" Relationship="Self.FK_Vehiculos_TiposVehiculo" FromRole="Vehiculos" ToRole="TiposVehiculo" />
+          <NavigationProperty Name="VehiculosCliente" Relationship="Self.FK_VehiculosCliente_Vehiculo" FromRole="Vehiculos" ToRole="VehiculosCliente" />
+        </EntityType>
+        <EntityType Name="VehiculosCliente">
+          <Key>
+            <PropertyRef Name="idVehiculosCliente" />
+          </Key>
+          <Property Name="idVehiculosCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idVehiculo" Type="Int32" Nullable="false" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_VehiculosCliente_Cliente" FromRole="VehiculosCliente" ToRole="Cliente" />
+          <NavigationProperty Name="Factura" Relationship="Self.FK_Factura_Vehiculo" FromRole="VehiculosCliente" ToRole="Factura" />
+          <NavigationProperty Name="Vehiculos" Relationship="Self.FK_VehiculosCliente_Vehiculo" FromRole="VehiculosCliente" ToRole="Vehiculos" />
+        </EntityType>
+        <Association Name="Canton_ref_Provincia">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
+          <End Role="Canton" Type="Self.Canton" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="id_Provincia" />
+            </Principal>
+            <Dependent Role="Canton">
+              <PropertyRef Name="id_Provincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Distrito_ref_Canton">
+          <End Role="Canton" Type="Self.Canton" Multiplicity="0..1" />
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Canton">
+              <PropertyRef Name="id_Canton" />
+            </Principal>
+            <Dependent Role="Distrito">
+              <PropertyRef Name="id_Canton" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -239,15 +760,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_detalleFactura_TipoServicio">
-          <End Role="TipoServicioProducto" Type="Self.TipoServicioProducto" Multiplicity="1" />
-          <End Role="detalle_Factura" Type="Self.detalle_Factura" Multiplicity="*" />
+        <Association Name="FK_Cliente_TipoCliente">
+          <End Role="TipoCliente" Type="Self.TipoCliente" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TipoServicioProducto">
-              <PropertyRef Name="idTipoServicioProducto" />
+            <Principal Role="TipoCliente">
+              <PropertyRef Name="id_tipoCliente" />
             </Principal>
-            <Dependent Role="detalle_Factura">
-              <PropertyRef Name="idTipoServicioProducto" />
+            <Dependent Role="Cliente">
+              <PropertyRef Name="tipoCliente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -263,6 +784,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_VehiculosCliente_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="VehiculosCliente" Type="Self.VehiculosCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="VehiculosCliente">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_detalleFactura_TipoServicio">
+          <End Role="TipoServicioProducto" Type="Self.TipoServicioProducto" Multiplicity="1" />
+          <End Role="detalle_Factura" Type="Self.detalle_Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoServicioProducto">
+              <PropertyRef Name="idTipoServicioProducto" />
+            </Principal>
+            <Dependent Role="detalle_Factura">
+              <PropertyRef Name="idTipoServicioProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_factura">
+          <End Role="Factura" Type="Self.Factura" Multiplicity="1" />
+          <End Role="detalle_Factura" Type="Self.detalle_Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factura">
+              <PropertyRef Name="id_factura" />
+            </Principal>
+            <Dependent Role="detalle_Factura">
+              <PropertyRef Name="num_factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Factura_Estado">
           <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
           <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
@@ -271,7 +828,7 @@
               <PropertyRef Name="id_estado" />
             </Principal>
             <Dependent Role="Factura">
-              <PropertyRef Name="id_estado" />
+              <PropertyRef Name="estado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -299,7 +856,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_vehiculos_marcavehiculo">
+        <Association Name="FK_Vehiculos_MarcaVehiculo">
           <End Role="MarcaVehiculo" Type="Self.MarcaVehiculo" Multiplicity="1" />
           <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -323,18 +880,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_VehiculosCliente_Cliente">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
-          <End Role="VehiculosCliente" Type="Self.VehiculosCliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="idCliente" />
-            </Principal>
-            <Dependent Role="VehiculosCliente">
-              <PropertyRef Name="idCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_VehiculosCliente_Vehiculo">
           <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="1" />
           <End Role="VehiculosCliente" Type="Self.VehiculosCliente" Multiplicity="*" />
@@ -347,125 +892,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="pa_EliminaCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idCliente" Type="int" Mode="In" />
-        </Function>
-        <Function Name="pa_EliminaTipoServicioProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idTipoServicioProducto" Type="int" Mode="In" />
-        </Function>
-        <Function Name="pa_InsertaCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="nomCliente" Type="nvarchar" Mode="In" />
-          <Parameter Name="ape1Cliente" Type="nvarchar" Mode="In" />
-          <Parameter Name="ape2Cliente" Type="nvarchar" Mode="In" />
-          <Parameter Name="numCedula" Type="nvarchar" Mode="In" />
-          <Parameter Name="genero" Type="nvarchar" Mode="In" />
-          <Parameter Name="provincia" Type="int" Mode="In" />
-          <Parameter Name="fechNacimiento" Type="datetime" Mode="In" />
-          <Parameter Name="canton" Type="int" Mode="In" />
-          <Parameter Name="distrito" Type="int" Mode="In" />
-          <Parameter Name="email" Type="nvarchar" Mode="In" />
-          <Parameter Name="pTelefono" Type="nvarchar" Mode="In" />
-          <Parameter Name="tipoCliente" Type="nvarchar" Mode="In" />
-          <Parameter Name="ultimoIngreso" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="pa_InsertaVehiculos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="placa" Type="nvarchar" Mode="In" />
-          <Parameter Name="numeroPuerta" Type="int" Mode="In" />
-          <Parameter Name="numeroRuedas" Type="int" Mode="In" />
-          <Parameter Name="tipoVehiculo" Type="int" Mode="In" />
-          <Parameter Name="marcaVehiculo" Type="int" Mode="In" />
-        </Function>
-        <Function Name="pa_ModificaCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="nomCliente" Type="nvarchar" Mode="In" />
-          <Parameter Name="ape1Cliente" Type="nvarchar" Mode="In" />
-          <Parameter Name="ape2Cliente" Type="nvarchar" Mode="In" />
-          <Parameter Name="numCedula" Type="nvarchar" Mode="In" />
-          <Parameter Name="genero" Type="nvarchar" Mode="In" />
-          <Parameter Name="provincia" Type="int" Mode="In" />
-          <Parameter Name="fechNacimiento" Type="datetime" Mode="In" />
-          <Parameter Name="canton" Type="int" Mode="In" />
-          <Parameter Name="distrito" Type="int" Mode="In" />
-          <Parameter Name="email" Type="nvarchar" Mode="In" />
-          <Parameter Name="pTelefono" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="pa_ModificaPaisFabricante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idFabricante" Type="int" Mode="In" />
-          <Parameter Name="codigo" Type="int" Mode="In" />
-          <Parameter Name="pais" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="pa_ModificaTipoServicioProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idTipoServicioProducto" Type="int" Mode="In" />
-          <Parameter Name="codigo" Type="nvarchar" Mode="In" />
-          <Parameter Name="descripcion" Type="nvarchar" Mode="In" />
-          <Parameter Name="precio" Type="float" Mode="In" />
-          <Parameter Name="tipo" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="pa_ModificaUltimaSesionCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idCliente" Type="int" Mode="In" />
-          <Parameter Name="ultimoIngreso" Type="datetime" Mode="In" />
-        </Function>
-        <Function Name="pa_RetornaCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="numCedula" Type="nvarchar" Mode="In" />
-          <Parameter Name="nomCliente" Type="nvarchar" Mode="In" />
-          <Parameter Name="ape1Cliente" Type="nvarchar" Mode="In" />
-          <Parameter Name="ape2Cliente" Type="nvarchar" Mode="In" />
-          <Parameter Name="tipoCliente" Type="nvarchar" Mode="In" />
-          <Parameter Name="provincia" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="pa_RetornaClienteCorreoPwd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="correoElectronico" Type="nvarchar" Mode="In" />
-          <Parameter Name="password" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="pa_RetornaClienteID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idCliente" Type="int" Mode="In" />
-        </Function>
-        <Function Name="pa_RetornaVehiculos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="placa" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="RetornaCantones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="nombre" Type="varchar" Mode="In" />
-          <Parameter Name="id_Provincia" Type="int" Mode="In" />
-        </Function>
-        <Function Name="RetornaCantonesID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="id_Canton" Type="int" Mode="In" />
-        </Function>
-        <Function Name="RetornaProvincias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="nombre" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="sp_EliminaCanton" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="id_Canton" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_InsertaCanton" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="id_Provincia" Type="int" Mode="In" />
-          <Parameter Name="nombre" Type="varchar" Mode="In" />
-          <Parameter Name="id_CantonInec" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_InsertaDistrito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="id_Canton" Type="int" Mode="In" />
-          <Parameter Name="nombre" Type="varchar" Mode="In" />
-          <Parameter Name="id_DistritoInec" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_ModificaCanton" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="id_Canton" Type="int" Mode="In" />
-          <Parameter Name="id_Provincia" Type="int" Mode="In" />
-          <Parameter Name="nombre" Type="varchar" Mode="In" />
-          <Parameter Name="id_CantonInec" Type="int" Mode="In" />
-        </Function>
-        <EntityContainer Name="mantvehiculosModelStoreContainer">
-          <EntitySet Name="Canton" EntityType="Self.Canton" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="detalle_Factura" EntityType="Self.detalle_Factura" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Distrito" EntityType="Self.Distrito" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Genero" EntityType="Self.Genero" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MarcaVehiculo" EntityType="Self.MarcaVehiculo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PaisFabricante" EntityType="Self.PaisFabricante" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TipoServicioProducto" EntityType="Self.TipoServicioProducto" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TiposVehiculo" EntityType="Self.TiposVehiculo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Vehiculos" EntityType="Self.Vehiculos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="VehiculosCliente" EntityType="Self.VehiculosCliente" Schema="dbo" store:Type="Tables" />
+        <EntityContainer Name="sistvehiculoviEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Canton" EntityType="Self.Canton" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="detalle_Factura" EntityType="Self.detalle_Factura" />
+          <EntitySet Name="Distrito" EntityType="Self.Distrito" />
+          <EntitySet Name="Estado" EntityType="Self.Estado" />
+          <EntitySet Name="Factura" EntityType="Self.Factura" />
+          <EntitySet Name="Genero" EntityType="Self.Genero" />
+          <EntitySet Name="MarcaVehiculo" EntityType="Self.MarcaVehiculo" />
+          <EntitySet Name="PaisFabricante" EntityType="Self.PaisFabricante" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" />
+          <EntitySet Name="TipoCliente" EntityType="Self.TipoCliente" />
+          <EntitySet Name="TipoServicioProducto" EntityType="Self.TipoServicioProducto" />
+          <EntitySet Name="TiposVehiculo" EntityType="Self.TiposVehiculo" />
+          <EntitySet Name="Vehiculos" EntityType="Self.Vehiculos" />
+          <EntitySet Name="VehiculosCliente" EntityType="Self.VehiculosCliente" />
           <AssociationSet Name="Canton_ref_Provincia" Association="Self.Canton_ref_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Canton" EntitySet="Canton" />
@@ -473,10 +915,6 @@
           <AssociationSet Name="Distrito_ref_Canton" Association="Self.Distrito_ref_Canton">
             <End Role="Canton" EntitySet="Canton" />
             <End Role="Distrito" EntitySet="Distrito" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Factura__id_deta__3B40CD36" Association="Self.FK__Factura__id_deta__3B40CD36">
-            <End Role="detalle_Factura" EntitySet="detalle_Factura" />
-            <End Role="Factura" EntitySet="Factura" />
           </AssociationSet>
           <AssociationSet Name="FK_Cliente_Canton" Association="Self.FK_Cliente_Canton">
             <End Role="Canton" EntitySet="Canton" />
@@ -494,344 +932,26 @@
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
-          <AssociationSet Name="FK_detalleFactura_TipoServicio" Association="Self.FK_detalleFactura_TipoServicio">
-            <End Role="TipoServicioProducto" EntitySet="TipoServicioProducto" />
-            <End Role="detalle_Factura" EntitySet="detalle_Factura" />
+          <AssociationSet Name="FK_Cliente_TipoCliente" Association="Self.FK_Cliente_TipoCliente">
+            <End Role="TipoCliente" EntitySet="TipoCliente" />
+            <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
           <AssociationSet Name="FK_Factura_Cliente" Association="Self.FK_Factura_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Factura" EntitySet="Factura" />
           </AssociationSet>
-          <AssociationSet Name="FK_Factura_Estado" Association="Self.FK_Factura_Estado">
-            <End Role="Estado" EntitySet="Estado" />
-            <End Role="Factura" EntitySet="Factura" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Factura_Vehiculo" Association="Self.FK_Factura_Vehiculo">
-            <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
-            <End Role="Factura" EntitySet="Factura" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MarcaVehiculo_PaisFabricante" Association="Self.FK_MarcaVehiculo_PaisFabricante">
-            <End Role="PaisFabricante" EntitySet="PaisFabricante" />
-            <End Role="MarcaVehiculo" EntitySet="MarcaVehiculo" />
-          </AssociationSet>
-          <AssociationSet Name="fk_vehiculos_marcavehiculo" Association="Self.fk_vehiculos_marcavehiculo">
-            <End Role="MarcaVehiculo" EntitySet="MarcaVehiculo" />
-            <End Role="Vehiculos" EntitySet="Vehiculos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Vehiculos_TiposVehiculo" Association="Self.FK_Vehiculos_TiposVehiculo">
-            <End Role="TiposVehiculo" EntitySet="TiposVehiculo" />
-            <End Role="Vehiculos" EntitySet="Vehiculos" />
-          </AssociationSet>
           <AssociationSet Name="FK_VehiculosCliente_Cliente" Association="Self.FK_VehiculosCliente_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VehiculosCliente_Vehiculo" Association="Self.FK_VehiculosCliente_Vehiculo">
-            <End Role="Vehiculos" EntitySet="Vehiculos" />
-            <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
-    <!-- CSDL content -->
-    <edmx:ConceptualModels>
-      <Schema Namespace="mantvehiculosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Canton">
-          <Key>
-            <PropertyRef Name="id_Canton" />
-          </Key>
-          <Property Name="id_Canton" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_Provincia" Type="Int32" Nullable="false" />
-          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="usuarioCrea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fechaCrea" Type="DateTime" Precision="3" />
-          <Property Name="usuarioModifica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="vc_Estado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="id_CantonInec" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Provincia" Relationship="Self.Canton_ref_Provincia" FromRole="Canton" ToRole="Provincia" />
-          <NavigationProperty Name="Distrito" Relationship="Self.Distrito_ref_Canton" FromRole="Canton" ToRole="Distrito" />
-          <NavigationProperty Name="Cliente" Relationship="mantvehiculosModel.FK_Cliente_Canton" FromRole="Canton" ToRole="Cliente" />
-        </EntityType>
-        <EntityType Name="detalle_Factura">
-          <Key>
-            <PropertyRef Name="id_detalle" />
-          </Key>
-          <Property Name="id_detalle" Type="Int32" Nullable="false" />
-          <Property Name="idTipoServicioProducto" Type="Int32" Nullable="false" />
-          <Property Name="cantidadServicioProducto" Type="Int32" Nullable="false" />
-          <Property Name="Precio" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Factura" Relationship="Self.FK__Factura__id_deta__3B40CD36" FromRole="detalle_Factura" ToRole="Factura" />
-          <NavigationProperty Name="TipoServicioProducto" Relationship="Self.FK_detalleFactura_TipoServicio" FromRole="detalle_Factura" ToRole="TipoServicioProducto" />
-        </EntityType>
-        <EntityType Name="Distrito">
-          <Key>
-            <PropertyRef Name="id_Distrito" />
-          </Key>
-          <Property Name="id_Distrito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_Canton" Type="Int32" />
-          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="usuarioCrea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fechaCrea" Type="DateTime" Precision="3" />
-          <Property Name="usuarioModifica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="vc_Estado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="id_DistritoInec" Type="Int32" />
-          <NavigationProperty Name="Canton" Relationship="Self.Distrito_ref_Canton" FromRole="Distrito" ToRole="Canton" />
-          <NavigationProperty Name="Cliente" Relationship="mantvehiculosModel.FK_Cliente_Distrito" FromRole="Distrito" ToRole="Cliente" />
-        </EntityType>
-        <EntityType Name="Estado">
-          <Key>
-            <PropertyRef Name="id_estado" />
-          </Key>
-          <Property Name="id_estado" Type="Int32" Nullable="false" />
-          <Property Name="estado1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Factura" Relationship="Self.FK_Factura_Estado" FromRole="Estado" ToRole="Factura" />
-        </EntityType>
-        <EntityType Name="Factura">
-          <Key>
-            <PropertyRef Name="id_factura" />
-          </Key>
-          <Property Name="id_factura" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="idCliente" Type="Int32" Nullable="false" />
-          <Property Name="idVehiculo" Type="Int32" Nullable="false" />
-          <Property Name="numFactura" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="id_estado" Type="Int32" Nullable="false" />
-          <Property Name="montoTotal" Type="Double" Nullable="false" />
-          <Property Name="id_detalleFactura" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="detalle_Factura" Relationship="Self.FK__Factura__id_deta__3B40CD36" FromRole="Factura" ToRole="detalle_Factura" />
-          <NavigationProperty Name="Estado" Relationship="Self.FK_Factura_Estado" FromRole="Factura" ToRole="Estado" />
-          <NavigationProperty Name="VehiculosCliente" Relationship="Self.FK_Factura_Vehiculo" FromRole="Factura" ToRole="VehiculosCliente" />
-          <NavigationProperty Name="Cliente" Relationship="mantvehiculosModel.FK_Factura_Cliente" FromRole="Factura" ToRole="Cliente" />
-        </EntityType>
-        <EntityType Name="MarcaVehiculo">
-          <Key>
-            <PropertyRef Name="idMarcaVehiculo" />
-          </Key>
-          <Property Name="idMarcaVehiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="idPaisFabricante" Type="Int32" Nullable="false" />
-          <Property Name="marca" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="PaisFabricante" Relationship="Self.FK_MarcaVehiculo_PaisFabricante" FromRole="MarcaVehiculo" ToRole="PaisFabricante" />
-          <NavigationProperty Name="Vehiculos" Relationship="Self.fk_vehiculos_marcavehiculo" FromRole="MarcaVehiculo" ToRole="Vehiculos" />
-        </EntityType>
-        <EntityType Name="PaisFabricante">
-          <Key>
-            <PropertyRef Name="idFabricante" />
-          </Key>
-          <Property Name="idFabricante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="pais" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="MarcaVehiculo" Relationship="Self.FK_MarcaVehiculo_PaisFabricante" FromRole="PaisFabricante" ToRole="MarcaVehiculo" />
-        </EntityType>
-        <EntityType Name="Provincia">
-          <Key>
-            <PropertyRef Name="id_Provincia" />
-          </Key>
-          <Property Name="id_Provincia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="usuarioCrea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fechaCrea" Type="DateTime" Precision="3" />
-          <Property Name="usuarioModifica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fechaModifica" Type="DateTime" Precision="3" />
-          <Property Name="vc_Estado" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Canton" Relationship="Self.Canton_ref_Provincia" FromRole="Provincia" ToRole="Canton" />
-          <NavigationProperty Name="Cliente" Relationship="mantvehiculosModel.FK_Cliente_Provincia" FromRole="Provincia" ToRole="Cliente" />
-        </EntityType>
-        <EntityType Name="TipoServicioProducto">
-          <Key>
-            <PropertyRef Name="idTipoServicioProducto" />
-          </Key>
-          <Property Name="idTipoServicioProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="precio" Type="Double" Nullable="false" />
-          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="detalle_Factura" Relationship="Self.FK_detalleFactura_TipoServicio" FromRole="TipoServicioProducto" ToRole="detalle_Factura" />
-        </EntityType>
-        <EntityType Name="TiposVehiculo">
-          <Key>
-            <PropertyRef Name="idTipoVehiculo" />
-          </Key>
-          <Property Name="idTipoVehiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Vehiculos" Relationship="Self.FK_Vehiculos_TiposVehiculo" FromRole="TiposVehiculo" ToRole="Vehiculos" />
-        </EntityType>
-        <EntityType Name="Vehiculos">
-          <Key>
-            <PropertyRef Name="idVehiculos" />
-          </Key>
-          <Property Name="idVehiculos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="placa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="tipoVehiculo" Type="Int32" Nullable="false" />
-          <Property Name="marcaVehiculo" Type="Int32" Nullable="false" />
-          <Property Name="numeroPuerta" Type="Int32" Nullable="false" />
-          <Property Name="numeroRueda" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="MarcaVehiculo1" Relationship="Self.fk_vehiculos_marcavehiculo" FromRole="Vehiculos" ToRole="MarcaVehiculo" />
-          <NavigationProperty Name="TiposVehiculo" Relationship="Self.FK_Vehiculos_TiposVehiculo" FromRole="Vehiculos" ToRole="TiposVehiculo" />
-          <NavigationProperty Name="VehiculosCliente" Relationship="Self.FK_VehiculosCliente_Vehiculo" FromRole="Vehiculos" ToRole="VehiculosCliente" />
-        </EntityType>
-        <EntityType Name="VehiculosCliente">
-          <Key>
-            <PropertyRef Name="idVehiculosCliente" />
-          </Key>
-          <Property Name="idVehiculosCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idVehiculo" Type="Int32" Nullable="false" />
-          <Property Name="idCliente" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Factura" Relationship="Self.FK_Factura_Vehiculo" FromRole="VehiculosCliente" ToRole="Factura" />
-          <NavigationProperty Name="Vehiculos" Relationship="Self.FK_VehiculosCliente_Vehiculo" FromRole="VehiculosCliente" ToRole="Vehiculos" />
-          <NavigationProperty Name="Cliente" Relationship="mantvehiculosModel.FK_VehiculosCliente_Cliente" FromRole="VehiculosCliente" ToRole="Cliente" />
-        </EntityType>
-        <Association Name="Canton_ref_Provincia">
-          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
-          <End Role="Canton" Type="Self.Canton" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provincia">
-              <PropertyRef Name="id_Provincia" />
-            </Principal>
-            <Dependent Role="Canton">
-              <PropertyRef Name="id_Provincia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="Distrito_ref_Canton">
-          <End Role="Canton" Type="Self.Canton" Multiplicity="0..1" />
-          <End Role="Distrito" Type="Self.Distrito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Canton">
-              <PropertyRef Name="id_Canton" />
-            </Principal>
-            <Dependent Role="Distrito">
-              <PropertyRef Name="id_Canton" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Factura__id_deta__3B40CD36">
-          <End Role="detalle_Factura" Type="Self.detalle_Factura" Multiplicity="1" />
-          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="detalle_Factura">
-              <PropertyRef Name="id_detalle" />
-            </Principal>
-            <Dependent Role="Factura">
-              <PropertyRef Name="id_detalleFactura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_detalleFactura_TipoServicio">
-          <End Role="TipoServicioProducto" Type="Self.TipoServicioProducto" Multiplicity="1" />
-          <End Role="detalle_Factura" Type="Self.detalle_Factura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoServicioProducto">
-              <PropertyRef Name="idTipoServicioProducto" />
-            </Principal>
-            <Dependent Role="detalle_Factura">
-              <PropertyRef Name="idTipoServicioProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Factura_Estado">
-          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
-          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estado">
-              <PropertyRef Name="id_estado" />
-            </Principal>
-            <Dependent Role="Factura">
-              <PropertyRef Name="id_estado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Factura_Vehiculo">
-          <End Role="VehiculosCliente" Type="Self.VehiculosCliente" Multiplicity="1" />
-          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VehiculosCliente">
-              <PropertyRef Name="idVehiculosCliente" />
-            </Principal>
-            <Dependent Role="Factura">
-              <PropertyRef Name="idVehiculo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MarcaVehiculo_PaisFabricante">
-          <End Role="PaisFabricante" Type="Self.PaisFabricante" Multiplicity="1" />
-          <End Role="MarcaVehiculo" Type="Self.MarcaVehiculo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PaisFabricante">
-              <PropertyRef Name="idFabricante" />
-            </Principal>
-            <Dependent Role="MarcaVehiculo">
-              <PropertyRef Name="idPaisFabricante" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_vehiculos_marcavehiculo">
-          <End Role="MarcaVehiculo" Type="Self.MarcaVehiculo" Multiplicity="1" />
-          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MarcaVehiculo">
-              <PropertyRef Name="idMarcaVehiculo" />
-            </Principal>
-            <Dependent Role="Vehiculos">
-              <PropertyRef Name="marcaVehiculo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Vehiculos_TiposVehiculo">
-          <End Role="TiposVehiculo" Type="Self.TiposVehiculo" Multiplicity="1" />
-          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TiposVehiculo">
-              <PropertyRef Name="idTipoVehiculo" />
-            </Principal>
-            <Dependent Role="Vehiculos">
-              <PropertyRef Name="tipoVehiculo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_VehiculosCliente_Vehiculo">
-          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="1" />
-          <End Role="VehiculosCliente" Type="Self.VehiculosCliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vehiculos">
-              <PropertyRef Name="idVehiculos" />
-            </Principal>
-            <Dependent Role="VehiculosCliente">
-              <PropertyRef Name="idVehiculo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="sistVehiculoEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Canton" EntityType="Self.Canton" />
-          <EntitySet Name="detalle_Factura" EntityType="Self.detalle_Factura" />
-          <EntitySet Name="Distrito" EntityType="Self.Distrito" />
-          <EntitySet Name="Estado" EntityType="Self.Estado" />
-          <EntitySet Name="Factura" EntityType="Self.Factura" />
-          <EntitySet Name="MarcaVehiculo" EntityType="Self.MarcaVehiculo" />
-          <EntitySet Name="PaisFabricante" EntityType="Self.PaisFabricante" />
-          <EntitySet Name="Provincia" EntityType="Self.Provincia" />
-          <EntitySet Name="TipoServicioProducto" EntityType="Self.TipoServicioProducto" />
-          <EntitySet Name="TiposVehiculo" EntityType="Self.TiposVehiculo" />
-          <EntitySet Name="Vehiculos" EntityType="Self.Vehiculos" />
-          <EntitySet Name="VehiculosCliente" EntityType="Self.VehiculosCliente" />
-          <AssociationSet Name="Canton_ref_Provincia" Association="Self.Canton_ref_Provincia">
-            <End Role="Provincia" EntitySet="Provincia" />
-            <End Role="Canton" EntitySet="Canton" />
-          </AssociationSet>
-          <AssociationSet Name="Distrito_ref_Canton" Association="Self.Distrito_ref_Canton">
-            <End Role="Canton" EntitySet="Canton" />
-            <End Role="Distrito" EntitySet="Distrito" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Factura__id_deta__3B40CD36" Association="Self.FK__Factura__id_deta__3B40CD36">
-            <End Role="detalle_Factura" EntitySet="detalle_Factura" />
-            <End Role="Factura" EntitySet="Factura" />
           </AssociationSet>
           <AssociationSet Name="FK_detalleFactura_TipoServicio" Association="Self.FK_detalleFactura_TipoServicio">
             <End Role="TipoServicioProducto" EntitySet="TipoServicioProducto" />
             <End Role="detalle_Factura" EntitySet="detalle_Factura" />
           </AssociationSet>
+          <AssociationSet Name="FK_factura" Association="Self.FK_factura">
+            <End Role="Factura" EntitySet="Factura" />
+            <End Role="detalle_Factura" EntitySet="detalle_Factura" />
+          </AssociationSet>
           <AssociationSet Name="FK_Factura_Estado" Association="Self.FK_Factura_Estado">
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Factura" EntitySet="Factura" />
@@ -844,7 +964,7 @@
             <End Role="PaisFabricante" EntitySet="PaisFabricante" />
             <End Role="MarcaVehiculo" EntitySet="MarcaVehiculo" />
           </AssociationSet>
-          <AssociationSet Name="fk_vehiculos_marcavehiculo" Association="Self.fk_vehiculos_marcavehiculo">
+          <AssociationSet Name="FK_Vehiculos_MarcaVehiculo" Association="Self.FK_Vehiculos_MarcaVehiculo">
             <End Role="MarcaVehiculo" EntitySet="MarcaVehiculo" />
             <End Role="Vehiculos" EntitySet="Vehiculos" />
           </AssociationSet>
@@ -856,71 +976,40 @@
             <End Role="Vehiculos" EntitySet="Vehiculos" />
             <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
           </AssociationSet>
-          <FunctionImport Name="pa_EliminaCliente">
-          <Parameter Name="idCliente" Mode="In" Type="Int32" />
+          <FunctionImport Name="pa_ModificaUltimaSesionCliente">
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+            <Parameter Name="ultimoIngreso" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="pa_EliminaTipoServicioProducto">
-          <Parameter Name="idTipoServicioProducto" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="pa_InsertaCliente">
+          <FunctionImport Name="pa_RetornaCliente" ReturnType="Collection(sistvehiculoviModel.pa_RetornaCliente_Result)">
+            <Parameter Name="numCedula" Mode="In" Type="String" />
             <Parameter Name="nomCliente" Mode="In" Type="String" />
             <Parameter Name="ape1Cliente" Mode="In" Type="String" />
             <Parameter Name="ape2Cliente" Mode="In" Type="String" />
-            <Parameter Name="numCedula" Mode="In" Type="String" />
-            <Parameter Name="genero" Mode="In" Type="String" />
-            <Parameter Name="provincia" Mode="In" Type="Int32" />
-            <Parameter Name="fechNacimiento" Mode="In" Type="DateTime" />
-            <Parameter Name="canton" Mode="In" Type="Int32" />
-            <Parameter Name="distrito" Mode="In" Type="Int32" />
-            <Parameter Name="email" Mode="In" Type="String" />
-            <Parameter Name="pTelefono" Mode="In" Type="String" />
-            <Parameter Name="tipoCliente" Mode="In" Type="String" />
-            <Parameter Name="ultimoIngreso" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="pa_InsertaVehiculos">
-            <Parameter Name="placa" Mode="In" Type="String" />
-            <Parameter Name="numeroPuerta" Mode="In" Type="Int32" />
-            <Parameter Name="numeroRuedas" Mode="In" Type="Int32" />
-            <Parameter Name="tipoVehiculo" Mode="In" Type="Int32" />
-            <Parameter Name="marcaVehiculo" Mode="In" Type="Int32" />
+          <FunctionImport Name="pa_RetornaClienteCorreoPwd" ReturnType="Collection(sistvehiculoviModel.pa_RetornaClienteCorreoPwd_Result)">
+            <Parameter Name="correoElectronico" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="pa_ModificaPaisFabricante">
-            <Parameter Name="idFabricante" Mode="In" Type="Int32" />
-            <Parameter Name="codigo" Mode="In" Type="Int32" />
-            <Parameter Name="pais" Mode="In" Type="String" />
+          <FunctionImport Name="pa_RetornaClienteID" ReturnType="Collection(sistvehiculoviModel.pa_RetornaClienteID_Result)">
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="pa_ModificaTipoServicioProducto">
-            <Parameter Name="idTipoServicioProducto" Mode="In" Type="Int32" />
-            <Parameter Name="codigo" Mode="In" Type="String" />
-            <Parameter Name="descripcion" Mode="In" Type="String" />
-            <Parameter Name="precio" Mode="In" Type="Double" />
-            <Parameter Name="tipo" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="pa_RetornaVehiculos" ReturnType="Collection(mantvehiculosModel.pa_RetornaVehiculos_Result)">
-          <Parameter Name="placa" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="RetornaCantones" ReturnType="Collection(mantvehiculosModel.RetornaCantones_Result)">
+          <FunctionImport Name="RetornaCantones" ReturnType="Collection(sistvehiculoviModel.RetornaCantones_Result)">
             <Parameter Name="nombre" Mode="In" Type="String" />
             <Parameter Name="id_Provincia" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="RetornaCantonesID" ReturnType="Collection(mantvehiculosModel.RetornaCantonesID_Result)">
-          <Parameter Name="id_Canton" Mode="In" Type="Int32" />
+          <FunctionImport Name="RetornaCantonesID" ReturnType="Collection(sistvehiculoviModel.RetornaCantonesID_Result)">
+            <Parameter Name="id_Canton" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="RetornaProvincias" ReturnType="Collection(mantvehiculosModel.RetornaProvincias_Result)">
-          <Parameter Name="nombre" Mode="In" Type="String" />
+          <FunctionImport Name="RetornaProvincias" ReturnType="Collection(sistvehiculoviModel.RetornaProvincias_Result)">
+            <Parameter Name="nombre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_EliminaCanton">
-          <Parameter Name="id_Canton" Mode="In" Type="Int32" />
+            <Parameter Name="id_Canton" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_InsertaCanton">
             <Parameter Name="id_Provincia" Mode="In" Type="Int32" />
             <Parameter Name="nombre" Mode="In" Type="String" />
             <Parameter Name="id_CantonInec" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_InsertaDistrito">
-            <Parameter Name="id_Canton" Mode="In" Type="Int32" />
-            <Parameter Name="nombre" Mode="In" Type="String" />
-            <Parameter Name="id_DistritoInec" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_ModificaCanton">
             <Parameter Name="id_Canton" Mode="In" Type="Int32" />
@@ -928,72 +1017,72 @@
             <Parameter Name="nombre" Mode="In" Type="String" />
             <Parameter Name="id_CantonInec" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="pa_RetornaClienteID" ReturnType="Collection(mantvehiculosModel.pa_RetornaClienteID_Result)">
-          <Parameter Name="idCliente" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="pa_ModificaUltimaSesionCliente">
-            <Parameter Name="idCliente" Mode="In" Type="Int32" />
-            <Parameter Name="ultimoIngreso" Mode="In" Type="DateTime" />
-          </FunctionImport>
-          <FunctionImport Name="pa_ModificaCliente">
-            <Parameter Name="nomCliente" Mode="In" Type="String" />
-            <Parameter Name="ape1Cliente" Mode="In" Type="String" />
-            <Parameter Name="ape2Cliente" Mode="In" Type="String" />
-            <Parameter Name="numCedula" Mode="In" Type="String" />
-            <Parameter Name="genero" Mode="In" Type="String" />
-            <Parameter Name="provincia" Mode="In" Type="Int32" />
-            <Parameter Name="fechNacimiento" Mode="In" Type="DateTime" />
-            <Parameter Name="canton" Mode="In" Type="Int32" />
-            <Parameter Name="distrito" Mode="In" Type="Int32" />
-            <Parameter Name="email" Mode="In" Type="String" />
-            <Parameter Name="pTelefono" Mode="In" Type="String" />
-          </FunctionImport>
-          <EntitySet Name="Cliente" EntityType="mantvehiculosModel.Cliente" />
-          <EntitySet Name="Genero" EntityType="mantvehiculosModel.Genero" />
-          <AssociationSet Name="FK_Cliente_Canton" Association="mantvehiculosModel.FK_Cliente_Canton">
-            <End Role="Canton" EntitySet="Canton" />
-            <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cliente_Distrito" Association="mantvehiculosModel.FK_Cliente_Distrito">
-            <End Role="Distrito" EntitySet="Distrito" />
-            <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cliente_Genero" Association="mantvehiculosModel.FK_Cliente_Genero">
-            <End Role="Genero" EntitySet="Genero" />
-            <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cliente_Provincia" Association="mantvehiculosModel.FK_Cliente_Provincia">
-            <End Role="Provincia" EntitySet="Provincia" />
-            <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Factura_Cliente" Association="mantvehiculosModel.FK_Factura_Cliente">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Factura" EntitySet="Factura" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VehiculosCliente_Cliente" Association="mantvehiculosModel.FK_VehiculosCliente_Cliente">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
-          </AssociationSet>
-          <FunctionImport Name="pa_RetornaCliente" ReturnType="Collection(mantvehiculosModel.pa_RetornaCliente_Result)">
-            <Parameter Name="numCedula" Mode="In" Type="String" />
-            <Parameter Name="nomCliente" Mode="In" Type="String" />
-            <Parameter Name="ape1Cliente" Mode="In" Type="String" />
-            <Parameter Name="ape2Cliente" Mode="In" Type="String" />
-            <Parameter Name="tipoCliente" Mode="In" Type="String" />
-            <Parameter Name="provincia" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="pa_RetornaClienteCorreoPwd" ReturnType="Collection(mantvehiculosModel.pa_RetornaClienteCorreoPwd_Result)">
-            <Parameter Name="correoElectronico" Mode="In" Type="String" />
-            <Parameter Name="password" Mode="In" Type="String" />
-          </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="pa_RetornaVehiculos_Result">
-          <Property Type="Int32" Name="idVehiculos" Nullable="false" />
-          <Property Type="Int32" Name="tipoVehiculo" Nullable="false" />
-          <Property Type="Int32" Name="numeroPuerta" Nullable="false" />
-          <Property Type="Int32" Name="numeroRueda" Nullable="false" />
-          <Property Type="String" Name="marca" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="tipo" Nullable="false" MaxLength="50" />
+        <ComplexType Name="pa_RetornaCliente_Result">
+          <Property Type="Int32" Name="idCliente" Nullable="false" />
+          <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="numCedula" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="provincia" Nullable="false" />
+          <Property Type="Int32" Name="genero" Nullable="false" />
+          <Property Type="String" Name="nombreGenero" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="nombreProvincia" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="canton" Nullable="false" />
+          <Property Type="String" Name="nombreCanton" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="distrito" Nullable="false" />
+          <Property Type="String" Name="nombreDistrito" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="fechNacimiento" Nullable="false" Precision="23" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="tipoCliente" Nullable="false" />
+          <Property Type="String" Name="nombreTipoCliente" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="ultimoIngreso" Nullable="false" Precision="23" />
+          <Property Type="String" Name="contrasena" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaClienteCorreoPwd_Result">
+          <Property Type="Int32" Name="idCliente" Nullable="false" />
+          <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="numCedula" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="provincia" Nullable="false" />
+          <Property Type="Int32" Name="genero" Nullable="false" />
+          <Property Type="String" Name="nombreGenero" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="nombreProvincia" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="canton" Nullable="false" />
+          <Property Type="String" Name="nombreCanton" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="distrito" Nullable="false" />
+          <Property Type="String" Name="nombreDistrito" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="fechNacimiento" Nullable="false" Precision="23" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="tipoCliente" Nullable="false" />
+          <Property Type="String" Name="nombreTipoCliente" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="ultimoIngreso" Nullable="false" Precision="23" />
+          <Property Type="String" Name="contrasena" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaClienteID_Result">
+          <Property Type="Int32" Name="idCliente" Nullable="false" />
+          <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="numCedula" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="provincia" Nullable="false" />
+          <Property Type="Int32" Name="genero" Nullable="false" />
+          <Property Type="String" Name="nombreGenero" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="nombreProvincia" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="canton" Nullable="false" />
+          <Property Type="String" Name="nombreCanton" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="distrito" Nullable="false" />
+          <Property Type="String" Name="nombreDistrito" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="fechNacimiento" Nullable="false" Precision="23" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="tipoCliente" Nullable="false" />
+          <Property Type="String" Name="nombreTipoCliente" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="ultimoIngreso" Nullable="false" Precision="23" />
+          <Property Type="String" Name="contrasena" Nullable="false" MaxLength="200" />
         </ComplexType>
         <ComplexType Name="RetornaCantones_Result">
           <Property Type="Int32" Name="id_Canton" Nullable="false" />
@@ -1028,180 +1117,14 @@
           <Property Type="DateTime" Name="fechaModifica" Nullable="true" Precision="23" />
           <Property Type="String" Name="vc_Estado" Nullable="true" MaxLength="3" />
         </ComplexType>
-        <ComplexType Name="pa_RetornaClienteID_Result">
-          <Property Type="Int32" Name="idCliente" Nullable="false" />
-          <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="numCedula" Nullable="false" MaxLength="20" />
-          <Property Type="String" Name="genero" Nullable="false" MaxLength="1" />
-          <Property Type="Int32" Name="provincia" Nullable="false" />
-          <Property Type="String" Name="nombreProvincia" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="canton" Nullable="false" />
-          <Property Type="String" Name="nombreCanton" Nullable="false" MaxLength="100" />
-          <Property Type="Int32" Name="distrito" Nullable="false" />
-          <Property Type="String" Name="nombreDistrito" Nullable="false" MaxLength="100" />
-          <Property Type="DateTime" Name="fechNacimiento" Nullable="false" Precision="23" />
-          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="tipoCliente" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="ultimoIngreso" Nullable="false" Precision="23" />
-        </ComplexType>
-        <EntityType Name="Cliente">
-          <Key>
-            <PropertyRef Name="idCliente" />
-          </Key>
-          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nomCliente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ape1Cliente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ape2Cliente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="numCedula" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="provincia" Type="Int32" Nullable="false" />
-          <Property Name="fechNacimiento" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="canton" Type="Int32" Nullable="false" />
-          <Property Name="distrito" Type="Int32" Nullable="false" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="pTelefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="tipoCliente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ultimoIngreso" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="contrasena" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="genero" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Canton1" Relationship="mantvehiculosModel.FK_Cliente_Canton" FromRole="Cliente" ToRole="Canton" />
-          <NavigationProperty Name="Distrito1" Relationship="mantvehiculosModel.FK_Cliente_Distrito" FromRole="Cliente" ToRole="Distrito" />
-          <NavigationProperty Name="Genero1" Relationship="mantvehiculosModel.FK_Cliente_Genero" FromRole="Cliente" ToRole="Genero" />
-          <NavigationProperty Name="Provincia1" Relationship="mantvehiculosModel.FK_Cliente_Provincia" FromRole="Cliente" ToRole="Provincia" />
-          <NavigationProperty Name="Factura" Relationship="mantvehiculosModel.FK_Factura_Cliente" FromRole="Cliente" ToRole="Factura" />
-          <NavigationProperty Name="VehiculosCliente" Relationship="mantvehiculosModel.FK_VehiculosCliente_Cliente" FromRole="Cliente" ToRole="VehiculosCliente" />
-        </EntityType>
-        <EntityType Name="Genero">
-          <Key>
-            <PropertyRef Name="id_Genero" />
-          </Key>
-          <Property Name="id_Genero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nom_genero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Cliente" Relationship="mantvehiculosModel.FK_Cliente_Genero" FromRole="Genero" ToRole="Cliente" />
-        </EntityType>
-        <Association Name="FK_Cliente_Canton">
-          <End Type="mantvehiculosModel.Canton" Role="Canton" Multiplicity="1" />
-          <End Type="mantvehiculosModel.Cliente" Role="Cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Canton">
-              <PropertyRef Name="id_Canton" />
-            </Principal>
-            <Dependent Role="Cliente">
-              <PropertyRef Name="canton" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cliente_Distrito">
-          <End Type="mantvehiculosModel.Distrito" Role="Distrito" Multiplicity="1" />
-          <End Type="mantvehiculosModel.Cliente" Role="Cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Distrito">
-              <PropertyRef Name="id_Distrito" />
-            </Principal>
-            <Dependent Role="Cliente">
-              <PropertyRef Name="distrito" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cliente_Genero">
-          <End Type="mantvehiculosModel.Genero" Role="Genero" Multiplicity="1" />
-          <End Type="mantvehiculosModel.Cliente" Role="Cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Genero">
-              <PropertyRef Name="id_Genero" />
-            </Principal>
-            <Dependent Role="Cliente">
-              <PropertyRef Name="genero" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cliente_Provincia">
-          <End Type="mantvehiculosModel.Provincia" Role="Provincia" Multiplicity="1" />
-          <End Type="mantvehiculosModel.Cliente" Role="Cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provincia">
-              <PropertyRef Name="id_Provincia" />
-            </Principal>
-            <Dependent Role="Cliente">
-              <PropertyRef Name="provincia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Factura_Cliente">
-          <End Type="mantvehiculosModel.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="mantvehiculosModel.Factura" Role="Factura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="idCliente" />
-            </Principal>
-            <Dependent Role="Factura">
-              <PropertyRef Name="idCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_VehiculosCliente_Cliente">
-          <End Type="mantvehiculosModel.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="mantvehiculosModel.VehiculosCliente" Role="VehiculosCliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="idCliente" />
-            </Principal>
-            <Dependent Role="VehiculosCliente">
-              <PropertyRef Name="idCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <ComplexType Name="pa_RetornaCliente_Result">
-          <Property Type="Int32" Name="idCliente" Nullable="false" />
-          <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="numCedula" Nullable="false" MaxLength="20" />
-          <Property Type="Int32" Name="genero" Nullable="false" />
-          <Property Type="String" Name="nombreGenero" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="provincia" Nullable="false" />
-          <Property Type="String" Name="nombreProvincia" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="canton" Nullable="false" />
-          <Property Type="String" Name="nombreCanton" Nullable="false" MaxLength="100" />
-          <Property Type="Int32" Name="distrito" Nullable="false" />
-          <Property Type="String" Name="nombreDistrito" Nullable="false" MaxLength="100" />
-          <Property Type="DateTime" Name="fechNacimiento" Nullable="false" Precision="23" />
-          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="tipoCliente" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="ultimoIngreso" Nullable="false" Precision="23" />
-        </ComplexType>
-        <ComplexType Name="pa_RetornaClienteCorreoPwd_Result">
-          <Property Type="Int32" Name="idCliente" Nullable="false" />
-          <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="numCedula" Nullable="false" MaxLength="20" />
-          <Property Type="Int32" Name="genero" Nullable="false" />
-          <Property Type="String" Name="nombreGenero" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="provincia" Nullable="false" />
-          <Property Type="String" Name="nombreProvincia" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="canton" Nullable="false" />
-          <Property Type="String" Name="nombreCanton" Nullable="false" MaxLength="100" />
-          <Property Type="Int32" Name="distrito" Nullable="false" />
-          <Property Type="String" Name="nombreDistrito" Nullable="false" MaxLength="100" />
-          <Property Type="DateTime" Name="fechNacimiento" Nullable="false" Precision="23" />
-          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="contrasena" Nullable="false" MaxLength="500" />
-          <Property Type="String" Name="tipoCliente" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="ultimoIngreso" Nullable="false" Precision="23" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="mantvehiculosModelStoreContainer" CdmEntityContainer="sistVehiculoEntities">
+        <EntityContainerMapping StorageEntityContainer="sistvehiculoviModelStoreContainer" CdmEntityContainer="sistvehiculoviEntities">
           <EntitySetMapping Name="Canton">
-            <EntityTypeMapping TypeName="mantvehiculosModel.Canton">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.Canton">
               <MappingFragment StoreEntitySet="Canton">
                 <ScalarProperty Name="id_Canton" ColumnName="id_Canton" />
                 <ScalarProperty Name="id_Provincia" ColumnName="id_Provincia" />
@@ -1215,10 +1138,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
+                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
+                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
+                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="fechNacimiento" ColumnName="fechNacimiento" />
+                <ScalarProperty Name="canton" ColumnName="canton" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
+                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
+                <ScalarProperty Name="ultimoIngreso" ColumnName="ultimoIngreso" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="detalle_Factura">
-            <EntityTypeMapping TypeName="mantvehiculosModel.detalle_Factura">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.detalle_Factura">
               <MappingFragment StoreEntitySet="detalle_Factura">
-                <ScalarProperty Name="id_detalle" ColumnName="id_detalle" />
+                <ScalarProperty Name="num_detalle" ColumnName="num_detalle" />
+                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
                 <ScalarProperty Name="idTipoServicioProducto" ColumnName="idTipoServicioProducto" />
                 <ScalarProperty Name="cantidadServicioProducto" ColumnName="cantidadServicioProducto" />
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
@@ -1226,7 +1171,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Distrito">
-            <EntityTypeMapping TypeName="mantvehiculosModel.Distrito">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.Distrito">
               <MappingFragment StoreEntitySet="Distrito">
                 <ScalarProperty Name="id_Distrito" ColumnName="id_Distrito" />
                 <ScalarProperty Name="id_Canton" ColumnName="id_Canton" />
@@ -1241,29 +1186,36 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Estado">
-            <EntityTypeMapping TypeName="mantvehiculosModel.Estado">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.Estado">
               <MappingFragment StoreEntitySet="Estado">
                 <ScalarProperty Name="id_estado" ColumnName="id_estado" />
-                <ScalarProperty Name="estado1" ColumnName="estado" />
+                <ScalarProperty Name="nomEstado" ColumnName="nomEstado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Factura">
-            <EntityTypeMapping TypeName="mantvehiculosModel.Factura">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.Factura">
               <MappingFragment StoreEntitySet="Factura">
                 <ScalarProperty Name="id_factura" ColumnName="id_factura" />
+                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="idCliente" ColumnName="idCliente" />
                 <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
-                <ScalarProperty Name="numFactura" ColumnName="numFactura" />
-                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
                 <ScalarProperty Name="montoTotal" ColumnName="montoTotal" />
-                <ScalarProperty Name="id_detalleFactura" ColumnName="id_detalleFactura" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genero">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.Genero">
+              <MappingFragment StoreEntitySet="Genero">
+                <ScalarProperty Name="id_Genero" ColumnName="id_Genero" />
+                <ScalarProperty Name="nombreGenero" ColumnName="nombreGenero" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MarcaVehiculo">
-            <EntityTypeMapping TypeName="mantvehiculosModel.MarcaVehiculo">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.MarcaVehiculo">
               <MappingFragment StoreEntitySet="MarcaVehiculo">
                 <ScalarProperty Name="idMarcaVehiculo" ColumnName="idMarcaVehiculo" />
                 <ScalarProperty Name="codigo" ColumnName="codigo" />
@@ -1273,7 +1225,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PaisFabricante">
-            <EntityTypeMapping TypeName="mantvehiculosModel.PaisFabricante">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.PaisFabricante">
               <MappingFragment StoreEntitySet="PaisFabricante">
                 <ScalarProperty Name="idFabricante" ColumnName="idFabricante" />
                 <ScalarProperty Name="codigo" ColumnName="codigo" />
@@ -1282,7 +1234,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Provincia">
-            <EntityTypeMapping TypeName="mantvehiculosModel.Provincia">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.Provincia">
               <MappingFragment StoreEntitySet="Provincia">
                 <ScalarProperty Name="id_Provincia" ColumnName="id_Provincia" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -1294,8 +1246,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TipoCliente">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.TipoCliente">
+              <MappingFragment StoreEntitySet="TipoCliente">
+                <ScalarProperty Name="id_tipoCliente" ColumnName="id_tipoCliente" />
+                <ScalarProperty Name="nombreTipoCliente" ColumnName="nombreTipoCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TipoServicioProducto">
-            <EntityTypeMapping TypeName="mantvehiculosModel.TipoServicioProducto">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.TipoServicioProducto">
               <MappingFragment StoreEntitySet="TipoServicioProducto">
                 <ScalarProperty Name="idTipoServicioProducto" ColumnName="idTipoServicioProducto" />
                 <ScalarProperty Name="codigo" ColumnName="codigo" />
@@ -1306,7 +1266,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TiposVehiculo">
-            <EntityTypeMapping TypeName="mantvehiculosModel.TiposVehiculo">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.TiposVehiculo">
               <MappingFragment StoreEntitySet="TiposVehiculo">
                 <ScalarProperty Name="idTipoVehiculo" ColumnName="idTipoVehiculo" />
                 <ScalarProperty Name="codigo" ColumnName="codigo" />
@@ -1315,7 +1275,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Vehiculos">
-            <EntityTypeMapping TypeName="mantvehiculosModel.Vehiculos">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.Vehiculos">
               <MappingFragment StoreEntitySet="Vehiculos">
                 <ScalarProperty Name="idVehiculos" ColumnName="idVehiculos" />
                 <ScalarProperty Name="placa" ColumnName="placa" />
@@ -1327,7 +1287,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VehiculosCliente">
-            <EntityTypeMapping TypeName="mantvehiculosModel.VehiculosCliente">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.VehiculosCliente">
               <MappingFragment StoreEntitySet="VehiculosCliente">
                 <ScalarProperty Name="idVehiculosCliente" ColumnName="idVehiculosCliente" />
                 <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
@@ -1335,27 +1295,88 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="pa_EliminaCliente" FunctionName="mantvehiculosModel.Store.pa_EliminaCliente" />
-          <FunctionImportMapping FunctionImportName="pa_EliminaTipoServicioProducto" FunctionName="mantvehiculosModel.Store.pa_EliminaTipoServicioProducto" />
-          <FunctionImportMapping FunctionImportName="pa_InsertaCliente" FunctionName="mantvehiculosModel.Store.pa_InsertaCliente" />
-          <FunctionImportMapping FunctionImportName="pa_InsertaVehiculos" FunctionName="mantvehiculosModel.Store.pa_InsertaVehiculos" />
-          <FunctionImportMapping FunctionImportName="pa_ModificaPaisFabricante" FunctionName="mantvehiculosModel.Store.pa_ModificaPaisFabricante" />
-          <FunctionImportMapping FunctionImportName="pa_ModificaTipoServicioProducto" FunctionName="mantvehiculosModel.Store.pa_ModificaTipoServicioProducto" />
-          <FunctionImportMapping FunctionImportName="pa_RetornaVehiculos" FunctionName="mantvehiculosModel.Store.pa_RetornaVehiculos">
+          <FunctionImportMapping FunctionImportName="pa_ModificaUltimaSesionCliente" FunctionName="sistvehiculoviModel.Store.pa_ModificaUltimaSesionCliente" />
+          <FunctionImportMapping FunctionImportName="pa_RetornaCliente" FunctionName="sistvehiculoviModel.Store.pa_RetornaCliente">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="mantvehiculosModel.pa_RetornaVehiculos_Result">
-                <ScalarProperty Name="idVehiculos" ColumnName="idVehiculos" />
-                <ScalarProperty Name="tipoVehiculo" ColumnName="tipoVehiculo" />
-                <ScalarProperty Name="numeroPuerta" ColumnName="numeroPuerta" />
-                <ScalarProperty Name="numeroRueda" ColumnName="numeroRueda" />
-                <ScalarProperty Name="marca" ColumnName="marca" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaCliente_Result">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
+                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
+                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
+                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="nombreGenero" ColumnName="nombreGenero" />
+                <ScalarProperty Name="nombreProvincia" ColumnName="nombreProvincia" />
+                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
+                <ScalarProperty Name="canton" ColumnName="canton" />
+                <ScalarProperty Name="nombreCanton" ColumnName="nombreCanton" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+                <ScalarProperty Name="nombreDistrito" ColumnName="nombreDistrito" />
+                <ScalarProperty Name="fechNacimiento" ColumnName="fechNacimiento" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
+                <ScalarProperty Name="nombreTipoCliente" ColumnName="nombreTipoCliente" />
+                <ScalarProperty Name="ultimoIngreso" ColumnName="ultimoIngreso" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="RetornaCantones" FunctionName="mantvehiculosModel.Store.RetornaCantones">
+          <FunctionImportMapping FunctionImportName="pa_RetornaClienteCorreoPwd" FunctionName="sistvehiculoviModel.Store.pa_RetornaClienteCorreoPwd">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="mantvehiculosModel.RetornaCantones_Result">
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaClienteCorreoPwd_Result">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
+                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
+                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
+                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="nombreGenero" ColumnName="nombreGenero" />
+                <ScalarProperty Name="nombreProvincia" ColumnName="nombreProvincia" />
+                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
+                <ScalarProperty Name="canton" ColumnName="canton" />
+                <ScalarProperty Name="nombreCanton" ColumnName="nombreCanton" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+                <ScalarProperty Name="nombreDistrito" ColumnName="nombreDistrito" />
+                <ScalarProperty Name="fechNacimiento" ColumnName="fechNacimiento" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
+                <ScalarProperty Name="nombreTipoCliente" ColumnName="nombreTipoCliente" />
+                <ScalarProperty Name="ultimoIngreso" ColumnName="ultimoIngreso" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_RetornaClienteID" FunctionName="sistvehiculoviModel.Store.pa_RetornaClienteID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaClienteID_Result">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
+                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
+                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
+                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="genero" ColumnName="genero" />
+                <ScalarProperty Name="nombreGenero" ColumnName="nombreGenero" />
+                <ScalarProperty Name="nombreProvincia" ColumnName="nombreProvincia" />
+                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
+                <ScalarProperty Name="canton" ColumnName="canton" />
+                <ScalarProperty Name="nombreCanton" ColumnName="nombreCanton" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+                <ScalarProperty Name="nombreDistrito" ColumnName="nombreDistrito" />
+                <ScalarProperty Name="fechNacimiento" ColumnName="fechNacimiento" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
+                <ScalarProperty Name="nombreTipoCliente" ColumnName="nombreTipoCliente" />
+                <ScalarProperty Name="ultimoIngreso" ColumnName="ultimoIngreso" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RetornaCantones" FunctionName="sistvehiculoviModel.Store.RetornaCantones">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.RetornaCantones_Result">
                 <ScalarProperty Name="id_Canton" ColumnName="id_Canton" />
                 <ScalarProperty Name="id_Provincia" ColumnName="id_Provincia" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -1369,9 +1390,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="RetornaCantonesID" FunctionName="mantvehiculosModel.Store.RetornaCantonesID">
+          <FunctionImportMapping FunctionImportName="RetornaCantonesID" FunctionName="sistvehiculoviModel.Store.RetornaCantonesID">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="mantvehiculosModel.RetornaCantonesID_Result">
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.RetornaCantonesID_Result">
                 <ScalarProperty Name="id_Canton" ColumnName="id_Canton" />
                 <ScalarProperty Name="id_Provincia" ColumnName="id_Provincia" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -1385,9 +1406,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="RetornaProvincias" FunctionName="mantvehiculosModel.Store.RetornaProvincias">
+          <FunctionImportMapping FunctionImportName="RetornaProvincias" FunctionName="sistvehiculoviModel.Store.RetornaProvincias">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="mantvehiculosModel.RetornaProvincias_Result">
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.RetornaProvincias_Result">
                 <ScalarProperty Name="id_Provincia" ColumnName="id_Provincia" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="usuarioCrea" ColumnName="usuarioCrea" />
@@ -1398,113 +1419,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_EliminaCanton" FunctionName="mantvehiculosModel.Store.sp_EliminaCanton" />
-          <FunctionImportMapping FunctionImportName="sp_InsertaCanton" FunctionName="mantvehiculosModel.Store.sp_InsertaCanton" />
-          <FunctionImportMapping FunctionImportName="sp_InsertaDistrito" FunctionName="mantvehiculosModel.Store.sp_InsertaDistrito" />
-          <FunctionImportMapping FunctionImportName="sp_ModificaCanton" FunctionName="mantvehiculosModel.Store.sp_ModificaCanton" />
-          <FunctionImportMapping FunctionImportName="pa_RetornaClienteID" FunctionName="mantvehiculosModel.Store.pa_RetornaClienteID">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="mantvehiculosModel.pa_RetornaClienteID_Result">
-                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
-                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
-                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
-                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
-                <ScalarProperty Name="genero" ColumnName="genero" />
-                <ScalarProperty Name="provincia" ColumnName="provincia" />
-                <ScalarProperty Name="nombreProvincia" ColumnName="nombreProvincia" />
-                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
-                <ScalarProperty Name="canton" ColumnName="canton" />
-                <ScalarProperty Name="nombreCanton" ColumnName="nombreCanton" />
-                <ScalarProperty Name="distrito" ColumnName="distrito" />
-                <ScalarProperty Name="nombreDistrito" ColumnName="nombreDistrito" />
-                <ScalarProperty Name="fechNacimiento" ColumnName="fechNacimiento" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
-                <ScalarProperty Name="ultimoIngreso" ColumnName="ultimoIngreso" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="pa_ModificaUltimaSesionCliente" FunctionName="mantvehiculosModel.Store.pa_ModificaUltimaSesionCliente" />
-          <FunctionImportMapping FunctionImportName="pa_ModificaCliente" FunctionName="mantvehiculosModel.Store.pa_ModificaCliente" />
-          <EntitySetMapping Name="Cliente">
-            <EntityTypeMapping TypeName="mantvehiculosModel.Cliente">
-              <MappingFragment StoreEntitySet="Cliente">
-                <ScalarProperty Name="genero" ColumnName="genero" />
-                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
-                <ScalarProperty Name="ultimoIngreso" ColumnName="ultimoIngreso" />
-                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
-                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="distrito" ColumnName="distrito" />
-                <ScalarProperty Name="canton" ColumnName="canton" />
-                <ScalarProperty Name="fechNacimiento" ColumnName="fechNacimiento" />
-                <ScalarProperty Name="provincia" ColumnName="provincia" />
-                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
-                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
-                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
-                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
-                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Genero">
-            <EntityTypeMapping TypeName="mantvehiculosModel.Genero">
-              <MappingFragment StoreEntitySet="Genero">
-                <ScalarProperty Name="nom_genero" ColumnName="nom_genero" />
-                <ScalarProperty Name="id_Genero" ColumnName="id_Genero" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="pa_RetornaCliente" FunctionName="mantvehiculosModel.Store.pa_RetornaCliente">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="mantvehiculosModel.pa_RetornaCliente_Result">
-                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
-                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
-                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
-                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
-                <ScalarProperty Name="genero" ColumnName="genero" />
-                <ScalarProperty Name="nombreGenero" ColumnName="nombreGenero" />
-                <ScalarProperty Name="provincia" ColumnName="provincia" />
-                <ScalarProperty Name="nombreProvincia" ColumnName="nombreProvincia" />
-                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
-                <ScalarProperty Name="canton" ColumnName="canton" />
-                <ScalarProperty Name="nombreCanton" ColumnName="nombreCanton" />
-                <ScalarProperty Name="distrito" ColumnName="distrito" />
-                <ScalarProperty Name="nombreDistrito" ColumnName="nombreDistrito" />
-                <ScalarProperty Name="fechNacimiento" ColumnName="fechNacimiento" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
-                <ScalarProperty Name="ultimoIngreso" ColumnName="ultimoIngreso" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="pa_RetornaClienteCorreoPwd" FunctionName="mantvehiculosModel.Store.pa_RetornaClienteCorreoPwd">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="mantvehiculosModel.pa_RetornaClienteCorreoPwd_Result">
-                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
-                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
-                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
-                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
-                <ScalarProperty Name="genero" ColumnName="genero" />
-                <ScalarProperty Name="nombreGenero" ColumnName="nombreGenero" />
-                <ScalarProperty Name="provincia" ColumnName="provincia" />
-                <ScalarProperty Name="nombreProvincia" ColumnName="nombreProvincia" />
-                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
-                <ScalarProperty Name="canton" ColumnName="canton" />
-                <ScalarProperty Name="nombreCanton" ColumnName="nombreCanton" />
-                <ScalarProperty Name="distrito" ColumnName="distrito" />
-                <ScalarProperty Name="nombreDistrito" ColumnName="nombreDistrito" />
-                <ScalarProperty Name="fechNacimiento" ColumnName="fechNacimiento" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
-                <ScalarProperty Name="tipoCliente" ColumnName="tipoCliente" />
-                <ScalarProperty Name="ultimoIngreso" ColumnName="ultimoIngreso" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_EliminaCanton" FunctionName="sistvehiculoviModel.Store.sp_EliminaCanton" />
+          <FunctionImportMapping FunctionImportName="sp_InsertaCanton" FunctionName="sistvehiculoviModel.Store.sp_InsertaCanton" />
+          <FunctionImportMapping FunctionImportName="sp_ModificaCanton" FunctionName="sistvehiculoviModel.Store.sp_ModificaCanton" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

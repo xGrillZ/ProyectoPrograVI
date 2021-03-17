@@ -20,7 +20,7 @@ namespace SistVehiculo.Models
         }
     
         public int id_estado { get; set; }
-        public string estado1 { get; set; }
+        public string nomEstado { get; set; }
     
         public virtual ICollection<Factura> Factura { get; set; }
     }

@@ -14,17 +14,13 @@ namespace SistVehiculo.Models
     
     public partial class detalle_Factura
     {
-        public detalle_Factura()
-        {
-            this.Factura = new HashSet<Factura>();
-        }
-    
-        public int id_detalle { get; set; }
+        public int num_detalle { get; set; }
+        public int num_factura { get; set; }
         public int idTipoServicioProducto { get; set; }
         public int cantidadServicioProducto { get; set; }
         public double Precio { get; set; }
     
-        public virtual ICollection<Factura> Factura { get; set; }
         public virtual TipoServicioProducto TipoServicioProducto { get; set; }
+        public virtual Factura Factura { get; set; }
     }
 }

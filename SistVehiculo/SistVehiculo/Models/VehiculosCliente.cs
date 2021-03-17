@@ -23,8 +23,8 @@ namespace SistVehiculo.Models
         public int idVehiculo { get; set; }
         public int idCliente { get; set; }
     
+        public virtual Cliente Cliente { get; set; }
         public virtual ICollection<Factura> Factura { get; set; }
         public virtual Vehiculos Vehiculos { get; set; }
-        public virtual Cliente Cliente { get; set; }
     }
 }

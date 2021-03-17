@@ -9,7 +9,7 @@ namespace SistVehiculo.Controllers
 {
     public class MantMarcaVehiculosController : Controller
     {
-        sistVehiculoEntities modeloBD = new sistVehiculoEntities();
+        sistvehiculoviEntities modeloBD = new sistvehiculoviEntities();
         // GET: MantMarcaVehiculos
         public ActionResult ListaMarcaVehiculos()
         {
