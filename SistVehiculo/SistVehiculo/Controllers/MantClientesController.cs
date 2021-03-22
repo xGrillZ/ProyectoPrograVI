@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using SistVehiculo.Models;
@@ -74,6 +75,101 @@ namespace SistVehiculo.Controllers
         {
             List<RetornaDistritos_Result> distritos = this.modeloBD.RetornaDistritos(null, id_Canton).ToList();
             return Json(distritos);
+        }
+
+        bool verificaCedula(string pNumCedula)
+        {
+            ///Resultado de la operación
+            bool resultado = true;
+            try
+            {
+                ///Variable que almacenará el dato solicitado
+                string ced = pNumCedula;
+                ///Resultado de la operación
+                resultado = this.modeloBD.Cliente.Count(Cliente => Cliente.numCedula == ced) <= 0;
+            }
+            catch
+            {
+                ///Mensaje de error
+                string mensaje = "Error al verificar la cédula.";
+                Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
+            }
+            ///Retorno del resultado
+            return resultado;
+        }
+
+        [HttpPost]
+        public ActionResult InsertarClientes(pa_RetornaCliente_Result modeloVista)
+        {
+            ///Variable que registra la cantidad de registros afectados
+            ///si un procedimiento que ejecuta insert, update o delete
+            ///no afecta registros implica que hubo un error
+            int cantRegistrosAfectados = 0;
+            string mensaje = "";
+            DateTime fechaActual = DateTime.Now;
+
+            if (this.verificaCedula(modeloVista.numCedula))
+            {
+                try
+                {
+                    cantRegistrosAfectados = this.modeloBD.pa_InsertaCliente(modeloVista.nomCliente, modeloVista.ape1Cliente, modeloVista.ape2Cliente,
+                                                                                 modeloVista.numCedula, modeloVista.genero, modeloVista.provincia,
+                                                                                 modeloVista.fechNacimiento, modeloVista.canton, modeloVista.distrito,
+                                                                                 modeloVista.email, modeloVista.pTelefono, modeloVista.tipoCliente,
+                                                                                 fechaActual, modeloVista.contrasena);
+                    this.correoElectronicoIngreso(modeloVista.ape1Cliente, modeloVista.ape2Cliente, modeloVista.nomCliente,
+                                                  modeloVista.email, fechaActual);
+                }
+                catch (Exception ex)
+                {
+                    mensaje = "Ocurrió un error: " + ex.Message;
+                }
+                finally
+                {
+                    if (cantRegistrosAfectados > 0)
+                    {
+                        mensaje = "Registro insertado";
+                    }
+                    else
+                    {
+                        mensaje += ".No se pudo insertar";
+                    }
+                }
+            }
+            else
+            {
+                mensaje = "Esta cédula ya existe, debes ingresar otra";
+            }
+
+            Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
+
+            this.AgregaGeneroViewBag();
+            this.AgregaTipoClienteViewBag();
+            return View();
+        }
+
+        void correoElectronicoIngreso(string pPriApellido, string pSecApellido, string pNombre, string pCorreo, DateTime pUltimoIngreso)
+        {
+            ///Creación de variables con datos
+            string emailOrigen = "segurosxxiumca@gmail.com";
+            string emailDestino = pCorreo;
+            string contrasena = "CastroCarazoProgra";
+            ///Creación del cuerpo del mensaje
+            MailMessage oMailMessage = new MailMessage(emailOrigen, emailDestino, "SmartVehicle",
+                                                       $"Estimado cliente: {pPriApellido} {pSecApellido}" +
+                                                       $" {pNombre}, gracias por confiar en SmartVehicle."+
+                                                       $"Para nosotros es un placer servirle");
+            oMailMessage.IsBodyHtml = true;
+            ///Host
+            SmtpClient oSmtpClient = new SmtpClient("smtp.gmail.com");
+            oSmtpClient.EnableSsl = true;
+            oSmtpClient.UseDefaultCredentials = false;
+            oSmtpClient.Port = 587;
+            oSmtpClient.Credentials = new System.Net.NetworkCredential(emailOrigen, contrasena);
+            ///Enviar mensaje
+            oSmtpClient.Send(oMailMessage);
+            ///Reiniciar mensaje
+            oSmtpClient.Dispose();
         }
 
         public ActionResult ModificarClientes()

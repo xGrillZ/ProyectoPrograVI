@@ -6,6 +6,7 @@
     //la lista con la que iniciaremos.
     cargaDropdownListProvincias();
     datePickerRegistro();
+    validacionRegistro();
 });
 
 //función que registrará los eventos necesarios para "monitorear"
@@ -173,10 +174,67 @@ function procesarResultadoDistritos(data) {
 
 ///Función para Fecha de Nacimiento -> Registrar Nuevo Cliente
 function datePickerRegistro() {
-    $("#fechaNacimiento").datepicker({
+    $("#fechNacimiento").datepicker({
         changeMonth: true,
         changeYear: true,
         yearRange: "c-70:c", ///Modificar la fecha para colocar la actual y fecha hacia atrás c significa año actual
         dateFormat: "yy/mm/dd" ///Formato de fecha para SQL
+    });
+}
+
+///crea las validaciones para el formulario
+function validacionRegistro() {
+    $("#frmNuevoCliente").validate({
+        ///objeto que contiene "las condiciones" que el formulario
+        ///debe cumplir para ser considerado válido
+        rules: {
+            nomCliente: {
+                required: true,
+                maxlength: 50
+            },
+            ape1Cliente: {
+                required: true,
+                maxlength: 50
+            },
+            ape2Cliente: {
+                required: true,
+                maxlength: 50
+            },
+            numCedula: {
+                required: true,
+                maxlength: 20
+            },
+            genero: {
+                required: true
+            },
+            provincia: {
+                required: true
+            },
+            canton: {
+                required: true
+            },
+            distrito: {
+                required: true
+            },
+            fechNacimiento: {
+                required: true
+            },
+            email: {
+                required: true,
+                email: true,
+                maxlength: 50
+            },
+            pTelefono: {
+                required: true,
+                maxlength: 50
+            },
+            tipoCliente: {
+                required: true
+            },
+            contrasena: {
+                required: true,
+                maxlength: 200
+            },
+        }
     });
 }
