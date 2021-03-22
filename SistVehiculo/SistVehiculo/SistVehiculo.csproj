@@ -197,6 +197,9 @@
     <Compile Include="Models\RetornaCantones_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RetornaDistritos_Result.cs">
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RetornaProvincias_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
@@ -310,6 +313,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Logeo\Logeo.js" />
     <Content Include="Scripts\Logeo\verificacion.js" />
+    <Content Include="Scripts\mantClientes\mantClientes.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PagPrincipal\pagPrincipal.js" />
     <Content Include="Scripts\popper-utils.js" />

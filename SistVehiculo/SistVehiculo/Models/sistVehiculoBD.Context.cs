@@ -407,5 +407,18 @@ namespace SistVehiculo.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaTipoCliente_Result>("pa_RetornaTipoCliente", nombreParameter);
         }
+    
+        public virtual ObjectResult<RetornaDistritos_Result> RetornaDistritos(string nombre, Nullable<int> id_Canton)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var id_CantonParameter = id_Canton.HasValue ?
+                new ObjectParameter("id_Canton", id_Canton) :
+                new ObjectParameter("id_Canton", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RetornaDistritos_Result>("RetornaDistritos", nombreParameter, id_CantonParameter);
+        }
     }
 }

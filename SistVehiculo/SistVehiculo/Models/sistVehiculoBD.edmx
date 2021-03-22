@@ -455,6 +455,10 @@
         <Function Name="RetornaCantonesID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_Canton" Type="int" Mode="In" />
         </Function>
+        <Function Name="RetornaDistritos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="id_Canton" Type="int" Mode="In" />
+        </Function>
         <Function Name="RetornaProvincias" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="varchar" Mode="In" />
         </Function>
@@ -1141,10 +1145,14 @@
           <Parameter Name="placa" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_RetornaGenero" ReturnType="Collection(sistvehiculoviModel.pa_RetornaGenero_Result)">
-            <Parameter Name="nombre" Mode="In" Type="String" />
+          <Parameter Name="nombre" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_RetornaTipoCliente" ReturnType="Collection(sistvehiculoviModel.pa_RetornaTipoCliente_Result)">
+          <Parameter Name="nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="RetornaDistritos" ReturnType="Collection(sistvehiculoviModel.RetornaDistritos_Result)">
             <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="id_Canton" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -1261,6 +1269,18 @@
         <ComplexType Name="pa_RetornaTipoCliente_Result">
           <Property Type="Int32" Name="id_tipoCliente" Nullable="false" />
           <Property Type="String" Name="nombreTipoCliente" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="RetornaDistritos_Result">
+          <Property Type="Int32" Name="id_Distrito" Nullable="false" />
+          <Property Type="Int32" Name="id_Canton" Nullable="false" />
+          <Property Type="String" Name="nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Canton" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="usuarioCrea" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="fechaCrea" Nullable="true" Precision="23" />
+          <Property Type="String" Name="usuarioModifica" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="fechaModifica" Nullable="true" Precision="23" />
+          <Property Type="String" Name="vc_Estado" Nullable="true" MaxLength="3" />
+          <Property Type="Int32" Name="id_DistritoInec" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1599,6 +1619,22 @@
               <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaTipoCliente_Result">
                 <ScalarProperty Name="id_tipoCliente" ColumnName="id_tipoCliente" />
                 <ScalarProperty Name="nombreTipoCliente" ColumnName="nombreTipoCliente" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RetornaDistritos" FunctionName="sistvehiculoviModel.Store.RetornaDistritos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.RetornaDistritos_Result">
+                <ScalarProperty Name="id_Distrito" ColumnName="id_Distrito" />
+                <ScalarProperty Name="id_Canton" ColumnName="id_Canton" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="Canton" ColumnName="Canton" />
+                <ScalarProperty Name="usuarioCrea" ColumnName="usuarioCrea" />
+                <ScalarProperty Name="fechaCrea" ColumnName="fechaCrea" />
+                <ScalarProperty Name="usuarioModifica" ColumnName="usuarioModifica" />
+                <ScalarProperty Name="fechaModifica" ColumnName="fechaModifica" />
+                <ScalarProperty Name="vc_Estado" ColumnName="vc_Estado" />
+                <ScalarProperty Name="id_DistritoInec" ColumnName="id_DistritoInec" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

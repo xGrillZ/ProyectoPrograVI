@@ -1,4 +1,7 @@
-﻿
+﻿@section css{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+}
+
 @{
     ViewBag.Title = "Nuevo Cliente";
     Layout = "~/Views/Shared/_LayoutPersonalizado.cshtml";
@@ -40,16 +43,20 @@
     </div>
     <div class="form-group">
         <label>Provincia:</label>
+        <select name="provincia" id="provincia" class="form-control"></select>
     </div>
     <div class="form-group">
         <label>Cantón:</label>
+        <select name="canton" id="canton" class="form-control"></select>
     </div>
     <div class="form-group">
         <label>Distrito:</label>
+        <select name="distrito" id="distrito" class="form-control"></select>
     </div>
 
     <div class="form-group">
         <label>Fecha Nacimiento:</label>
+        <input type="text" name="fechaNacimiento" id="fechaNacimiento" class="form-control" readonly/>
     </div>
     <div class="form-group">
         <label>Correo Electrónico:</label>
@@ -79,5 +86,10 @@
     <div class="form-group">
         <input type="submit" value="Registrar" id="btnAceptar" />
     </div>
-    <a href="~/Personas/PersonaLista">Regresar a la lista</a>
+    <a href="~/MantPersonas/ListaClientes">Regresar a la lista</a>
 </form>
+
+@section scripts{
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script src="~/Scripts/mantClientes/mantClientes.js"></script>
+}
