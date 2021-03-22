@@ -172,9 +172,17 @@ namespace SistVehiculo.Controllers
             oSmtpClient.Dispose();
         }
 
-        public ActionResult ModificarClientes()
+        public ActionResult ModificarClientes(int idCliente)
         {
-            return View();
+            ///Obtener el registro que se desea modificar
+            ///utilizando el parámetro del método idCliente
+            pa_RetornaClienteID_Result modeloVista = new pa_RetornaClienteID_Result();
+            modeloVista = this.modeloBD.pa_RetornaClienteID(idCliente).FirstOrDefault();
+
+            this.AgregaGeneroViewBag();
+            this.AgregaTipoClienteViewBag();
+            ///Enviar el modelo a la vista
+            return View(modeloVista);
         }
 
         public ActionResult EliminarClientes()

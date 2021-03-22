@@ -1,67 +1,170 @@
-﻿@model SistVehiculo.Models.pa_RetornaCliente_Result
+﻿@model SistVehiculo.Models.pa_RetornaClienteID_Result
+
+@section css{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+}
+
 @{
-    ViewBag.Title = "ModificaCliente";
+    ViewBag.Title = "Modifica Cliente";
+    Layout = "~/Views/Shared/_LayoutPersonalizado.cshtml";
 }
 
 <h2>Modificar Clientes</h2>
 
 
-<form id="frmNuevaPersona" method="post">
+<form id="frmModificaCliente" method="post">
     <div class="form-group">
         <label>Nombre Cliente:</label>
-        <input type="text" name="primerApellido" id="primerApellido" class="form-control" value="@Model.nomCliente" />
+        <input type="text" name="nomCliente" id="nomCliente" class="form-control" value="@Model.nomCliente" />
     </div>
 
     <div class="form-group">
         <label>Primer Apellido:</label>
-        <input type="text" name="segundoApellido" id="segundoApellido" class="form-control" value="@Model.ape1Cliente" />
+        <input type="text" name="ape1Cliente" id="ape1Cliente" class="form-control" value="@Model.ape1Cliente" />
     </div>
+
     <div class="form-group">
         <label>Segundo Apellido:</label>
-        <input type="text" name="segundoApellido" id="segundoApellido" class="form-control" value="@Model.ape2Cliente" />
+        <input type="text" name="ape2Cliente" id="ape2Cliente" class="form-control" value="@Model.ape2Cliente" />
+    </div>
+    <div class="form-group">
+        <label>Cédula:</label>
+        <input type="text" name="numCedula" id="numCedula" class="form-control" value="@Model.numCedula" />
+    </div>
+    <div class="form-group">
+        <label>Género</label>
+        <select name="genero" id="genero" class="form-control">
+            <option value="">Seleccione un género</option>
+            @{
+                foreach (SistVehiculo.Models.pa_RetornaGenero_Result genero in this.ViewBag.ListaGeneros)
+                {
+                    ///Verifica si el ID es igual al ID del genero que viene en el modelo
+                    bool esIdGeneroModelo = genero.id_Genero == Model.genero;
+
+                    ///Incluir la propiedad selected para que la opcion aparezca seleccionada.
+                    ///Se compara la propiedad id_Genero del objeto del ViewBag contra la propiedad
+                    ///id_Genero del modelo de la vista
+                    if (esIdGeneroModelo)
+                    {
+                        <option value="@genero.id_Genero" selected>@genero.nombreGenero</option>
+                    }
+                    else
+                    {
+                        <option value="@genero.id_Genero">@genero.nombreGenero</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Provincia:</label>
+        <select name="provincia" id="provincia" class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label>Cantón:</label>
+        <select name="canton" id="canton" class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label>Distrito:</label>
+        <select name="distrito" id="distrito" class="form-control"></select>
     </div>
 
     <div class="form-group">
-        <label>Número Cédula:</label>
-        <input type="text" name="nombre" id="nombre" class="form-control" value="@Model.numCedula" />
+        <label>Fecha Nacimiento:</label>
+        <input type="text" name="fechNacimiento" id="fechNacimiento" class="form-control" readonly value="@Model.fechNacimiento" />
     </div>
     <div class="form-group">
-        <label>Género :</label>
-        <input type="text" name="telefono" id="telefono" class="form-control" value="@Model.genero" />
+        <label>Correo Electrónico:</label>
+        <input type="text" name="email" id="email" class="form-control" value="@Model.email" />
     </div>
     <div class="form-group">
-        <label>Provincia :</label>
-        <input type="text" name="telefono" id="telefono" class="form-control" value="@Model.provincia" />
+        <label>Teléfono:</label>
+        <input type="text" name="pTelefono" id="pTelefono" class="form-control" value="@Model.pTelefono" />
     </div>
     <div class="form-group">
-        <label>Fecha Nacimiento :</label>
-        <input type="text" name="telefono" id="telefono" class="form-control" value="@Model.fechNacimiento" />
-    </div>
-    <div class="form-group">
-        <label>Cantón :</label>
-        <input type="text" name="telefono" id="telefono" class="form-control" value="@Model.canton" />
-    </div>
-    <div class="form-group">
-        <label>Distrito :</label>
-        <input type="text" name="telefono" id="telefono" class="form-control" value="@Model.distrito" />
-    </div>
-    <div class="form-group">
-        <label>Email :</label>
-        <input type="text" name="telefono" id="telefono" class="form-control" value="@Model.email" />
-    </div>
-    <div class="form-group">
-        <label>Telefono :</label>
-        <input type="text" name="telefono" id="telefono" class="form-control" value="@Model.pTelefono" />
-    </div>
+        <label>Tipo Cliente:</label>
+        <select name="tipoCliente" id="tipoCliente" class="form-control">
+            <option value="">Seleccione el tipo de cliente</option>
+            @{
+                foreach (SistVehiculo.Models.pa_RetornaTipoCliente_Result tipoCliente in this.ViewBag.ListaTiposCliente)
+                {
+                    bool esIdTipoClienteModelo = tipoCliente.id_tipoCliente == Model.tipoCliente;
 
-    <div class="form-group">
-        <input type="submit" value="Modificar" id="btnAceptar" />
+                    if (esIdTipoClienteModelo)
+                    {
+                        <option value="@tipoCliente.id_tipoCliente" selected>@tipoCliente.nombreTipoCliente</option>
+                    }
+                    else
+                    {
+                        <option value="@tipoCliente.id_tipoCliente">@tipoCliente.nombreTipoCliente</option>
+                    }
+                }
+            }
+        </select>
     </div>
-    <a href="~/xxxx/xxxxLista">Regresar a la lista</a>
+    <div class="form-group">
+        <input type="submit" value="Registrar" id="btnAceptar" />
+    </div>
+    <a href="~/MantClientes/ListaClientes">Regresar a la lista</a>
 </form>
+<br />
+<input type="button" id="btMostrarDialog" value="Mostrar dialog" />
+<!-- Contenido que se mostrará al dar click en el botón  btMostrarDialog-->
+<div id="divDialog" hidden>
+    <h2>Ingresa los datos de la nueva empresa</h2>
+    <form id="frmNuevaEmpresa" method="post">
+        <div class="form-group">
+            <label>Nombre Empresa:</label>
+            <input type="text" name="nombreEmpresa" id="nombreEmpresa" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Identificación:</label>
+            <input type="text" name="identificacionEmpresa" id="identificacionEmpresa" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Dirección:</label>
+            <input type="text" name="direccionEmpresa" id="direccionEmpresa" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>País Origen:</label>
+            <input type="text" name="paisEmpresa" id="paisEmpresa" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Sitio Web:</label>
+            <input type="text" name="webEmpresa" id="webEmpresa" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Correo Electrónico:</label>
+            <input type="text" name="emailEmpresa" id="emailEmpresa" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Representante Legal:</label>
+            <select name="representanteLegal" id="representanteLegal" class="form-control"></select>
+        </div>
+        <div class="form-group">
+            <label>Fecha Creación:</label>
+            <input type="text" name="fechaCreacion" id="fechaCreacion" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Fecha Inscripción:</label>
+            <input type="text" name="fechaInscripcion" id="fechaInscripcion" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Número Permiso Operación:</label>
+            <input type="text" name="numPermOperacion" id="numPermOperacion" class="form-control" />
+        </div>
+        <!--El tipo del boton debe ser button para no recargar la página--->
+        <div class="form-group">
+            <input type="button" value="Insertar" id="btnAceptar" />
+        </div>
+    </form>
+    <button id="btCerrar">Cerrar ventana</button>
+</div>
 
 @section scripts{
-    <script src="~/Scripts/xxxx/xxxxxx.js"></script>
-
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script src="~/Scripts/mantClientes/mantClientes.js"></script>
 }
 

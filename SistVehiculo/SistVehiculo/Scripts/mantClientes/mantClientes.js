@@ -7,6 +7,8 @@
     cargaDropdownListProvincias();
     datePickerRegistro();
     validacionRegistro();
+    validacionModifica();
+    creaElementosJqueryUI();
 });
 
 //función que registrará los eventos necesarios para "monitorear"
@@ -236,5 +238,88 @@ function validacionRegistro() {
                 maxlength: 200
             },
         }
+    });
+}
+
+///crea las validaciones para el formulario
+function validacionModifica() {
+    $("#frmModificaCliente").validate({
+        ///objeto que contiene "las condiciones" que el formulario
+        ///debe cumplir para ser considerado válido
+        rules: {
+            nomCliente: {
+                required: true,
+                maxlength: 50
+            },
+            ape1Cliente: {
+                required: true,
+                maxlength: 50
+            },
+            ape2Cliente: {
+                required: true,
+                maxlength: 50
+            },
+            numCedula: {
+                required: true,
+                maxlength: 20
+            },
+            genero: {
+                required: true
+            },
+            provincia: {
+                required: true
+            },
+            canton: {
+                required: true
+            },
+            distrito: {
+                required: true
+            },
+            fechNacimiento: {
+                required: true
+            },
+            email: {
+                required: true,
+                email: true,
+                maxlength: 50
+            },
+            pTelefono: {
+                required: true,
+                maxlength: 50
+            },
+            tipoCliente: {
+                required: true
+            },
+            contrasena: {
+                required: true,
+                maxlength: 200
+            },
+        }
+    });
+}
+
+///Funcion que permite mostrar el dialogo al hacer click
+function creaElementosJqueryUI() {
+    ///creamos el div divDialog como elemento de tipo Dialog
+    crearDialog();
+    ///evento click del botón btMostrarDialog          
+    $("#btMostrarDialog").click(function () {
+        $("#divDialog").dialog("open");
+    });
+    //evento click del botón btCerrar   
+    $("#btCerrar").click(function () {
+        $("#divDialog").dialog("close");
+    });
+}
+
+///Funcion que crea un dialog
+function crearDialog() {
+    $("#divDialog").dialog({
+        autoOpen: false,
+        height: 650,
+        width: 800,
+        modal: true,
+        title: "Cambiar Contraseña",
+        resizable: false,
     });
 }
