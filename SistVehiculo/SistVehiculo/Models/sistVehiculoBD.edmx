@@ -391,6 +391,9 @@
         <Function Name="pa_EliminaTipoServicioProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idTipoServicioProducto" Type="int" Mode="In" />
         </Function>
+        <Function Name="pa_EliminaTiposVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idTiposVehiculo" Type="int" Mode="In" />
+        </Function>
         <Function Name="pa_InsertaCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nomCliente" Type="nvarchar" Mode="In" />
           <Parameter Name="ape1Cliente" Type="nvarchar" Mode="In" />
@@ -412,6 +415,10 @@
           <Parameter Name="descripcion" Type="nvarchar" Mode="In" />
           <Parameter Name="precio" Type="float" Mode="In" />
           <Parameter Name="tipo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_InsertaTiposVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codigo" Type="nvarchar" Mode="In" />
+          <Parameter Name="tipo" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="pa_InsertaVehiculos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="placa" Type="nvarchar" Mode="In" />
@@ -447,6 +454,11 @@
           <Parameter Name="precio" Type="float" Mode="In" />
           <Parameter Name="tipo" Type="int" Mode="In" />
         </Function>
+        <Function Name="pa_ModificaTiposVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idTipoVehiculo" Type="int" Mode="In" />
+          <Parameter Name="codigo" Type="nvarchar" Mode="In" />
+          <Parameter Name="tipo" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="pa_ModificaUltimaSesionCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idCliente" Type="int" Mode="In" />
           <Parameter Name="ultimoIngreso" Type="datetime" Mode="In" />
@@ -478,6 +490,13 @@
         </Function>
         <Function Name="pa_RetornaTipoServicioProductoID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idTipoServicioProducto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_RetornaTiposVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codigo" Type="nvarchar" Mode="In" />
+          <Parameter Name="tipo" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="pa_RetornaTiposVehiculoID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idTipoVehiculo" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_RetornaVehiculos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="placa" Type="nvarchar" Mode="In" />
@@ -1188,7 +1207,26 @@
           <Parameter Name="descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_RetornaClasificacionSP" ReturnType="Collection(sistvehiculoviModel.pa_RetornaClasificacionSP_Result)">
-            <Parameter Name="nombre" Mode="In" Type="String" />
+          <Parameter Name="nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_EliminaTiposVehiculo">
+          <Parameter Name="idTiposVehiculo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_InsertaTiposVehiculo">
+            <Parameter Name="codigo" Mode="In" Type="String" />
+            <Parameter Name="tipo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_ModificaTiposVehiculo">
+            <Parameter Name="idTipoVehiculo" Mode="In" Type="Int32" />
+            <Parameter Name="codigo" Mode="In" Type="String" />
+            <Parameter Name="tipo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_RetornaTiposVehiculo" ReturnType="Collection(sistvehiculoviModel.pa_RetornaTiposVehiculo_Result)">
+            <Parameter Name="codigo" Mode="In" Type="String" />
+            <Parameter Name="tipo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_RetornaTiposVehiculoID" ReturnType="Collection(sistvehiculoviModel.pa_RetornaTiposVehiculoID_Result)">
+            <Parameter Name="idTipoVehiculo" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -1381,6 +1419,16 @@
         <ComplexType Name="pa_RetornaClasificacionSP_Result">
           <Property Type="Int32" Name="id_clasificacionSP" Nullable="false" />
           <Property Type="String" Name="nombreClasificacion" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaTiposVehiculo_Result">
+          <Property Type="Int32" Name="idTipoVehiculo" Nullable="false" />
+          <Property Type="String" Name="codigo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tipo" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaTiposVehiculoID_Result">
+          <Property Type="Int32" Name="idTipoVehiculo" Nullable="false" />
+          <Property Type="String" Name="codigo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tipo" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1776,6 +1824,27 @@
               <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaClasificacionSP_Result">
                 <ScalarProperty Name="id_clasificacionSP" ColumnName="id_clasificacionSP" />
                 <ScalarProperty Name="nombreClasificacion" ColumnName="nombreClasificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_EliminaTiposVehiculo" FunctionName="sistvehiculoviModel.Store.pa_EliminaTiposVehiculo" />
+          <FunctionImportMapping FunctionImportName="pa_InsertaTiposVehiculo" FunctionName="sistvehiculoviModel.Store.pa_InsertaTiposVehiculo" />
+          <FunctionImportMapping FunctionImportName="pa_ModificaTiposVehiculo" FunctionName="sistvehiculoviModel.Store.pa_ModificaTiposVehiculo" />
+          <FunctionImportMapping FunctionImportName="pa_RetornaTiposVehiculo" FunctionName="sistvehiculoviModel.Store.pa_RetornaTiposVehiculo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaTiposVehiculo_Result">
+                <ScalarProperty Name="idTipoVehiculo" ColumnName="idTipoVehiculo" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_RetornaTiposVehiculoID" FunctionName="sistvehiculoviModel.Store.pa_RetornaTiposVehiculoID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaTiposVehiculoID_Result">
+                <ScalarProperty Name="idTipoVehiculo" ColumnName="idTipoVehiculo" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

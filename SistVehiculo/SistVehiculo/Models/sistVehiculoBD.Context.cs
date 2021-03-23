@@ -469,5 +469,66 @@ namespace SistVehiculo.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaClasificacionSP_Result>("pa_RetornaClasificacionSP", nombreParameter);
         }
+    
+        public virtual int pa_EliminaTiposVehiculo(Nullable<int> idTiposVehiculo)
+        {
+            var idTiposVehiculoParameter = idTiposVehiculo.HasValue ?
+                new ObjectParameter("idTiposVehiculo", idTiposVehiculo) :
+                new ObjectParameter("idTiposVehiculo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_EliminaTiposVehiculo", idTiposVehiculoParameter);
+        }
+    
+        public virtual int pa_InsertaTiposVehiculo(string codigo, string tipo)
+        {
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
+    
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("tipo", tipo) :
+                new ObjectParameter("tipo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_InsertaTiposVehiculo", codigoParameter, tipoParameter);
+        }
+    
+        public virtual int pa_ModificaTiposVehiculo(Nullable<int> idTipoVehiculo, string codigo, string tipo)
+        {
+            var idTipoVehiculoParameter = idTipoVehiculo.HasValue ?
+                new ObjectParameter("idTipoVehiculo", idTipoVehiculo) :
+                new ObjectParameter("idTipoVehiculo", typeof(int));
+    
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
+    
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("tipo", tipo) :
+                new ObjectParameter("tipo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ModificaTiposVehiculo", idTipoVehiculoParameter, codigoParameter, tipoParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaTiposVehiculo_Result> pa_RetornaTiposVehiculo(string codigo, string tipo)
+        {
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
+    
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("tipo", tipo) :
+                new ObjectParameter("tipo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaTiposVehiculo_Result>("pa_RetornaTiposVehiculo", codigoParameter, tipoParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaTiposVehiculoID_Result> pa_RetornaTiposVehiculoID(Nullable<int> idTipoVehiculo)
+        {
+            var idTipoVehiculoParameter = idTipoVehiculo.HasValue ?
+                new ObjectParameter("idTipoVehiculo", idTipoVehiculo) :
+                new ObjectParameter("idTipoVehiculo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaTiposVehiculoID_Result>("pa_RetornaTiposVehiculoID", idTipoVehiculoParameter);
+        }
     }
 }
