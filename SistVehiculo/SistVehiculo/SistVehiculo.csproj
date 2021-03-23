@@ -188,6 +188,12 @@
     <Compile Include="Models\pa_RetornaGenero_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pa_RetornaMarcaVehiculoID_Result.cs">
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_RetornaMarcaVehiculo_Result.cs">
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pa_RetornaTipoCliente_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
