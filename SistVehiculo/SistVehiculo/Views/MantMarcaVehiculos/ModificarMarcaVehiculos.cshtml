@@ -1,7 +1,60 @@
-﻿
-@{
-    ViewBag.Title = "ModificarMarcaVehiculos";
+﻿@model SistVehiculo.Models.pa_RetornaMarcaVehiculoID_Result
+
+@section css{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 }
 
-<h2>ModificarMarcaVehiculos</h2>
+@{
+    ViewBag.Title = "Modificar Marca Vehículo";
+    Layout = "~/Views/Shared/_LayoutPersonalizado.cshtml";
+}
 
+<h2>Modificar Marca Vehículo</h2>
+
+<form id="frmModificaMarcaVehiculo" method="post">
+    <div class="form-group">
+        <label>Código:</label>
+        <input type="text" name="codigo" id="codigo" class="form-control" value="@Model.codigo"/>
+    </div>
+
+    <div class="form-group">
+        <label>País Fabricante:</label>
+        <select name="idPaisFabricante" id="idPaisFabricante" class="form-control">
+            <option value="">Seleccione un País Fabricante</option>
+            @{
+                foreach (SistVehiculo.Models.pa_RetornaPaisFabricante_Result paises in this.ViewBag.ListaPaises)
+                {
+
+                    ///Verifica si el ID es igual al ID del genero que viene en el modelo
+                    bool esIdPaisFabricanteModelo = paises.idFabricante == Model.idPaisFabricante;
+
+
+                    ///Incluir la propiedad selected para que la opcion aparezca seleccionada.
+                    ///Se compara la propiedad id_Genero del objeto del ViewBag contra la propiedad
+                    ///id_Genero del modelo de la vista
+                    if (esIdPaisFabricanteModelo)
+                    {
+                        <option value="@paises.idFabricante" selected>@paises.pais</option>
+                    }
+                    else
+                    {
+                        <option value="@paises.idFabricante">@paises.pais</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Marca:</label>
+        <input type="text" name="marca" id="marca" class="form-control" value="@Model.marca"/>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Modificar" id="btnAceptar" />
+    </div>
+    <a href="~/MantMarcaVehiculos/ListaMarcaVehiculos">Regresar a la lista</a>
+</form>
+
+@section scripts{
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+}

@@ -599,5 +599,14 @@ namespace SistVehiculo.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaMarcaVehiculoID_Result>("pa_RetornaMarcaVehiculoID", idMarcaVehiculoParameter);
         }
+    
+        public virtual ObjectResult<pa_RetornaPaisFabricante_Result> pa_RetornaPaisFabricante(string pais)
+        {
+            var paisParameter = pais != null ?
+                new ObjectParameter("pais", pais) :
+                new ObjectParameter("pais", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaPaisFabricante_Result>("pa_RetornaPaisFabricante", paisParameter);
+        }
     }
 }

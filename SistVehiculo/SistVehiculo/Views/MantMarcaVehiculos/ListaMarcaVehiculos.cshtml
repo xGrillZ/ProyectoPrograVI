@@ -1,7 +1,37 @@
-﻿
+﻿<!--Indicar a la vista el modelo-->
+@model List<SistVehiculo.Models.pa_RetornaMarcaVehiculo_Result>
+
 @{
-    ViewBag.Title = "ListaMarcaVehiculos";
+    ViewBag.Title = "Lista Marcas Vehículos";
+    Layout = "~/Views/Shared/_LayoutPersonalizado.cshtml";
 }
 
-<h2>ListaMarcaVehiculos</h2>
+<h2>Lista de Marcas de Vehículos</h2>
+<a href="~/MantMarcaVehiculos/InsertarMarcaVehiculos">Agregar Marca</a>
 
+<table class="table">
+    <tr>
+        <th>Código</th>
+        <th>País Fabricante</th>
+        <th>Marca</th>
+        <th>Acciones</th>
+    </tr>
+    <!--Incluir código .net
+        Recorrido para la vista
+        -->
+    @{
+        foreach (SistVehiculo.Models.pa_RetornaMarcaVehiculo_Result posicionModelo in this.Model)
+        {
+            <tr>
+                <td>@posicionModelo.codigo</td>
+                <td>@posicionModelo.pais</td>
+                <td>@posicionModelo.marca</td>
+                <td>
+                    <a href="~/MantMarcaVehiculos/ModificarMarcaVehiculos?idMarcaVehiculo=@posicionModelo.idMarcaVehiculo">Modificar</a>
+                    <br />
+                    <a href="~/MantMarcaVehiculos/EliminarMarcaVehiculos?idMarcaVehiculo=@posicionModelo.idMarcaVehiculo">Eliminar</a>
+                </td>
+            </tr>
+        }
+    }
+</table>
