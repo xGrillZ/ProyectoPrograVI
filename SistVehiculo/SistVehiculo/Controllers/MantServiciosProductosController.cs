@@ -99,14 +99,108 @@ namespace SistVehiculo.Controllers
             return View();
         }
 
-        public ActionResult ModificarServiciosProductos()
+        public ActionResult ModificarServiciosProductos(int idTipoServicioProducto)
         {
-            return View();
+            ///Obtener el registro que se desea modificar
+            ///utilizando el parámetro del método idCliente
+            pa_RetornaTipoServicioProductoID_Result modeloVista = new pa_RetornaTipoServicioProductoID_Result();
+            modeloVista = this.modeloBD.pa_RetornaTipoServicioProductoID(idTipoServicioProducto).FirstOrDefault();
+
+            this.AgregaClasificacionViewBag();
+            ///Enviar el modelo a la vista
+            return View(modeloVista);
         }
 
-        public ActionResult EliminarServiciosProductos()
+        [HttpPost]
+        public ActionResult ModificarServiciosProductos(pa_RetornaTipoServicioProductoID_Result modeloVista)
         {
-            return View();
+            ///Variable que registra la cantidad de registros afectados
+            ///si un procedimiento que ejecuta insert, update o delete
+            ///no afecta registros implica que hubo un error
+            int cantRegistrosAfectados = 0;
+            string mensaje = "";
+
+            if (this.verificaServicio(modeloVista.codigo))
+            {
+                try
+                {
+                    cantRegistrosAfectados = this.modeloBD.pa_ModificaTipoServicioProducto(modeloVista.idTipoServicioProducto, modeloVista.codigo, modeloVista.descripcion,
+                                                                                          modeloVista.precio, modeloVista.tipo);
+                }
+                catch (Exception ex)
+                {
+                    mensaje = "Ocurrió un error: " + ex.Message;
+                }
+                finally
+                {
+                    if (cantRegistrosAfectados > 0)
+                    {
+                        mensaje = "Registro modificado";
+                    }
+                    else
+                    {
+                        mensaje += ".No se pudo modificar";
+                    }
+                }
+            }
+            else
+            {
+                mensaje = "Esta código ya existe, debes ingresar otro.";
+            }
+
+            Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
+
+            this.AgregaClasificacionViewBag();
+            ///Enviar el modelo a la vista
+            return View(modeloVista);
+        }
+
+        public ActionResult EliminarServiciosProductos(int idTipoServicioProducto)
+        {
+            ///Obtener el registro que se desea modificar
+            ///utilizando el parámetro del método idTipoServicioProducto
+            pa_RetornaTipoServicioProductoID_Result modeloVista = new pa_RetornaTipoServicioProductoID_Result();
+            modeloVista = this.modeloBD.pa_RetornaTipoServicioProductoID(idTipoServicioProducto).FirstOrDefault();
+
+            this.AgregaClasificacionViewBag();
+            ///Enviar el modelo a la vista
+            return View(modeloVista);
+        }
+
+        [HttpPost]
+        public ActionResult EliminarServiciosProductos(pa_RetornaTipoServicioProductoID_Result modeloVista)
+        {
+            ///Variable que registra la cantidad de registros afectados
+            ///si un procedimiento que ejecuta insert, update o delete
+            ///no afecta registros implica que hubo un error
+            int cantRegistrosAfectados = 0;
+            string mensaje = "";
+
+            try
+            {
+                cantRegistrosAfectados = this.modeloBD.pa_EliminaTipoServicioProducto(modeloVista.idTipoServicioProducto);
+            }
+            catch(Exception ex)
+            {
+                mensaje = "Ocurrió un error: " + ex.Message;
+            }
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    mensaje = "Registro Eliminado";
+                }
+                else
+                {
+                    mensaje += ".No se pudo eliminar";
+                }
+            }
+
+            Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
+
+            this.AgregaClasificacionViewBag();
+            ///Enviar el modelo a la vista
+            return View(modeloVista);
         }
     }
 }

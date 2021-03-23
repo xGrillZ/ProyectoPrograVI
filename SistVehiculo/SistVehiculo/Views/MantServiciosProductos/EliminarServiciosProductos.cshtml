@@ -1,7 +1,54 @@
-﻿
+﻿@model SistVehiculo.Models.pa_RetornaTipoServicioProductoID_Result
+
 @{
-    ViewBag.Title = "EliminarServiciosProductos";
+    ViewBag.Title = "Elimina Servicio y Producto";
+    Layout = "~/Views/Shared/_LayoutPersonalizado.cshtml";
 }
 
-<h2>EliminarServiciosProductos</h2>
+<h2>Elimina Servicio o Producto</h2>
 
+<form id="frmEliminaServicioProducto" method="post">
+    <div class="form-group">
+        <label>Código:</label>
+        <input type="text" name="codigo" id="codigo" class="form-control" value="@Model.codigo" readonly/>
+    </div>
+
+    <div class="form-group">
+        <label>Descripción:</label>
+        <input type="text" name="descripcion" id="descripcion" class="form-control" value="@Model.descripcion" readonly/>
+    </div>
+
+    <div class="form-group">
+        <label>Precio:</label>
+        <input type="text" name="precio" id="precio" class="form-control" value="@Model.precio" readonly/>
+    </div>
+    <div class="form-group">
+        <label>Tipo:</label>
+        <select name="tipo" id="tipo" class="form-control" readonly>
+            <option value="">Seleccione una clasificación</option>
+            @{
+                foreach (SistVehiculo.Models.pa_RetornaClasificacionSP_Result clasificacion in this.ViewBag.ListaClasificacion)
+                {
+                    ///Verifica si el ID es igual al ID del genero que viene en el modelo
+                    bool esIdClasificacionModelo = clasificacion.id_clasificacionSP == Model.tipo;
+
+                    ///Incluir la propiedad selected para que la opcion aparezca seleccionada.
+                    ///Se compara la propiedad id_Genero del objeto del ViewBag contra la propiedad
+                    ///id_Genero del modelo de la vista
+                    if (esIdClasificacionModelo)
+                    {
+                        <option value="@clasificacion.id_clasificacionSP" selected>@clasificacion.nombreClasificacion</option>
+                    }
+                    else
+                    {
+                        <option value="@clasificacion.id_clasificacionSP">@clasificacion.nombreClasificacion</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Eliminar" id="btnAceptar" />
+    </div>
+    <a href="~/MantServiciosProductos/ListaServiciosProductos">Regresar a la lista</a>
+</form>
