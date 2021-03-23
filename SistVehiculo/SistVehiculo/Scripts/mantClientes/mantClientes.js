@@ -290,10 +290,6 @@ function validacionModifica() {
             tipoCliente: {
                 required: true
             },
-            contrasena: {
-                required: true,
-                maxlength: 200
-            },
         }
     });
 }

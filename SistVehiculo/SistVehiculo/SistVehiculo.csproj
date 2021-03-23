@@ -314,6 +314,7 @@
     <Content Include="Scripts\Logeo\Logeo.js" />
     <Content Include="Scripts\Logeo\verificacion.js" />
     <Content Include="Scripts\mantClientes\mantClientes.js" />
+    <Content Include="Scripts\mantClientes\modificaClientes.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PagPrincipal\pagPrincipal.js" />
     <Content Include="Scripts\popper-utils.js" />

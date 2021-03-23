@@ -185,9 +185,31 @@ namespace SistVehiculo.Controllers
             return View(modeloVista);
         }
 
-        public ActionResult EliminarClientes()
+       /* public ActionResult ModificarClientes(int idCliente)
         {
-            return View();
+            ///Obtener el registro que se desea modificar
+            ///utilizando el parámetro del método idCliente
+            pa_RetornaClienteID_Result modeloVista = new pa_RetornaClienteID_Result();
+            modeloVista = this.modeloBD.pa_RetornaClienteID(idCliente).FirstOrDefault();
+
+            this.AgregaGeneroViewBag();
+            this.AgregaTipoClienteViewBag();
+            ///Enviar el modelo a la vista
+            return Json(modeloVista);
+        }*/
+
+        public ActionResult EliminarClientes(int idCliente)
+        {
+            ///Obtener el registro que se desea eliminar
+            ///utilizando el parámetro del método idCliente
+            pa_RetornaClienteID_Result modeloVista = new pa_RetornaClienteID_Result();
+            ///Resultado de ejecución del procedimiento almacenado
+            modeloVista = this.modeloBD.pa_RetornaClienteID(idCliente).FirstOrDefault();
+
+            this.AgregaGeneroViewBag();
+            this.AgregaTipoClienteViewBag();
+            ///Enviar el modelo a la vista
+            return View(modeloVista);
         }
     }
 }
