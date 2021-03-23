@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="sistvehiculoviModel.PaisFabricante" Width="1.5" PointX="6" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="sistvehiculoviModel.Provincia" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="sistvehiculoviModel.TipoCliente" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="sistvehiculoviModel.TipoServicioProducto" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="sistvehiculoviModel.TiposVehiculo" Width="1.5" PointX="8.25" PointY="14.375" IsExpanded="true" />
         <EntityTypeShape EntityType="sistvehiculoviModel.Vehiculos" Width="1.5" PointX="10.5" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="sistvehiculoviModel.VehiculosCliente" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
@@ -29,7 +28,6 @@
         <AssociationConnector Association="sistvehiculoviModel.FK_Cliente_TipoCliente" ManuallyRouted="false" />
         <AssociationConnector Association="sistvehiculoviModel.FK_Factura_Cliente" ManuallyRouted="false" />
         <AssociationConnector Association="sistvehiculoviModel.FK_VehiculosCliente_Cliente" ManuallyRouted="false" />
-        <AssociationConnector Association="sistvehiculoviModel.FK_detalleFactura_TipoServicio" ManuallyRouted="false" />
         <AssociationConnector Association="sistvehiculoviModel.FK_factura" ManuallyRouted="false" />
         <AssociationConnector Association="sistvehiculoviModel.FK_Factura_Estado" ManuallyRouted="false" />
         <AssociationConnector Association="sistvehiculoviModel.FK_Factura_Vehiculo" ManuallyRouted="false" />
@@ -37,6 +35,10 @@
         <AssociationConnector Association="sistvehiculoviModel.FK_Vehiculos_MarcaVehiculo" ManuallyRouted="false" />
         <AssociationConnector Association="sistvehiculoviModel.FK_Vehiculos_TiposVehiculo" ManuallyRouted="false" />
         <AssociationConnector Association="sistvehiculoviModel.FK_VehiculosCliente_Vehiculo" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.clasificacionSP" Width="1.5" PointX="0.75" PointY="11.375" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.TipoServicioProducto" Width="1.5" PointX="3" PointY="11" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_TipoServicioProducto_clasificacionSP" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_detalleFactura_TipoServicio" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

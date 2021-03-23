@@ -12,15 +12,16 @@ namespace SistVehiculo.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class detalle_Factura
+    public partial class clasificacionSP
     {
-        public int num_detalle { get; set; }
-        public int num_factura { get; set; }
-        public int idTipoServicioProducto { get; set; }
-        public int cantidadServicioProducto { get; set; }
-        public double Precio { get; set; }
+        public clasificacionSP()
+        {
+            this.TipoServicioProducto = new HashSet<TipoServicioProducto>();
+        }
     
-        public virtual Factura Factura { get; set; }
-        public virtual TipoServicioProducto TipoServicioProducto { get; set; }
+        public int id_clasificacionSP { get; set; }
+        public string nombreClasificacion { get; set; }
+    
+        public virtual ICollection<TipoServicioProducto> TipoServicioProducto { get; set; }
     }
 }

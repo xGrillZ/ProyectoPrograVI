@@ -10,17 +10,14 @@
 namespace SistVehiculo.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class detalle_Factura
+    public partial class pa_RetornaTipoServicioProducto_Result
     {
-        public int num_detalle { get; set; }
-        public int num_factura { get; set; }
         public int idTipoServicioProducto { get; set; }
-        public int cantidadServicioProducto { get; set; }
-        public double Precio { get; set; }
-    
-        public virtual Factura Factura { get; set; }
-        public virtual TipoServicioProducto TipoServicioProducto { get; set; }
+        public string codigo { get; set; }
+        public string descripcion { get; set; }
+        public double precio { get; set; }
+        public int tipo { get; set; }
+        public string nombreClasificacion { get; set; }
     }
 }

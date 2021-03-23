@@ -39,10 +39,11 @@ namespace SistVehiculo.Models
         public DbSet<PaisFabricante> PaisFabricante { get; set; }
         public DbSet<Provincia> Provincia { get; set; }
         public DbSet<TipoCliente> TipoCliente { get; set; }
-        public DbSet<TipoServicioProducto> TipoServicioProducto { get; set; }
         public DbSet<TiposVehiculo> TiposVehiculo { get; set; }
         public DbSet<Vehiculos> Vehiculos { get; set; }
         public DbSet<VehiculosCliente> VehiculosCliente { get; set; }
+        public DbSet<clasificacionSP> clasificacionSP { get; set; }
+        public DbSet<TipoServicioProducto> TipoServicioProducto { get; set; }
     
         public virtual int pa_ModificaUltimaSesionCliente(Nullable<int> idCliente, Nullable<System.DateTime> ultimoIngreso)
         {
@@ -356,31 +357,6 @@ namespace SistVehiculo.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ModificaPaisFabricante", idFabricanteParameter, codigoParameter, paisParameter);
         }
     
-        public virtual int pa_ModificaTipoServicioProducto(Nullable<int> idTipoServicioProducto, string codigo, string descripcion, Nullable<double> precio, string tipo)
-        {
-            var idTipoServicioProductoParameter = idTipoServicioProducto.HasValue ?
-                new ObjectParameter("idTipoServicioProducto", idTipoServicioProducto) :
-                new ObjectParameter("idTipoServicioProducto", typeof(int));
-    
-            var codigoParameter = codigo != null ?
-                new ObjectParameter("codigo", codigo) :
-                new ObjectParameter("codigo", typeof(string));
-    
-            var descripcionParameter = descripcion != null ?
-                new ObjectParameter("descripcion", descripcion) :
-                new ObjectParameter("descripcion", typeof(string));
-    
-            var precioParameter = precio.HasValue ?
-                new ObjectParameter("precio", precio) :
-                new ObjectParameter("precio", typeof(double));
-    
-            var tipoParameter = tipo != null ?
-                new ObjectParameter("tipo", tipo) :
-                new ObjectParameter("tipo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ModificaTipoServicioProducto", idTipoServicioProductoParameter, codigoParameter, descripcionParameter, precioParameter, tipoParameter);
-        }
-    
         public virtual ObjectResult<pa_RetornaVehiculos_Result> pa_RetornaVehiculos(string placa)
         {
             var placaParameter = placa != null ?
@@ -419,6 +395,79 @@ namespace SistVehiculo.Models
                 new ObjectParameter("id_Canton", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RetornaDistritos_Result>("RetornaDistritos", nombreParameter, id_CantonParameter);
+        }
+    
+        public virtual int pa_InsertaTipoServicioProducto(string codigo, string descripcion, Nullable<double> precio, Nullable<int> tipo)
+        {
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            var precioParameter = precio.HasValue ?
+                new ObjectParameter("precio", precio) :
+                new ObjectParameter("precio", typeof(double));
+    
+            var tipoParameter = tipo.HasValue ?
+                new ObjectParameter("tipo", tipo) :
+                new ObjectParameter("tipo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_InsertaTipoServicioProducto", codigoParameter, descripcionParameter, precioParameter, tipoParameter);
+        }
+    
+        public virtual int pa_ModificaTipoServicioProducto(Nullable<int> idTipoServicioProducto, string codigo, string descripcion, Nullable<double> precio, Nullable<int> tipo)
+        {
+            var idTipoServicioProductoParameter = idTipoServicioProducto.HasValue ?
+                new ObjectParameter("idTipoServicioProducto", idTipoServicioProducto) :
+                new ObjectParameter("idTipoServicioProducto", typeof(int));
+    
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            var precioParameter = precio.HasValue ?
+                new ObjectParameter("precio", precio) :
+                new ObjectParameter("precio", typeof(double));
+    
+            var tipoParameter = tipo.HasValue ?
+                new ObjectParameter("tipo", tipo) :
+                new ObjectParameter("tipo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ModificaTipoServicioProducto", idTipoServicioProductoParameter, codigoParameter, descripcionParameter, precioParameter, tipoParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaTipoServicioProductoID_Result> pa_RetornaTipoServicioProductoID(Nullable<int> idTipoServicioProducto)
+        {
+            var idTipoServicioProductoParameter = idTipoServicioProducto.HasValue ?
+                new ObjectParameter("idTipoServicioProducto", idTipoServicioProducto) :
+                new ObjectParameter("idTipoServicioProducto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaTipoServicioProductoID_Result>("pa_RetornaTipoServicioProductoID", idTipoServicioProductoParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaTipoServicioProducto_Result> pa_RetornaTipoServicioProducto(string descripcion)
+        {
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaTipoServicioProducto_Result>("pa_RetornaTipoServicioProducto", descripcionParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaClasificacionSP_Result> pa_RetornaClasificacionSP(string nombre)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaClasificacionSP_Result>("pa_RetornaClasificacionSP", nombreParameter);
         }
     }
 }

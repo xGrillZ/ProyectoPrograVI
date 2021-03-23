@@ -1,7 +1,39 @@
-﻿
+﻿<!--Indicar a la vista el modelo-->
+@model List<SistVehiculo.Models.pa_RetornaTipoServicioProducto_Result>
+
 @{
-    ViewBag.Title = "ListaServiciosProductos";
+    ViewBag.Title = "Lista Servicios";
+    Layout = "~/Views/Shared/_LayoutPersonalizado.cshtml";
 }
 
-<h2>ListaServiciosProductos</h2>
+<h2>Lista de Servicios y Productos</h2>
+<a href="~/MantServiciosProductos/InsertarServiciosProductos">Agregar Cliente</a>
 
+<table class="table">
+    <tr>
+        <th>Código</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Tipo</th>
+        <th>Acciones</th>
+    </tr>
+    <!--Incluir código .net
+        Recorrido para la vista
+        -->
+    @{
+        foreach (SistVehiculo.Models.pa_RetornaTipoServicioProducto_Result posicionModelo in this.Model)
+        {
+            <tr>
+                <td>@posicionModelo.codigo</td>
+                <td>@posicionModelo.descripcion</td>
+                <td>@posicionModelo.precio</td>
+                <td>@posicionModelo.nombreClasificacion</td>
+                <td>
+                    <a href="~/MantServiciosProductos/ModificarServiciosProductos?idCliente=@posicionModelo.idTipoServicioProducto">Modificar</a>
+                    <br />
+                    <a href="~/MantServiciosProductos/EliminarServiciosProductos?id_Persona=@posicionModelo.idTipoServicioProducto">Eliminar</a>
+                </td>
+            </tr>
+        }
+    }
+</table>
