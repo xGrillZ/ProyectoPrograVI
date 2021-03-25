@@ -11,11 +11,13 @@
 
 <h2>Modificar Clientes</h2>
 
-
 <form id="frmModificaCliente" method="post">
     <div class="form-group">
         <label>Nombre Cliente:</label>
         <input type="text" name="nomCliente" id="nomCliente" class="form-control" value="@Model.nomCliente" />
+        <input type="hidden" id="hdProvincia" value="@Model.provincia" />
+        <input type="hidden" id="hdCanton" value="@Model.canton" />
+        <input type="hidden" id="hdDistrito" value="@Model.distrito" />
     </div>
 
     <div class="form-group">
@@ -108,11 +110,25 @@
     <a href="~/MantClientes/ListaClientes">Regresar a la lista</a>
 </form>
 <br />
+
 <input type="button" id="btMostrarDialog" value="Mostrar dialog" />
 <!-- Contenido que se mostrará al dar click en el botón  btMostrarDialog-->
-<div id="divDialog" hidden>
-    <h2>Ingresa los datos de la nueva empresa</h2>
-    <p>Test</p>
+<div id="divDialog">
+    <h1>PRUEBAAAA</h1>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <h2>Contenido de la ventana emergente</h2>
+    <p>Aquí se puede ingresar cualquier contenido HTML</p>
     <button id="btCerrar">Cerrar ventana</button>
 </div>
 

@@ -78,6 +78,14 @@ function procesarResultadoProvincias(data) {
         ///Agregamos la opción al dropdownlist
         ddlProvincias.append(nuevaOpcion);
     });
+
+    ///Obtiene el valor del hidden
+    var hiddenProvincia = $("#hdProvincia").val();
+
+    if (hiddenProvincia != undefined) {
+        ddlProvincias.val(hiddenProvincia);
+        cargaDropdownListCantones(hiddenProvincia);
+    }
 }
 
 ///carga los registros de los cantones
@@ -126,6 +134,14 @@ function procesarResultadoCantones(data) {
         ///Agregamos la opción al dropdownlist
         ddlCantones.append(nuevaOpcion);
     });
+
+    ///Obtiene el valor del hidden
+    var hiddenCanton = $("#hdCanton").val();
+
+    if (hiddenCanton != undefined) {
+        ddlCantones.val(hiddenCanton);
+        cargaDropdownListDistritos(hiddenCanton);
+    }
 }
 
 function cargaDropdownListDistritos(pIdCanton) {
@@ -172,6 +188,13 @@ function procesarResultadoDistritos(data) {
         ///Agregamos la opción al dropdownlist
         ddlDistritos.append(nuevaOpcion);
     });
+
+    ///Obtiene el valor del hidden
+    var hiddenDistrito = $("#hdDistrito").val();
+
+    if (hiddenDistrito != undefined) {
+        ddlDistritos.val(hiddenDistrito);
+    }
 }
 
 ///Función para Fecha de Nacimiento -> Registrar Nuevo Cliente
@@ -312,10 +335,10 @@ function creaElementosJqueryUI() {
 function crearDialog() {
     $("#divDialog").dialog({
         autoOpen: false,
-        height: 650,
-        width: 800,
+        height: 300,
+        width: 300,
         modal: true,
-        title: "Cambiar Contraseña",
-        resizable: false,
+        title: "Mensaje de confirmación",
+        resizable: false
     });
 }
