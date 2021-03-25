@@ -35,7 +35,7 @@ namespace SistVehiculo.Controllers
             this.ViewBag.ListaClasificacion = this.modeloBD.pa_RetornaClasificacionSP("").ToList();
         }
 
-        bool verificaServicio(string pCodigo)
+        bool verificaServicio(string pCodigo, string pCodigoDos)
         {
             ///Resultado de la operación
             bool resultado = true;
@@ -43,8 +43,19 @@ namespace SistVehiculo.Controllers
             {
                 ///Variable que almacenará el dato solicitado
                 string cod = pCodigo;
+
                 ///Resultado de la operación
-                resultado = this.modeloBD.TipoServicioProducto.Count(tipoServicioProducto => tipoServicioProducto.codigo == cod) <= 0;
+                if (string.IsNullOrEmpty(pCodigoDos))
+                {
+                    ///Resultado de la operación
+                    resultado = this.modeloBD.TipoServicioProducto.Count(tipoServicioProducto => tipoServicioProducto.codigo == cod) <= 0;
+                }
+                else
+                {
+                    int cod2 = Convert.ToInt32(pCodigoDos);
+                    ///Resultado de la operación
+                    resultado = this.modeloBD.TipoServicioProducto.Count(tipoServicioProducto => tipoServicioProducto.codigo == cod && tipoServicioProducto.idTipoServicioProducto != cod2) <= 0;
+                }
             }
             catch
             {
@@ -65,7 +76,7 @@ namespace SistVehiculo.Controllers
             int cantRegistrosAfectados = 0;
             string mensaje = "";
 
-            if (this.verificaServicio(modeloVista.codigo))
+            if (this.verificaServicio(modeloVista.codigo, null))
             {
                 try
                 {
@@ -120,7 +131,7 @@ namespace SistVehiculo.Controllers
             int cantRegistrosAfectados = 0;
             string mensaje = "";
 
-            if (this.verificaServicio(modeloVista.codigo))
+            if (this.verificaServicio(modeloVista.codigo, modeloVista.idTipoServicioProducto.ToString()))
             {
                 try
                 {

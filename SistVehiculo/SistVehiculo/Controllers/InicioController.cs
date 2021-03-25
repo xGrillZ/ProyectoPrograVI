@@ -29,9 +29,9 @@ namespace SistVehiculo.Controllers
 
             string mensaje = "";
 
-           /* string encryptPass = this.GetSHA256(password);*/
+           string encryptPass = this.GetSHA256(password);
 
-            pa_RetornaClienteCorreoPwd_Result resultadoSp = this.modeloBD.pa_RetornaClienteCorreoPwd(correoElectronico, password).FirstOrDefault();
+            pa_RetornaClienteCorreoPwd_Result resultadoSp = this.modeloBD.pa_RetornaClienteCorreoPwd(correoElectronico, encryptPass).FirstOrDefault();
 
             try
             {

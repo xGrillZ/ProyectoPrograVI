@@ -436,6 +436,7 @@
           <Parameter Name="marcaVehiculo" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_ModificaCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCliente" Type="int" Mode="In" />
           <Parameter Name="nomCliente" Type="nvarchar" Mode="In" />
           <Parameter Name="ape1Cliente" Type="nvarchar" Mode="In" />
           <Parameter Name="ape2Cliente" Type="nvarchar" Mode="In" />
@@ -448,7 +449,6 @@
           <Parameter Name="email" Type="nvarchar" Mode="In" />
           <Parameter Name="pTelefono" Type="nvarchar" Mode="In" />
           <Parameter Name="tipoCliente" Type="int" Mode="In" />
-          <Parameter Name="contrasena" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="pa_ModificaMarcaVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idMarcaVehiculo" Type="int" Mode="In" />
@@ -460,6 +460,10 @@
           <Parameter Name="idFabricante" Type="int" Mode="In" />
           <Parameter Name="codigo" Type="nvarchar" Mode="In" />
           <Parameter Name="pais" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="pa_ModificaPasswordCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCliente" Type="int" Mode="In" />
+          <Parameter Name="contrasena" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="pa_ModificaTipoServicioProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idTipoServicioProducto" Type="int" Mode="In" />
@@ -1168,21 +1172,6 @@
             <Parameter Name="tipoVehiculo" Mode="In" Type="Int32" />
             <Parameter Name="marcaVehiculo" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="pa_ModificaCliente">
-            <Parameter Name="nomCliente" Mode="In" Type="String" />
-            <Parameter Name="ape1Cliente" Mode="In" Type="String" />
-            <Parameter Name="ape2Cliente" Mode="In" Type="String" />
-            <Parameter Name="numCedula" Mode="In" Type="String" />
-            <Parameter Name="genero" Mode="In" Type="Int32" />
-            <Parameter Name="provincia" Mode="In" Type="Int32" />
-            <Parameter Name="fechNacimiento" Mode="In" Type="DateTime" />
-            <Parameter Name="canton" Mode="In" Type="Int32" />
-            <Parameter Name="distrito" Mode="In" Type="Int32" />
-            <Parameter Name="email" Mode="In" Type="String" />
-            <Parameter Name="pTelefono" Mode="In" Type="String" />
-            <Parameter Name="tipoCliente" Mode="In" Type="Int32" />
-            <Parameter Name="contrasena" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="pa_ModificaPaisFabricante">
             <Parameter Name="idFabricante" Mode="In" Type="Int32" />
             <Parameter Name="codigo" Mode="In" Type="String" />
@@ -1274,7 +1263,26 @@
           <Parameter Name="idMarcaVehiculo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_RetornaPaisFabricante" ReturnType="Collection(sistvehiculoviModel.pa_RetornaPaisFabricante_Result)">
-            <Parameter Name="pais" Mode="In" Type="String" />
+          <Parameter Name="pais" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_ModificaPasswordCliente">
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+            <Parameter Name="contrasena" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_ModificaCliente">
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+            <Parameter Name="nomCliente" Mode="In" Type="String" />
+            <Parameter Name="ape1Cliente" Mode="In" Type="String" />
+            <Parameter Name="ape2Cliente" Mode="In" Type="String" />
+            <Parameter Name="numCedula" Mode="In" Type="String" />
+            <Parameter Name="genero" Mode="In" Type="Int32" />
+            <Parameter Name="provincia" Mode="In" Type="Int32" />
+            <Parameter Name="fechNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="canton" Mode="In" Type="Int32" />
+            <Parameter Name="distrito" Mode="In" Type="Int32" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="pTelefono" Mode="In" Type="String" />
+            <Parameter Name="tipoCliente" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -1795,7 +1803,6 @@
           <FunctionImportMapping FunctionImportName="pa_EliminaTipoServicioProducto" FunctionName="sistvehiculoviModel.Store.pa_EliminaTipoServicioProducto" />
           <FunctionImportMapping FunctionImportName="pa_InsertaCliente" FunctionName="sistvehiculoviModel.Store.pa_InsertaCliente" />
           <FunctionImportMapping FunctionImportName="pa_InsertaVehiculos" FunctionName="sistvehiculoviModel.Store.pa_InsertaVehiculos" />
-          <FunctionImportMapping FunctionImportName="pa_ModificaCliente" FunctionName="sistvehiculoviModel.Store.pa_ModificaCliente" />
           <FunctionImportMapping FunctionImportName="pa_ModificaPaisFabricante" FunctionName="sistvehiculoviModel.Store.pa_ModificaPaisFabricante" />
           <FunctionImportMapping FunctionImportName="pa_RetornaVehiculos" FunctionName="sistvehiculoviModel.Store.pa_RetornaVehiculos">
             <ResultMapping>
@@ -1949,6 +1956,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_ModificaPasswordCliente" FunctionName="sistvehiculoviModel.Store.pa_ModificaPasswordCliente" />
+          <FunctionImportMapping FunctionImportName="pa_ModificaCliente" FunctionName="sistvehiculoviModel.Store.pa_ModificaCliente" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

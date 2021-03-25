@@ -9,6 +9,8 @@
     validacionRegistro();
     validacionModifica();
     creaElementosJqueryUI();
+    validacionModificaContrasena();
+    creaEventoFormularioContrasena();
 });
 
 //función que registrará los eventos necesarios para "monitorear"
@@ -322,23 +324,97 @@ function creaElementosJqueryUI() {
     ///creamos el div divDialog como elemento de tipo Dialog
     crearDialog();
     ///evento click del botón btMostrarDialog          
-    $("#btMostrarDialog").click(function () {
-        $("#divDialog").dialog("open");
+    $("#btMostrarDialogPassword").click(function () {
+        $("#divDialogPassword").dialog("open");
     });
     //evento click del botón btCerrar   
-    $("#btCerrar").click(function () {
-        $("#divDialog").dialog("close");
+    $("#btCerrarPassword").click(function () {
+        $("#divDialogPassword").dialog("close");
     });
 }
 
 ///Funcion que crea un dialog
 function crearDialog() {
-    $("#divDialog").dialog({
+    $("#divDialogPassword").dialog({
         autoOpen: false,
-        height: 300,
-        width: 300,
+        height: 450,
+        width: 500,
         modal: true,
-        title: "Mensaje de confirmación",
+        title: "Cambiar contraseña",
         resizable: false
     });
+}
+
+///crea las validaciones para el formulario
+function validacionModificaContrasena() {
+    $("#frmModificaContrasena").validate({
+        ///objeto que contiene "las condiciones" que el formulario
+        ///debe cumplir para ser considerado válido
+        rules: {
+            contrasena: {
+                required: true,
+                maxlength: 200
+            },
+            contrasenaRepite: {
+                required: true,
+                maxlength: 200,
+                equalTo: "#contrasena"
+            },
+        }
+    });
+}
+
+/* Permite realizar una acción con el evento click */
+function creaEventoFormularioContrasena() {
+    $("#btnAceptarPassword").on("click", function () {
+        /*Asignar a la variable formulario
+          el resultado del selector*/
+        var formulario = $("#frmModificaContrasena");
+        /*Ejecutar el método de validación*/
+        formulario.validate();
+        /*Si el formulario es valido, proceder a
+         ejecutar la función invocarMetodoPost*/
+        if (formulario.valid()) {
+            invocarMetodoPostPassword();
+        }
+    });
+}
+
+///se encarga de llamar al método del controlador y procesar el resultado
+function invocarMetodoPostPassword() {
+    /*Dirección a donde se enviarán los datos */
+    var url = '/MantClientes/ModificaContrasena';
+    /*Parámetros del método*/
+    var parametros = {
+        pIdCliente: $("#hdIdCliente").val(),
+        pContrasena: $("#contrasena").val()
+    };
+    /*Invocación del método*/
+    ///Este método puede ser reciclado AVERIGUAR COMO
+    $.ajax({
+        ///Dirección del método
+        url: url,
+        dataType: 'json', ///Formato en el que se envían y reciben los datos
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(parametros), ///Parámetros convertidos en formato JSON
+        ///Función que se ejecuta cuando ela respuesta fue satisfactoria
+        ///data: contiene el valor retornado por el método del servidor
+        success: function (data, textStatus, jQxhr) {
+            procesarResultadoMetodoPassword(data);
+        },
+        ///Función que se ejecuta cuando la respuesta tuvo errores
+        error: function (jQxhr, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });
+}
+
+function procesarResultadoMetodoPassword(data) {
+    ///Es .resultado porque la función devuelve
+    ///un objeto JSON que posee una propiedad
+    ///llamada resultado 
+    var resultadoFuncion = data.resultado; /*.resultado es la propiedad del objeto que retorno el controlador*/
+    alert("Información: " + resultadoFuncion);
+    $("#divDialogPassword").dialog("close");
 }

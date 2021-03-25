@@ -18,6 +18,7 @@
         <input type="hidden" id="hdProvincia" value="@Model.provincia" />
         <input type="hidden" id="hdCanton" value="@Model.canton" />
         <input type="hidden" id="hdDistrito" value="@Model.distrito" />
+        <input type="hidden" id="hdIdCliente" value="@Model.idCliente" />
     </div>
 
     <div class="form-group">
@@ -73,7 +74,7 @@
 
     <div class="form-group">
         <label>Fecha Nacimiento:</label>
-        <input type="text" name="fechNacimiento" id="fechNacimiento" class="form-control" readonly value="@Model.fechNacimiento" />
+        <input type="datetime" name="fechNacimiento" id="fechNacimiento" class="form-control" readonly value="@Model.fechNacimiento.ToString("yyyy/MM/dd")" />
     </div>
     <div class="form-group">
         <label>Correo Electrónico:</label>
@@ -105,31 +106,32 @@
         </select>
     </div>
     <div class="form-group">
-        <input type="submit" value="Registrar" id="btnAceptar" />
+        <input type="submit" value="Modificar" id="btnAceptar" class="form-control" />
     </div>
     <a href="~/MantClientes/ListaClientes">Regresar a la lista</a>
 </form>
 <br />
 
-<input type="button" id="btMostrarDialog" value="Mostrar dialog" />
+<input type="button" id="btMostrarDialogPassword" value="Cambiar Contraseña" class="form-control" />
 <!-- Contenido que se mostrará al dar click en el botón  btMostrarDialog-->
-<div id="divDialog">
-    <h1>PRUEBAAAA</h1>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <h2>Contenido de la ventana emergente</h2>
-    <p>Aquí se puede ingresar cualquier contenido HTML</p>
-    <button id="btCerrar">Cerrar ventana</button>
+<div id="divDialogPassword">
+    <h2>Ingresa una contraseña nueva</h2>
+    <form id="frmModificaContrasena" method="post">
+        <div class="form-group">
+            <label>Contraseña Nueva:</label>
+            <input type="password" name="contrasena" id="contrasena" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Repetir Contraseña:</label>
+            <input type="password" name="contrasenaRepite" id="contrasenaRepite" class="form-control" />
+        </div>
+        <!--El tipo del boton debe ser button para no recargar la página--->
+        <div class="form-group">
+            <input type="button" value="Cambiar Contraseña" id="btnAceptarPassword" class="form-control" />
+        </div>
+    </form>
+    <button id="btCerrarPassword">Cancelar</button>
 </div>
 
 @section scripts{

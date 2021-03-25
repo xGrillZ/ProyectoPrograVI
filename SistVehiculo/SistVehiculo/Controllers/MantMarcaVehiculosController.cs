@@ -37,7 +37,7 @@ namespace SistVehiculo.Controllers
             this.ViewBag.ListaPaises = this.modeloBD.pa_RetornaPaisFabricante("").ToList();
         }
 
-        bool verificaCodigo(string pCodigo)
+        bool verificaCodigo(string pCodigo, string pCodigoDos)
         {
             ///Resultado de la operación
             bool resultado = true;
@@ -46,7 +46,15 @@ namespace SistVehiculo.Controllers
                 ///Variable que almacenará el dato solicitado
                 string cod = pCodigo;
                 ///Resultado de la operación
-                resultado = this.modeloBD.MarcaVehiculo.Count(MarcaVehiculo => MarcaVehiculo.codigo == cod) <= 0;
+                if (string.IsNullOrEmpty(pCodigoDos))
+                {
+                    resultado = this.modeloBD.MarcaVehiculo.Count(MarcaVehiculo => MarcaVehiculo.codigo == cod) <= 0;
+                }
+                else
+                {
+                    int cod2 = Convert.ToInt32(pCodigoDos);
+                    resultado = this.modeloBD.MarcaVehiculo.Count(MarcaVehiculo => MarcaVehiculo.codigo == cod && MarcaVehiculo.idMarcaVehiculo != cod2) <= 0;
+                }
             }
             catch
             {
@@ -67,7 +75,7 @@ namespace SistVehiculo.Controllers
             int cantRegistrosAfectados = 0;
             string mensaje = "";
 
-            if (this.verificaCodigo(modeloVista.codigo))
+            if (this.verificaCodigo(modeloVista.codigo, null))
             {
                 try
                 {
@@ -121,7 +129,7 @@ namespace SistVehiculo.Controllers
             int cantRegistrosAfectados = 0;
             string mensaje = "";
 
-            if (this.verificaCodigo(modeloVista.codigo))
+            if (this.verificaCodigo(modeloVista.codigo, modeloVista.idMarcaVehiculo.ToString()))
             {
                 try
                 {
