@@ -344,6 +344,7 @@
     <Content Include="Scripts\mantClientes\modificaClientes.js" />
     <Content Include="Scripts\mantServiciosProductos\mantServiciosProductos.js" />
     <Content Include="Scripts\mantTiposVehiculos\mantTiposVehiculos.js" />
+    <Content Include="Scripts\mantVehiculos\mantVehiculos.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PagPrincipal\pagPrincipal.js" />
     <Content Include="Scripts\popper-utils.js" />
@@ -475,7 +476,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\mantClientesConsultores\" />
     <Folder Include="Scripts\mantVehiculoCliente\" />
-    <Folder Include="Scripts\mantVehiculos\" />
     <Folder Include="Views\Sesion\" />
   </ItemGroup>
   <ItemGroup>

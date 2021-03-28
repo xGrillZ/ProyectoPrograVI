@@ -1,4 +1,4 @@
-﻿@model SistVehiculo.Models.pa_RetornaTiposVehiculoID_Result
+﻿@model SistVehiculo.Models.pa_RetornaVehiculos_Result
 
 @section css{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
@@ -14,8 +14,8 @@
 
 <form id="frmEliminaVehiculo" method="post">
     <div class="form-group">
-        <label>Placa:</label>
-        <input type="text" name="placa" id="placa" class="form-control" value="@Model.placa"  />
+        <label>Id de Vehiculo:</label>
+        <input type="text" name="idVehiculos" id="idVehiculos" class="form-control" value="@Model.idVehiculos"  />
     </div>
     <div class="form-group">
         <input type="submit" value="Eliminar" id="btnAceptar" />
