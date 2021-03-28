@@ -1,7 +1,38 @@
-﻿
+﻿<!--Indicar a la vista el modelo-->
+@model List<SistVehiculo.Models.pa_RetornaVehiculos_Result>
+
 @{
-    ViewBag.Title = "ListaVehiculos";
+    ViewBag.Title = "Lista de Vehículos";
+    Layout = "~/Views/Shared/_LayoutPersonalizado.cshtml";
 }
 
-<h2>ListaVehiculos</h2>
+<h2>Lista de Vehículos</h2>
+<a href="~/MantVehiculos/InsertarVehiculos">Agregar nuevo Vehículo</a>
 
+<table class="table">
+    <tr>
+        <th>Marca</th>
+        <th>Tipo de Vehículo</th>
+        <th>Número de puertas</th>
+        <th>Número de ruedas</th>
+        <th>Tipo</th>
+    </tr>
+    
+    @{
+        foreach (SistVehiculo.Models.pa_RetornaVehiculos_Result posicionModelo in this.Model)
+        {
+        <tr>
+            <td>@posicionModelo.marca</td>
+            <td>@posicionModelo.tipoVehiculo</td>
+            <td>@posicionModelo.numeroPuerta</td>
+            <td>@posicionModelo.numeroRueda</td>
+            <td>@posicionModelo.tipo</td>
+            <td>
+                <a href="~/MantVehiculos/ModificarVehiculos?idVehiculos=@posicionModelo.idVehiculos">Modificar</a>
+                <br />
+                <a href="~/MantVehiculos/EliminarVehiculos?idVehiculos=@posicionModelo.idVehiculos">Eliminar</a>
+            </td>
+        </tr>
+        }
+    }
+</table>
