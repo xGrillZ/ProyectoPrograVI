@@ -592,6 +592,7 @@
         </Function>
         <Function Name="pa_RetornaTipoServicioProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="tipo" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="pa_RetornaTipoServicioProductoID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idTipoServicioProducto" Type="int" Mode="In" />
@@ -1322,9 +1323,6 @@
           <FunctionImport Name="pa_RetornaTipoServicioProductoID" ReturnType="Collection(sistvehiculoviModel.pa_RetornaTipoServicioProductoID_Result)">
           <Parameter Name="idTipoServicioProducto" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="pa_RetornaTipoServicioProducto" ReturnType="Collection(sistvehiculoviModel.pa_RetornaTipoServicioProducto_Result)">
-          <Parameter Name="descripcion" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="pa_RetornaClasificacionSP" ReturnType="Collection(sistvehiculoviModel.pa_RetornaClasificacionSP_Result)">
           <Parameter Name="nombre" Mode="In" Type="String" />
           </FunctionImport>
@@ -1429,6 +1427,10 @@
             <Parameter Name="tipo" Mode="In" Type="String" />
             <Parameter Name="marca" Mode="In" Type="String" />
             <Parameter Name="tipoVehiculo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_RetornaTipoServicioProducto" ReturnType="Collection(sistvehiculoviModel.pa_RetornaTipoServicioProducto_Result)">
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="tipo" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -1612,14 +1614,6 @@
           <Property Type="Int32" Name="tipo" Nullable="false" />
           <Property Type="String" Name="nombreClasificacion" Nullable="false" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="pa_RetornaTipoServicioProducto_Result">
-          <Property Type="Int32" Name="idTipoServicioProducto" Nullable="false" />
-          <Property Type="String" Name="codigo" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="descripcion" Nullable="false" MaxLength="50" />
-          <Property Type="Double" Name="precio" Nullable="false" />
-          <Property Type="Int32" Name="tipo" Nullable="false" />
-          <Property Type="String" Name="nombreClasificacion" Nullable="false" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="pa_RetornaClasificacionSP_Result">
           <Property Type="Int32" Name="id_clasificacionSP" Nullable="false" />
           <Property Type="String" Name="nombreClasificacion" Nullable="false" MaxLength="50" />
@@ -1794,6 +1788,14 @@
           <Property Type="String" Name="marca" Nullable="false" MaxLength="100" />
           <Property Type="Int32" Name="numeroPuerta" Nullable="false" />
           <Property Type="Int32" Name="numeroRueda" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaTipoServicioProducto_Result">
+          <Property Type="Int32" Name="idTipoServicioProducto" Nullable="false" />
+          <Property Type="String" Name="codigo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="precio" Nullable="false" />
+          <Property Type="Int32" Name="tipo" Nullable="false" />
+          <Property Type="String" Name="nombreClasificacion" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2171,18 +2173,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="pa_RetornaTipoServicioProducto" FunctionName="sistvehiculoviModel.Store.pa_RetornaTipoServicioProducto">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaTipoServicioProducto_Result">
-                <ScalarProperty Name="idTipoServicioProducto" ColumnName="idTipoServicioProducto" />
-                <ScalarProperty Name="codigo" ColumnName="codigo" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="precio" ColumnName="precio" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
-                <ScalarProperty Name="nombreClasificacion" ColumnName="nombreClasificacion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_RetornaClasificacionSP" FunctionName="sistvehiculoviModel.Store.pa_RetornaClasificacionSP">
             <ResultMapping>
               <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaClasificacionSP_Result">
@@ -2354,6 +2344,18 @@
                 <ScalarProperty Name="marca" ColumnName="marca" />
                 <ScalarProperty Name="numeroPuerta" ColumnName="numeroPuerta" />
                 <ScalarProperty Name="numeroRueda" ColumnName="numeroRueda" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_RetornaTipoServicioProducto" FunctionName="sistvehiculoviModel.Store.pa_RetornaTipoServicioProducto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaTipoServicioProducto_Result">
+                <ScalarProperty Name="idTipoServicioProducto" ColumnName="idTipoServicioProducto" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="nombreClasificacion" ColumnName="nombreClasificacion" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

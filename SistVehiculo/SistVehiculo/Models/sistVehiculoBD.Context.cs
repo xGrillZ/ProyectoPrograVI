@@ -397,15 +397,6 @@ namespace SistVehiculo.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaTipoServicioProductoID_Result>("pa_RetornaTipoServicioProductoID", idTipoServicioProductoParameter);
         }
     
-        public virtual ObjectResult<pa_RetornaTipoServicioProducto_Result> pa_RetornaTipoServicioProducto(string descripcion)
-        {
-            var descripcionParameter = descripcion != null ?
-                new ObjectParameter("descripcion", descripcion) :
-                new ObjectParameter("descripcion", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaTipoServicioProducto_Result>("pa_RetornaTipoServicioProducto", descripcionParameter);
-        }
-    
         public virtual ObjectResult<pa_RetornaClasificacionSP_Result> pa_RetornaClasificacionSP(string nombre)
         {
             var nombreParameter = nombre != null ?
@@ -695,6 +686,19 @@ namespace SistVehiculo.Models
                 new ObjectParameter("tipoVehiculo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaServiciosVehiculo_Result>("pa_RetornaServiciosVehiculo", tipoParameter, marcaParameter, tipoVehiculoParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaTipoServicioProducto_Result> pa_RetornaTipoServicioProducto(string descripcion, string tipo)
+        {
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("descripcion", descripcion) :
+                new ObjectParameter("descripcion", typeof(string));
+    
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("tipo", tipo) :
+                new ObjectParameter("tipo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaTipoServicioProducto_Result>("pa_RetornaTipoServicioProducto", descripcionParameter, tipoParameter);
         }
     }
 }
