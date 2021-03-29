@@ -339,5 +339,19 @@ namespace SistVehiculo.Controllers
 
             return Json(new { resultado = mensaje });
         }
+
+        public ActionResult RpServiciosCliente()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RetornaServiciosClienteLista()
+        {
+            List<pa_RetornaServiciosCliente_Result> serviciosCliente =
+                this.modeloBD.pa_RetornaServiciosCliente("","","").ToList();
+
+            return Json(new { resultado = serviciosCliente });
+        }
     }
 }

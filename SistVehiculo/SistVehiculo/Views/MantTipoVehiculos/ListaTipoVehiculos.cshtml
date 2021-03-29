@@ -7,7 +7,7 @@
 }
 
 <h2>Lista de Tipos de Vehículos</h2>
-<a href="~/MantTipoVehiculos/InsertarTipoVehiculos">Agregar Tipo Vehículo</a>
+<a href="~/MantTipoVehiculos/InsertarTipoVehiculos" class="btn btn-success">Agregar Tipo Vehículo</a>
 
 <table class="table">
     <tr>
@@ -25,9 +25,9 @@
                 <td>@posicionModelo.codigo</td>
                 <td>@posicionModelo.tipo</td>
                 <td>
-                    <a href="~/MantTipoVehiculos/ModificarTipoVehiculos?idTipoVehiculo=@posicionModelo.idTipoVehiculo">Modificar</a>
+                    <a href="~/MantTipoVehiculos/ModificarTipoVehiculos?idTipoVehiculo=@posicionModelo.idTipoVehiculo" class="btn btn-warning">Modificar</a>
                     <br />
-                    <a href="~/MantTipoVehiculos/EliminarTipoVehiculos?idTipoVehiculo=@posicionModelo.idTipoVehiculo">Eliminar</a>
+                    <a href="~/MantTipoVehiculos/EliminarTipoVehiculos?idTipoVehiculo=@posicionModelo.idTipoVehiculo" class="btn btn-danger">Eliminar</a>
                 </td>
             </tr>
         }

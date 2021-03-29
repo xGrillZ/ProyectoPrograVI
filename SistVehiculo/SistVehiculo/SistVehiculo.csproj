@@ -197,6 +197,12 @@
     <Compile Include="Models\pa_RetornaPaisFabricante_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pa_RetornaServiciosCliente_Result.cs">
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_RetornaServiciosVehiculo_Result.cs">
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pa_RetornaTipoCliente_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
@@ -210,6 +216,12 @@
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaTiposVehiculo_Result.cs">
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_RetornaVehiculosClienteID_Result.cs">
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_RetornaVehiculosCliente_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaVehiculos_Result.cs">
@@ -228,6 +240,12 @@
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RetornaProvincias_Result.cs">
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ServiciosCliente.cs">
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ServiciosVehiculo.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sistVehiculoBD.Context.cs">
@@ -342,8 +360,10 @@
     <Content Include="Scripts\Logeo\verificacion.js" />
     <Content Include="Scripts\mantClientes\mantClientes.js" />
     <Content Include="Scripts\mantClientes\modificaClientes.js" />
+    <Content Include="Scripts\mantClientes\reporteClientes.js" />
     <Content Include="Scripts\mantServiciosProductos\mantServiciosProductos.js" />
     <Content Include="Scripts\mantTiposVehiculos\mantTiposVehiculos.js" />
+    <Content Include="Scripts\mantVehiculoCliente\mantVehiculoCliente.js" />
     <Content Include="Scripts\mantVehiculos\mantVehiculos.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PagPrincipal\pagPrincipal.js" />
@@ -351,6 +371,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\reutilizacionScript.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
     <Content Include="Scripts\src\methods\destroy.js" />
@@ -471,11 +492,13 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\MantVehiculosCliente\RpVehiculosCliente.cshtml" />
+    <Content Include="Views\MantClientes\RpServiciosCliente.cshtml" />
+    <Content Include="Views\MantVehiculos\RpServicioVehiculo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\mantClientesConsultores\" />
-    <Folder Include="Scripts\mantVehiculoCliente\" />
     <Folder Include="Views\Sesion\" />
   </ItemGroup>
   <ItemGroup>

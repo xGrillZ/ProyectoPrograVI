@@ -7,7 +7,7 @@
 }
 
 <h2>Lista de Marcas de Vehículos</h2>
-<a href="~/MantMarcaVehiculos/InsertarMarcaVehiculos">Agregar Marca</a>
+<a href="~/MantMarcaVehiculos/InsertarMarcaVehiculos" class="btn btn-success">Agregar Marca</a>
 
 <table class="table">
     <tr>
@@ -27,9 +27,9 @@
                 <td>@posicionModelo.pais</td>
                 <td>@posicionModelo.marca</td>
                 <td>
-                    <a href="~/MantMarcaVehiculos/ModificarMarcaVehiculos?idMarcaVehiculo=@posicionModelo.idMarcaVehiculo">Modificar</a>
+                    <a href="~/MantMarcaVehiculos/ModificarMarcaVehiculos?idMarcaVehiculo=@posicionModelo.idMarcaVehiculo" class="btn btn-warning">Modificar</a>
                     <br />
-                    <a href="~/MantMarcaVehiculos/EliminarMarcaVehiculos?idMarcaVehiculo=@posicionModelo.idMarcaVehiculo">Eliminar</a>
+                    <a href="~/MantMarcaVehiculos/EliminarMarcaVehiculos?idMarcaVehiculo=@posicionModelo.idMarcaVehiculo" class="btn btn-danger">Eliminar</a>
                 </td>
             </tr>
         }

@@ -11,13 +11,20 @@ namespace SistVehiculo.Models
 {
     using System;
     
-    public partial class pa_RetornaTipoServicioProductoID_Result
+    public partial class pa_RetornaServiciosCliente_Result
     {
-        public int idTipoServicioProducto { get; set; }
-        public string codigo { get; set; }
+        public int idServiciosCliente { get; set; }
+        public int idTipoServiciosProducto { get; set; }
+        public string codigoServicioProducto { get; set; }
         public string descripcion { get; set; }
         public double precio { get; set; }
         public int tipo { get; set; }
         public string nombreClasificacion { get; set; }
+        public string nomCliente { get; set; }
+        public string ape1Cliente { get; set; }
+        public string ape2Cliente { get; set; }
+        public string numCedula { get; set; }
+        public string email { get; set; }
+        public string pTelefono { get; set; }
     }
 }

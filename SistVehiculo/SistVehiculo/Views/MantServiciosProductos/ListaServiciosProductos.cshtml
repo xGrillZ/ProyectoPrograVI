@@ -7,7 +7,7 @@
 }
 
 <h2>Lista de Servicios y Productos</h2>
-<a href="~/MantServiciosProductos/InsertarServiciosProductos">Agregar Cliente</a>
+<a href="~/MantServiciosProductos/InsertarServiciosProductos" class="btn btn-success">Agregar Cliente</a>
 
 <table class="table">
     <tr>
@@ -26,12 +26,12 @@
             <tr>
                 <td>@posicionModelo.codigo</td>
                 <td>@posicionModelo.descripcion</td>
-                <td>@posicionModelo.precio</td>
+                <td>₡@posicionModelo.precio</td>
                 <td>@posicionModelo.nombreClasificacion</td>
                 <td>
-                    <a href="~/MantServiciosProductos/ModificarServiciosProductos?idTipoServicioProducto=@posicionModelo.idTipoServicioProducto">Modificar</a>
+                    <a href="~/MantServiciosProductos/ModificarServiciosProductos?idTipoServicioProducto=@posicionModelo.idTipoServicioProducto" class="btn btn-warning">Modificar</a>
                     <br />
-                    <a href="~/MantServiciosProductos/EliminarServiciosProductos?idTipoServicioProducto=@posicionModelo.idTipoServicioProducto">Eliminar</a>
+                    <a href="~/MantServiciosProductos/EliminarServiciosProductos?idTipoServicioProducto=@posicionModelo.idTipoServicioProducto" class="btn btn-danger">Eliminar</a>
                 </td>
             </tr>
         }

@@ -39,6 +39,12 @@
         <EntityTypeShape EntityType="sistvehiculoviModel.TipoServicioProducto" Width="1.5" PointX="3" PointY="11" />
         <AssociationConnector Association="sistvehiculoviModel.FK_TipoServicioProducto_clasificacionSP" />
         <AssociationConnector Association="sistvehiculoviModel.FK_detalleFactura_TipoServicio" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.ServiciosCliente" Width="1.5" PointX="9.75" PointY="8.5" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.ServiciosVehiculo" Width="1.5" PointX="12.75" PointY="12.25" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_ServiciosCliente_Cliente" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_ServiciosCliente_TipoServicioProducto" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_ServiciosVehiculo_TipoServicioProducto" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_ServiciosVehiculo_Vehiculo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

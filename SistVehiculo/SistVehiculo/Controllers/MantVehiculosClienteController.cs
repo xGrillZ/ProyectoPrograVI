@@ -29,5 +29,18 @@ namespace SistVehiculo.Controllers
         {
             return View();
         }
+
+        public ActionResult RpVehiculosCliente()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RetornaVehiculosClienteLista()
+        {
+            List<pa_RetornaVehiculosCliente_Result> listaVehiculosCliente = 
+                this.modeloBD.pa_RetornaVehiculosCliente("","","","").ToList();
+            return Json(new { resultado = listaVehiculosCliente });
+        }
     }
 }

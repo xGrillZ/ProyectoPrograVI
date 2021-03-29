@@ -29,5 +29,18 @@ namespace SistVehiculo.Controllers
         {
             return View();
         }
+
+        public ActionResult RpServicioVehiculo()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RetornaServiciosVehiculoLista()
+        {
+            List<pa_RetornaServiciosVehiculo_Result> serviciosVehiculo =
+                this.modeloBD.pa_RetornaServiciosVehiculo("","","").ToList();
+            return Json(new { resultado = serviciosVehiculo });
+        }
     }
 }

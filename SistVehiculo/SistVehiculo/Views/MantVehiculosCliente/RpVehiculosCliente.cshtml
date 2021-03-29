@@ -1,0 +1,24 @@
+﻿@section css{
+    <link href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.blueopal.min.css" rel="stylesheet" />
+}
+
+
+@{
+    ViewBag.Title = "Reporte Vehiculos Cliente";
+    Layout = "~/Views/Shared/_LayoutPersonalizado.cshtml";
+}
+
+<h2>Reporte Vehiculos por Cliente</h2>
+
+<div id="divKendoGrid">
+
+</div>
+
+@section scripts{
+    <script src="https://kendo.cdn.telerik.com/2020.2.617/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.2.617/js/jszip.min.js"></script>
+    <script src="~/Scripts/reutilizacionScript.js"></script>
+    <script src="~/Scripts/mantVehiculoCliente/mantVehiculoCliente.js"></script>
+}
+

@@ -12,19 +12,13 @@ namespace SistVehiculo.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MarcaVehiculo
+    public partial class ServiciosVehiculo
     {
-        public MarcaVehiculo()
-        {
-            this.Vehiculos = new HashSet<Vehiculos>();
-        }
+        public int idServiciosVehiculo { get; set; }
+        public int idTipoServiciosProducto { get; set; }
+        public int idVehiculo { get; set; }
     
-        public int idMarcaVehiculo { get; set; }
-        public string codigo { get; set; }
-        public int idPaisFabricante { get; set; }
-        public string marca { get; set; }
-    
-        public virtual PaisFabricante PaisFabricante { get; set; }
-        public virtual ICollection<Vehiculos> Vehiculos { get; set; }
+        public virtual TipoServicioProducto TipoServicioProducto { get; set; }
+        public virtual Vehiculos Vehiculos { get; set; }
     }
 }

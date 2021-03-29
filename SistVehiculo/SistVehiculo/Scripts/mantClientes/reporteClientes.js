@@ -1,70 +1,10 @@
 ﻿$(function () {
-    validacionRegistro();
-    validacionModifica();
-    obtenerRegistrosServiciosVehiculoKendo();
+    obtenerRegistrosServiciosClientesKendo();
 });
 
-///crea las validaciones para el formulario
-function validacionRegistro() {
-    $("#frmNuevoVehiculo").validate({
-        ///objeto que contiene "las condiciones" que el formulario
-        ///debe cumplir para ser considerado válido
-        rules: {
-            placa: {
-                required: true,
-                maxlength: 50
-            },
-            numeroPuerta: {
-                required: true,
-                maxlength: 50
-            },
-            numeroRuedas: {
-                required: true,
-            },
-            tipoVehiculo: {
-                required: true,
-            },
-            marcaVehiculo: {
-                required: true,
-            },
-        }
-    });
-}
-
-///crea las validaciones para el formulario
-function validacionModifica() {
-    $("#frmModificaVehiculo").validate({
-        ///objeto que contiene "las condiciones" que el formulario
-        ///debe cumplir para ser considerado válido
-        rules: {
-            marca: {
-                required: true,
-                maxlength: 100
-            },
-            tipo: {
-                required: true,
-                
-            },
-            tipoVeh: {
-                required: true,
-                
-            },
-            numeroPuerta: {
-                required: true,
-                number: true,
-            },
-            numeroRueda: {
-                required: true,
-                number: true,
-            }, 
-
-        }
-    });
-}
-
-function obtenerRegistrosServiciosVehiculoKendo() {
+function obtenerRegistrosServiciosClientesKendo() {
     /////construir la dirección del método del servidor
-    var urlMetodo = '/MantVehiculos/RetornaServiciosVehiculoLista'
+    var urlMetodo = '/MantClientes/RetornaServiciosClienteLista'
     var parametros = {};
     var funcion = creaGridKendo;
     ///ejecuta la función $.ajax utilizando un método genérico
@@ -85,21 +25,25 @@ function creaGridKendo(data) {
             ///Cada columna se agrega por llaves
             {
                 ///Propiedad de la fuenta de datos a mostrar
-                field: "marca",
+                field: "nomCliente",
                 ///Texto del encabezado
-                title: "Marca Vehículo"
+                title: "Nombre del Cliente"
             },
             {
-                field: "tipoDeVehiculo",
-                title: "Tipo Vehículo"
+                field: "ape1Cliente",
+                title: "Primer Apellido"
             },
             {
-                field: "numeroPuerta",
-                title: "Número de Puertas"
+                field: "ape2Cliente",
+                title: "Segundo Apellido"
             },
             {
-                field: "numeroRueda",
-                title: "Número de Ruedas",
+                field: "email",
+                title: "Correo Electrónico",
+            },
+            {
+                field: "pTelefono",
+                title: "Teléfono"
             },
             {
                 field: "codigoServicioProducto",
