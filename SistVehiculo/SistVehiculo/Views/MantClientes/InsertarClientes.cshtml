@@ -1,5 +1,6 @@
 ﻿@section css{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link href="~/Content/mantClientes/mantClientes.css" rel="stylesheet" />
 }
 
 @{
@@ -10,84 +11,87 @@
 <h2>Nuevo Cliente</h2>
 
 <form id="frmNuevoCliente" method="post">
-    <div class="form-group">
-        <label>Nombre Cliente:</label>
-        <input type="text" name="nomCliente" id="nomCliente" class="form-control" />
-    </div>
+    <div class="row col-sm-6">
+        <div class="form-group col-6">
+            <label>Nombre Cliente:</label>
+            <input type="text" name="nomCliente" id="nomCliente" class="form-control" />
+        </div>
 
-    <div class="form-group">
-        <label>Primer Apellido:</label>
-        <input type="text" name="ape1Cliente" id="ape1Cliente" class="form-control" />
-    </div>
+        <div class="form-group col-6">
+            <label>Primer Apellido:</label>
+            <input type="text" name="ape1Cliente" id="ape1Cliente" class="form-control" />
+        </div>
 
-    <div class="form-group">
-        <label>Segundo Apellido:</label>
-        <input type="text" name="ape2Cliente" id="ape2Cliente" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Cédula:</label>
-        <input type="text" name="numCedula" id="numCedula" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Género</label>
-        <select name="genero" id="genero" class="form-control">
-            <option value="">Seleccione un género</option>
-            @{
-                foreach (SistVehiculo.Models.pa_RetornaGenero_Result genero in this.ViewBag.ListaGeneros)
-                {
-                    /*Almacena el ID del género y muestra el nombre del género*/
-                    <option value="@genero.id_Genero">@genero.nombreGenero</option>
+        <div class="form-group col-6">
+            <label>Segundo Apellido:</label>
+            <input type="text" name="ape2Cliente" id="ape2Cliente" class="form-control" />
+        </div>
+        <div class="form-group col-6">
+            <label>Cédula:</label>
+            <input type="text" name="numCedula" id="numCedula" class="form-control" />
+        </div>
+        <div class="form-group col-6">
+            <label>Género</label>
+            <select name="genero" id="genero" class="form-control selectGenero">
+                <option value="">Seleccione un género</option>
+                @{
+                    foreach (SistVehiculo.Models.pa_RetornaGenero_Result genero in this.ViewBag.ListaGeneros)
+                    {
+                        /*Almacena el ID del género y muestra el nombre del género*/
+                        <option value="@genero.id_Genero">@genero.nombreGenero</option>
+                    }
                 }
-            }
-        </select>
-    </div>
-    <div class="form-group">
-        <label>Provincia:</label>
-        <select name="provincia" id="provincia" class="form-control"></select>
-    </div>
-    <div class="form-group">
-        <label>Cantón:</label>
-        <select name="canton" id="canton" class="form-control"></select>
-    </div>
-    <div class="form-group">
-        <label>Distrito:</label>
-        <select name="distrito" id="distrito" class="form-control"></select>
+            </select>
+        </div>
+        <div class="form-group col-6">
+            <label>Provincia:</label>
+            <select name="provincia" id="provincia" class="form-control"></select>
+        </div>
+        <div class="form-group col-6">
+            <label>Cantón:</label>
+            <select name="canton" id="canton" class="form-control selectCanton"></select>
+        </div>
+        <div class="form-group col-6">
+            <label>Distrito:</label>
+            <select name="distrito" id="distrito" class="form-control"></select>
+        </div>
+
+        <div class="form-group col-6">
+            <label>Fecha Nacimiento:</label>
+            <input type="text" name="fechNacimiento" id="fechNacimiento" class="form-control" readonly />
+        </div>
+        <div class="form-group col-6">
+            <label>Correo Electrónico:</label>
+            <input type="text" name="email" id="email" class="form-control" />
+        </div>
+        <div class="form-group col-6">
+            <label>Teléfono:</label>
+            <input type="text" name="pTelefono" id="pTelefono" class="form-control" />
+        </div>
+        <div class="form-group col-6">
+            <label>Tipo Cliente:</label>
+            <select name="tipoCliente" id="tipoCliente" class="form-control">
+                <option value="">Seleccione el tipo de cliente</option>
+                @{
+                    foreach (SistVehiculo.Models.pa_RetornaTipoCliente_Result tipoCliente in this.ViewBag.ListaTiposCliente)
+                    {
+                        /*Almacena el ID del género y muestra el nombre del género*/
+                        <option value="@tipoCliente.id_tipoCliente">@tipoCliente.nombreTipoCliente</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group col-6">
+            <label>Contraseña:</label>
+            <input type="password" name="contrasena" id="contrasena" class="form-control" />
+        </div>
     </div>
 
     <div class="form-group">
-        <label>Fecha Nacimiento:</label>
-        <input type="text" name="fechNacimiento" id="fechNacimiento" class="form-control" readonly/>
+        <button type="submit" id="btnRegistrar" class="btn btn-success btnRegistrar">Registrar</button>
     </div>
-    <div class="form-group">
-        <label>Correo Electrónico:</label>
-        <input type="text" name="email" id="email" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Teléfono:</label>
-        <input type="text" name="pTelefono" id="pTelefono" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Tipo Cliente:</label>
-        <select name="tipoCliente" id="tipoCliente" class="form-control">
-            <option value="">Seleccione el tipo de cliente</option>
-            @{
-                foreach (SistVehiculo.Models.pa_RetornaTipoCliente_Result tipoCliente in this.ViewBag.ListaTiposCliente)
-                {
-                    /*Almacena el ID del género y muestra el nombre del género*/
-                    <option value="@tipoCliente.id_tipoCliente">@tipoCliente.nombreTipoCliente</option>
-                }
-            }
-        </select>
-    </div>
-    <div class="form-group">
-        <label>Contraseña:</label>
-        <input type="password" name="contrasena" id="contrasena" class="form-control" />
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Registrar" id="btnAceptar" />
-    </div>
-    <a href="~/MantClientes/ListaClientes">Regresar a la lista</a>
 </form>
+<a href="~/MantClientes/ListaClientes" class="btn btn-warning">Regresar a la lista</a>
 
 @section scripts{
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>

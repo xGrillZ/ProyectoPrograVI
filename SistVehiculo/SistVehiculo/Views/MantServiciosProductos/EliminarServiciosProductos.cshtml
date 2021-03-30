@@ -1,5 +1,9 @@
 ﻿@model SistVehiculo.Models.pa_RetornaTipoServicioProductoID_Result
 
+@section css{
+    <link href="~/Content/mantServiciosProductos/mantServiciosProductos.css" rel="stylesheet" />
+}
+
 @{
     ViewBag.Title = "Elimina Servicio y Producto";
     Layout = "~/Views/Shared/_LayoutPersonalizado.cshtml";
@@ -10,17 +14,17 @@
 <form id="frmEliminaServicioProducto" method="post">
     <div class="form-group">
         <label>Código:</label>
-        <input type="text" name="codigo" id="codigo" class="form-control" value="@Model.codigo" readonly/>
+        <input type="text" name="codigo" id="codigo" class="form-control" value="@Model.codigo" readonly />
     </div>
 
     <div class="form-group">
         <label>Descripción:</label>
-        <input type="text" name="descripcion" id="descripcion" class="form-control" value="@Model.descripcion" readonly/>
+        <input type="text" name="descripcion" id="descripcion" class="form-control" value="@Model.descripcion" readonly />
     </div>
 
     <div class="form-group">
         <label>Precio:</label>
-        <input type="text" name="precio" id="precio" class="form-control" value="@Model.precio" readonly/>
+        <input type="text" name="precio" id="precio" class="form-control" value="@Model.precio" readonly />
     </div>
     <div class="form-group">
         <label>Tipo:</label>
@@ -48,7 +52,7 @@
         </select>
     </div>
     <div class="form-group">
-        <input type="submit" value="Eliminar" id="btnAceptar" />
+        <input type="submit" value="Eliminar" id="btnAceptar" class="btn btn-success btnEliminarServicio" />
     </div>
-    <a href="~/MantServiciosProductos/ListaServiciosProductos">Regresar a la lista</a>
 </form>
+<a href="~/MantServiciosProductos/ListaServiciosProductos" class="btn btn-primary">Regresar a la lista</a>

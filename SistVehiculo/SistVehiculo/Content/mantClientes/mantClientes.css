@@ -13,3 +13,46 @@
 .btnModificar {
     margin: 0px 0px 10px 0px;
 }
+
+#frmNuevoCliente {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnRegistrar {
+    margin: 0px 0px 0px 150px;
+}
+
+#frmModificaCliente {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnModificarCliente {
+    margin: 0px 0px 0px 150px;
+}
+
+.btnContrasena {
+    margin: 0px 0px 0px 630px;
+}
+
+#frmEliminaCliente {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnEliminarCliente {
+    margin: 0px 0px 0px 150px;
+}

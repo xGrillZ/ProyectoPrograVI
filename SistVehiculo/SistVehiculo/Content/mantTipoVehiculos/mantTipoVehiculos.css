@@ -13,3 +13,30 @@
 .btnModificar {
     margin: 0px 0px 10px 0px;
 }
+
+#frmNuevoTipoVehiculo {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#frmModificaTiposVehiculo {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#frmEliminarTiposVehiculo {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

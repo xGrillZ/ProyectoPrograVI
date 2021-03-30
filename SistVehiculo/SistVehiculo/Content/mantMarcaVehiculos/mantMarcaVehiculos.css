@@ -13,3 +13,30 @@
 .btnModificar {
     margin: 0px 0px 10px 0px;
 }
+
+#frmNuevoMarcaVehiculo {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#frmModificaMarcaVehiculo {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#frmEliminaMarcaVehiculo {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

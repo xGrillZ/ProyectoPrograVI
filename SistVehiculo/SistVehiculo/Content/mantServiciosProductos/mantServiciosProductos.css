@@ -13,3 +13,34 @@
 .btnModificar{
     margin: 0px 0px 10px 0px;
 }
+
+#frmNuevoServicioProducto {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnRegistrarServicio {
+    margin: 0px 0px 0px 150px;
+}
+
+#frmModificaServicioProducto {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#frmEliminaServicioProducto {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
