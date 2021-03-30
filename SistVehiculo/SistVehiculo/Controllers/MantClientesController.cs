@@ -14,12 +14,12 @@ namespace SistVehiculo.Controllers
     {
         sistvehiculoviEntities modeloBD = new sistvehiculoviEntities();
         // GET: MantClientes
-        public ActionResult ListaClientes()
+        public ActionResult ListaClientes(string numCedula = null, string nomCliente = null, string ape1Cliente = null, string ape2Cliente = null)
         {
             ///Variable que contiene los registros obtenidos
             List<pa_RetornaCliente_Result> modeloVista = new List<pa_RetornaCliente_Result>();
             ///Asígnación a la variable el resultado de la invocación del procedimiento almacenado
-            modeloVista = this.modeloBD.pa_RetornaCliente("", "", "", "").ToList();
+            modeloVista = this.modeloBD.pa_RetornaCliente(numCedula, nomCliente, ape1Cliente, ape2Cliente).ToList();
             ///Enviar a la vista el modelo
             return View(modeloVista);
         }

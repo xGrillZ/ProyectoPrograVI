@@ -514,19 +514,6 @@ namespace SistVehiculo.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ModificaMarcaVehiculo", idMarcaVehiculoParameter, codigoParameter, idPaisFabricanteParameter, marcaParameter);
         }
     
-        public virtual ObjectResult<pa_RetornaMarcaVehiculo_Result> pa_RetornaMarcaVehiculo(string codigo, string marca)
-        {
-            var codigoParameter = codigo != null ?
-                new ObjectParameter("codigo", codigo) :
-                new ObjectParameter("codigo", typeof(string));
-    
-            var marcaParameter = marca != null ?
-                new ObjectParameter("marca", marca) :
-                new ObjectParameter("marca", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaMarcaVehiculo_Result>("pa_RetornaMarcaVehiculo", codigoParameter, marcaParameter);
-        }
-    
         public virtual ObjectResult<pa_RetornaMarcaVehiculoID_Result> pa_RetornaMarcaVehiculoID(Nullable<int> idMarcaVehiculo)
         {
             var idMarcaVehiculoParameter = idMarcaVehiculo.HasValue ?
@@ -699,6 +686,23 @@ namespace SistVehiculo.Models
                 new ObjectParameter("tipo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaTipoServicioProducto_Result>("pa_RetornaTipoServicioProducto", descripcionParameter, tipoParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaMarcaVehiculo_Result> pa_RetornaMarcaVehiculo(string codigo, string marca, string pais)
+        {
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
+    
+            var marcaParameter = marca != null ?
+                new ObjectParameter("marca", marca) :
+                new ObjectParameter("marca", typeof(string));
+    
+            var paisParameter = pais != null ?
+                new ObjectParameter("pais", pais) :
+                new ObjectParameter("pais", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaMarcaVehiculo_Result>("pa_RetornaMarcaVehiculo", codigoParameter, marcaParameter, paisParameter);
         }
     }
 }

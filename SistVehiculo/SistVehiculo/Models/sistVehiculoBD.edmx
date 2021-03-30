@@ -570,6 +570,7 @@
         <Function Name="pa_RetornaMarcaVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="codigo" Type="varchar" Mode="In" />
           <Parameter Name="marca" Type="nvarchar" Mode="In" />
+          <Parameter Name="pais" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="pa_RetornaMarcaVehiculoID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idMarcaVehiculo" Type="int" Mode="In" />
@@ -1359,10 +1360,6 @@
             <Parameter Name="idPaisFabricante" Mode="In" Type="Int32" />
             <Parameter Name="marca" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="pa_RetornaMarcaVehiculo" ReturnType="Collection(sistvehiculoviModel.pa_RetornaMarcaVehiculo_Result)">
-            <Parameter Name="codigo" Mode="In" Type="String" />
-            <Parameter Name="marca" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="pa_RetornaMarcaVehiculoID" ReturnType="Collection(sistvehiculoviModel.pa_RetornaMarcaVehiculoID_Result)">
           <Parameter Name="idMarcaVehiculo" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1431,6 +1428,11 @@
           <FunctionImport Name="pa_RetornaTipoServicioProducto" ReturnType="Collection(sistvehiculoviModel.pa_RetornaTipoServicioProducto_Result)">
             <Parameter Name="descripcion" Mode="In" Type="String" />
             <Parameter Name="tipo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_RetornaMarcaVehiculo" ReturnType="Collection(sistvehiculoviModel.pa_RetornaMarcaVehiculo_Result)">
+            <Parameter Name="codigo" Mode="In" Type="String" />
+            <Parameter Name="marca" Mode="In" Type="String" />
+            <Parameter Name="pais" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -1628,13 +1630,6 @@
           <Property Type="String" Name="codigo" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="tipo" Nullable="false" MaxLength="50" />
         </ComplexType>
-        <ComplexType Name="pa_RetornaMarcaVehiculo_Result">
-          <Property Type="Int32" Name="idMarcaVehiculo" Nullable="false" />
-          <Property Type="String" Name="codigo" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="idPaisFabricante" Nullable="false" />
-          <Property Type="String" Name="pais" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="marca" Nullable="false" MaxLength="100" />
-        </ComplexType>
         <ComplexType Name="pa_RetornaMarcaVehiculoID_Result">
           <Property Type="Int32" Name="idMarcaVehiculo" Nullable="false" />
           <Property Type="String" Name="codigo" Nullable="false" MaxLength="50" />
@@ -1796,6 +1791,13 @@
           <Property Type="Double" Name="precio" Nullable="false" />
           <Property Type="Int32" Name="tipo" Nullable="false" />
           <Property Type="String" Name="nombreClasificacion" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaMarcaVehiculo_Result">
+          <Property Type="Int32" Name="idMarcaVehiculo" Nullable="false" />
+          <Property Type="String" Name="codigo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="idPaisFabricante" Nullable="false" />
+          <Property Type="String" Name="pais" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="marca" Nullable="false" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2205,17 +2207,6 @@
           <FunctionImportMapping FunctionImportName="pa_EliminaMarcaVehiculo" FunctionName="sistvehiculoviModel.Store.pa_EliminaMarcaVehiculo" />
           <FunctionImportMapping FunctionImportName="pa_InsertaMarcaVehiculo" FunctionName="sistvehiculoviModel.Store.pa_InsertaMarcaVehiculo" />
           <FunctionImportMapping FunctionImportName="pa_ModificaMarcaVehiculo" FunctionName="sistvehiculoviModel.Store.pa_ModificaMarcaVehiculo" />
-          <FunctionImportMapping FunctionImportName="pa_RetornaMarcaVehiculo" FunctionName="sistvehiculoviModel.Store.pa_RetornaMarcaVehiculo">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaMarcaVehiculo_Result">
-                <ScalarProperty Name="idMarcaVehiculo" ColumnName="idMarcaVehiculo" />
-                <ScalarProperty Name="codigo" ColumnName="codigo" />
-                <ScalarProperty Name="idPaisFabricante" ColumnName="idPaisFabricante" />
-                <ScalarProperty Name="pais" ColumnName="pais" />
-                <ScalarProperty Name="marca" ColumnName="marca" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_RetornaMarcaVehiculoID" FunctionName="sistvehiculoviModel.Store.pa_RetornaMarcaVehiculoID">
             <ResultMapping>
               <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaMarcaVehiculoID_Result">
@@ -2356,6 +2347,17 @@
                 <ScalarProperty Name="precio" ColumnName="precio" />
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
                 <ScalarProperty Name="nombreClasificacion" ColumnName="nombreClasificacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_RetornaMarcaVehiculo" FunctionName="sistvehiculoviModel.Store.pa_RetornaMarcaVehiculo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaMarcaVehiculo_Result">
+                <ScalarProperty Name="idMarcaVehiculo" ColumnName="idMarcaVehiculo" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="idPaisFabricante" ColumnName="idPaisFabricante" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
