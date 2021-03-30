@@ -1,4 +1,5 @@
-﻿@model SistVehiculo.Models.pa_RetornaVehiculos_Result
+﻿
+@model SistVehiculo.Models.pa_RetornaVehiculosID_Result
 
 @section css{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
@@ -15,15 +16,15 @@
 <form id="frmEliminaVehiculo" method="post">
     <div class="form-group">
         <label>Id de Vehiculo:</label>
-        <input type="text" name="idVehiculos" id="idVehiculos" class="form-control" value="@Model.idVehiculos"  />
+        <input type="text" name="idVehiculos" id="idVehiculos" class="form-control" value="@Model.idVehiculos" readonly />
     </div>
     <div class="form-group">
         <input type="submit" value="Eliminar" id="btnAceptar" />
     </div>
-    <a href="~/MantTipoVehiculos/ListaTipoVehiculos">Regresar a la lista</a>
+    <a href="~/MantVehiculos/ListaVehiculos">Regresar a la lista</a>
 </form>
 
 @section scripts{
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-    <script src="~/Scripts/mantTiposVehiculos/mantTiposVehiculos.js"></script>
+    <script src="~/Scripts/mantVehiculos/mantVehiculos.js"></script>
 }

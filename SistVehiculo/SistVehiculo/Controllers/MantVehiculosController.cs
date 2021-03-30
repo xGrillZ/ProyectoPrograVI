@@ -13,7 +13,12 @@ namespace SistVehiculo.Controllers
         // GET: MantVehiculos
         public ActionResult ListaVehiculos()
         {
-            return View();
+            ///Variable que contiene los registros obtenidos
+            List<pa_RetornaVehiculos_Result> modeloVista = new List<pa_RetornaVehiculos_Result>();
+            ///Asígnación a la variable el resultado de la invocación del procedimiento almacenado
+            modeloVista = this.modeloBD.pa_RetornaVehiculos("").ToList();
+            ///Enviar a la vista el modelo
+            return View(modeloVista);
         }
         public ActionResult InsertarVehiculos()
         {
@@ -25,9 +30,45 @@ namespace SistVehiculo.Controllers
             return View();
         }
 
-        public ActionResult EliminarVehiculos()
+        public ActionResult EliminarVehiculos(int idVehiculos)
+        {            
+            pa_RetornaVehiculosID_Result modeloVista = new pa_RetornaVehiculosID_Result();
+            modeloVista = this.modeloBD.pa_RetornaVehiculosID(idVehiculos).FirstOrDefault();
+
+            return View(modeloVista);
+        }
+
+        [HttpPost]
+        public ActionResult EliminarVehiculos(pa_RetornaVehiculosID_Result modeloVista)
         {
-            return View();
+            
+            int cantRegistrosAfectados = 0;
+            string mensaje = "";
+
+            try
+            {
+                cantRegistrosAfectados = this.modeloBD.pa_EliminaVehiculo(modeloVista.idVehiculos);
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Ocurrió un error: " + ex.Message;
+            }
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    mensaje = "Registro Eliminado";
+                }
+                else
+                {
+                    mensaje += "No se pudo eliminar";
+                }
+            }
+
+            Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
+
+            ///Enviar el modelo a la vista
+            return View(modeloVista);
         }
 
         public ActionResult RpServicioVehiculo()
