@@ -20,6 +20,18 @@ namespace SistVehiculo.Controllers
             ///Enviar a la vista el modelo
             return View(modeloVista);
         }
+
+        void AgregaTipoVehiculoViewBag()
+        {
+            this.ViewBag.ListaTipoVehiculo = this.modeloBD.pa_RetornaTiposVehiculo("","").ToList();
+        }
+
+        void AgregaMarcaVehiculoViewBag()
+        {
+            this.ViewBag.ListaMarcaVehiculo = this.modeloBD.pa_RetornaMarcaVehiculo("", "", "").ToList();
+        }
+
+
         public ActionResult InsertarVehiculos()
         {
             return View();
@@ -41,7 +53,9 @@ namespace SistVehiculo.Controllers
         [HttpPost]
         public ActionResult EliminarVehiculos(pa_RetornaVehiculosID_Result modeloVista)
         {
-            
+            ///Variable que registra la cantidad de registros afectados
+            ///si un procedimiento que ejecuta insert, update o delete
+            ///no afecta registros implica que hubo un error
             int cantRegistrosAfectados = 0;
             string mensaje = "";
 
@@ -61,12 +75,14 @@ namespace SistVehiculo.Controllers
                 }
                 else
                 {
-                    mensaje += " No se pudo eliminar";
+                    mensaje += ".No se pudo eliminar";
                 }
             }
 
             Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
 
+            AgregaTipoVehiculoViewBag();
+            AgregaMarcaVehiculoViewBag();
             ///Enviar el modelo a la vista
             return View(modeloVista);
         }
