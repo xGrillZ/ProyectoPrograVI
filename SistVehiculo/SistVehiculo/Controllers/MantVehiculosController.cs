@@ -61,7 +61,7 @@ namespace SistVehiculo.Controllers
                 }
                 else
                 {
-                    mensaje += "No se pudo eliminar";
+                    mensaje += " No se pudo eliminar";
                 }
             }
 
