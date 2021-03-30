@@ -2,6 +2,7 @@
 
 @section css{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link href="~/Content/mantTipoVehiculos/mantTipoVehiculos.css" rel="stylesheet" />
 }
 
 @{
@@ -12,21 +13,21 @@
 <h2>Eliminar Tipos Vehículo</h2>
 
 
-<form id="frmModificaTiposVehiculo" method="post">
+<form id="frmEliminarTiposVehiculo" method="post">
     <div class="form-group">
         <label>Código:</label>
-        <input type="text" name="codigo" id="codigo" class="form-control" value="@Model.codigo" readonly/>
+        <input type="text" name="codigo" id="codigo" class="form-control" value="@Model.codigo" readonly />
     </div>
 
     <div class="form-group">
         <label>Tipo:</label>
-        <input type="text" name="tipo" id="tipo" class="form-control" value="@Model.tipo" readonly/>
+        <input type="text" name="tipo" id="tipo" class="form-control" value="@Model.tipo" readonly />
     </div>
     <div class="form-group">
-        <input type="submit" value="Eliminar" id="btnAceptar" />
+        <input type="submit" value="Eliminar" id="btnAceptar" class="btn btn-success btnEliminarTipoVehiculo"/>
     </div>
-    <a href="~/MantTipoVehiculos/ListaTipoVehiculos">Regresar a la lista</a>
 </form>
+<a href="~/MantTipoVehiculos/ListaTipoVehiculos" class="btn btn-primary">Regresar a la lista</a>
 
 @section scripts{
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>

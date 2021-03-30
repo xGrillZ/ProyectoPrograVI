@@ -2,6 +2,7 @@
 
 @section css{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link href="~/Content/mantClientes/mantClientes.css" rel="stylesheet" />
 }
 
 @{
@@ -12,107 +13,109 @@
 <h2>Modificar Clientes</h2>
 
 <form id="frmModificaCliente" method="post">
-    <div class="form-group">
-        <label>Nombre Cliente:</label>
-        <input type="text" name="nomCliente" id="nomCliente" class="form-control" value="@Model.nomCliente" />
-        <input type="hidden" id="hdProvincia" value="@Model.provincia" />
-        <input type="hidden" id="hdCanton" value="@Model.canton" />
-        <input type="hidden" id="hdDistrito" value="@Model.distrito" />
-        <input type="hidden" id="hdIdCliente" value="@Model.idCliente" />
-    </div>
+    <div class="row col-sm-6">
+        <div class="form-group col-6">
+            <label>Nombre Cliente:</label>
+            <input type="text" name="nomCliente" id="nomCliente" class="form-control" value="@Model.nomCliente" />
+            <input type="hidden" id="hdProvincia" value="@Model.provincia" />
+            <input type="hidden" id="hdCanton" value="@Model.canton" />
+            <input type="hidden" id="hdDistrito" value="@Model.distrito" />
+            <input type="hidden" id="hdIdCliente" value="@Model.idCliente" />
+        </div>
 
-    <div class="form-group">
-        <label>Primer Apellido:</label>
-        <input type="text" name="ape1Cliente" id="ape1Cliente" class="form-control" value="@Model.ape1Cliente" />
-    </div>
+        <div class="form-group col-6">
+            <label>Primer Apellido:</label>
+            <input type="text" name="ape1Cliente" id="ape1Cliente" class="form-control" value="@Model.ape1Cliente" />
+        </div>
 
-    <div class="form-group">
-        <label>Segundo Apellido:</label>
-        <input type="text" name="ape2Cliente" id="ape2Cliente" class="form-control" value="@Model.ape2Cliente" />
-    </div>
-    <div class="form-group">
-        <label>Cédula:</label>
-        <input type="text" name="numCedula" id="numCedula" class="form-control" value="@Model.numCedula" />
-    </div>
-    <div class="form-group">
-        <label>Género</label>
-        <select name="genero" id="genero" class="form-control">
-            <option value="">Seleccione un género</option>
-            @{
-                foreach (SistVehiculo.Models.pa_RetornaGenero_Result genero in this.ViewBag.ListaGeneros)
-                {
-                    ///Verifica si el ID es igual al ID del genero que viene en el modelo
-                    bool esIdGeneroModelo = genero.id_Genero == Model.genero;
-
-                    ///Incluir la propiedad selected para que la opcion aparezca seleccionada.
-                    ///Se compara la propiedad id_Genero del objeto del ViewBag contra la propiedad
-                    ///id_Genero del modelo de la vista
-                    if (esIdGeneroModelo)
+        <div class="form-group col-6">
+            <label>Segundo Apellido:</label>
+            <input type="text" name="ape2Cliente" id="ape2Cliente" class="form-control" value="@Model.ape2Cliente" />
+        </div>
+        <div class="form-group col-6">
+            <label>Cédula:</label>
+            <input type="text" name="numCedula" id="numCedula" class="form-control" value="@Model.numCedula" />
+        </div>
+        <div class="form-group col-6">
+            <label>Género</label>
+            <select name="genero" id="genero" class="form-control">
+                <option value="">Seleccione un género</option>
+                @{
+                    foreach (SistVehiculo.Models.pa_RetornaGenero_Result genero in this.ViewBag.ListaGeneros)
                     {
-                        <option value="@genero.id_Genero" selected>@genero.nombreGenero</option>
-                    }
-                    else
-                    {
-                        <option value="@genero.id_Genero">@genero.nombreGenero</option>
-                    }
-                }
-            }
-        </select>
-    </div>
-    <div class="form-group">
-        <label>Provincia:</label>
-        <select name="provincia" id="provincia" class="form-control"></select>
-    </div>
-    <div class="form-group">
-        <label>Cantón:</label>
-        <select name="canton" id="canton" class="form-control"></select>
-    </div>
-    <div class="form-group">
-        <label>Distrito:</label>
-        <select name="distrito" id="distrito" class="form-control"></select>
-    </div>
+                        ///Verifica si el ID es igual al ID del genero que viene en el modelo
+                        bool esIdGeneroModelo = genero.id_Genero == Model.genero;
 
-    <div class="form-group">
-        <label>Fecha Nacimiento:</label>
-        <input type="datetime" name="fechNacimiento" id="fechNacimiento" class="form-control" readonly value="@Model.fechNacimiento.ToString("yyyy/MM/dd")" />
-    </div>
-    <div class="form-group">
-        <label>Correo Electrónico:</label>
-        <input type="text" name="email" id="email" class="form-control" value="@Model.email" />
-    </div>
-    <div class="form-group">
-        <label>Teléfono:</label>
-        <input type="text" name="pTelefono" id="pTelefono" class="form-control" value="@Model.pTelefono" />
-    </div>
-    <div class="form-group">
-        <label>Tipo Cliente:</label>
-        <select name="tipoCliente" id="tipoCliente" class="form-control">
-            <option value="">Seleccione el tipo de cliente</option>
-            @{
-                foreach (SistVehiculo.Models.pa_RetornaTipoCliente_Result tipoCliente in this.ViewBag.ListaTiposCliente)
-                {
-                    bool esIdTipoClienteModelo = tipoCliente.id_tipoCliente == Model.tipoCliente;
-
-                    if (esIdTipoClienteModelo)
-                    {
-                        <option value="@tipoCliente.id_tipoCliente" selected>@tipoCliente.nombreTipoCliente</option>
-                    }
-                    else
-                    {
-                        <option value="@tipoCliente.id_tipoCliente">@tipoCliente.nombreTipoCliente</option>
+                        ///Incluir la propiedad selected para que la opcion aparezca seleccionada.
+                        ///Se compara la propiedad id_Genero del objeto del ViewBag contra la propiedad
+                        ///id_Genero del modelo de la vista
+                        if (esIdGeneroModelo)
+                        {
+                            <option value="@genero.id_Genero" selected>@genero.nombreGenero</option>
+                        }
+                        else
+                        {
+                            <option value="@genero.id_Genero">@genero.nombreGenero</option>
+                        }
                     }
                 }
-            }
-        </select>
+            </select>
+        </div>
+        <div class="form-group col-6">
+            <label>Provincia:</label>
+            <select name="provincia" id="provincia" class="form-control"></select>
+        </div>
+        <div class="form-group col-6">
+            <label>Cantón:</label>
+            <select name="canton" id="canton" class="form-control"></select>
+        </div>
+        <div class="form-group col-6">
+            <label>Distrito:</label>
+            <select name="distrito" id="distrito" class="form-control"></select>
+        </div>
+
+        <div class="form-group col-6">
+            <label>Fecha Nacimiento:</label>
+            <input type="datetime" name="fechNacimiento" id="fechNacimiento" class="form-control" readonly value="@Model.fechNacimiento.ToString("yyyy/MM/dd")" />
+        </div>
+        <div class="form-group col-6">
+            <label>Correo Electrónico:</label>
+            <input type="text" name="email" id="email" class="form-control" value="@Model.email" />
+        </div>
+        <div class="form-group col-6">
+            <label>Teléfono:</label>
+            <input type="text" name="pTelefono" id="pTelefono" class="form-control" value="@Model.pTelefono" />
+        </div>
+        <div class="form-group col-6">
+            <label>Tipo Cliente:</label>
+            <select name="tipoCliente" id="tipoCliente" class="form-control">
+                <option value="">Seleccione el tipo de cliente</option>
+                @{
+                    foreach (SistVehiculo.Models.pa_RetornaTipoCliente_Result tipoCliente in this.ViewBag.ListaTiposCliente)
+                    {
+                        bool esIdTipoClienteModelo = tipoCliente.id_tipoCliente == Model.tipoCliente;
+
+                        if (esIdTipoClienteModelo)
+                        {
+                            <option value="@tipoCliente.id_tipoCliente" selected>@tipoCliente.nombreTipoCliente</option>
+                        }
+                        else
+                        {
+                            <option value="@tipoCliente.id_tipoCliente">@tipoCliente.nombreTipoCliente</option>
+                        }
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Modificar" id="btModificar" class="form-control btn btn-success btnModificarCliente" />
+        </div>
     </div>
-    <div class="form-group">
-        <input type="submit" value="Modificar" id="btnAceptar" class="form-control" />
-    </div>
-    <a href="~/MantClientes/ListaClientes">Regresar a la lista</a>
 </form>
+<a href="~/MantClientes/ListaClientes" class="btn btn-primary">Regresar a la lista</a>
 <br />
 
-<input type="button" id="btMostrarDialogPassword" value="Cambiar Contraseña" class="form-control" />
+<input type="button" id="btMostrarDialogPassword" value="Cambiar Contraseña" class="form-control btn btn-warning btnContrasena" />
 <!-- Contenido que se mostrará al dar click en el botón  btMostrarDialog-->
 <div id="divDialogPassword">
     <h2>Ingresa una contraseña nueva</h2>

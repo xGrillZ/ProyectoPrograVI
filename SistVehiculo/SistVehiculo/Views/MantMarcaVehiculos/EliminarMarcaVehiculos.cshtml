@@ -2,6 +2,7 @@
 
 @section css{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link href="~/Content/mantMarcaVehiculos/mantMarcaVehiculos.css" rel="stylesheet" />
 }
 
 @{
@@ -14,7 +15,7 @@
 <form id="frmEliminaMarcaVehiculo" method="post">
     <div class="form-group">
         <label>Código:</label>
-        <input type="text" name="codigo" id="codigo" class="form-control" value="@Model.codigo" readonly/>
+        <input type="text" name="codigo" id="codigo" class="form-control" value="@Model.codigo" readonly />
     </div>
 
     <div class="form-group">
@@ -47,13 +48,13 @@
 
     <div class="form-group">
         <label>Marca:</label>
-        <input type="text" name="marca" id="marca" class="form-control" value="@Model.marca" readonly/>
+        <input type="text" name="marca" id="marca" class="form-control" value="@Model.marca" readonly />
     </div>
     <div class="form-group">
-        <input type="submit" value="Eliminar" id="btnAceptar" />
+        <input type="submit" value="Eliminar" id="btnAceptar" class="btn btn-success btnEliminarMarca" />
     </div>
-    <a href="~/MantMarcaVehiculos/ListaMarcaVehiculos">Regresar a la lista</a>
 </form>
+<a href="~/MantMarcaVehiculos/ListaMarcaVehiculos" class="btn btn-primary">Regresar a la lista</a>
 
 @section scripts{
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>

@@ -304,6 +304,8 @@
     <Content Include="Content\img\spritePrincipalHeader.png" />
     <Content Include="Content\img\Wave.png" />
     <Content Include="Content\Logeo.css" />
+    <Content Include="Content\mantClientes\mantClientes.css" />
+    <Content Include="Content\mantMarcaVehiculos\mantMarcaVehiculos.css" />
     <Content Include="Content\mantServiciosProductos\mantServiciosProductos.css" />
     <Content Include="Content\mantTipoVehiculos\mantTipoVehiculos.css" />
     <Content Include="Content\Principal.css" />

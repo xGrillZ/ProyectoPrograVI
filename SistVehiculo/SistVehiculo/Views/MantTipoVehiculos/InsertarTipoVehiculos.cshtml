@@ -1,5 +1,6 @@
 ﻿@section css{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link href="~/Content/mantTipoVehiculos/mantTipoVehiculos.css" rel="stylesheet" />
 }
 
 @{
@@ -20,10 +21,10 @@
         <input type="text" name="tipo" id="tipo" class="form-control" />
     </div>
     <div class="form-group">
-        <input type="submit" value="Registrar" id="btnAceptar" />
+        <input type="submit" value="Registrar" id="btnAceptar" class="btn btn-success btnRegistrarTipoVehiculo" />
     </div>
-    <a href="~/MantTipoVehiculos/ListaTipoVehiculos">Regresar a la lista</a>
 </form>
+<a href="~/MantTipoVehiculos/ListaTipoVehiculos" class="btn btn-primary">Regresar a la lista</a>
 
 @section scripts{
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>

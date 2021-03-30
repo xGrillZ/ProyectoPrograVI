@@ -1,14 +1,44 @@
 ﻿<!--Indicar a la vista el modelo-->
 @model List<SistVehiculo.Models.pa_RetornaCliente_Result>
 
+@section css{
+    <link href="~/Content/mantClientes/mantClientes.css" rel="stylesheet" />
+}
+
 @{
     ViewBag.Title = "ListaClientes";
     Layout = "~/Views/Shared/_LayoutPersonalizado.cshtml";
 }
 
 <h2>Lista de Clientes</h2>
-<a href="~/MantClientes/InsertarClientes" class="btn btn-success">Agregar Cliente</a>
+<a href="~/MantClientes/InsertarClientes" class="btn btn-success"><i class="fas fa-user-plus"></i> Agregar Cliente</a>
+<form id="frmBusquedaClientes" method="post">
+    <div class="row">
+        <div class="form-group col">
+            <label>Número Cédula:</label>
+            <input type="text" name="numCedula" id="numCedula" class="form-control" />
+        </div>
 
+        <div class="form-group col">
+            <label>Nombre:</label>
+            <input type="text" name="nomCliente" id="nomCliente" class="form-control" />
+        </div>
+
+        <div class="form-group col">
+            <label>Primer Apellido:</label>
+            <input type="text" name="ape1Cliente" id="ape1Cliente" class="form-control" />
+        </div>
+
+        <div class="form-group col">
+            <label>Segundo Apellido:</label>
+            <input type="text" name="ape2Cliente" id="ape2Cliente" class="form-control" />
+        </div>
+
+        <div class="form-group col">
+            <button type="submit" id="btnAceptar" class="btn btn-info"><i class="fas fa-search"></i> Buscar</button>
+        </div>
+    </div>
+</form>
 <table class="table">
     <tr>
         <th>Nombre Completo</th>
@@ -37,9 +67,9 @@
                 <td>@posicionModelo.nombreTipoCliente</td>
                 <td>@posicionModelo.ultimoIngreso</td>
                 <td>
-                    <a href="~/MantClientes/ModificarClientes?idCliente=@posicionModelo.idCliente" class="btn btn-warning">Modificar</a>
+                    <a href="~/MantClientes/ModificarClientes?idCliente=@posicionModelo.idCliente" class="btn btn-warning btnModificar col-md-12">Modificar</a>
                     <br />
-                    <a href="~/Personas/PersonaElimina?id_Persona=@posicionModelo.idCliente" class="btn btn-danger">Eliminar</a>
+                    <a href="~/MantClientes/EliminarClientes?idCliente=@posicionModelo.idCliente" class="btn btn-danger btnEliminar col-md-12">Eliminar</a>
                 </td>
             </tr>
         }

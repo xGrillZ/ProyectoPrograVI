@@ -11,12 +11,12 @@ namespace SistVehiculo.Controllers
     {
         sistvehiculoviEntities modeloBD = new sistvehiculoviEntities();
         // GET: MantMarcaVehiculos
-        public ActionResult ListaMarcaVehiculos()
+        public ActionResult ListaMarcaVehiculos(string codigo, string marca, string pais)
         {
             ///Variable que contiene los registros obtenidos
             List<pa_RetornaMarcaVehiculo_Result> modeloVista = new List<pa_RetornaMarcaVehiculo_Result>();
             ///Asígnación a la variable el resultado de la invocación del procedimiento almacenado
-            modeloVista = this.modeloBD.pa_RetornaMarcaVehiculo("","").ToList();
+            modeloVista = this.modeloBD.pa_RetornaMarcaVehiculo(codigo, marca, pais).ToList();
             ///Enviar a la vista el modelo
             return View(modeloVista);
         }

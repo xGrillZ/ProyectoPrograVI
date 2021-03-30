@@ -1,9 +1,9 @@
-﻿#frmBusquedaServiciosProductos {
+﻿#frmBusquedaClientes {
     padding: 25px 0px 15px 0px;
 }
 
 .row {
-    padding: 0px 0px 0px 310px;
+    padding: 0px 0px 0px 150px;
 }
 
 #btnAceptar {
@@ -14,7 +14,7 @@
     margin: 0px 0px 10px 0px;
 }
 
-#frmNuevoTipoVehiculo {
+#frmNuevoCliente {
     width: 100%;
     margin: 0 auto;
     display: flex;
@@ -23,7 +23,11 @@
     align-items: center;
 }
 
-#frmModificaTiposVehiculo {
+.btnRegistrar {
+    margin: 0px 0px 0px 150px;
+}
+
+#frmModificaCliente {
     width: 100%;
     margin: 0 auto;
     display: flex;
@@ -32,11 +36,23 @@
     align-items: center;
 }
 
-#frmEliminarTiposVehiculo {
+.btnModificarCliente {
+    margin: 0px 0px 0px 150px;
+}
+
+.btnContrasena {
+    margin: 0px 0px 0px 630px;
+}
+
+#frmEliminaCliente {
     width: 100%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.btnEliminarCliente {
+    margin: 0px 0px 0px 150px;
 }
