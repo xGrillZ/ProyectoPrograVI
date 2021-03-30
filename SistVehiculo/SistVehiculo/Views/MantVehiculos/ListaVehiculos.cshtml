@@ -18,22 +18,22 @@
         <th>Tipo</th>
         <th>Acciones</th>
     </tr>
-    
+
     @{
         foreach (SistVehiculo.Models.pa_RetornaVehiculos_Result posicionModelo in this.Model)
         {
-        <tr>
-            <td>@posicionModelo.marca</td>
-            <td>@posicionModelo.tipoVehiculo</td>
-            <td>@posicionModelo.numeroPuerta</td>
-            <td>@posicionModelo.numeroRueda</td>
-            <td>@posicionModelo.tipo</td>
-            <td>
-                <a href="~/MantVehiculos/ModificarVehiculos?idVehiculos=@posicionModelo.idVehiculos">Modificar</a>
-                <br />
-                <a href="~/MantVehiculos/EliminarVehiculos?idVehiculos=@posicionModelo.idVehiculos">Eliminar</a>
-            </td>
-        </tr>
+            <tr>
+                <td>@posicionModelo.marca</td>
+                <td>@posicionModelo.tipoVehiculo</td>
+                <td>@posicionModelo.numeroPuerta</td>
+                <td>@posicionModelo.numeroRueda</td>
+                <td>@posicionModelo.tipo</td>
+                <td>
+                    <a href="~/MantVehiculos/ModificarVehiculos?idVehiculos=@posicionModelo.idVehiculos">Modificar</a>
+                    <br />
+                    <a href="~/MantVehiculos/EliminarVehiculos?idVehiculos=@posicionModelo.idVehiculos">Eliminar</a>
+                </td>
+            </tr>
         }
     }
 </table>
