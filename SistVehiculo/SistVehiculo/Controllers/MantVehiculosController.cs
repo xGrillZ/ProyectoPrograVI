@@ -34,8 +34,87 @@ namespace SistVehiculo.Controllers
 
         public ActionResult InsertarVehiculos()
         {
+            AgregaTipoVehiculoViewBag();
+            AgregaMarcaVehiculoViewBag();
             return View();
         }
+       /* bool verificaCodigo(string pCodigo, string pCodigoDos)
+        {
+            ///Resultado de la operación
+            bool resultado = true;
+            try
+            {
+                ///Variable que almacenará el dato solicitado
+                string cod = pCodigo;
+
+                if (string.IsNullOrEmpty(pCodigoDos))
+                {
+                    ///Resultado de la operación
+                    resultado = this.modeloBD.Vehiculos.Count(Vehiculos => Vehiculos.placa == cod) <= 0;
+                }
+                else
+                {
+                    int cod2 = Convert.ToInt32(pCodigoDos);
+                    ///Resultado de la operación
+                    resultado = this.modeloBD.Vehiculos.Count(Vehiculos => Vehiculos.placa == cod && Vehiculos.idVehiculos != cod2) <= 0;
+                }
+            }
+            catch
+            {
+                ///Mensaje de error
+                string mensaje = "Error al verificar el código.";
+                Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
+            }
+            ///Retorno del resultado
+            return resultado;
+        }*/ 
+
+        [HttpPost]
+        public ActionResult InsertarVehiculos(pa_RetornaVehiculos_Result modeloVista)
+        {
+            ///Variable que registra la cantidad de registros afectados
+            ///si un procedimiento que ejecuta insert, update o delete
+            ///no afecta registros implica que hubo un error
+            int cantRegistrosAfectados = 0;
+            string mensaje = "";
+
+            try
+                {
+                    cantRegistrosAfectados = this.modeloBD.pa_InsertaVehiculos( 
+                        modeloVista.placa,
+                        modeloVista.numeroPuerta,
+                        modeloVista.numeroRueda,
+                        modeloVista.tipoVehiculo,
+                        modeloVista.marca
+                        );
+
+
+    }
+                catch (Exception ex)
+                {
+                    mensaje = "Ocurrió un error: " + ex.Message;
+                }
+                finally
+                {
+                    if (cantRegistrosAfectados > 0)
+                    {
+                        mensaje = "Registro insertado";
+                    }
+                    else
+                    {
+                        mensaje += "No se pudo insertar";
+                    }
+                }
+                       
+
+            Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
+
+            AgregaTipoVehiculoViewBag();
+            AgregaMarcaVehiculoViewBag();
+
+            return View();
+        }
+
 
         public ActionResult ModificarVehiculos()
         {

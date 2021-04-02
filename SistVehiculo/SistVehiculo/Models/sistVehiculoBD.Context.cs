@@ -80,7 +80,12 @@ namespace SistVehiculo.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaCliente_Result>("pa_RetornaCliente", numCedulaParameter, nomClienteParameter, ape1ClienteParameter, ape2ClienteParameter);
         }
-    
+
+        internal int pa_InsertaVehiculos(object placa, int numeroPuerta, int numeroRueda, int tipoVehiculo, string marca)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual ObjectResult<pa_RetornaClienteCorreoPwd_Result> pa_RetornaClienteCorreoPwd(string correoElectronico, string password)
         {
             var correoElectronicoParameter = correoElectronico != null ?

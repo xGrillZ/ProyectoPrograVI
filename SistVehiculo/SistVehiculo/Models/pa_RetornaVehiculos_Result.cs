@@ -13,6 +13,8 @@ namespace SistVehiculo.Models
     
     public partial class pa_RetornaVehiculos_Result
     {
+        internal object placa;
+
         public int idVehiculos { get; set; }
         public int tipoVehiculo { get; set; }
         public int numeroPuerta { get; set; }

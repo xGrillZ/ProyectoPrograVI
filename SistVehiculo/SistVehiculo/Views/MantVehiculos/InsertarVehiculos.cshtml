@@ -1,6 +1,6 @@
-﻿
-@section css{
+﻿@section css{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    
 }
 
 @{
@@ -15,23 +15,46 @@
         <label>Placa:</label>
         <input type="text" name="placa" id="placa" class="form-control" />
     </div>
-
     <div class="form-group">
         <label>Número de Puertas:</label>
         <input type="text" name="numeroPuerta " id="numeroPuerta " class="form-control" />
     </div>
     <div class="form-group">
         <label>Número de Ruedas:</label>
-        <input type="text" name="numeroRuedas " id="numeroRuedas " class="form-control" />
+        <input type="text" name="numeroRueda " id="numeroRueda " class="form-control" />
     </div>
     <div class="form-group">
         <label>Tipo de Vehiculo:</label>
-        <input type="text" name="tipoVehiculo " id="tipoVehiculo " class="form-control" />
+        <select name="tipoVehiculo" id="tipoVehiculo" class="form-control">
+            <option value="">SELECCIONE UN TIPO DE VEHICULO</option>
+            @{
+                foreach (SistVehiculo.Models.pa_RetornaTiposVehiculo_Result tipo in ViewBag.ListaTipoVehiculo)
+
+                {
+
+
+                    <option value="@tipo.idTipoVehiculo">@tipo.tipo.ToUpper()</option>
+                }
+            }
+        </select>
     </div>
     <div class="form-group">
-        <label>TMarca de Vehiculo:</label>
-        <input type="text" name="marcaVehiculo " id="marcaVehiculo " class="form-control" />
-    </div>  
+        <label>Marca de Vehiculo :</label>
+        <select name="marca" id="marca" class="form-control">
+            <option value="">SELECCIONE UNA MARCA</option>
+            @{
+                foreach (SistVehiculo.Models.pa_RetornaMarcaVehiculo_Result marca in ViewBag.ListaMarcaVehiculo)
+
+
+
+                {
+
+
+                    <option value="@marca.idMarcaVehiculo">@marca.marca.ToUpper()</option>
+                }
+            }
+        </select>
+    </div>
     <div class="form-group">
         <input type="submit" value="Registrar" id="btnAceptar" />
     </div>
@@ -40,5 +63,5 @@
 
 @section scripts{
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-    <script src="~/Scripts/mantTiposVehiculos/mantTiposVehiculos.js"></script>
+    <script src="~/Scripts/mantVehiculos/mantVehiculos.js"></script>
 }

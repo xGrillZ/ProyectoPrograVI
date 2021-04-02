@@ -1,7 +1,7 @@
 ﻿$(function () {
     validacionRegistro();
     validacionModifica();
-    obtenerRegistrosServiciosVehiculoKendo();
+    //obtenerRegistrosServiciosVehiculoKendo();
 });
 
 ///crea las validaciones para el formulario
