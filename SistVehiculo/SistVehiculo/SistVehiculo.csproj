@@ -133,6 +133,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\MantClientesController.cs" />
+    <Compile Include="Controllers\MantFacturasController.cs" />
     <Compile Include="Controllers\MantMarcaVehiculosController.cs" />
     <Compile Include="Controllers\MantServiciosProductosController.cs" />
     <Compile Include="Controllers\MantTipoVehiculosController.cs" />
@@ -183,6 +184,9 @@
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaCliente_Result.cs">
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_RetornaEncabezadoFactura_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaGenero_Result.cs">
@@ -502,6 +506,8 @@
     <Content Include="Views\MantVehiculosCliente\RpVehiculosCliente.cshtml" />
     <Content Include="Views\MantClientes\RpServiciosCliente.cshtml" />
     <Content Include="Views\MantVehiculos\RpServicioVehiculo.cshtml" />
+    <Content Include="Views\Facturas\ListaEncabezadoFacturas.cshtml" />
+    <Content Include="Views\MantFacturas\ListaEncabezado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

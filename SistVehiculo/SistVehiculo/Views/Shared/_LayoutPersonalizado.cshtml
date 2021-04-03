@@ -28,7 +28,7 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item"><a class="nav-link" href="#">Facturación</a></li>
+                            <li class="nav-item">@Html.ActionLink("Facturas", "ListaEncabezado", "MantFacturas", new { area = "" }, new { @class = "nav-link" })</li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Mantenimiento
@@ -39,7 +39,7 @@
                                     <li class="dropdown-item">@Html.ActionLink("Marcas de vehículos", "ListaMarcaVehiculos", "MantMarcaVehiculos")</li>
                                     <li class="dropdown-item">@Html.ActionLink("Clientes", "ListaClientes", "MantClientes")</li>
                                     <li class="dropdown-item">@Html.ActionLink("Vehículos", "ListaVehiculos", "MantVehiculos")</li>
-                                    <li class="dropdown-item">@Html.ActionLink("Vehículos por cliente", "About", "Home")</li>
+                                    <li class="dropdown-item">@Html.ActionLink("Vehículos por cliente", "ListaEncabezado", "MantFacturas")</li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">

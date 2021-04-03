@@ -10,24 +10,28 @@
 namespace SistVehiculo.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Factura
+    public partial class pa_RetornaEncabezadoFactura_Result
     {
-        public Factura()
-        {
-            this.detalle_Factura = new HashSet<detalle_Factura>();
-        }
-    
         public int id_factura { get; set; }
         public string num_factura { get; set; }
         public System.DateTime fecha { get; set; }
         public double montoTotal { get; set; }
         public int estado { get; set; }
+        public string nomEstado { get; set; }
         public int idVehiculosCliente { get; set; }
-    
-        public virtual ICollection<detalle_Factura> detalle_Factura { get; set; }
-        public virtual Estado Estado1 { get; set; }
-        public virtual VehiculosCliente VehiculosCliente { get; set; }
+        public string nomCliente { get; set; }
+        public string ape1Cliente { get; set; }
+        public string ape2Cliente { get; set; }
+        public string email { get; set; }
+        public string numCedula { get; set; }
+        public string pTelefono { get; set; }
+        public string placa { get; set; }
+        public int numeroPuerta { get; set; }
+        public int numeroRueda { get; set; }
+        public int tipoVehiculo { get; set; }
+        public string nomTipoVehiculo { get; set; }
+        public int marcaVehiculo { get; set; }
+        public string nomMarcaVehiculo { get; set; }
     }
 }

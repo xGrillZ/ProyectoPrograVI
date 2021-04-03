@@ -1,0 +1,73 @@
+﻿<!--Indicar a la vista el modelo-->
+@model List<SistVehiculo.Models.pa_RetornaEncabezadoFactura_Result>
+
+@{
+    ViewBag.Title = "ListaEncabezadoFacturas";
+    Layout = "~/Views/Shared/_LayoutPersonalizado.cshtml";
+}
+
+<h2>Lista de Encabezado Factura</h2>
+<a href="~/MantClientes/InsertarClientes" class="btn btn-success"><i class="fas fa-user-plus"></i> Agregar Encabezado Factura</a>
+<form id="frmBusquedaEncabezado" method="post">
+    <div class="row">
+        <div class="form-group col">
+            <label>Número Factura:</label>
+            <input type="text" name="num_factura" id="num_factura" class="form-control" />
+        </div>
+
+        <div class="form-group col">
+            <label>Fecha:</label>
+            <input type="text" name="fecha" id="fecha" class="form-control" />
+        </div>
+
+        <div class="form-group col">
+            <label>Estado:</label>
+            <input type="text" name="estado" id="estado" class="form-control" />
+        </div>
+
+        <div class="form-group col">
+            <button type="submit" id="btnAceptar" class="btn btn-info"><i class="fas fa-search"></i> Buscar</button>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <tr>
+        <th>Número Factura</th>
+        <th>Estado</th>
+        <th>Monto total</th>
+        <th>Nombre Completo</th>
+        <th>Correo</th>
+        <th>Número Cédula</th>
+        <th>Teléfono</th>
+        <th>Placa Vehículo</th>
+        <th>Tipo Vehículo</th>
+        <th>Marca Vehículo</th>
+        <th>Acciones</th>
+    </tr>
+    <!--Incluir código .net
+        Recorrido para la vista
+        -->
+    @{
+        foreach (SistVehiculo.Models.pa_RetornaEncabezadoFactura_Result posicionModelo in this.Model)
+        {
+            <tr>
+                <td>@posicionModelo.num_factura</td>
+                <td>@posicionModelo.nomEstado</td>
+                <td>@posicionModelo.montoTotal</td>
+                <td>@posicionModelo.ape1Cliente @posicionModelo.ape2Cliente @posicionModelo.nomCliente</td>
+                <td>@posicionModelo.email</td>
+                <td>@posicionModelo.numCedula</td>
+                <td>@posicionModelo.pTelefono</td>
+                <td>@posicionModelo.placa</td>
+                <td>@posicionModelo.nomTipoVehiculo</td>
+                <td>@posicionModelo.nomMarcaVehiculo</td>
+                <td>
+                    <a href="~/Facturas/ModificarEncabezado?idCliente=@posicionModelo.id_factura" class="btn btn-warning btnModificar col-md-12">Modificar</a>
+                    <br />
+                    <a href="~/Facturas/EliminarEncabezado?idCliente=@posicionModelo.id_factura" class="btn btn-danger btnEliminar col-md-12">Eliminar</a>
+                </td>
+            </tr>
+        }
+    }
+</table>
+

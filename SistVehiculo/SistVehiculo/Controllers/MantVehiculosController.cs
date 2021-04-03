@@ -69,6 +69,11 @@ namespace SistVehiculo.Controllers
             return resultado;
         }*/ 
 
+        /// <summary>
+        /// Revisar errores
+        /// </summary>
+        /// <returns></returns>
+/*
         [HttpPost]
         public ActionResult InsertarVehiculos(pa_RetornaVehiculos_Result modeloVista)
         {
@@ -115,7 +120,7 @@ namespace SistVehiculo.Controllers
             return View();
         }
 
-
+*/
         public ActionResult ModificarVehiculos()
         {
             return View();

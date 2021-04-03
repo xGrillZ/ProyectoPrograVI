@@ -125,11 +125,13 @@ namespace SistVehiculo.Controllers
             {
                 try
                 {
+                    string contrasenaEncriptada = this.GetSHA256(modeloVista.contrasena);
+
                     cantRegistrosAfectados = this.modeloBD.pa_InsertaCliente(modeloVista.nomCliente, modeloVista.ape1Cliente, modeloVista.ape2Cliente,
                                                                                  modeloVista.numCedula, modeloVista.genero, modeloVista.provincia,
                                                                                  modeloVista.fechNacimiento, modeloVista.canton, modeloVista.distrito,
                                                                                  modeloVista.email, modeloVista.pTelefono, modeloVista.tipoCliente,
-                                                                                 fechaActual, modeloVista.contrasena);
+                                                                                 fechaActual, contrasenaEncriptada);
                     this.correoElectronicoIngreso(modeloVista.ape1Cliente, modeloVista.ape2Cliente, modeloVista.nomCliente,
                                                   modeloVista.email, fechaActual);
                 }
