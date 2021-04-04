@@ -607,6 +607,9 @@
         <Function Name="pa_RetornaVehiculosID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idVehiculos" Type="int" Mode="In" />
         </Function>
+        <Function Name="pa_RetornaVehiculosInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="placa" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="RetornaCantones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="varchar" Mode="In" />
           <Parameter Name="id_Provincia" Type="int" Mode="In" />
@@ -1362,6 +1365,9 @@
             <Parameter Name="numeroPuerta" Mode="In" Type="Int32" />
             <Parameter Name="numeroRueda" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="pa_RetornaVehiculosInsert" ReturnType="Collection(sistvehiculoviModel.pa_RetornaVehiculosInsert_Result)">
+            <Parameter Name="placa" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
           <Property Type="Int32" Name="idCliente" Nullable="false" />
@@ -1806,6 +1812,15 @@
           <Property Type="String" Name="nomTipoVehiculo" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="marcaVehiculo" Nullable="false" />
           <Property Type="String" Name="nomMarcaVehiculo" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaVehiculosInsert_Result">
+          <Property Type="Int32" Name="idVehiculos" Nullable="false" />
+          <Property Type="String" Name="placa" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="tipoVehiculo" Nullable="false" />
+          <Property Type="Int32" Name="numeroPuerta" Nullable="false" />
+          <Property Type="Int32" Name="numeroRueda" Nullable="false" />
+          <Property Type="Int32" Name="idMarcaVehiculo" Nullable="false" />
+          <Property Type="Int32" Name="idTipoVehiculo" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2407,6 +2422,19 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_ModificaVehiculos" FunctionName="sistvehiculoviModel.Store.pa_ModificaVehiculos" />
+          <FunctionImportMapping FunctionImportName="pa_RetornaVehiculosInsert" FunctionName="sistvehiculoviModel.Store.pa_RetornaVehiculosInsert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaVehiculosInsert_Result">
+                <ScalarProperty Name="idVehiculos" ColumnName="idVehiculos" />
+                <ScalarProperty Name="placa" ColumnName="placa" />
+                <ScalarProperty Name="tipoVehiculo" ColumnName="tipoVehiculo" />
+                <ScalarProperty Name="numeroPuerta" ColumnName="numeroPuerta" />
+                <ScalarProperty Name="numeroRueda" ColumnName="numeroRueda" />
+                <ScalarProperty Name="idMarcaVehiculo" ColumnName="idMarcaVehiculo" />
+                <ScalarProperty Name="idTipoVehiculo" ColumnName="idTipoVehiculo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

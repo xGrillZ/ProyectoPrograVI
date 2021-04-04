@@ -74,9 +74,9 @@ namespace SistVehiculo.Controllers
         /// Revisar errores
         /// </summary>
         /// <returns></returns>
-/*
+
         [HttpPost]
-        public ActionResult InsertarVehiculos(pa_RetornaVehiculos_Result modeloVista)
+        public ActionResult InsertarVehiculos(pa_RetornaVehiculosInsert_Result modeloVista)
         {
             ///Variable que registra la cantidad de registros afectados
             ///si un procedimiento que ejecuta insert, update o delete
@@ -90,13 +90,12 @@ namespace SistVehiculo.Controllers
                         modeloVista.placa,
                         modeloVista.numeroPuerta,
                         modeloVista.numeroRueda,
-                        modeloVista.tipoVehiculo,
-                        modeloVista.marca
+                        modeloVista.idTipoVehiculo,
+                        modeloVista.idMarcaVehiculo
                         );
 
-
-    }
-                catch (Exception ex)
+                        }
+            catch (Exception ex)
                 {
                     mensaje = "Ocurrió un error: " + ex.Message;
                 }
@@ -121,7 +120,7 @@ namespace SistVehiculo.Controllers
             return View();
         }
 
-*/
+
         public ActionResult ModificarVehiculos(int idVehiculos )
         {
             pa_RetornaVehiculosID_Result modeloVista = new pa_RetornaVehiculosID_Result();
