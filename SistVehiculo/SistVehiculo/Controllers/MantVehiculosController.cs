@@ -139,7 +139,6 @@ namespace SistVehiculo.Controllers
             ///no afecta registros implica que hubo un error
             int cantRegistrosAfectados = 0;
             string mensaje = "";
-
             
                 try
                 {
