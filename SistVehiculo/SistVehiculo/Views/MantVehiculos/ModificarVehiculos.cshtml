@@ -9,6 +9,13 @@
 
 <h2>Modificar Vehículo</h2>
 
+<!--modeloVista.idVehiculos,
+                        modeloVista.placa,
+                        modeloVista.tipoVehiculo,
+                        modeloVista.marcaVehiculo,
+                        modeloVista.numeroPuerta,
+                        modeloVista.numeroRueda-->
+
 
 <form id="frmModificaVehiculo" method="post">
     <div class="form-group">
@@ -17,12 +24,36 @@
     </div>
 
     <div class="form-group">
-        <label>Tipo:</label>
-        <input type="text" name="tipo" id="tipo" class="form-control" value="@Model.tipoVehiculo" />
+        <label>Tipo de Vehiculo:</label>
+        <select name="tipoVehiculo" id="tipoVehiculo" class="form-control">
+            <option value="">SELECCIONE UN TIPO DE VEHICULO</option>
+            @{
+                foreach (SistVehiculo.Models.pa_RetornaTiposVehiculo_Result tipo in ViewBag.ListaTipoVehiculo)
+
+                {
+
+
+                    <option value="@tipo.idTipoVehiculo">@tipo.tipo.ToUpper()</option>
+                }
+            }
+        </select>
     </div>
     <div class="form-group">
-        <label>Tipo de Vehículo:</label>
-        <input type="text" name="tipoVeh" id="tipoVeh" class="form-control" value="@Model.marcaVehiculo" />
+        <label>Marca de Vehiculo :</label>
+        <select name="marcaVehiculo" id="marcaVehiculo" class="form-control">
+            <option value="">SELECCIONE UNA MARCA</option>
+            @{
+                foreach (SistVehiculo.Models.pa_RetornaMarcaVehiculo_Result marca in ViewBag.ListaMarcaVehiculo)
+
+
+
+                {
+
+
+                    <option value="@marca.idMarcaVehiculo">@marca.marca.ToUpper()</option>
+                }
+            }
+        </select>
     </div>
     <div class="form-group">
         <label>Número de Puertas:</label>

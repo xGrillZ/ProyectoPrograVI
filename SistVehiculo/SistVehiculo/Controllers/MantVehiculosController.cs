@@ -126,6 +126,9 @@ namespace SistVehiculo.Controllers
             pa_RetornaVehiculosID_Result modeloVista = new pa_RetornaVehiculosID_Result();
             modeloVista = this.modeloBD.pa_RetornaVehiculosID(idVehiculos).FirstOrDefault();
 
+            AgregaTipoVehiculoViewBag();
+            AgregaMarcaVehiculoViewBag();
+
             return View(modeloVista);
 
         }
@@ -169,7 +172,9 @@ namespace SistVehiculo.Controllers
 
             Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
 
-           
+            AgregaTipoVehiculoViewBag();
+            AgregaMarcaVehiculoViewBag();
+
             return View(modeloVista);
         }
 
@@ -206,7 +211,7 @@ namespace SistVehiculo.Controllers
                 }
                 else
                 {
-                    mensaje += ".No se pudo eliminar";
+                    mensaje += " No se pudo eliminar";
                 }
             }
 
