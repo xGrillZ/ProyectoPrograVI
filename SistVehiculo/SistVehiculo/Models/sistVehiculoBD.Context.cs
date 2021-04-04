@@ -726,5 +726,34 @@ namespace SistVehiculo.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaEncabezadoFactura_Result>("pa_RetornaEncabezadoFactura", num_facturaParameter, estadoParameter);
         }
+    
+        public virtual int pa_ModificaVehiculos(Nullable<int> idVehiculos, string placa, Nullable<int> tipoVehiculo, Nullable<int> marcaVehiculo, Nullable<int> numeroPuerta, Nullable<int> numeroRueda)
+        {
+            var idVehiculosParameter = idVehiculos.HasValue ?
+                new ObjectParameter("idVehiculos", idVehiculos) :
+                new ObjectParameter("idVehiculos", typeof(int));
+    
+            var placaParameter = placa != null ?
+                new ObjectParameter("placa", placa) :
+                new ObjectParameter("placa", typeof(string));
+    
+            var tipoVehiculoParameter = tipoVehiculo.HasValue ?
+                new ObjectParameter("tipoVehiculo", tipoVehiculo) :
+                new ObjectParameter("tipoVehiculo", typeof(int));
+    
+            var marcaVehiculoParameter = marcaVehiculo.HasValue ?
+                new ObjectParameter("marcaVehiculo", marcaVehiculo) :
+                new ObjectParameter("marcaVehiculo", typeof(int));
+    
+            var numeroPuertaParameter = numeroPuerta.HasValue ?
+                new ObjectParameter("numeroPuerta", numeroPuerta) :
+                new ObjectParameter("numeroPuerta", typeof(int));
+    
+            var numeroRuedaParameter = numeroRueda.HasValue ?
+                new ObjectParameter("numeroRueda", numeroRueda) :
+                new ObjectParameter("numeroRueda", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ModificaVehiculos", idVehiculosParameter, placaParameter, tipoVehiculoParameter, marcaVehiculoParameter, numeroPuertaParameter, numeroRuedaParameter);
+        }
     }
 }

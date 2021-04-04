@@ -523,6 +523,14 @@
           <Parameter Name="idCliente" Type="int" Mode="In" />
           <Parameter Name="ultimoIngreso" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="pa_ModificaVehiculos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idVehiculos" Type="int" Mode="In" />
+          <Parameter Name="placa" Type="nvarchar" Mode="In" />
+          <Parameter Name="tipoVehiculo" Type="int" Mode="In" />
+          <Parameter Name="marcaVehiculo" Type="int" Mode="In" />
+          <Parameter Name="numeroPuerta" Type="int" Mode="In" />
+          <Parameter Name="numeroRueda" Type="int" Mode="In" />
+        </Function>
         <Function Name="pa_RetornaClasificacionSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="varchar" Mode="In" />
         </Function>
@@ -1345,6 +1353,14 @@
           <FunctionImport Name="pa_RetornaEncabezadoFactura" ReturnType="Collection(sistvehiculoviModel.pa_RetornaEncabezadoFactura_Result)">
             <Parameter Name="num_factura" Mode="In" Type="String" />
             <Parameter Name="estado" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_ModificaVehiculos">
+            <Parameter Name="idVehiculos" Mode="In" Type="Int32" />
+            <Parameter Name="placa" Mode="In" Type="String" />
+            <Parameter Name="tipoVehiculo" Mode="In" Type="Int32" />
+            <Parameter Name="marcaVehiculo" Mode="In" Type="Int32" />
+            <Parameter Name="numeroPuerta" Mode="In" Type="Int32" />
+            <Parameter Name="numeroRueda" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -2390,6 +2406,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_ModificaVehiculos" FunctionName="sistvehiculoviModel.Store.pa_ModificaVehiculos" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

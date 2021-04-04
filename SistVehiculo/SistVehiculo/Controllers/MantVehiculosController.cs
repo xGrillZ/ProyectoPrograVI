@@ -36,6 +36,7 @@ namespace SistVehiculo.Controllers
         {
             AgregaTipoVehiculoViewBag();
             AgregaMarcaVehiculoViewBag();
+
             return View();
         }
        /* bool verificaCodigo(string pCodigo, string pCodigoDos)
@@ -121,9 +122,57 @@ namespace SistVehiculo.Controllers
         }
 
 */
-        public ActionResult ModificarVehiculos()
+        public ActionResult ModificarVehiculos(int idVehiculos )
         {
-            return View();
+            pa_RetornaVehiculosID_Result modeloVista = new pa_RetornaVehiculosID_Result();
+            modeloVista = this.modeloBD.pa_RetornaVehiculosID(idVehiculos).FirstOrDefault();
+
+            return View(modeloVista);
+
+        }
+
+        [HttpPost]
+        public ActionResult ModificarVehiculos(pa_RetornaVehiculosID_Result modeloVista)
+        {
+            ///Variable que registra la cantidad de registros afectados
+            ///si un procedimiento que ejecuta insert, update o delete
+            ///no afecta registros implica que hubo un error
+            int cantRegistrosAfectados = 0;
+            string mensaje = "";
+
+            
+                try
+                {
+                    cantRegistrosAfectados = this.modeloBD.pa_ModificaVehiculos(
+                        modeloVista.idVehiculos,
+                        modeloVista.placa,
+                        modeloVista.tipoVehiculo,
+                        modeloVista.marcaVehiculo,
+                        modeloVista.numeroPuerta,
+                        modeloVista.numeroRueda
+                        );
+                }
+                catch (Exception ex)
+                {
+                    mensaje = "Ocurrió un error: " + ex.Message;
+                }
+                finally
+                {
+                    if (cantRegistrosAfectados > 0)
+                    {
+                        mensaje = " Registro modificado";
+                    }
+                    else
+                    {
+                        mensaje += " No se pudo modificar";
+                    }
+                }
+                      
+
+            Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
+
+           
+            return View(modeloVista);
         }
 
         public ActionResult EliminarVehiculos(int idVehiculos)
