@@ -9,13 +9,6 @@
 
 <h2>Modificar Vehículo</h2>
 
-<!--modeloVista.idVehiculos,
-                        modeloVista.placa,
-                        modeloVista.tipoVehiculo,
-                        modeloVista.marcaVehiculo,
-                        modeloVista.numeroPuerta,
-                        modeloVista.numeroRueda-->
-
 
 <form id="frmModificaVehiculo" method="post">
     <div class="form-group">
@@ -31,9 +24,16 @@
                 foreach (SistVehiculo.Models.pa_RetornaTiposVehiculo_Result tipo in ViewBag.ListaTipoVehiculo)
 
                 {
+                    bool estipoVehiculo = tipo.idTipoVehiculo == Model.tipoVehiculo;
 
-
-                    <option value="@tipo.idTipoVehiculo">@tipo.tipo.ToUpper()</option>
+                    if (estipoVehiculo)
+                    {
+                        <option value="@tipo.idTipoVehiculo" selected>@tipo.tipo.ToUpper()</option>
+                    }
+                    else
+                    {
+                        <option value="@tipo.idTipoVehiculo" >@tipo.tipo.ToUpper()</option>
+                    }
                 }
             }
         </select>
@@ -45,13 +45,21 @@
             @{
                 foreach (SistVehiculo.Models.pa_RetornaMarcaVehiculo_Result marca in ViewBag.ListaMarcaVehiculo)
 
-
-
                 {
+                    bool esMarcaVehiculo = marca.idMarcaVehiculo == Model.marcaVehiculo;
 
-
-                    <option value="@marca.idMarcaVehiculo">@marca.marca.ToUpper()</option>
+                    if (esMarcaVehiculo)
+                    {
+                        <option value="@marca.idMarcaVehiculo" selected>@marca.marca.ToUpper()</option>
+                        }
+                    else
+                    {
+                     <option value="@marca.idMarcaVehiculo" >@marca.marca.ToUpper()</option>
+                    }
                 }
+
+
+            }
             }
         </select>
     </div>
