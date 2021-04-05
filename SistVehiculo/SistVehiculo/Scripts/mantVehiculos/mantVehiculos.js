@@ -37,26 +37,24 @@ function validacionModifica() {
         ///objeto que contiene "las condiciones" que el formulario
         ///debe cumplir para ser considerado válido
         rules: {
-            marca: {
+            placa: {
                 required: true,
-                maxlength: 100
+                maxlength: 50
             },
-            tipo: {
-                required: true,
-                
+            tipoVehiculo: {
+                required: true                
             },
-            tipoVeh: {
+            marcaVehiculo: {
                 required: true,
                 
             },
             numeroPuerta: {
                 required: true,
-                number: true,
+                
             },
             numeroRueda: {
                 required: true,
-                number: true,
-            }, 
+            },
 
         }
     });
