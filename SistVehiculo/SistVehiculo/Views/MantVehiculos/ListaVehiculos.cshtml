@@ -9,6 +9,19 @@
 <h2>Lista de Vehículos</h2>
 <a href="~/MantVehiculos/InsertarVehiculos">Agregar nuevo Vehículo</a>
 
+<form id="frmBusquedaListaVehiculos" method="post">
+    <div class="row">
+        <div class="form-group col">
+            <label>Placa:</label>
+            <input type="text" name="placa" id="placa" class="form-control" />
+        </div>
+
+        <div class="form-group col">
+            <button type="submit" id="btnAceptar" class="btn btn-info"><i class="fas fa-search"></i> Buscar por placa</button>
+        </div>
+    </div>
+</form>
+
 <table class="table">
     <tr>
         <th>Placa</th>
