@@ -268,7 +268,7 @@ function procesarResultadoDatosCliente(data) {
     lblCedula.empty();
     lblTelefono.empty();
 
-    ///Recorrido de los registros obtenidos
+    ///Recorrido de los registros obtenidosasdas
     $(data).each(function () {
         ///Obtenemos el objeto de tipo Canton haciendo uso de la claúsula "this"
         ///ahora podemos acceder a todas las propiedades por ejemplo
