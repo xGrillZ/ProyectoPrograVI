@@ -439,6 +439,9 @@
         <Function Name="pa_EliminaVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idVehiculos" Type="int" Mode="In" />
         </Function>
+        <Function Name="pa_EliminaVehiculosCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="placa" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="pa_InsertaCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nomCliente" Type="nvarchar" Mode="In" />
           <Parameter Name="ape1Cliente" Type="nvarchar" Mode="In" />
@@ -1390,7 +1393,10 @@
           <Parameter Name="marcaVehiculo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_RetornaVehiculosList" ReturnType="Collection(sistvehiculoviModel.pa_RetornaVehiculosList_Result)">
-            <Parameter Name="placa" Mode="In" Type="String" />
+          <Parameter Name="placa" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_EliminaVehiculosCliente">
+          <Parameter Name="placa" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -2613,6 +2619,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_EliminaVehiculosCliente" FunctionName="sistvehiculoviModel.Store.pa_EliminaVehiculosCliente" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

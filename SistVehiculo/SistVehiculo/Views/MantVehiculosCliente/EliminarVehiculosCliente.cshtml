@@ -10,41 +10,37 @@
     Layout = "~/Views/Shared/_LayoutPersonalizado.cshtml";
 }
 
-<h2>Eliminar Vehículo</h2>
+<h2>Eliminar Vehículo de Cliente</h2>
 
 
 <form id="frmEliminaVehiculoCliente" method="post">
     <div class="form-group">
-        <label>Id de Vehiculo:</label>
-        <input type="text" name="idVehiculos" id="idVehiculos" class="form-control" value="@Model.idVehiculos" readonly />
+        <label>Nombre Cliente:</label>
+        <input type="text" name="nomCliente" id="nomCliente" class="form-control" value="@Model.nomCliente" readonly />
+    </div>
+    <div class="form-group">
+        <label>Número Cédula:</label>
+        <input type="text" name="numCedula" id="numCedula" class="form-control" value="@Model.numCedula" readonly />
     </div>
     <div class="form-group">
         <label>Placa:</label>
         <input type="text" name="placa" id="placa" class="form-control" value="@Model.placa" readonly />
     </div>
     <div class="form-group">
-        <label>Tipo de Vehiculo:</label>
-        <input type="text" name="tipoVehiculo" id="tipoVehiculo" class="form-control" value="@Model.tipoVehiculo" readonly />
-    </div>
-    <div class="form-group">
-        <label>Marca Vehiculo:</label>
+        <label>Marca Vehículo:</label>
         <input type="text" name="marcaVehiculo" id="marcaVehiculo" class="form-control" value="@Model.marcaVehiculo" readonly />
     </div>
     <div class="form-group">
-        <label>Número de Puertas:</label>
-        <input type="text" name="numeroPuerta" id="numeroPuerta" class="form-control" value="@Model.numeroPuerta" readonly />
-    </div>
-    <div class="form-group">
-        <label>Número de Ruedas:</label>
-        <input type="text" name="numeroRueda" id="numeroRueda" class="form-control" value="@Model.numeroRueda" readonly />
+        <label>Tipo Vehículo:</label>
+        <input type="text" name="tipo" id="tipo" class="form-control" value="@Model.tipo" readonly />
     </div>
     <div class="form-group">
         <input type="submit" value="Eliminar" id="btnAceptar" />
     </div>
-    <a href="~/MantVehiculos/ListaVehiculos">Regresar a la lista</a>
+    <a href="~/MantVehiculosCliente/ListaVehiculosCliente">Regresar a la lista</a>
 </form>
 
 @section scripts{
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
-    <script src="~/Scripts/mantVehiculos/mantVehiculos.js"></script>
+    <script src="~/Scripts/mantVehiculosCliente/mantVehiculosCliente.js"></script>
 }

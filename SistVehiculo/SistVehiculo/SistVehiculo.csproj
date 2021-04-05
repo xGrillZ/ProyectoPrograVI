@@ -391,6 +391,7 @@
     <Content Include="Scripts\mantServiciosProductos\mantServiciosProductos.js" />
     <Content Include="Scripts\mantTiposVehiculos\mantTiposVehiculos.js" />
     <Content Include="Scripts\mantVehiculoCliente\mantVehiculoCliente.js" />
+    <Content Include="Scripts\mantVehiculosCliente\mantVehiculosCliente.js" />
     <Content Include="Scripts\mantVehiculos\mantVehiculos.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\PagPrincipal\pagPrincipal.js" />

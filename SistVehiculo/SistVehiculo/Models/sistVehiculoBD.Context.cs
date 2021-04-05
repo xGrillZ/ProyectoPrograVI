@@ -800,5 +800,14 @@ namespace SistVehiculo.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaVehiculosList_Result>("pa_RetornaVehiculosList", placaParameter);
         }
+    
+        public virtual int pa_EliminaVehiculosCliente(string placa)
+        {
+            var placaParameter = placa != null ?
+                new ObjectParameter("placa", placa) :
+                new ObjectParameter("placa", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_EliminaVehiculosCliente", placaParameter);
+        }
     }
 }
