@@ -1,7 +1,43 @@
 ﻿
+@model List <SistVehiculo.Models.pa_RetornaVehiculosxIDCliente_Result>
+
 @{
-    ViewBag.Title = "ListaVehiculosCliente";
+    ViewBag.Title = "Lista Vehículos Clientes";
+    Layout = "~/Views/Shared/_LayoutPersonalizado.cshtml";
 }
 
-<h2>ListaVehiculosCliente</h2>
+<h2>Lista de Vehículos</h2>
+<a href="~/MantVehiculosCliente/InsertarVehiculosCliente">Agregar nuevo Vehículo de cliente</a>
 
+<table class="table">
+    <tr>
+
+        <th>Nombre Cliente</th>
+        <th>Número Cédula</th>
+        <th>Placa</th>
+        <th>Marca de Vehiculo</th>
+        <th>Tipo de Vehiculo</th>
+        <th>Número Teléfono</th>
+        <th>Email</th>
+    </tr>
+
+    @{
+        foreach (SistVehiculo.Models.pa_RetornaVehiculosxIDCliente_Result posicionModelo in this.Model)
+        {
+        <tr>
+            <td>@posicionModelo.nomCliente</td>
+            <td>@posicionModelo.numCedula</td>
+            <td>@posicionModelo.placa</td>
+            <td>@posicionModelo.marcaVehiculo</td>
+            <td>@posicionModelo.tipo</td>
+            <td>@posicionModelo.pTelefono</td>
+            <td>@posicionModelo.email</td>
+            <td>
+                <a href="~/MantVehiculosCliente/ModificarVehiculosCliente?idCliente=@posicionModelo.idCliente">Modificar</a>
+                <br />
+                <a href="~/MantVehiculosCliente/EliminarVehiculosCliente?idCliente=@posicionModelo.idCliente">Eliminar</a>
+            </td>
+        </tr>
+        }
+    }
+</table>

@@ -13,7 +13,13 @@ namespace SistVehiculo.Controllers
         // GET: MantVehiculosCliente
         public ActionResult ListaVehiculosCliente()
         {
-            return View();
+            ///Variable que contiene los registros obtenidos
+            List<pa_RetornaVehiculosxIDCliente_Result> modeloVista = new List<pa_RetornaVehiculosxIDCliente_Result>();
+            ///Asígnación a la variable el resultado de la invocación del procedimiento almacenado
+            modeloVista = this.modeloBD.pa_RetornaVehiculosxIDCliente(null).ToList();
+
+            ///Enviar a la vista el modelo
+            return View(modeloVista);
         }
         public ActionResult InsertarVehiculosCliente()
         {
