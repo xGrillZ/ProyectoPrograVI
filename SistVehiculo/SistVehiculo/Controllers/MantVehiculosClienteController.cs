@@ -21,14 +21,75 @@ namespace SistVehiculo.Controllers
             ///Enviar a la vista el modelo
             return View(modeloVista);
         }
+
+        void AgregaTipoVehiculoViewBag()
+        {
+            this.ViewBag.ListaTipoVehiculo = this.modeloBD.pa_RetornaTiposVehiculo("", "").ToList();
+        }
+
+        void AgregaMarcaVehiculoViewBag()
+        {
+            this.ViewBag.ListaMarcaVehiculo = this.modeloBD.pa_RetornaMarcaVehiculo("", "", "").ToList();
+        }
         public ActionResult InsertarVehiculosCliente()
         {
             return View();
         }
 
-        public ActionResult ModificarVehiculosCliente()
+        public ActionResult ModificarVehiculosCliente(int idVehiculosCliente)
         {
-            return View();
+            pa_RetornaVehiculosClienteID_Result modeloVista = new pa_RetornaVehiculosClienteID_Result();
+            modeloVista = this.modeloBD.pa_RetornaVehiculosClienteID(idVehiculosCliente).FirstOrDefault();
+
+            AgregaTipoVehiculoViewBag();
+            AgregaMarcaVehiculoViewBag();
+
+            return View(modeloVista);
+        }
+
+        [HttpPost]
+        public ActionResult ModificarVehiculosCliente(pa_RetornaVehiculosClienteID_Result modeloVista)
+        {
+            ///Variable que registra la cantidad de registros afectados
+            ///si un procedimiento que ejecuta insert, update o delete
+            ///no afecta registros implica que hubo un error
+            int cantRegistrosAfectados = 0;
+            string mensaje = "";
+
+            try
+            {
+                cantRegistrosAfectados = this.modeloBD.pa_ModificaVehiculosCliente(
+                    modeloVista.idVehiculosCliente,
+                    modeloVista.placa,
+                    modeloVista.tipoVehiculo,
+                    modeloVista.marcaVehiculo,
+                    modeloVista.numeroPuerta,
+                    modeloVista.numeroRueda
+                    );
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Ocurrió un error: " + ex.Message;
+            }
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    mensaje = " Registro modificado";
+                }
+                else
+                {
+                    mensaje += " No se pudo modificar";
+                }
+            }
+
+
+            Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
+
+            AgregaTipoVehiculoViewBag();
+            AgregaMarcaVehiculoViewBag();
+
+            return View(modeloVista);
         }
 
         public ActionResult EliminarVehiculosCliente(int idCliente)

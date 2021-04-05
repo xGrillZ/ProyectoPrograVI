@@ -534,6 +534,14 @@
           <Parameter Name="numeroPuerta" Type="int" Mode="In" />
           <Parameter Name="numeroRueda" Type="int" Mode="In" />
         </Function>
+        <Function Name="pa_ModificaVehiculosCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idVehiculos" Type="int" Mode="In" />
+          <Parameter Name="placa" Type="nvarchar" Mode="In" />
+          <Parameter Name="tipoVehiculo" Type="int" Mode="In" />
+          <Parameter Name="marcaVehiculo" Type="int" Mode="In" />
+          <Parameter Name="numeroPuerta" Type="int" Mode="In" />
+          <Parameter Name="numeroRueda" Type="int" Mode="In" />
+        </Function>
         <Function Name="pa_RetornaClasificacionSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="varchar" Mode="In" />
         </Function>
@@ -1397,6 +1405,14 @@
           </FunctionImport>
           <FunctionImport Name="pa_EliminaVehiculosCliente">
           <Parameter Name="placa" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_ModificaVehiculosCliente">
+            <Parameter Name="idVehiculos" Mode="In" Type="Int32" />
+            <Parameter Name="placa" Mode="In" Type="String" />
+            <Parameter Name="tipoVehiculo" Mode="In" Type="Int32" />
+            <Parameter Name="marcaVehiculo" Mode="In" Type="Int32" />
+            <Parameter Name="numeroPuerta" Mode="In" Type="Int32" />
+            <Parameter Name="numeroRueda" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -2620,6 +2636,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_EliminaVehiculosCliente" FunctionName="sistvehiculoviModel.Store.pa_EliminaVehiculosCliente" />
+          <FunctionImportMapping FunctionImportName="pa_ModificaVehiculosCliente" FunctionName="sistvehiculoviModel.Store.pa_ModificaVehiculosCliente" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
