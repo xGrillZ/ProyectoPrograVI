@@ -1,5 +1,5 @@
 ﻿<!--Indicar a la vista el modelo-->
-@model List<SistVehiculo.Models.pa_RetornaVehiculos_Result>
+@model List<SistVehiculo.Models.pa_RetornaVehiculosList_Result>
 
 @{
     ViewBag.Title = "Lista de Vehículos";
@@ -11,6 +11,7 @@
 
 <table class="table">
     <tr>
+        <th>Placa</th>
         <th>Marca</th>
         <th>Tipo de Vehículo</th>
         <th>Número de puertas</th>
@@ -20,9 +21,10 @@
     </tr>
 
     @{
-        foreach (SistVehiculo.Models.pa_RetornaVehiculos_Result posicionModelo in this.Model)
+        foreach (SistVehiculo.Models.pa_RetornaVehiculosList_Result posicionModelo in this.Model)
         {
             <tr>
+                <td>@posicionModelo.placa</td>
                 <td>@posicionModelo.marca</td>
                 <td>@posicionModelo.tipoVehiculo</td>
                 <td>@posicionModelo.numeroPuerta</td>
