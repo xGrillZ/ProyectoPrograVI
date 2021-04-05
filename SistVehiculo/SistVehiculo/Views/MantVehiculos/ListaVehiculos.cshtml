@@ -16,8 +16,7 @@
         <th>Tipo de Vehículo</th>
         <th>Número de puertas</th>
         <th>Número de ruedas</th>
-        <th>Tipo</th>
-        <th>Acciones</th>
+       <th>Acciones</th>
     </tr>
 
     @{
@@ -26,10 +25,9 @@
             <tr>
                 <td>@posicionModelo.placa</td>
                 <td>@posicionModelo.marca</td>
-                <td>@posicionModelo.tipoVehiculo</td>
+                <td>@posicionModelo.tipo</td>
                 <td>@posicionModelo.numeroPuerta</td>
                 <td>@posicionModelo.numeroRueda</td>
-                <td>@posicionModelo.tipo</td>
                 <td>
                     <a href="~/MantVehiculos/ModificarVehiculos?idVehiculos=@posicionModelo.idVehiculos">Modificar</a>
                     <br />
