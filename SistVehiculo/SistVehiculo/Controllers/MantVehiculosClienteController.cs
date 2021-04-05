@@ -31,8 +31,68 @@ namespace SistVehiculo.Controllers
         {
             this.ViewBag.ListaMarcaVehiculo = this.modeloBD.pa_RetornaMarcaVehiculo("", "", "").ToList();
         }
+
+        void AgregaClienteViewBag()
+        {
+            this.ViewBag.ListaCliente = this.modeloBD.pa_RetornaCliente("", "", "", "").ToList();
+        }
+        void AgregaVehiculosViewBag()
+        {
+            this.ViewBag.ListaVehiculos = this.modeloBD.pa_RetornaVehiculos("").ToList();
+        }        
+
         public ActionResult InsertarVehiculosCliente()
         {
+
+            AgregaTipoVehiculoViewBag();
+            AgregaMarcaVehiculoViewBag();
+            AgregaClienteViewBag();
+            AgregaVehiculosViewBag();
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult InsertarVehiculosCliente(pa_RetornaVehiculosxIDCliente_Result modeloVista)
+        {
+            ///Variable que registra la cantidad de registros afectados
+            ///si un procedimiento que ejecuta insert, update o delete
+            ///no afecta registros implica que hubo un error
+            int cantRegistrosAfectados = 0;
+            string mensaje = "";
+
+            try
+            {
+                cantRegistrosAfectados = this.modeloBD.pa_InsertaVehiculosCliente(
+                    modeloVista.idVehiculo,
+                    modeloVista.idCliente                    
+                    );
+
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Ocurrió un error: " + ex.Message;
+            }
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    mensaje = "Registro insertado";
+                }
+                else
+                {
+                    mensaje += " No se pudo insertar";
+                }
+            }
+
+
+            Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
+
+            AgregaTipoVehiculoViewBag();
+            AgregaMarcaVehiculoViewBag();
+            AgregaClienteViewBag();
+            AgregaVehiculosViewBag();
+
             return View();
         }
 

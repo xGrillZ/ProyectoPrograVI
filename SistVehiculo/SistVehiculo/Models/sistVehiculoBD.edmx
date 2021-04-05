@@ -480,6 +480,10 @@
           <Parameter Name="tipoVehiculo" Type="int" Mode="In" />
           <Parameter Name="marcaVehiculo" Type="int" Mode="In" />
         </Function>
+        <Function Name="pa_InsertaVehiculosCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idVehiculo" Type="int" Mode="In" />
+          <Parameter Name="idCliente" Type="int" Mode="In" />
+        </Function>
         <Function Name="pa_ModificaCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idCliente" Type="int" Mode="In" />
           <Parameter Name="nomCliente" Type="nvarchar" Mode="In" />
@@ -1413,6 +1417,10 @@
             <Parameter Name="marcaVehiculo" Mode="In" Type="Int32" />
             <Parameter Name="numeroPuerta" Mode="In" Type="Int32" />
             <Parameter Name="numeroRueda" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_InsertaVehiculosCliente">
+            <Parameter Name="idVehiculo" Mode="In" Type="Int32" />
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -2637,6 +2645,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_EliminaVehiculosCliente" FunctionName="sistvehiculoviModel.Store.pa_EliminaVehiculosCliente" />
           <FunctionImportMapping FunctionImportName="pa_ModificaVehiculosCliente" FunctionName="sistvehiculoviModel.Store.pa_ModificaVehiculosCliente" />
+          <FunctionImportMapping FunctionImportName="pa_InsertaVehiculosCliente" FunctionName="sistvehiculoviModel.Store.pa_InsertaVehiculosCliente" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
