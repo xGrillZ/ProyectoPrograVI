@@ -195,6 +195,9 @@
     <Compile Include="Models\pa_RetornaMarcaVehiculoID_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pa_RetornaMarcaVehiculoxPlaca_Result.cs">
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pa_RetornaMarcaVehiculo_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
@@ -222,6 +225,9 @@
     <Compile Include="Models\pa_RetornaTiposVehiculo_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pa_RetornaTipoVehiculoxMarca_Result.cs">
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pa_RetornaVehiculosClienteID_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
@@ -232,6 +238,9 @@
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaVehiculosInsert_Result.cs">
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_RetornaVehiculosxIDCliente_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaVehiculos_Result.cs">
@@ -375,6 +384,7 @@
     <Content Include="Scripts\mantClientes\mantClientes.js" />
     <Content Include="Scripts\mantClientes\modificaClientes.js" />
     <Content Include="Scripts\mantClientes\reporteClientes.js" />
+    <Content Include="Scripts\mantFacturas\mantFacturas.js" />
     <Content Include="Scripts\mantServiciosProductos\mantServiciosProductos.js" />
     <Content Include="Scripts\mantTiposVehiculos\mantTiposVehiculos.js" />
     <Content Include="Scripts\mantVehiculoCliente\mantVehiculoCliente.js" />
@@ -511,6 +521,7 @@
     <Content Include="Views\MantVehiculos\RpServicioVehiculo.cshtml" />
     <Content Include="Views\Facturas\ListaEncabezadoFacturas.cshtml" />
     <Content Include="Views\MantFacturas\ListaEncabezado.cshtml" />
+    <Content Include="Views\MantFacturas\InsertaEncabezado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
