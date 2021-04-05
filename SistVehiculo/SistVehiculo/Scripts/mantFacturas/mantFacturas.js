@@ -275,14 +275,13 @@ function procesarResultadoDatosCliente(data) {
         ///cantonActual.nombre nos retorna el nombre del canton
         var tipoDatosClienteActual = this;
         ///Creación de la nueva opción de la lista, con el valor ID de provincia y Nombre de la provincia
-        nuevaOpcion = $("#correo").val(tipoDatosClienteActual.email);
-        ///Agregamos la opción al dropdownlist
-        lblCorreo.append(nuevaOpcion);
+        nuevaOpcion = tipoDatosClienteActual.email;
+        lblCorreo.val(nuevaOpcion);
 
-        nuevaOpcionDos = $("#numCedula").val(tipoDatosClienteActual.numCedula);
-        lblCedula.append(nuevaOpcionDos);
+        nuevaOpcionDos = tipoDatosClienteActual.numCedula;
+        lblCedula.val(nuevaOpcionDos);
 
-        nuevaOpcionTres = $("#pTelefono").val(tipoDatosClienteActual.pTelefono);
-        lblTelefono.append(nuevaOpcionTres);
+        nuevaOpcionTres = tipoDatosClienteActual.pTelefono;
+        lblTelefono.val(nuevaOpcionTres);
     });
 }

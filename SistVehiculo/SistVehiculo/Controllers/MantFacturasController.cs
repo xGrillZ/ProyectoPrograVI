@@ -50,7 +50,7 @@ namespace SistVehiculo.Controllers
         public ActionResult RetornaClienteID(int idCliente)
         {
             List<pa_RetornaClienteID_Result> clienteID = this.modeloBD.pa_RetornaClienteID(idCliente).ToList();
-            return Json(clienteID);
+            return Json(clienteID, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult InsertaEncabezado()
