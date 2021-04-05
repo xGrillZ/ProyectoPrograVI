@@ -92,10 +92,10 @@ namespace SistVehiculo.Controllers
             return View(modeloVista);
         }
 
-        public ActionResult EliminarVehiculosCliente(int idCliente)
+        public ActionResult EliminarVehiculosCliente(int idVehiculosCliente)
         {
             pa_RetornaVehiculosClienteID_Result modeloVista = new pa_RetornaVehiculosClienteID_Result();
-            modeloVista = this.modeloBD.pa_RetornaVehiculosClienteID(idCliente).FirstOrDefault();
+            modeloVista = this.modeloBD.pa_RetornaVehiculosClienteID(idVehiculosCliente).FirstOrDefault();
 
             return View(modeloVista);
         }
