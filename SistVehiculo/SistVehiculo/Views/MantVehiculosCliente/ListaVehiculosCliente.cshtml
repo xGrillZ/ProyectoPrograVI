@@ -13,8 +13,8 @@
 <form id="frmBusquedaListaVehiculosCliente" method="post">
     <div class="row">
         <div class="form-group col">
-            <label>Placa:</label>
-            <input type="text" name="placa" id="placa" class="form-control" />
+            <label>ID Cliente:</label>
+            <input type="text" name="idCliente" id="idCliente" class="form-control" />
         </div>
         
         <div class="form-group col">
@@ -28,7 +28,7 @@
 
 <table class="table">
     <tr>
-
+        <th>ID Cliente</th>
         <th>Nombre Cliente</th>
         <th>Número Cédula</th>
         <th>Placa</th>
@@ -42,6 +42,7 @@
         foreach (SistVehiculo.Models.pa_RetornaVehiculosxIDCliente_Result posicionModelo in this.Model)
         {
             <tr>
+                <td>@posicionModelo.idCliente</td>
                 <td>@posicionModelo.nomCliente</td>
                 <td>@posicionModelo.numCedula</td>
                 <td>@posicionModelo.placa</td>

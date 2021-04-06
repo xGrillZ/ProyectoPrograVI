@@ -526,6 +526,9 @@
     <Content Include="Views\Facturas\ListaEncabezadoFacturas.cshtml" />
     <Content Include="Views\MantFacturas\ListaEncabezado.cshtml" />
     <Content Include="Views\MantFacturas\InsertaEncabezado.cshtml" />
+    <Content Include="Views\MantClientes\RpServiciosClienteConsultor.cshtml" />
+    <Content Include="Views\MantVehiculos\RpServicioVehiculoConsultor.cshtml" />
+    <Content Include="Views\MantVehiculosCliente\RpVehiculosClienteConsultor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

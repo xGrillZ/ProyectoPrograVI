@@ -22,7 +22,12 @@ namespace SistVehiculo.Models
             : base("name=sistvehiculoviEntities")
         {
         }
-    
+
+        internal object pa_RetornaVehiculosxIDCliente()
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
