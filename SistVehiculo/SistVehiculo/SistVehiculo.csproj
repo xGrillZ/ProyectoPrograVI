@@ -390,6 +390,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Logeo\Logeo.js" />
     <Content Include="Scripts\Logeo\verificacion.js" />
+    <Content Include="Scripts\mantClientesConsultores\reporteClientesConsultores.js" />
     <Content Include="Scripts\mantClientes\mantClientes.js" />
     <Content Include="Scripts\mantClientes\modificaClientes.js" />
     <Content Include="Scripts\mantClientes\reporteClientes.js" />
@@ -539,7 +540,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\mantClientesConsultores\" />
     <Folder Include="Views\Sesion\" />
   </ItemGroup>
   <ItemGroup>
