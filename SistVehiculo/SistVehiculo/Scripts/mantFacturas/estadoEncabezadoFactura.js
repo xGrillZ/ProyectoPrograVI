@@ -66,6 +66,12 @@ function validacionEstadoEncabezado() {
         var ddlEstado = $("#estado");
         ddlEstado.attr("readonly", "readonly");
 
+        var botonModificar = $("#btnModificar");
+        botonModificar.attr("readonly", "readonly");
+
+        var botonDetalle = $("#btnDetalle");
+        botonDetalle.attr("readonly", "readonly");
+
     } else {
         alert("Encabezado No Vencido");
     }
