@@ -86,7 +86,8 @@
           <Property Name="fecha" Type="datetime" Nullable="false" />
           <Property Name="montoTotal" Type="float" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
-          <Property Name="idVehiculosCliente" Type="int" Nullable="false" />
+          <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="idVehiculo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Genero">
           <Key>
@@ -304,15 +305,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Factura_VehiculosCliente">
-          <End Role="VehiculosCliente" Type="Self.VehiculosCliente" Multiplicity="1" />
+        <Association Name="FK_Factura_idCliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
           <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="VehiculosCliente">
-              <PropertyRef Name="idVehiculosCliente" />
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
             </Principal>
             <Dependent Role="Factura">
-              <PropertyRef Name="idVehiculosCliente" />
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_idVehiculo">
+          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculos">
+              <PropertyRef Name="idVehiculos" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="idVehiculo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -458,6 +471,14 @@
           <Parameter Name="ultimoIngreso" Type="datetime" Mode="In" />
           <Parameter Name="contrasena" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="pa_InsertaEncabezadoFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="num_factura" Type="nvarchar" Mode="In" />
+          <Parameter Name="fecha" Type="datetime" Mode="In" />
+          <Parameter Name="montoTotal" Type="float" Mode="In" />
+          <Parameter Name="estado" Type="int" Mode="In" />
+          <Parameter Name="idCliente" Type="int" Mode="In" />
+          <Parameter Name="idVehiculo" Type="int" Mode="In" />
+        </Function>
         <Function Name="pa_InsertaMarcaVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="codigo" Type="nvarchar" Mode="In" />
           <Parameter Name="idPaisFabricante" Type="int" Mode="In" />
@@ -566,6 +587,12 @@
           <Parameter Name="num_factura" Type="nvarchar" Mode="In" />
           <Parameter Name="estado" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="pa_RetornaEncabezadoFacturaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_Factura" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_RetornaEstadoFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="nomEstado" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="pa_RetornaGenero" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="varchar" Mode="In" />
         </Function>
@@ -578,7 +605,7 @@
           <Parameter Name="idMarcaVehiculo" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_RetornaMarcaVehiculoxPlaca" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="placa" Type="varchar" Mode="In" />
+          <Parameter Name="idVehiculo" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_RetornaPaisFabricante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="pais" Type="varchar" Mode="In" />
@@ -724,8 +751,12 @@
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Factura" EntitySet="Factura" />
           </AssociationSet>
-          <AssociationSet Name="FK_Factura_VehiculosCliente" Association="Self.FK_Factura_VehiculosCliente">
-            <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
+          <AssociationSet Name="FK_Factura_idCliente" Association="Self.FK_Factura_idCliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_idVehiculo" Association="Self.FK_Factura_idVehiculo">
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
             <End Role="Factura" EntitySet="Factura" />
           </AssociationSet>
           <AssociationSet Name="FK_MarcaVehiculo_PaisFabricante" Association="Self.FK_MarcaVehiculo_PaisFabricante">
@@ -812,6 +843,7 @@
           <NavigationProperty Name="TipoCliente1" Relationship="Self.FK_Cliente_TipoCliente" FromRole="Cliente" ToRole="TipoCliente" />
           <NavigationProperty Name="VehiculosCliente" Relationship="Self.FK_VehiculosCliente_Cliente" FromRole="Cliente" ToRole="VehiculosCliente" />
           <NavigationProperty Name="ServiciosCliente" Relationship="sistvehiculoviModel.FK_ServiciosCliente_Cliente" FromRole="Cliente" ToRole="ServiciosCliente" />
+          <NavigationProperty Name="Factura" Relationship="sistvehiculoviModel.FK_Factura_idCliente" FromRole="Cliente" ToRole="Factura" />
         </EntityType>
         <EntityType Name="detalle_Factura">
           <Key>
@@ -922,6 +954,7 @@
           <NavigationProperty Name="TiposVehiculo" Relationship="Self.FK_Vehiculos_TiposVehiculo" FromRole="Vehiculos" ToRole="TiposVehiculo" />
           <NavigationProperty Name="VehiculosCliente" Relationship="Self.FK_VehiculosCliente_Vehiculo" FromRole="Vehiculos" ToRole="VehiculosCliente" />
           <NavigationProperty Name="ServiciosVehiculo" Relationship="sistvehiculoviModel.FK_ServiciosVehiculo_Vehiculo" FromRole="Vehiculos" ToRole="ServiciosVehiculo" />
+          <NavigationProperty Name="Factura" Relationship="sistvehiculoviModel.FK_Factura_idVehiculo" FromRole="Vehiculos" ToRole="Factura" />
         </EntityType>
         <EntityType Name="VehiculosCliente">
           <Key>
@@ -932,7 +965,6 @@
           <Property Name="idCliente" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK_VehiculosCliente_Cliente" FromRole="VehiculosCliente" ToRole="Cliente" />
           <NavigationProperty Name="Vehiculos" Relationship="Self.FK_VehiculosCliente_Vehiculo" FromRole="VehiculosCliente" ToRole="Vehiculos" />
-          <NavigationProperty Name="Factura" Relationship="sistvehiculoviModel.FK_Factura_VehiculosCliente" FromRole="VehiculosCliente" ToRole="Factura" />
         </EntityType>
         <Association Name="Canton_ref_Provincia">
           <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
@@ -1367,23 +1399,6 @@
           <FunctionImport Name="pa_RetornaVehiculosID" ReturnType="Collection(sistvehiculoviModel.pa_RetornaVehiculosID_Result)">
           <Parameter Name="idVehiculos" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="Factura" EntityType="sistvehiculoviModel.Factura" />
-          <AssociationSet Name="FK_factura" Association="sistvehiculoviModel.FK_factura">
-            <End Role="Factura" EntitySet="Factura" />
-            <End Role="detalle_Factura" EntitySet="detalle_Factura" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Factura_Estado" Association="sistvehiculoviModel.FK_Factura_Estado">
-            <End Role="Estado" EntitySet="Estado" />
-            <End Role="Factura" EntitySet="Factura" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Factura_VehiculosCliente" Association="sistvehiculoviModel.FK_Factura_VehiculosCliente">
-            <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
-            <End Role="Factura" EntitySet="Factura" />
-          </AssociationSet>
-          <FunctionImport Name="pa_RetornaEncabezadoFactura" ReturnType="Collection(sistvehiculoviModel.pa_RetornaEncabezadoFactura_Result)">
-            <Parameter Name="num_factura" Mode="In" Type="String" />
-            <Parameter Name="estado" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="pa_ModificaVehiculos">
             <Parameter Name="idVehiculos" Mode="In" Type="Int32" />
             <Parameter Name="placa" Mode="In" Type="String" />
@@ -1397,9 +1412,6 @@
           </FunctionImport>
           <FunctionImport Name="pa_RetornaVehiculosxIDCliente" ReturnType="Collection(sistvehiculoviModel.pa_RetornaVehiculosxIDCliente_Result)">
           <Parameter Name="idCliente" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="pa_RetornaMarcaVehiculoxPlaca" ReturnType="Collection(sistvehiculoviModel.pa_RetornaMarcaVehiculoxPlaca_Result)">
-          <Parameter Name="placa" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_RetornaTipoVehiculoxMarca" ReturnType="Collection(sistvehiculoviModel.pa_RetornaTipoVehiculoxMarca_Result)">
           <Parameter Name="marcaVehiculo" Mode="In" Type="String" />
@@ -1421,6 +1433,44 @@
           <FunctionImport Name="pa_InsertaVehiculosCliente">
             <Parameter Name="idVehiculo" Mode="In" Type="Int32" />
             <Parameter Name="idCliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Factura" EntityType="sistvehiculoviModel.Factura" />
+          <AssociationSet Name="FK_Factura_idCliente" Association="sistvehiculoviModel.FK_Factura_idCliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_factura" Association="sistvehiculoviModel.FK_factura">
+            <End Role="Factura" EntitySet="Factura" />
+            <End Role="detalle_Factura" EntitySet="detalle_Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Estado" Association="sistvehiculoviModel.FK_Factura_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_idVehiculo" Association="sistvehiculoviModel.FK_Factura_idVehiculo">
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <FunctionImport Name="pa_RetornaEstadoFactura" ReturnType="Collection(sistvehiculoviModel.pa_RetornaEstadoFactura_Result)">
+          <Parameter Name="nomEstado" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_RetornaEncabezadoFactura" ReturnType="Collection(sistvehiculoviModel.pa_RetornaEncabezadoFactura_Result)">
+            <Parameter Name="num_factura" Mode="In" Type="String" />
+            <Parameter Name="estado" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_InsertaEncabezadoFactura">
+            <Parameter Name="num_factura" Mode="In" Type="String" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="montoTotal" Mode="In" Type="Double" />
+            <Parameter Name="estado" Mode="In" Type="Int32" />
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+            <Parameter Name="idVehiculo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_RetornaMarcaVehiculoxPlaca" ReturnType="Collection(sistvehiculoviModel.pa_RetornaMarcaVehiculoxPlaca_Result)">
+          <Parameter Name="idVehiculo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_RetornaEncabezadoFacturaID" ReturnType="Collection(sistvehiculoviModel.pa_RetornaEncabezadoFacturaID_Result)">
+            <Parameter Name="id_Factura" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -1795,78 +1845,6 @@
           <Property Type="Int32" Name="numeroPuerta" Nullable="false" />
           <Property Type="Int32" Name="numeroRueda" Nullable="false" />
         </ComplexType>
-        <EntityType Name="Factura">
-          <Key>
-            <PropertyRef Name="id_factura" />
-          </Key>
-          <Property Name="id_factura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="num_factura" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="montoTotal" Type="Double" Nullable="false" />
-          <Property Name="estado" Type="Int32" Nullable="false" />
-          <Property Name="idVehiculosCliente" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="detalle_Factura" Relationship="sistvehiculoviModel.FK_factura" FromRole="Factura" ToRole="detalle_Factura" />
-          <NavigationProperty Name="Estado1" Relationship="sistvehiculoviModel.FK_Factura_Estado" FromRole="Factura" ToRole="Estado" />
-          <NavigationProperty Name="VehiculosCliente" Relationship="sistvehiculoviModel.FK_Factura_VehiculosCliente" FromRole="Factura" ToRole="VehiculosCliente" />
-        </EntityType>
-        <Association Name="FK_factura">
-          <End Type="sistvehiculoviModel.Factura" Role="Factura" Multiplicity="1" />
-          <End Type="sistvehiculoviModel.detalle_Factura" Role="detalle_Factura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Factura">
-              <PropertyRef Name="id_factura" />
-            </Principal>
-            <Dependent Role="detalle_Factura">
-              <PropertyRef Name="num_factura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Factura_Estado">
-          <End Type="sistvehiculoviModel.Estado" Role="Estado" Multiplicity="1" />
-          <End Type="sistvehiculoviModel.Factura" Role="Factura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estado">
-              <PropertyRef Name="id_estado" />
-            </Principal>
-            <Dependent Role="Factura">
-              <PropertyRef Name="estado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Factura_VehiculosCliente">
-          <End Type="sistvehiculoviModel.VehiculosCliente" Role="VehiculosCliente" Multiplicity="1" />
-          <End Type="sistvehiculoviModel.Factura" Role="Factura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VehiculosCliente">
-              <PropertyRef Name="idVehiculosCliente" />
-            </Principal>
-            <Dependent Role="Factura">
-              <PropertyRef Name="idVehiculosCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <ComplexType Name="pa_RetornaEncabezadoFactura_Result">
-          <Property Type="Int32" Name="id_factura" Nullable="false" />
-          <Property Type="String" Name="num_factura" Nullable="false" MaxLength="150" />
-          <Property Type="DateTime" Name="fecha" Nullable="false" Precision="23" />
-          <Property Type="Double" Name="montoTotal" Nullable="false" />
-          <Property Type="Int32" Name="estado" Nullable="false" />
-          <Property Type="String" Name="nomEstado" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="idVehiculosCliente" Nullable="false" />
-          <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="numCedula" Nullable="false" MaxLength="20" />
-          <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="placa" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="numeroPuerta" Nullable="false" />
-          <Property Type="Int32" Name="numeroRueda" Nullable="false" />
-          <Property Type="Int32" Name="tipoVehiculo" Nullable="false" />
-          <Property Type="String" Name="nomTipoVehiculo" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="marcaVehiculo" Nullable="false" />
-          <Property Type="String" Name="nomMarcaVehiculo" Nullable="false" MaxLength="100" />
-        </ComplexType>
         <ComplexType Name="pa_RetornaVehiculosInsert_Result">
           <Property Type="Int32" Name="idVehiculos" Nullable="false" />
           <Property Type="String" Name="placa" Nullable="false" MaxLength="50" />
@@ -1877,26 +1855,6 @@
           <Property Type="Int32" Name="idTipoVehiculo" Nullable="false" />
         </ComplexType>
         <ComplexType Name="pa_RetornaVehiculosxIDCliente_Result">
-          <Property Type="Int32" Name="idVehiculosCliente" Nullable="false" />
-          <Property Type="Int32" Name="idVehiculo" Nullable="false" />
-          <Property Type="String" Name="placa" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="tipoVehiculo" Nullable="false" />
-          <Property Type="String" Name="codigoTipoVehiculo" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="tipo" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="marcaVehiculo" Nullable="false" />
-          <Property Type="String" Name="codigoMarcaVehiculo" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="marca" Nullable="false" MaxLength="100" />
-          <Property Type="Int32" Name="numeroPuerta" Nullable="false" />
-          <Property Type="Int32" Name="numeroRueda" Nullable="false" />
-          <Property Type="Int32" Name="idCliente" Nullable="false" />
-          <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="numCedula" Nullable="false" MaxLength="20" />
-          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="pa_RetornaMarcaVehiculoxPlaca_Result">
           <Property Type="Int32" Name="idVehiculosCliente" Nullable="false" />
           <Property Type="Int32" Name="idVehiculo" Nullable="false" />
           <Property Type="String" Name="placa" Nullable="false" MaxLength="50" />
@@ -1944,6 +1902,140 @@
           <Property Type="Int32" Name="numeroRueda" Nullable="false" />
           <Property Type="String" Name="marca" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="tipo" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="id_factura" />
+          </Key>
+          <Property Name="id_factura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="num_factura" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="montoTotal" Type="Double" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="idVehiculo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="sistvehiculoviModel.FK_Factura_idCliente" FromRole="Factura" ToRole="Cliente" />
+          <NavigationProperty Name="detalle_Factura" Relationship="sistvehiculoviModel.FK_factura" FromRole="Factura" ToRole="detalle_Factura" />
+          <NavigationProperty Name="Estado1" Relationship="sistvehiculoviModel.FK_Factura_Estado" FromRole="Factura" ToRole="Estado" />
+          <NavigationProperty Name="Vehiculos" Relationship="sistvehiculoviModel.FK_Factura_idVehiculo" FromRole="Factura" ToRole="Vehiculos" />
+        </EntityType>
+        <Association Name="FK_Factura_idCliente">
+          <End Type="sistvehiculoviModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="sistvehiculoviModel.Factura" Role="Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_factura">
+          <End Type="sistvehiculoviModel.Factura" Role="Factura" Multiplicity="1" />
+          <End Type="sistvehiculoviModel.detalle_Factura" Role="detalle_Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factura">
+              <PropertyRef Name="id_factura" />
+            </Principal>
+            <Dependent Role="detalle_Factura">
+              <PropertyRef Name="num_factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Estado">
+          <End Type="sistvehiculoviModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="sistvehiculoviModel.Factura" Role="Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_idVehiculo">
+          <End Type="sistvehiculoviModel.Vehiculos" Role="Vehiculos" Multiplicity="1" />
+          <End Type="sistvehiculoviModel.Factura" Role="Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculos">
+              <PropertyRef Name="idVehiculos" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="idVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="pa_RetornaEstadoFactura_Result">
+          <Property Type="Int32" Name="id_estado" Nullable="false" />
+          <Property Type="String" Name="nomEstado" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaEncabezadoFactura_Result">
+          <Property Type="Int32" Name="id_factura" Nullable="false" />
+          <Property Type="String" Name="num_factura" Nullable="false" MaxLength="150" />
+          <Property Type="DateTime" Name="fecha" Nullable="false" Precision="23" />
+          <Property Type="Double" Name="montoTotal" Nullable="false" />
+          <Property Type="Int32" Name="estado" Nullable="false" />
+          <Property Type="String" Name="nomEstado" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="idCliente" Nullable="false" />
+          <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="numCedula" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="idVehiculo" Nullable="false" />
+          <Property Type="String" Name="placa" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="numeroPuerta" Nullable="false" />
+          <Property Type="Int32" Name="numeroRueda" Nullable="false" />
+          <Property Type="Int32" Name="tipoVehiculo" Nullable="false" />
+          <Property Type="String" Name="nomTipoVehiculo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="marcaVehiculo" Nullable="false" />
+          <Property Type="String" Name="nomMarcaVehiculo" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaMarcaVehiculoxPlaca_Result">
+          <Property Type="Int32" Name="idVehiculosCliente" Nullable="false" />
+          <Property Type="Int32" Name="idVehiculo" Nullable="false" />
+          <Property Type="String" Name="placa" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="tipoVehiculo" Nullable="false" />
+          <Property Type="String" Name="codigoTipoVehiculo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tipo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="marcaVehiculo" Nullable="false" />
+          <Property Type="String" Name="codigoMarcaVehiculo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="marca" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="numeroPuerta" Nullable="false" />
+          <Property Type="Int32" Name="numeroRueda" Nullable="false" />
+          <Property Type="Int32" Name="idCliente" Nullable="false" />
+          <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="numCedula" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaEncabezadoFacturaID_Result">
+          <Property Type="Int32" Name="id_factura" Nullable="false" />
+          <Property Type="String" Name="num_factura" Nullable="false" MaxLength="150" />
+          <Property Type="DateTime" Name="fecha" Nullable="false" Precision="23" />
+          <Property Type="Double" Name="montoTotal" Nullable="false" />
+          <Property Type="Int32" Name="estado" Nullable="false" />
+          <Property Type="String" Name="nomEstado" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="idCliente" Nullable="false" />
+          <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="numCedula" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="idVehiculo" Nullable="false" />
+          <Property Type="String" Name="placa" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="numeroPuerta" Nullable="false" />
+          <Property Type="Int32" Name="numeroRueda" Nullable="false" />
+          <Property Type="Int32" Name="tipoVehiculo" Nullable="false" />
+          <Property Type="String" Name="nomTipoVehiculo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="marcaVehiculo" Nullable="false" />
+          <Property Type="String" Name="nomMarcaVehiculo" Nullable="false" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2506,44 +2598,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="Factura">
-            <EntityTypeMapping TypeName="sistvehiculoviModel.Factura">
-              <MappingFragment StoreEntitySet="Factura">
-                <ScalarProperty Name="idVehiculosCliente" ColumnName="idVehiculosCliente" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="montoTotal" ColumnName="montoTotal" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
-                <ScalarProperty Name="id_factura" ColumnName="id_factura" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="pa_RetornaEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_RetornaEncabezadoFactura">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaEncabezadoFactura_Result">
-                <ScalarProperty Name="id_factura" ColumnName="id_factura" />
-                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="montoTotal" ColumnName="montoTotal" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="nomEstado" ColumnName="nomEstado" />
-                <ScalarProperty Name="idVehiculosCliente" ColumnName="idVehiculosCliente" />
-                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
-                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
-                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
-                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
-                <ScalarProperty Name="placa" ColumnName="placa" />
-                <ScalarProperty Name="numeroPuerta" ColumnName="numeroPuerta" />
-                <ScalarProperty Name="numeroRueda" ColumnName="numeroRueda" />
-                <ScalarProperty Name="tipoVehiculo" ColumnName="tipoVehiculo" />
-                <ScalarProperty Name="nomTipoVehiculo" ColumnName="nomTipoVehiculo" />
-                <ScalarProperty Name="marcaVehiculo" ColumnName="marcaVehiculo" />
-                <ScalarProperty Name="nomMarcaVehiculo" ColumnName="nomMarcaVehiculo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_ModificaVehiculos" FunctionName="sistvehiculoviModel.Store.pa_ModificaVehiculos" />
           <FunctionImportMapping FunctionImportName="pa_RetornaVehiculosInsert" FunctionName="sistvehiculoviModel.Store.pa_RetornaVehiculosInsert">
             <ResultMapping>
@@ -2561,30 +2615,6 @@
           <FunctionImportMapping FunctionImportName="pa_RetornaVehiculosxIDCliente" FunctionName="sistvehiculoviModel.Store.pa_RetornaVehiculosxIDCliente">
             <ResultMapping>
               <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaVehiculosxIDCliente_Result">
-                <ScalarProperty Name="idVehiculosCliente" ColumnName="idVehiculosCliente" />
-                <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
-                <ScalarProperty Name="placa" ColumnName="placa" />
-                <ScalarProperty Name="tipoVehiculo" ColumnName="tipoVehiculo" />
-                <ScalarProperty Name="codigoTipoVehiculo" ColumnName="codigoTipoVehiculo" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
-                <ScalarProperty Name="marcaVehiculo" ColumnName="marcaVehiculo" />
-                <ScalarProperty Name="codigoMarcaVehiculo" ColumnName="codigoMarcaVehiculo" />
-                <ScalarProperty Name="marca" ColumnName="marca" />
-                <ScalarProperty Name="numeroPuerta" ColumnName="numeroPuerta" />
-                <ScalarProperty Name="numeroRueda" ColumnName="numeroRueda" />
-                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
-                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
-                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
-                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="pa_RetornaMarcaVehiculoxPlaca" FunctionName="sistvehiculoviModel.Store.pa_RetornaMarcaVehiculoxPlaca">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaMarcaVehiculoxPlaca_Result">
                 <ScalarProperty Name="idVehiculosCliente" ColumnName="idVehiculosCliente" />
                 <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
                 <ScalarProperty Name="placa" ColumnName="placa" />
@@ -2646,6 +2676,106 @@
           <FunctionImportMapping FunctionImportName="pa_EliminaVehiculosCliente" FunctionName="sistvehiculoviModel.Store.pa_EliminaVehiculosCliente" />
           <FunctionImportMapping FunctionImportName="pa_ModificaVehiculosCliente" FunctionName="sistvehiculoviModel.Store.pa_ModificaVehiculosCliente" />
           <FunctionImportMapping FunctionImportName="pa_InsertaVehiculosCliente" FunctionName="sistvehiculoviModel.Store.pa_InsertaVehiculosCliente" />
+          <EntitySetMapping Name="Factura">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.Factura">
+              <MappingFragment StoreEntitySet="Factura">
+                <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="montoTotal" ColumnName="montoTotal" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
+                <ScalarProperty Name="id_factura" ColumnName="id_factura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pa_RetornaEstadoFactura" FunctionName="sistvehiculoviModel.Store.pa_RetornaEstadoFactura">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaEstadoFactura_Result">
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="nomEstado" ColumnName="nomEstado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_RetornaEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_RetornaEncabezadoFactura">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaEncabezadoFactura_Result">
+                <ScalarProperty Name="id_factura" ColumnName="id_factura" />
+                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="montoTotal" ColumnName="montoTotal" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="nomEstado" ColumnName="nomEstado" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
+                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
+                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
+                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
+                <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
+                <ScalarProperty Name="placa" ColumnName="placa" />
+                <ScalarProperty Name="numeroPuerta" ColumnName="numeroPuerta" />
+                <ScalarProperty Name="numeroRueda" ColumnName="numeroRueda" />
+                <ScalarProperty Name="tipoVehiculo" ColumnName="tipoVehiculo" />
+                <ScalarProperty Name="nomTipoVehiculo" ColumnName="nomTipoVehiculo" />
+                <ScalarProperty Name="marcaVehiculo" ColumnName="marcaVehiculo" />
+                <ScalarProperty Name="nomMarcaVehiculo" ColumnName="nomMarcaVehiculo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_InsertaEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_InsertaEncabezadoFactura" />
+          <FunctionImportMapping FunctionImportName="pa_RetornaMarcaVehiculoxPlaca" FunctionName="sistvehiculoviModel.Store.pa_RetornaMarcaVehiculoxPlaca">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaMarcaVehiculoxPlaca_Result">
+                <ScalarProperty Name="idVehiculosCliente" ColumnName="idVehiculosCliente" />
+                <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
+                <ScalarProperty Name="placa" ColumnName="placa" />
+                <ScalarProperty Name="tipoVehiculo" ColumnName="tipoVehiculo" />
+                <ScalarProperty Name="codigoTipoVehiculo" ColumnName="codigoTipoVehiculo" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="marcaVehiculo" ColumnName="marcaVehiculo" />
+                <ScalarProperty Name="codigoMarcaVehiculo" ColumnName="codigoMarcaVehiculo" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="numeroPuerta" ColumnName="numeroPuerta" />
+                <ScalarProperty Name="numeroRueda" ColumnName="numeroRueda" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
+                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
+                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
+                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_RetornaEncabezadoFacturaID" FunctionName="sistvehiculoviModel.Store.pa_RetornaEncabezadoFacturaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaEncabezadoFacturaID_Result">
+                <ScalarProperty Name="id_factura" ColumnName="id_factura" />
+                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="montoTotal" ColumnName="montoTotal" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="nomEstado" ColumnName="nomEstado" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
+                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
+                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
+                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
+                <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
+                <ScalarProperty Name="placa" ColumnName="placa" />
+                <ScalarProperty Name="numeroPuerta" ColumnName="numeroPuerta" />
+                <ScalarProperty Name="numeroRueda" ColumnName="numeroRueda" />
+                <ScalarProperty Name="tipoVehiculo" ColumnName="tipoVehiculo" />
+                <ScalarProperty Name="nomTipoVehiculo" ColumnName="nomTipoVehiculo" />
+                <ScalarProperty Name="marcaVehiculo" ColumnName="marcaVehiculo" />
+                <ScalarProperty Name="nomMarcaVehiculo" ColumnName="nomMarcaVehiculo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -35,9 +35,9 @@ namespace SistVehiculo.Controllers
             return Json(vehiculos);
         }
 
-        public ActionResult RetornaMarcaVehiculo(string placa)
+        public ActionResult RetornaMarcaVehiculo(int idVehiculo)
         {
-            List<pa_RetornaMarcaVehiculoxPlaca_Result> marcaVehiculo = this.modeloBD.pa_RetornaMarcaVehiculoxPlaca(placa).ToList();
+            List<pa_RetornaMarcaVehiculoxPlaca_Result> marcaVehiculo = this.modeloBD.pa_RetornaMarcaVehiculoxPlaca(idVehiculo).ToList();
             return Json(marcaVehiculo);
         }
 
@@ -53,9 +53,57 @@ namespace SistVehiculo.Controllers
             return Json(clienteID, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult RetornaEstadoFactura()
+        {
+            List<pa_RetornaEstadoFactura_Result> estadoFactura = this.modeloBD.pa_RetornaEstadoFactura("").ToList();
+            return Json(estadoFactura, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult InsertaEncabezado()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult InsertaEncabezadoFactura(string pNum_factura, DateTime pFecha, float pMontoTotal, int pEstado, int pIdCliente, int pIdVehiculo)
+        {
+            string mensaje = "";
+            int cantRegistrosAfectados = 0;
+
+            try
+            {
+                cantRegistrosAfectados = this.modeloBD.pa_InsertaEncabezadoFactura(pNum_factura, pFecha, pMontoTotal, pEstado, pIdCliente, pIdVehiculo);
+            }
+            catch (Exception error)
+            {
+                mensaje = "Ocurrió un error: " + error.Message;
+
+            }
+            /*Se ejecuta cuando haya o no haya un error, siempre se ejecutará*/
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    mensaje = "Encabezado de factura ingresado";
+                }
+                else
+                {
+                    mensaje += ".No se pudo ingresar el encabezado de factura";
+                }
+            }
+
+            return Json(new { resultado = mensaje });
+        }
+
+        public ActionResult ModificaEncabezadoFactura(int id_Factura)
+        {
+            ///Obtener el registro que se desea modificar
+            ///utilizando el parámetro del método idFactura
+            pa_RetornaEncabezadoFacturaID_Result modeloVista = new pa_RetornaEncabezadoFacturaID_Result();
+            modeloVista = this.modeloBD.pa_RetornaEncabezadoFacturaID(id_Factura).FirstOrDefault();
+
+            ///Enviar el modelo a la vista
+            return View(modeloVista);
         }
     }
 }

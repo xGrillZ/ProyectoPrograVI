@@ -10,21 +10,10 @@
 namespace SistVehiculo.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class MarcaVehiculo
+    public partial class pa_RetornaEstadoFactura_Result
     {
-        public MarcaVehiculo()
-        {
-            this.Vehiculos = new HashSet<Vehiculos>();
-        }
-    
-        public int idMarcaVehiculo { get; set; }
-        public string codigo { get; set; }
-        public int idPaisFabricante { get; set; }
-        public string marca { get; set; }
-    
-        public virtual PaisFabricante PaisFabricante { get; set; }
-        public virtual ICollection<Vehiculos> Vehiculos { get; set; }
+        public int id_estado { get; set; }
+        public string nomEstado { get; set; }
     }
 }
