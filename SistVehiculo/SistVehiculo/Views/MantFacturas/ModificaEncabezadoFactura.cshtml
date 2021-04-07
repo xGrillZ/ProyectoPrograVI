@@ -19,8 +19,10 @@
             <input type="hidden" id="hdIdCliente" value="@Model.idCliente" />
             <input type="hidden" id="hdPlaca" value="@Model.idVehiculo" />
             <input type="hidden" id="hdMarca" value="@Model.nomMarcaVehiculo" />
-            <input type="hidden" id="hdTipoVehiculo" value="@Model.tipoVehiculo" />
+            <input type="hidden" id="hdTipoVechiculo" value="@Model.nomTipoVehiculo" />
             <input type="hidden" id="hdEstado" value="@Model.estado" />
+            <input type="hidden" id="hdIdFactura" value="@Model.id_factura" />
+            <input type="hidden" id="hdFecha" value="@Model.fecha" />
         </div>
         <div class="form-group col-6">
             <label>Cliente:</label>
@@ -73,4 +75,5 @@
 @section scripts{
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
     <script src="~/Scripts/mantFacturas/mantFacturas.js"></script>
+    <script src="~/Scripts/mantFacturas/estadoEncabezadoFactura.js"></script>
 }

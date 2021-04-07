@@ -105,5 +105,98 @@ namespace SistVehiculo.Controllers
             ///Enviar el modelo a la vista
             return View(modeloVista);
         }
+
+        [HttpPost]
+        public ActionResult ModificaEncabezadoFactura(int pId_factura, string pNum_factura, DateTime pFecha, float pMontoTotal, int pEstado, int pIdCliente, int pIdVehiculo)
+        {
+            string mensaje = "";
+            int cantRegistrosAfectados = 0;
+
+            try
+            {
+                cantRegistrosAfectados = this.modeloBD.pa_ModificaEncabezadoFactura(pId_factura,pNum_factura, pFecha, pMontoTotal, pEstado, pIdCliente, pIdVehiculo);
+            }
+            catch (Exception error)
+            {
+                mensaje = "Ocurrió un error: " + error.Message;
+
+            }
+            /*Se ejecuta cuando haya o no haya un error, siempre se ejecutará*/
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    mensaje = "Encabezado de factura modificado";
+                }
+                else
+                {
+                    mensaje += ".No se pudo modificar el encabezado de factura";
+                }
+            }
+
+            return Json(new { resultado = mensaje });
+        }
+
+        [HttpPost]
+        public ActionResult ModificaEstadoOffEncabezadoFactura(int pId_factura)
+        {
+            string mensaje = "";
+            int cantRegistrosAfectados = 0;
+
+            try
+            {
+                cantRegistrosAfectados = this.modeloBD.pa_ModificaEstadoOffEncabezadoFactura(pId_factura);
+            }
+            catch (Exception error)
+            {
+                mensaje = "Ocurrió un error: " + error.Message;
+
+            }
+            /*Se ejecuta cuando haya o no haya un error, siempre se ejecutará*/
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    mensaje = "Encabezado de factura Inhabilitado";
+                }
+                else
+                {
+                    mensaje += ".No se pudo inhabilitar el encabezado de factura";
+                }
+            }
+
+            return Json(new { resultado = mensaje });
+        }
+
+        [HttpPost]
+        public ActionResult ModificaEstadoOnEncabezadoFactura(int pId_factura)
+        {
+            string mensaje = "";
+            int cantRegistrosAfectados = 0;
+
+            try
+            {
+                cantRegistrosAfectados = this.modeloBD.pa_ModificaEstadoOnEncabezadoFactura(pId_factura);
+            }
+            catch (Exception error)
+            {
+                mensaje = "Ocurrió un error: " + error.Message;
+
+            }
+            /*Se ejecuta cuando haya o no haya un error, siempre se ejecutará*/
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    mensaje = "Encabezado de factura Habilitado";
+                }
+                else
+                {
+                    mensaje += ".No se pudo habilitar el encabezado de factura";
+                }
+            }
+
+            return Json(new { resultado = mensaje });
+        }
     }
 }

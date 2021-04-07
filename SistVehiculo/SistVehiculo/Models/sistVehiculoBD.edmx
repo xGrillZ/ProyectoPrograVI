@@ -520,6 +520,21 @@
           <Parameter Name="pTelefono" Type="nvarchar" Mode="In" />
           <Parameter Name="tipoCliente" Type="int" Mode="In" />
         </Function>
+        <Function Name="pa_ModificaEncabezadoFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_factura" Type="int" Mode="In" />
+          <Parameter Name="num_factura" Type="nvarchar" Mode="In" />
+          <Parameter Name="fecha" Type="datetime" Mode="In" />
+          <Parameter Name="montoTotal" Type="float" Mode="In" />
+          <Parameter Name="estado" Type="int" Mode="In" />
+          <Parameter Name="idCliente" Type="int" Mode="In" />
+          <Parameter Name="idVehiculo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_ModificaEstadoOffEncabezadoFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_factura" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_ModificaEstadoOnEncabezadoFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_factura" Type="int" Mode="In" />
+        </Function>
         <Function Name="pa_ModificaMarcaVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idMarcaVehiculo" Type="int" Mode="In" />
           <Parameter Name="codigo" Type="nvarchar" Mode="In" />
@@ -1470,7 +1485,22 @@
           <Parameter Name="idVehiculo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_RetornaEncabezadoFacturaID" ReturnType="Collection(sistvehiculoviModel.pa_RetornaEncabezadoFacturaID_Result)">
-            <Parameter Name="id_Factura" Mode="In" Type="Int32" />
+          <Parameter Name="id_Factura" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_ModificaEncabezadoFactura">
+            <Parameter Name="id_factura" Mode="In" Type="Int32" />
+            <Parameter Name="num_factura" Mode="In" Type="String" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="montoTotal" Mode="In" Type="Double" />
+            <Parameter Name="estado" Mode="In" Type="Int32" />
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+            <Parameter Name="idVehiculo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_ModificaEstadoOffEncabezadoFactura">
+            <Parameter Name="id_factura" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_ModificaEstadoOnEncabezadoFactura">
+            <Parameter Name="id_factura" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -2776,6 +2806,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_ModificaEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_ModificaEncabezadoFactura" />
+          <FunctionImportMapping FunctionImportName="pa_ModificaEstadoOffEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_ModificaEstadoOffEncabezadoFactura" />
+          <FunctionImportMapping FunctionImportName="pa_ModificaEstadoOnEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_ModificaEstadoOnEncabezadoFactura" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

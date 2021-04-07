@@ -394,6 +394,7 @@
     <Content Include="Scripts\mantClientes\mantClientes.js" />
     <Content Include="Scripts\mantClientes\modificaClientes.js" />
     <Content Include="Scripts\mantClientes\reporteClientes.js" />
+    <Content Include="Scripts\mantFacturas\estadoEncabezadoFactura.js" />
     <Content Include="Scripts\mantFacturas\mantFacturas.js" />
     <Content Include="Scripts\mantServiciosProductos\mantServiciosProductos.js" />
     <Content Include="Scripts\mantTiposVehiculos\mantTiposVehiculos.js" />

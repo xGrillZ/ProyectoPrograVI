@@ -898,5 +898,56 @@ namespace SistVehiculo.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaEncabezadoFacturaID_Result>("pa_RetornaEncabezadoFacturaID", id_FacturaParameter);
         }
+    
+        public virtual int pa_ModificaEncabezadoFactura(Nullable<int> id_factura, string num_factura, Nullable<System.DateTime> fecha, Nullable<double> montoTotal, Nullable<int> estado, Nullable<int> idCliente, Nullable<int> idVehiculo)
+        {
+            var id_facturaParameter = id_factura.HasValue ?
+                new ObjectParameter("id_factura", id_factura) :
+                new ObjectParameter("id_factura", typeof(int));
+    
+            var num_facturaParameter = num_factura != null ?
+                new ObjectParameter("num_factura", num_factura) :
+                new ObjectParameter("num_factura", typeof(string));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            var montoTotalParameter = montoTotal.HasValue ?
+                new ObjectParameter("montoTotal", montoTotal) :
+                new ObjectParameter("montoTotal", typeof(double));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(int));
+    
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("idCliente", idCliente) :
+                new ObjectParameter("idCliente", typeof(int));
+    
+            var idVehiculoParameter = idVehiculo.HasValue ?
+                new ObjectParameter("idVehiculo", idVehiculo) :
+                new ObjectParameter("idVehiculo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ModificaEncabezadoFactura", id_facturaParameter, num_facturaParameter, fechaParameter, montoTotalParameter, estadoParameter, idClienteParameter, idVehiculoParameter);
+        }
+    
+        public virtual int pa_ModificaEstadoOffEncabezadoFactura(Nullable<int> id_factura)
+        {
+            var id_facturaParameter = id_factura.HasValue ?
+                new ObjectParameter("id_factura", id_factura) :
+                new ObjectParameter("id_factura", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ModificaEstadoOffEncabezadoFactura", id_facturaParameter);
+        }
+    
+        public virtual int pa_ModificaEstadoOnEncabezadoFactura(Nullable<int> id_factura)
+        {
+            var id_facturaParameter = id_factura.HasValue ?
+                new ObjectParameter("id_factura", id_factura) :
+                new ObjectParameter("id_factura", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ModificaEstadoOnEncabezadoFactura", id_facturaParameter);
+        }
     }
 }
