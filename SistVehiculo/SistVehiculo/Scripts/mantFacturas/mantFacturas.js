@@ -89,8 +89,8 @@ function procesarResultadoClientes(data) {
     var hiddenCliente = $("#hdIdCliente").val();
 
     if (hiddenCliente != undefined) {
-        ddlCliente.val(hiddenProvincia);
-        cargaDropdownListPlacaVehiculo(hiddenProvincia);
+        ddlCliente.val(hiddenCliente);
+        cargaDropdownListPlacaVehiculo(hiddenCliente);
     }
 }
 
@@ -258,6 +258,13 @@ function procesarResultadoTipoVehiculo(data) {
         ///Agregamos la opción al dropdownlist
         ddlTipoVehiculo.append(nuevaOpcion);
     });
+
+    ///Obtiene el valor del hidden
+    var hiddenTipoVehiculos = $("#hdTipoVehiculo").val();
+
+    if (hiddenTipoVehiculos != undefined) {
+        ddlTipoVehiculo.val(hiddenTipoVehiculos);
+    }
 }
 
 ///carga los registros de los tipos de vehículo
@@ -368,6 +375,13 @@ function procesarResultadoEstadoFactura(data) {
         ///Agregamos la opción al dropdownlist
         ddlEstado.append(nuevaOpcion);
     });
+
+    ///Obtiene el valor del hidden
+    var hiddenEstado = $("#hdEstado").val();
+
+    if (hiddenEstado != undefined) {
+        ddlEstado.val(hiddenEstado);
+    }
 }
 
 ///crea las validaciones para el formulario
