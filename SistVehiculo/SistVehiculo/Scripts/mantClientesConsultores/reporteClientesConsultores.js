@@ -17,7 +17,7 @@ function creaGridKendo(data) {
     $("#divKendoGrid").kendoGrid({
         ///Asignar la fuente de datos al objeto KendoGrid
         dataSource: {
-            data: data.resultado, ///Se obtiene los datos pero con propiedad de resultado indicado en el controlador Personas
+            data: data.resultado, ///Se obtiene los datos pero con propiedad de resultado indicado en el controlador 
             pageSize: 5, ///Mostrar los registros en pantalla
         },
         pageable: true, ///Permite crear un menu de páginas

@@ -235,5 +235,6 @@ namespace SistVehiculo.Controllers
                 this.modeloBD.pa_RetornaServiciosVehiculo("","","").ToList();
             return Json(new { resultado = serviciosVehiculo });
         }
+
     }
 }
