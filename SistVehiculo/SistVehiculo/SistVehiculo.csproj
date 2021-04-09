@@ -538,6 +538,7 @@
     <Content Include="Views\MantVehiculos\RpServicioVehiculoConsultor.cshtml" />
     <Content Include="Views\MantVehiculosCliente\RpVehiculosClienteConsultor.cshtml" />
     <Content Include="Views\MantFacturas\ModificaEncabezadoFactura.cshtml" />
+    <Content Include="Views\MantClientes\ModificarClientesConsultor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

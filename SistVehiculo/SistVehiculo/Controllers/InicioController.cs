@@ -23,6 +23,8 @@ namespace SistVehiculo.Controllers
             return View();
         }
 
+       
+
         [HttpPost]
         public ActionResult Inicio(string correoElectronico, string password)
         {
@@ -118,6 +120,52 @@ namespace SistVehiculo.Controllers
         public ActionResult Principal()
         {
             return View();
+        }
+
+        public ActionResult ModificarClientesConsultor()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ModificarClientesConsultor(int idCliente)
+        {
+
+            string mensaje = "";
+
+            pa_RetornaClienteID_Result resultadoSp = this.modeloBD.pa_RetornaClienteID(idCliente).FirstOrDefault();
+
+            try
+            {
+                if (resultadoSp == null)
+                {
+                    this.Session.Add("idusuario", null);
+                    this.Session.Add("tipousuario", null);
+                    this.Session.Add("usuariologueado", null);
+
+                    mensaje = $"Correo electrónico o Contraseña inválida";
+                    ///Mensaje de error si cumple lo contrario del verificado de datos nulos
+                    Response.Write("<script>alert('" + mensaje + "')</script>");
+                    return View();
+                }
+                else
+                {
+                    /*Session["User"] = resultadoSp;*/
+                    this.Session.Add("idusuario", resultadoSp.idCliente);
+                    this.Session.Add("tipousuario", resultadoSp.tipoCliente);
+                    this.Session.Add("usuariologueado", true);
+
+                    this.envioCorreoElectronico();
+                    return RedirectToAction("Modificar datos", "ModificarClientesConsultor");
+                }
+            }
+            catch (Exception capturaExcepcion)
+            {
+                mensaje += $"Ocurrió un error: {capturaExcepcion}";
+                ///Mensaje de error si cumple lo contrario del verificado de datos nulos
+                Response.Write("<script>alert('" + mensaje + "')</script>");
+                return View();
+            }
         }
     }
 }

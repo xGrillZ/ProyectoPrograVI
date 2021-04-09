@@ -250,6 +250,70 @@ namespace SistVehiculo.Controllers
             return View(modeloVista);
         }
 
+
+        public ActionResult ModificarClientesConsultor(int idCliente)
+        {
+            ///Obtener el registro que se desea modificar
+            ///utilizando el parámetro del método idCliente
+            pa_RetornaClienteID_Result modeloVista = new pa_RetornaClienteID_Result();
+            modeloVista = this.modeloBD.pa_RetornaClienteID(idCliente).FirstOrDefault();
+
+            this.AgregaGeneroViewBag();
+            this.AgregaTipoClienteViewBag();
+            ///Enviar el modelo a la vista
+            return View(modeloVista);
+        }
+
+        [HttpPost]
+        public ActionResult ModificarClientesConsultor(pa_RetornaClienteID_Result modeloVista)
+        {
+
+            ///Variable que registra la cantidad de registros afectados
+            ///si un procedimiento que ejecuta insert, update o delete
+            ///no afecta registros implica que hubo un error
+            int cantRegistrosAfectados = 0;
+            string mensaje = "";
+
+            if (this.verificaCedula(modeloVista.numCedula, modeloVista.idCliente.ToString()))
+            {
+                try
+                {
+                    DateTime fechaCliente = modeloVista.fechNacimiento;
+
+                    cantRegistrosAfectados = this.modeloBD.pa_ModificaCliente(modeloVista.idCliente, modeloVista.nomCliente, modeloVista.ape1Cliente, modeloVista.ape2Cliente,
+                                                                              modeloVista.numCedula, modeloVista.genero, modeloVista.provincia,
+                                                                              modeloVista.fechNacimiento, modeloVista.canton, modeloVista.distrito,
+                                                                              modeloVista.email, modeloVista.pTelefono, modeloVista.tipoCliente);
+                }
+                catch (Exception ex)
+                {
+                    mensaje = "Ocurrió un error: " + ex.Message;
+                }
+                finally
+                {
+                    if (cantRegistrosAfectados > 0)
+                    {
+                        mensaje = "Registro Modificado";
+                    }
+                    else
+                    {
+                        mensaje += ".No se pudo modificar";
+                    }
+                }
+            }
+            else
+            {
+                mensaje = "Esta cédula ya existe, debes ingresar otra";
+            }
+
+            Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
+
+            this.AgregaGeneroViewBag();
+            this.AgregaTipoClienteViewBag();
+            ///Enviar el modelo a la vista
+            return View(modeloVista);
+        }
+
         public ActionResult EliminarClientes(int idCliente)
         {
             ///Obtener el registro que se desea eliminar
