@@ -89,7 +89,7 @@
         <div class="form-group col-6">
             <label>Tipo Cliente:</label>
             <select name="tipoCliente" id="tipoCliente" class="form-control">
-                <option value="">Seleccione el tipo de cliente</option>
+                <option value="" >Seleccione el tipo de cliente</option>
                 @{
                     foreach (SistVehiculo.Models.pa_RetornaTipoCliente_Result tipoCliente in this.ViewBag.ListaTiposCliente)
                     {
@@ -99,9 +99,7 @@
                         {
                             <option value="@tipoCliente.id_tipoCliente" selected>@tipoCliente.nombreTipoCliente</option>
                         }
-                        else
-                        {
-                            <option value="@tipoCliente.id_tipoCliente">@tipoCliente.nombreTipoCliente</option>
+                       
                         }
                     }
                 }
