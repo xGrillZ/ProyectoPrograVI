@@ -3,6 +3,7 @@
 
 @section css{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link href="~/Content/mantVehiculos/mantVehiculos.css" rel="stylesheet" />
 }
 
 @{
@@ -14,35 +15,38 @@
 
 
 <form id="frmEliminaVehiculo" method="post">
-    <div class="form-group">
-        <label>Id de Vehiculo:</label>
-        <input type="text" name="idVehiculos" id="idVehiculos" class="form-control" value="@Model.idVehiculos" readonly />
+    <div class="row col-sm-6">
+        <div class="form-group col-6">
+            <label>Id de Vehiculo:</label>
+            <input type="text" name="idVehiculos" id="idVehiculos" class="form-control" value="@Model.idVehiculos" readonly />
+        </div>
+        <div class="form-group col-6">
+            <label>Placa:</label>
+            <input type="text" name="placa" id="placa" class="form-control" value="@Model.placa" readonly />
+        </div>
+        <div class="form-group col-6">
+            <label>Tipo de Vehiculo:</label>
+            <input type="text" name="tipoVehiculo" id="tipoVehiculo" class="form-control" value="@Model.tipoVehiculo" readonly />
+        </div>
+        <div class="form-group col-6">
+            <label>Marca Vehiculo:</label>
+            <input type="text" name="marcaVehiculo" id="marcaVehiculo" class="form-control" value="@Model.marcaVehiculo" readonly />
+        </div>
+        <div class="form-group col-6">
+            <label>Número de Puertas:</label>
+            <input type="text" name="numeroPuerta" id="numeroPuerta" class="form-control" value="@Model.numeroPuerta" readonly />
+        </div>
+        <div class="form-group col-6">
+            <label>Número de Ruedas:</label>
+            <input type="text" name="numeroRueda" id="numeroRueda" class="form-control" value="@Model.numeroRueda" readonly />
+        </div>
     </div>
+
     <div class="form-group">
-        <label>Placa:</label>
-        <input type="text" name="placa" id="placa" class="form-control" value="@Model.placa" readonly />
+        <input type="submit" value="Eliminar" id="btnAceptar" class="form-control btn btn-success btnEliminarVehiculo" />
     </div>
-    <div class="form-group">
-        <label>Tipo de Vehiculo:</label>
-        <input type="text" name="tipoVehiculo" id="tipoVehiculo" class="form-control" value="@Model.tipoVehiculo" readonly />
-    </div>
-    <div class="form-group">
-        <label>Marca Vehiculo:</label>
-        <input type="text" name="marcaVehiculo" id="marcaVehiculo" class="form-control" value="@Model.marcaVehiculo" readonly />
-    </div>
-    <div class="form-group">
-        <label>Número de Puertas:</label>
-        <input type="text" name="numeroPuerta" id="numeroPuerta" class="form-control" value="@Model.numeroPuerta" readonly />
-    </div>
-    <div class="form-group">
-        <label>Número de Ruedas:</label>
-        <input type="text" name="numeroRueda" id="numeroRueda" class="form-control" value="@Model.numeroRueda" readonly />
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Eliminar" id="btnAceptar" />
-    </div>
-    <a href="~/MantVehiculos/ListaVehiculos">Regresar a la lista</a>
 </form>
+<a href="~/MantVehiculos/ListaVehiculos" class="btn btn-primary">Regresar a la lista</a>
 
 @section scripts{
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>

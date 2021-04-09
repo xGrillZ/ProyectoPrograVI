@@ -1,6 +1,10 @@
 ﻿<!--Indicar a la vista el modelo-->
 @model List<SistVehiculo.Models.pa_RetornaVehiculosList_Result>
 
+@section css{
+    <link href="~/Content/mantVehiculos/mantVehiculos.css" rel="stylesheet" />
+}
+
 @{
     ViewBag.Title = "Lista de Vehículos";
     Layout = "~/Views/Shared/_LayoutPersonalizado.cshtml";
@@ -11,7 +15,7 @@
 <a href="~/MantVehiculos/InsertarVehiculos" class="btn btn-success"><i class="fas fa-user-plus"></i> Agregar nuevo Vehículo</a>
 
 <form id="frmBusquedaListaVehiculos" method="post">
-    <div class="row">
+    <div class="row rowBusqueda">
         <div class="form-group col">
             <label>Placa:</label>
             <input type="text" name="placa" id="placa" class="form-control" />
@@ -29,7 +33,7 @@
         <th>Tipo de Vehículo</th>
         <th>Número de puertas</th>
         <th>Número de ruedas</th>
-       <th>Acciones</th>
+        <th>Acciones</th>
     </tr>
 
     @{
@@ -42,9 +46,9 @@
                 <td>@posicionModelo.numeroPuerta</td>
                 <td>@posicionModelo.numeroRueda</td>
                 <td>
-                    <a href="~/MantVehiculos/ModificarVehiculos?idVehiculos=@posicionModelo.idVehiculos">Modificar</a>
+                    <a href="~/MantVehiculos/ModificarVehiculos?idVehiculos=@posicionModelo.idVehiculos" class="btn btn-warning btnModificar col-md-12">Modificar</a>
                     <br />
-                    <a href="~/MantVehiculos/EliminarVehiculos?idVehiculos=@posicionModelo.idVehiculos">Eliminar</a>
+                    <a href="~/MantVehiculos/EliminarVehiculos?idVehiculos=@posicionModelo.idVehiculos" class="btn btn-danger btnEliminar col-md-12">Eliminar</a>
                 </td>
             </tr>
         }

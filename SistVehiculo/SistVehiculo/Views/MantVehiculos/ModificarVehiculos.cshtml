@@ -1,6 +1,9 @@
 ﻿@model SistVehiculo.Models.pa_RetornaVehiculosID_Result
 
+@section css{
 
+    <link href="~/Content/mantVehiculos/mantVehiculos.css" rel="stylesheet" />
+}
 
 @{
     ViewBag.Title = "Modifica Vehículo";
@@ -11,71 +14,74 @@
 
 
 <form id="frmModificaVehiculo" method="post">
-    <div class="form-group">
-        <label>Placa:</label>
-        <input type="text" name="placa" id="placa" class="form-control" value="@Model.placa" />
-    </div>
+    <div class="row col-sm-6">
+        <div class="form-group col-6">
+            <label>Placa:</label>
+            <input type="text" name="placa" id="placa" class="form-control" value="@Model.placa" />
+        </div>
 
-    <div class="form-group">
-        <label>Tipo de Vehiculo:</label>
-        <select name="tipoVehiculo" id="tipoVehiculo" class="form-control">
-            <option value="">SELECCIONE UN TIPO DE VEHICULO</option>
-            @{
-                foreach (SistVehiculo.Models.pa_RetornaTiposVehiculo_Result tipo in ViewBag.ListaTipoVehiculo)
+        <div class="form-group col-6">
+            <label>Tipo de Vehiculo:</label>
+            <select name="tipoVehiculo" id="tipoVehiculo" class="form-control">
+                <option value="">SELECCIONE UN TIPO DE VEHICULO</option>
+                @{
+                    foreach (SistVehiculo.Models.pa_RetornaTiposVehiculo_Result tipo in ViewBag.ListaTipoVehiculo)
 
-                {
-                    bool estipoVehiculo = tipo.idTipoVehiculo == Model.tipoVehiculo;
-
-                    if (estipoVehiculo)
                     {
-                        <option value="@tipo.idTipoVehiculo" selected>@tipo.tipo.ToUpper()</option>
-                    }
-                    else
-                    {
-                        <option value="@tipo.idTipoVehiculo" >@tipo.tipo.ToUpper()</option>
-                    }
-                }
-            }
-        </select>
-    </div>
-    <div class="form-group">
-        <label>Marca de Vehiculo :</label>
-        <select name="marcaVehiculo" id="marcaVehiculo" class="form-control">
-            <option value="">SELECCIONE UNA MARCA</option>
-            @{
-                foreach (SistVehiculo.Models.pa_RetornaMarcaVehiculo_Result marca in ViewBag.ListaMarcaVehiculo)
+                        bool estipoVehiculo = tipo.idTipoVehiculo == Model.tipoVehiculo;
 
-                {
-                    bool esMarcaVehiculo = marca.idMarcaVehiculo == Model.marcaVehiculo;
-
-                    if (esMarcaVehiculo)
-                    {
-                        <option value="@marca.idMarcaVehiculo" selected>@marca.marca.ToUpper()</option>
+                        if (estipoVehiculo)
+                        {
+                            <option value="@tipo.idTipoVehiculo" selected>@tipo.tipo.ToUpper()</option>
                         }
-                    else
-                    {
-                     <option value="@marca.idMarcaVehiculo" >@marca.marca.ToUpper()</option>
+                        else
+                        {
+                            <option value="@tipo.idTipoVehiculo">@tipo.tipo.ToUpper()</option>
+                        }
                     }
                 }
+            </select>
+        </div>
+        <div class="form-group col-6">
+            <label>Marca de Vehiculo :</label>
+            <select name="marcaVehiculo" id="marcaVehiculo" class="form-control">
+                <option value="">SELECCIONE UNA MARCA</option>
+                @{
+                    foreach (SistVehiculo.Models.pa_RetornaMarcaVehiculo_Result marca in ViewBag.ListaMarcaVehiculo)
+
+                    {
+                        bool esMarcaVehiculo = marca.idMarcaVehiculo == Model.marcaVehiculo;
+
+                        if (esMarcaVehiculo)
+                        {
+                            <option value="@marca.idMarcaVehiculo" selected>@marca.marca.ToUpper()</option>
+                        }
+                        else
+                        {
+                            <option value="@marca.idMarcaVehiculo">@marca.marca.ToUpper()</option>
+                        }
+                    }
 
 
-            }
-            }
-        </select>
+                }
+                }
+            </select>
+        </div>
+        <div class="form-group col-6">
+            <label>Número de Puertas:</label>
+            <input type="text" name="numeroPuerta" id="numeroPuerta" class="form-control" value="@Model.numeroPuerta" />
+        </div>
+        <div class="form-group col-6">
+            <label>Número de Ruedas:</label>
+            <input type="text" name="numeroRueda" id="numeroRueda" class="form-control" value="@Model.numeroRueda" />
+        </div>
     </div>
+
     <div class="form-group">
-        <label>Número de Puertas:</label>
-        <input type="text" name="numeroPuerta" id="numeroPuerta" class="form-control" value="@Model.numeroPuerta" />
+        <input type="submit" value="Modificar" id="btnAceptar" class="form-control btn btn-success btnModificarVehiculo" />
     </div>
-    <div class="form-group">
-        <label>Número de Ruedas:</label>
-        <input type="text" name="numeroRueda" id="numeroRueda" class="form-control" value="@Model.numeroRueda" />
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Modificar" id="btnAceptar" />
-    </div>
-    <a href="~/MantVehiculos/ListaVehiculos">Regresar a la lista</a>
 </form>
+<a href="~/MantVehiculos/ListaVehiculos" class="btn btn-primary">Regresar a la lista</a>
 
 @section scripts{
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>

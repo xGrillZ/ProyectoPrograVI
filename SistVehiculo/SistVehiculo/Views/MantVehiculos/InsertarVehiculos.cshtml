@@ -1,6 +1,6 @@
 ﻿@section css{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-
+    <link href="~/Content/mantVehiculos/mantVehiculos.css" rel="stylesheet" />
 }
 
 @{
@@ -12,55 +12,58 @@
 
 
 <form id="frmNuevoVehiculo" method="post">
-    <div class="form-group">
-        <label>Placa:</label>
-        <input type="text" name="placa" id="placa" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Número de Puertas:</label>
-        <input type="text" name="numeroPuerta" id="numeroPuerta " class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Número de Ruedas:</label>
-        <input type="text" name="numeroRueda" id="numeroRueda " class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Tipo de Vehiculo:</label>
-        <select name="idTipoVehiculo" id="idTipoVehiculo" class="form-control">
-            <option value="">SELECCIONE UN TIPO DE VEHICULO</option>
-            @{
-                foreach (SistVehiculo.Models.pa_RetornaTiposVehiculo_Result tipo in ViewBag.ListaTipoVehiculo)
+    <div class="row col-sm-6">
+        <div class="form-group col-6">
+            <label>Placa:</label>
+            <input type="text" name="placa" id="placa" class="form-control" />
+        </div>
+        <div class="form-group col-6">
+            <label>Número de Puertas:</label>
+            <input type="text" name="numeroPuerta" id="numeroPuerta " class="form-control" />
+        </div>
+        <div class="form-group col-6">
+            <label>Número de Ruedas:</label>
+            <input type="text" name="numeroRueda" id="numeroRueda " class="form-control" />
+        </div>
+        <div class="form-group col-6">
+            <label>Tipo de Vehiculo:</label>
+            <select name="idTipoVehiculo" id="idTipoVehiculo" class="form-control">
+                <option value="">SELECCIONE UN TIPO DE VEHICULO</option>
+                @{
+                    foreach (SistVehiculo.Models.pa_RetornaTiposVehiculo_Result tipo in ViewBag.ListaTipoVehiculo)
 
-                {
+                    {
 
 
-                    <option value="@tipo.idTipoVehiculo">@tipo.tipo.ToUpper()</option>
+                        <option value="@tipo.idTipoVehiculo">@tipo.tipo.ToUpper()</option>
+                    }
                 }
-            }
-        </select>
-    </div>
-    <div class="form-group">
-        <label>Marca de Vehiculo :</label>
-        <select name="idMarcaVehiculo" id="idMarcaVehiculo" class="form-control">
-            <option value="">SELECCIONE UNA MARCA</option>
-            @{
-                foreach (SistVehiculo.Models.pa_RetornaMarcaVehiculo_Result marca in ViewBag.ListaMarcaVehiculo)
+            </select>
+        </div>
+        <div class="form-group col-6">
+            <label>Marca de Vehiculo :</label>
+            <select name="idMarcaVehiculo" id="idMarcaVehiculo" class="form-control">
+                <option value="">SELECCIONE UNA MARCA</option>
+                @{
+                    foreach (SistVehiculo.Models.pa_RetornaMarcaVehiculo_Result marca in ViewBag.ListaMarcaVehiculo)
 
 
 
-                {
+                    {
 
 
-                    <option value="@marca.idMarcaVehiculo">@marca.marca.ToUpper()</option>
+                        <option value="@marca.idMarcaVehiculo">@marca.marca.ToUpper()</option>
+                    }
                 }
-            }
-        </select>
+            </select>
+        </div>
     </div>
+
     <div class="form-group">
-        <input type="submit" value="Registrar" id="btnAceptar" />
+        <input type="submit" value="Registrar" id="btnAceptar" class="btn btn-success btnRegistrar"/>
     </div>
-    <a href="~/MantVehiculos/ListaVehiculos">Regresar a la lista</a>
 </form>
+<a href="~/MantVehiculos/ListaVehiculos" class="btn btn-warning">Regresar a la lista</a>
 
 @section scripts{
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>

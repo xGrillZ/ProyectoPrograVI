@@ -1,6 +1,10 @@
 ﻿<!--Indicar a la vista el modelo-->
 @model List<SistVehiculo.Models.pa_RetornaEncabezadoFactura_Result>
 
+@section css{
+    <link href="~/Content/encabezadoFactura/encabezadoFactura.css" rel="stylesheet" />
+}
+
 @{
     ViewBag.Title = "ListaEncabezadoFacturas";
     Layout = "~/Views/Shared/_LayoutPersonalizado.cshtml";
@@ -9,7 +13,7 @@
 <h2>Lista de Encabezado Factura</h2>
 <a href="~/MantFacturas/InsertaEncabezado" class="btn btn-success"><i class="fas fa-user-plus"></i> Agregar Encabezado Factura</a>
 <form id="frmBusquedaEncabezado" method="post">
-    <div class="row">
+    <div class="row rowBusqueda">
         <div class="form-group col">
             <label>Número Factura:</label>
             <input type="text" name="num_factura" id="num_factura" class="form-control" />

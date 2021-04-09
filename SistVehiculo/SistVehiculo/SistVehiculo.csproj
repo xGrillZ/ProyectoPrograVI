@@ -315,6 +315,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\encabezadoFactura\encabezadoFactura.css" />
     <Content Include="Content\img\aseguradoradibujo.svg" />
     <Content Include="Content\img\avatar.svg" />
     <Content Include="Content\img\IMGLogin2.svg" />
@@ -333,6 +334,8 @@
     <Content Include="Content\mantMarcaVehiculos\mantMarcaVehiculos.css" />
     <Content Include="Content\mantServiciosProductos\mantServiciosProductos.css" />
     <Content Include="Content\mantTipoVehiculos\mantTipoVehiculos.css" />
+    <Content Include="Content\mantVehiculosxCliente\mantVehiculosxCliente.css" />
+    <Content Include="Content\mantVehiculos\mantVehiculos.css" />
     <Content Include="Content\Principal.css" />
     <Content Include="Content\Principal\pagPrincipal.css" />
     <Content Include="favicon.ico" />

@@ -16,16 +16,17 @@ function validacionRegistro() {
             },
             numeroPuerta: {
                 required: true,
-                maxlength: 50
+                number: true
             },
-            numeroRuedas: {
+            numeroRueda: {
                 required: true,
+                number: true
             },
-            tipoVehiculo: {
-                required: true,
+            idTipoVehiculo: {
+                required: true
             },
-            marcaVehiculo: {
-                required: true,
+            idMarcaVehiculo: {
+                required: true
             },
         }
     });
@@ -42,18 +43,20 @@ function validacionModifica() {
                 maxlength: 50
             },
             tipoVehiculo: {
-                required: true                
+                required: true             
             },
             marcaVehiculo: {
-                required: true,
+                required: true
                 
             },
             numeroPuerta: {
                 required: true,
+                number: true
                 
             },
             numeroRueda: {
                 required: true,
+                number: true
             },
 
         }

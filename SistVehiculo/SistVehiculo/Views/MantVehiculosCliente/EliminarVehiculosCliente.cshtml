@@ -3,6 +3,7 @@
 
 @section css{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link href="~/Content/mantVehiculosxCliente/mantVehiculosxCliente.css" rel="stylesheet" />
 }
 
 @{
@@ -14,31 +15,34 @@
 
 
 <form id="frmEliminaVehiculoCliente" method="post">
-    <div class="form-group">
-        <label>Nombre Cliente:</label>
-        <input type="text" name="nomCliente" id="nomCliente" class="form-control" value="@Model.nomCliente" readonly />
+    <div class="row col-sm-6">
+        <div class="form-group col-6">
+            <label>Nombre Cliente:</label>
+            <input type="text" name="nomCliente" id="nomCliente" class="form-control" value="@Model.nomCliente" readonly />
+        </div>
+        <div class="form-group col-6">
+            <label>Número Cédula:</label>
+            <input type="text" name="numCedula" id="numCedula" class="form-control" value="@Model.numCedula" readonly />
+        </div>
+        <div class="form-group col-6">
+            <label>Placa:</label>
+            <input type="text" name="placa" id="placa" class="form-control" value="@Model.placa" readonly />
+        </div>
+        <div class="form-group col-6">
+            <label>Marca Vehículo:</label>
+            <input type="text" name="marcaVehiculo" id="marcaVehiculo" class="form-control" value="@Model.marca" readonly />
+        </div>
+        <div class="form-group col-6">
+            <label>Tipo Vehículo:</label>
+            <input type="text" name="tipo" id="tipo" class="form-control" value="@Model.tipo" readonly />
+        </div>
     </div>
+
     <div class="form-group">
-        <label>Número Cédula:</label>
-        <input type="text" name="numCedula" id="numCedula" class="form-control" value="@Model.numCedula" readonly />
+        <input type="submit" value="Eliminar" id="btnAceptar" class="form-control btn btn-success btnEliminarVehiculoCliente"/>
     </div>
-    <div class="form-group">
-        <label>Placa:</label>
-        <input type="text" name="placa" id="placa" class="form-control" value="@Model.placa" readonly />
-    </div>
-    <div class="form-group">
-        <label>Marca Vehículo:</label>
-        <input type="text" name="marcaVehiculo" id="marcaVehiculo" class="form-control" value="@Model.marcaVehiculo" readonly />
-    </div>
-    <div class="form-group">
-        <label>Tipo Vehículo:</label>
-        <input type="text" name="tipo" id="tipo" class="form-control" value="@Model.tipo" readonly />
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Eliminar" id="btnAceptar" />
-    </div>
-    <a href="~/MantVehiculosCliente/ListaVehiculosCliente">Regresar a la lista</a>
 </form>
+<a href="~/MantVehiculosCliente/ListaVehiculosCliente" class="btn btn-primary">Regresar a la lista</a>
 
 @section scripts{
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>

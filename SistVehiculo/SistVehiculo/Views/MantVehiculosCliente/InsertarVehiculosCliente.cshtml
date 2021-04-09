@@ -6,7 +6,7 @@
 
 @section css{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-
+    <link href="~/Content/mantVehiculosxCliente/mantVehiculosxCliente.css" rel="stylesheet" />
 }
 
 
@@ -29,7 +29,7 @@
                 {
 
 
-                        <option value="@Cliente.idCliente">@Cliente.nomCliente.ToUpper()  @Cliente.ape1Cliente.ToUpper() @Cliente.ape2Cliente.ToUpper()</option>
+                    <option value="@Cliente.idCliente">@Cliente.nomCliente.ToUpper()  @Cliente.ape1Cliente.ToUpper() @Cliente.ape2Cliente.ToUpper()</option>
                 }
             }
         </select>
@@ -44,16 +44,16 @@
                 {
 
 
-                        <option value="@Vehiculo.idVehiculos">@Vehiculo.tipo.ToUpper() @Vehiculo.marca.ToUpper() </option>
+                    <option value="@Vehiculo.idVehiculos">@Vehiculo.tipo.ToUpper() @Vehiculo.marca.ToUpper() </option>
                 }
             }
         </select>
     </div>
     <div class="form-group">
-        <input type="submit" value="Registrar" id="btnAceptar" />
+        <input type="submit" value="Registrar" id="btnAceptar" class="btn btn-success btnRegistrar" />
     </div>
-    <a href="~/MantVehiculosCliente/ListaVehiculosCliente">Regresar a la lista</a>
 </form>
+<a href="~/MantVehiculosCliente/ListaVehiculosCliente" class="btn btn-warning">Regresar a la lista</a>
 
 @section scripts{
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>

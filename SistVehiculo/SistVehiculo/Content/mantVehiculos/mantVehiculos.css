@@ -1,0 +1,54 @@
+﻿#frmBusquedaListaVehiculos {
+    padding: 25px 0px 15px 0px;
+}
+
+.rowBusqueda {
+    padding: 0px 0px 0px 450px;
+}
+
+#btnAceptar {
+    margin: 30px 0px 0px 0px;
+}
+
+.btnModificar {
+    margin: 0px 0px 10px 0px;
+}
+
+#frmNuevoVehiculo {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnRegistrar {
+    margin: 0px 0px 0px 150px;
+}
+
+#frmModificaVehiculo {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnModificarVehiculo {
+    margin: 0px 0px 0px 150px;
+}
+
+#frmEliminaVehiculo {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnEliminarVehiculo {
+    margin: 0px 0px 0px 150px;
+}

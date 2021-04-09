@@ -1,6 +1,4 @@
-﻿import { input } from "modernizr";
-
-$(function () {
+﻿$(function () {
     validacionEstadoEncabezado();
 });
 
@@ -51,6 +49,9 @@ function validacionEstadoEncabezado() {
 
         /*alert("Encabezado Vencido");*/
 
+        var ddlCliente = $("#numFactura");
+        ddlCliente.attr("readonly", "readonly");
+
         var ddlCliente = $("#nomCliente");
         ddlCliente.attr("readonly", "readonly");
 
@@ -67,10 +68,10 @@ function validacionEstadoEncabezado() {
         ddlEstado.attr("readonly", "readonly");
 
         var botonModificar = $("#btnModificar");
-        botonModificar.attr("readonly", "readonly");
+        botonModificar.attr("disabled", "disabled");
 
         var botonDetalle = $("#btnDetalle");
-        botonDetalle.attr("readonly", "readonly");
+        botonDetalle.attr("disabled", "disabled");
 
     } else {
         alert("Encabezado No Vencido");
