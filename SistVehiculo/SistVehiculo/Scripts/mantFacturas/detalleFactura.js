@@ -182,7 +182,7 @@ function enviarDatosJson() {
 
 			datosDetalleFacturaServicio.push(datosServicio);
 
-			console.log(datosDetalleFacturaServicio);
+			/*console.log(datosDetalleFacturaServicio);*/
 		} else {
 			datosProducto.Cliente = idCliente;
 			datosProducto.Vehiculo = idVehiculo;
@@ -195,32 +195,78 @@ function enviarDatosJson() {
 
 			datosDetalleFacturaProducto.push(datosProducto);
 
-			console.log(datosDetalleFacturaProducto);
+			/*console.log(datosDetalleFacturaProducto);*/
 		}
 
 		///Enviar datos al procedimiento almacenado InsertaDetalleFactura
-		/*invocarMetodoInsertaDetalleFactura(datosDetalleFacturaGeneral);*/
-		test(datosDetalleFacturaGeneral);
+		recorridoJsonDetalleFacturaGlobal(datosDetalleFacturaGeneral);
+		recorridoJsonDetalleFacturaCliente(datosDetalleFacturaServicio);
+		recorridoJsonDetalleFacturaVehiculo(datosDetalleFacturaProducto);
 	}
 }
 
-function test(objetoJson) {
+/*function test(objetoJson) {
 	var jsonobject = objetoJson;
 
     for (var i = 0; i < jsonobject.length; i++) {
 		var resultado = jsonobject[i].Codigo;
 		var resultadoDos = jsonobject[i].Precio;
+		///console.log(resultado, resultadoDos);
+	}
 
-		console.log(resultado, resultadoDos);
-    }
+	invocarMetodoJsonPrueba(resultado, resultadoDos);
+}*/
+
+function recorridoJsonDetalleFacturaGlobal(objetoJson) {
+	var jsonobject = objetoJson;
+
+	var numFactura = $("#numFactura").val();
+
+	for (var i = 0; i < jsonobject.length; i++) {
+		var TipoServicio = jsonobject[i].Servicio;
+		var Cantidad = jsonobject[i].Cantidad;
+		var Precio = jsonobject[i].Precio;
+		/*console.log(resultado, resultadoDos);*/
+	}
+
+	invocarMetodoInsertaDetalleFactura(numFactura, TipoServicio, Cantidad, Precio);
 }
 
-function invocarMetodoInsertaDetalleFactura(pJsonDetalleFactura) {
+function recorridoJsonDetalleFacturaCliente(objetoJson) {
+	var jsonobject = objetoJson;
+
+	var idCliente = $("#hdIdCliente").val();
+
+	for (var i = 0; i < jsonobject.length; i++) {
+		var TipoServicio = jsonobject[i].Servicio;
+		/*console.log(resultado, resultadoDos);*/
+	}
+
+	invocarMetodoInsertaDetalleFacturaCliente(TipoServicio, idCliente);
+}
+
+function recorridoJsonDetalleFacturaVehiculo(objetoJson) {
+	var jsonobject = objetoJson;
+
+	var idVehiculo = $("#hdPlaca").val();
+
+	for (var i = 0; i < jsonobject.length; i++) {
+		var TipoServicio = jsonobject[i].Servicio;
+		/*console.log(resultado, resultadoDos);*/
+	}
+
+	invocarMetodoInsertaDetalleFacturaVehiculo(TipoServicio, idVehiculo);
+}
+
+function invocarMetodoInsertaDetalleFactura(pNumFactura, pTipoServicio, pCantidad, pPrecio) {
 	/*Dirección a donde se enviarán los datos */
 	var url = '/MantFacturas/InsertaEncabezadoFactura';
 	/*Parámetros del método*/
 	var parametros = {
-		detalleFactura: pJsonDetalleFactura
+		pNumFactura: pNumFactura,
+		pTipoServicio: pTipoServicio,
+		pCantidad: pCantidad,
+		pPrecio: pPrecio
 	};
 	/*Invocación del método*/
 	///Este método puede ser reciclado AVERIGUAR COMO
@@ -230,7 +276,7 @@ function invocarMetodoInsertaDetalleFactura(pJsonDetalleFactura) {
 		dataType: 'json', ///Formato en el que se envían y reciben los datos
 		type: 'post',
 		contentType: 'application/json',
-		data: JSON.parse(parametros), ///Parámetros convertidos en formato JSON
+		data: JSON.stringify(parametros), ///Parámetros convertidos en formato JSON
 		///Función que se ejecuta cuando ela respuesta fue satisfactoria
 		///data: contiene el valor retornado por el método del servidor
 		success: function (data, textStatus, jQxhr) {
@@ -244,6 +290,154 @@ function invocarMetodoInsertaDetalleFactura(pJsonDetalleFactura) {
 }
 
 function procesarResultadoMetodoDetalleFactura(data) {
+	///Es .resultado porque la función devuelve
+	///un objeto JSON que posee una propiedad
+	///llamada resultado 
+	var resultadoFuncion = data.resultado; /*.resultado es la propiedad del objeto que retorno el controlador*/
+	alert("Información: " + resultadoFuncion);
+	/*$("#divDialogPassword").dialog("close");*/
+}
+
+function invocarMetodoJsonPrueba(pCodigo, pPrecio) {
+	/*Dirección a donde se enviarán los datos */
+	var url = '/MantFacturas/InsertaJsonPrueba';
+	/*Parámetros del método*/
+	var parametros = {
+		pCodigo: pCodigo,
+		pPrecio: pPrecio
+	};
+	/*Invocación del método*/
+	///Este método puede ser reciclado AVERIGUAR COMO
+	$.ajax({
+		///Dirección del método
+		url: url,
+		dataType: 'json', ///Formato en el que se envían y reciben los datos
+		type: 'post',
+		contentType: 'application/json',
+		data: JSON.stringify(parametros), ///Parámetros convertidos en formato JSON
+		///Función que se ejecuta cuando ela respuesta fue satisfactoria
+		///data: contiene el valor retornado por el método del servidor
+		success: function (data, textStatus, jQxhr) {
+			procesarResultadoMetodoJsonPrueba(data);
+		},
+		///Función que se ejecuta cuando la respuesta tuvo errores
+		error: function (jQxhr, textStatus, errorThrown) {
+			alert(errorThrown);
+		}
+	});
+}
+
+function procesarResultadoMetodoJsonPrueba(data) {
+	var resultadoFuncion = data.resultado;
+	alert("Información: " + resultadoFuncion);
+}
+
+function invocarMetodoInsertaDetalleFacturaCliente(pTipoServicio, pIdCliente) {
+	/*Dirección a donde se enviarán los datos */
+	var url = '/MantFacturas/InsertaDetalleFacturaCliente';
+	/*Parámetros del método*/
+	var parametros = {
+		pTipoServicio: pTipoServicio,
+		pIdCliente: pIdCliente
+	};
+	/*Invocación del método*/
+	///Este método puede ser reciclado AVERIGUAR COMO
+	$.ajax({
+		///Dirección del método
+		url: url,
+		dataType: 'json', ///Formato en el que se envían y reciben los datos
+		type: 'post',
+		contentType: 'application/json',
+		data: JSON.stringify(parametros), ///Parámetros convertidos en formato JSON
+		///Función que se ejecuta cuando ela respuesta fue satisfactoria
+		///data: contiene el valor retornado por el método del servidor
+		success: function (data, textStatus, jQxhr) {
+			procesarResultadoMetodoDetalleFacturaCliente(data);
+		},
+		///Función que se ejecuta cuando la respuesta tuvo errores
+		error: function (jQxhr, textStatus, errorThrown) {
+			alert(errorThrown);
+		}
+	});
+}
+
+function procesarResultadoMetodoDetalleFacturaCliente(data) {
+	///Es .resultado porque la función devuelve
+	///un objeto JSON que posee una propiedad
+	///llamada resultado 
+	var resultadoFuncion = data.resultado; /*.resultado es la propiedad del objeto que retorno el controlador*/
+	alert("Información: " + resultadoFuncion);
+	/*$("#divDialogPassword").dialog("close");*/
+}
+
+function invocarMetodoInsertaDetalleFacturaVehiculo(pTipoServicio, pIdVehiculo) {
+	/*Dirección a donde se enviarán los datos */
+	var url = '/MantFacturas/InsertaDetalleFacturaVehiculo';
+	/*Parámetros del método*/
+	var parametros = {
+		pTipoServicio: pTipoServicio,
+		pIdVehiculo: pIdVehiculo
+	};
+	/*Invocación del método*/
+	///Este método puede ser reciclado AVERIGUAR COMO
+	$.ajax({
+		///Dirección del método
+		url: url,
+		dataType: 'json', ///Formato en el que se envían y reciben los datos
+		type: 'post',
+		contentType: 'application/json',
+		data: JSON.stringify(parametros), ///Parámetros convertidos en formato JSON
+		///Función que se ejecuta cuando ela respuesta fue satisfactoria
+		///data: contiene el valor retornado por el método del servidor
+		success: function (data, textStatus, jQxhr) {
+			procesarResultadoMetodoDetalleFacturaVehiculo(data);
+		},
+		///Función que se ejecuta cuando la respuesta tuvo errores
+		error: function (jQxhr, textStatus, errorThrown) {
+			alert(errorThrown);
+		}
+	});
+}
+
+function procesarResultadoMetodoDetalleFacturaVehiculo(data) {
+	///Es .resultado porque la función devuelve
+	///un objeto JSON que posee una propiedad
+	///llamada resultado 
+	var resultadoFuncion = data.resultado; /*.resultado es la propiedad del objeto que retorno el controlador*/
+	alert("Información: " + resultadoFuncion);
+	/*$("#divDialogPassword").dialog("close");*/
+}
+
+function invocarMetodoModificaTotalFactura(pIdFactura, pIdFactura) {
+	/*Dirección a donde se enviarán los datos */
+	var url = '/MantFacturas/ModificaMontoEncabezado';
+	/*Parámetros del método*/
+	var parametros = {
+		pIdFactura: pIdFactura,
+		pIdFactura: pIdFactura
+	};
+	/*Invocación del método*/
+	///Este método puede ser reciclado AVERIGUAR COMO
+	$.ajax({
+		///Dirección del método
+		url: url,
+		dataType: 'json', ///Formato en el que se envían y reciben los datos
+		type: 'post',
+		contentType: 'application/json',
+		data: JSON.stringify(parametros), ///Parámetros convertidos en formato JSON
+		///Función que se ejecuta cuando ela respuesta fue satisfactoria
+		///data: contiene el valor retornado por el método del servidor
+		success: function (data, textStatus, jQxhr) {
+			procesarResultadoMetodoModificaTotalFactura(data);
+		},
+		///Función que se ejecuta cuando la respuesta tuvo errores
+		error: function (jQxhr, textStatus, errorThrown) {
+			alert(errorThrown);
+		}
+	});
+}
+
+function procesarResultadoMetodoModificaTotalFactura(data) {
 	///Es .resultado porque la función devuelve
 	///un objeto JSON que posee una propiedad
 	///llamada resultado 

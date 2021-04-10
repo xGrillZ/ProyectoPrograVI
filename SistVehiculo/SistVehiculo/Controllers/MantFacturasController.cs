@@ -211,15 +211,15 @@ namespace SistVehiculo.Controllers
             return Json(new { resultado = mensaje });
         }
 
- /*       [HttpPost]
-        public ActionResult InsertaDetalleFactura(List<detalle_Factura> detalle_Facturas)
+        [HttpPost]
+        public ActionResult InsertaDetalleFactura(string pNumFactura, int pTipoServicio, int pCantidad, float pPrecio)
         {
             string mensaje = "";
             int cantRegistrosAfectados = 0;
 
             try
             {
-                cantRegistrosAfectados = this.modeloBD.pa_InsertaDetalleFactura(detalle_Facturas);
+                cantRegistrosAfectados = this.modeloBD.pa_InsertaDetalleFactura(pNumFactura, pTipoServicio, pCantidad, pPrecio);
             }
             catch (Exception error)
             {
@@ -231,17 +231,79 @@ namespace SistVehiculo.Controllers
             {
                 if (cantRegistrosAfectados > 0)
                 {
-                    mensaje = "Encabezado de factura ingresado";
+                    mensaje = $"Detalle de factura ingresado";
                 }
                 else
                 {
-                    mensaje += ".No se pudo ingresar el encabezado de factura";
+                    mensaje += ".No se pudo ingresar el detalle de factura";
                 }
             }
 
             return Json(new { resultado = mensaje });
-        }*/
-        
+        }
+
+        [HttpPost]
+        public ActionResult InsertaDetalleFacturaCliente(int pTipoServicio, int pIdCliente)
+        {
+            string mensaje = "";
+            int cantRegistrosAfectados = 0;
+
+            try
+            {
+                cantRegistrosAfectados = this.modeloBD.pa_InsertaServicioCliente(pTipoServicio, pIdCliente);
+            }
+            catch (Exception error)
+            {
+                mensaje = "Ocurrió un error: " + error.Message;
+
+            }
+            ///Se ejecuta cuando haya o no haya un error, siempre se ejecutará
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    mensaje = $"Detalle de factura ingresado al Cliente";
+                }
+                else
+                {
+                    mensaje += ".No se pudo ingresar el detalle de factura al Cliente";
+                }
+            }
+
+            return Json(new { resultado = mensaje });
+        }
+
+        [HttpPost]
+        public ActionResult InsertaDetalleFacturaVehiculo(int pTipoServicio, int pIdVehiculo)
+        {
+            string mensaje = "";
+            int cantRegistrosAfectados = 0;
+
+            try
+            {
+                cantRegistrosAfectados = this.modeloBD.pa_InsertaServicioVehiculo(pTipoServicio, pIdVehiculo);
+            }
+            catch (Exception error)
+            {
+                mensaje = "Ocurrió un error: " + error.Message;
+
+            }
+            ///Se ejecuta cuando haya o no haya un error, siempre se ejecutará
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    mensaje = $"Detalle de factura ingresado al Vehiculo";
+                }
+                else
+                {
+                    mensaje += ".No se pudo ingresar el detalle de factura al Vehiculo";
+                }
+            }
+
+            return Json(new { resultado = mensaje });
+        }
+
         [HttpPost]
         public ActionResult ModificaMontoEncabezado(int pId_factura, float pMontoTotal)
         {
@@ -269,6 +331,17 @@ namespace SistVehiculo.Controllers
                     mensaje += ".No se pudo actualizar el monto del encabezado";
                 }
             }
+
+            return Json(new { resultado = mensaje });
+        }
+
+        [HttpPost]
+        public ActionResult InsertaJsonPrueba(string pCodigo, float pPrecio)
+        {
+            string mensaje = "";
+
+            mensaje = $" Código: {pCodigo}"+
+                      $"Precio: {pPrecio}";
 
             return Json(new { resultado = mensaje });
         }
