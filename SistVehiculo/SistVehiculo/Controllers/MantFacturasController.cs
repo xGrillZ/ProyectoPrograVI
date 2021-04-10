@@ -59,6 +59,18 @@ namespace SistVehiculo.Controllers
             return Json(estadoFactura, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult RetornaServicioProducto()
+        {
+            List<pa_RetornaTipoServicioProducto_Result> servicioProducto = this.modeloBD.pa_RetornaTipoServicioProducto("","").ToList();
+            return Json(servicioProducto, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult RetornaServicioProductoID(int idTipoServicioProducto)
+        {
+            List<pa_RetornaTipoServicioProductoID_Result> servicioProductoID = this.modeloBD.pa_RetornaTipoServicioProductoID(idTipoServicioProducto).ToList();
+            return Json(servicioProductoID, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult InsertaEncabezado()
         {
             return View();

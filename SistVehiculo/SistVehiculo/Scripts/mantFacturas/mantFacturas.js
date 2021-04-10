@@ -6,6 +6,9 @@
     datePickerRegistroFactura();
     validacionRegistro();
     creaEventoFormularioEncabezado();
+    creaEventoDialogDetalle();
+    cargaDropdownListServicioProducto();
+    validacionIngresaDetalle();
 });
 
 //función que registrará los eventos necesarios para "monitorear"
@@ -35,6 +38,14 @@ function estableceEventosChangeCliente() {
         var marcaVehiculo = $("#marcaVehiculo").val();
         ///Funcion que permite cargar todos los distritos asociados al cantón seleccionado
         cargaDropdownListTipoVehiculo(marcaVehiculo);
+    });
+
+    ///Evento change de la lista de ServiciosProductos
+    $("#servicioProducto").change(function () {
+        ///Obtener el ID del canton seleccionado
+        var servicioProducto = $("#servicioProducto").val();
+        ///Funcion que permite cargar todos los distritos asociados al cantón seleccionado
+        cargaDropdownListDatosServiciosProductos(servicioProducto);
     });
 }
 
@@ -466,6 +477,31 @@ function validacionModificaEncabezado() {
     });
 }
 
+function validacionIngresaDetalle() {
+    $("#frmAgregaDetalleFactura").validate({
+        ///objeto que contiene "las condiciones" que el formulario
+        ///debe cumplir para ser considerado válido
+        rules: {
+            codigo: {
+                required: true,
+                maxlength: 150
+            },
+            servicioProducto: {
+                required: true
+            },
+            tipo: {
+                required: true
+            },
+            precio: {
+                required: true
+            },
+            cantidad: {
+                required: true
+            },
+        }
+    });
+}
+
 /* Permite realizar una acción con el evento click */
 function creaEventoFormularioEncabezado() {
     $("#btnRegistrar").on("click", function () {
@@ -578,4 +614,131 @@ function procesarResultadoMetodoModificaEncabezado(data) {
     ///llamada resultado 
     var resultadoFuncion = data.resultado; /*.resultado es la propiedad del objeto que retorno el controlador*/
     alert("Información: " + resultadoFuncion);
+}
+
+function creaEventoDialogDetalle() {
+    ///creamos el div divDialog como elemento de tipo Dialog
+    crearDialog();
+    ///evento click del botón btMostrarDialog          
+    $("#btnMostrarDetalle").click(function () {
+        $("#divDialogDetalleFactura").dialog("open");
+    });
+    //evento click del botón btCerrar   
+    $("#btCerrarDetalle").click(function () {
+        $("#divDialogDetalleFactura").dialog("close");
+    });
+}
+
+///Funcion que crea un dialog
+function crearDialog() {
+    $("#divDialogDetalleFactura").dialog({
+        autoOpen: false,
+        height: 500,
+        width: 800,
+        modal: true,
+        title: "Ingresar detalle factura",
+        resizable: false
+    });
+}
+
+///carga los registros de los Clientes
+function cargaDropdownListServicioProducto() {
+    ///dirección a donde se enviarán los datos
+    var url = '/MantFacturas/RetornaServicioProducto'; /*Controlador/Metodo*/
+    ///parámetros del método, es CASE-SENSITIVE
+    var parametros = {};
+    ///invocar el método
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(parametros), /*Envio de parametros por medio de una conversion*/
+        success: function (data, textStatus, jQxhr) { /*Ejecución de la funcion si funciona correctamente*/
+            procesarResultadoServicioProducto(data);
+        },
+        error: function (jQxhr, textStatus, errorThrown) { /*Ejecución de la funcion si funciona incorrectamente*/
+            alert(errorThrown);
+        },
+    });
+}
+
+///Toma el resultado del método RetornaClientes
+///y lo procesa, recorriendo cada posición
+function procesarResultadoServicioProducto(data) {
+    ///Mediante un selector nos posicionamos sobre la lista de provincias
+    var ddlServicioProducto = $("#servicioProducto");
+
+    ///Limpiamos todas las opcionesd e la lista de provincias
+    ddlServicioProducto.empty();
+
+    ///Creación de la primera opcion de la lista, con un valor vacio y texto de selección
+    var nuevaOpcion = "<option value=''>Selecciona un Servicio o Producto</option>";
+    ///Asignacion de la opcion al dropdownlist
+    ddlServicioProducto.append(nuevaOpcion);
+    ///Recorrido de los registros obtenidos
+    $(data).each(function () {
+        ///Obtenemos el objeto de tipo Provincia haciendo uso de la claúsula "this"
+        ///ahora podemos acceder a todas las propiedades por ejemplo
+        ///provinciaActual.nombre nos retorna el nombre de la provincia
+        var servicioProductoActual = this;
+        ///Creación de la nueva opción de la lista, con el valor ID de provincia y Nombre de la provincia
+        nuevaOpcion = "<option value='" + servicioProductoActual.idTipoServicioProducto + "'>" + servicioProductoActual.descripcion + "</option>";
+        ///Agregamos la opción al dropdownlist
+        ddlServicioProducto.append(nuevaOpcion);
+    });
+}
+
+///carga los registros de los tipos de vehículo
+function cargaDropdownListDatosServiciosProductos(pIdServicioProducto) {
+
+    ///dirección a donde se enviarán los datos
+    var url = '/MantFacturas/RetornaServicioProductoID'; /*Controlador/Metodo*/
+    ///parámetros del método, es CASE-SENSITIVE
+    var parametros = {
+        idTipoServicioProducto: pIdServicioProducto
+    };
+    ///invocar el método
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(parametros),
+        success: function (data, textStatus, jQxhr) {
+            procesarResultadoDatosServiciosProducto(data);
+        },
+        error: function (jQxhr, textStatus, errorThrown) {
+            alert(errorThrown);
+        },
+    });
+}
+
+function procesarResultadoDatosServiciosProducto(data) {
+    ///Declarar un selector donde nos posicionamos sobre la lista de cantones
+    var lblCodigo = $("#codigo");
+    var lblTipo = $("#tipo");
+    var lblPrecio = $("#precio");
+
+    ///Limpiamos todas las opciones de la lista de cantones
+    lblCodigo.empty();
+    lblTipo.empty();
+    lblPrecio.empty();
+
+    ///Recorrido de los registros obtenidosasdas
+    $(data).each(function () {
+        ///Obtenemos el objeto de tipo Canton haciendo uso de la claúsula "this"
+        ///ahora podemos acceder a todas las propiedades por ejemplo
+        ///cantonActual.nombre nos retorna el nombre del canton
+        var datosServicioProductoActual = this;
+        ///Creación de la nueva opción de la lista, con el valor ID de provincia y Nombre de la provincia
+        nuevaOpcion = datosServicioProductoActual.codigo;
+        lblCodigo.val(nuevaOpcion);
+
+        nuevaOpcionDos = datosServicioProductoActual.tipo;
+        lblTipo.val(nuevaOpcionDos);
+
+        nuevaOpcionTres = datosServicioProductoActual.precio;
+        lblPrecio.val(nuevaOpcionTres);
+    });
 }

@@ -72,10 +72,48 @@
     </div>
 
     <div class="form-group">
-        <input type="button" id="btnDetalle" class="btn btn-success btnDetalle" value="Agregar Detalles">
+        <input type="button" id="btnMostrarDetalle" class="btn btn-success btnDetalle" value="Agregar Detalles">
     </div>
 </form>
 <a href="~/MantFacturas/ListaEncabezado" class="btn btn-warning">Regresar a la lista</a>
+
+<!-- Contenido que se mostrará al dar click en el botón  btMostrarDialog-->
+<div id="divDialogDetalleFactura">
+    <h2>Ingresa el detalle de la factura</h2>
+    <form id="frmAgregaDetalleFactura" method="post">
+        <div class="row col-sm-12">
+            <div class="form-group col-6">
+                <label>Código Producto:</label>
+                <input type="text" name="codigo" id="codigo" class="form-control" readonly />
+            </div>
+
+            <div class="form-group col-6">
+                <label>Servicio o Producto:</label>
+                <select name="servicioProducto" id="servicioProducto" class="form-control"></select>
+            </div>
+
+            <div class="form-group col-6">
+                <label>Tipo:</label>
+                <input type="text" name="tipo" id="tipo" class="form-control" readonly />
+            </div>
+
+            <div class="form-group col-6">
+                <label>Precio:</label>
+                <input type="text" name="precio" id="precio" class="form-control" readonly />
+            </div>
+
+            <div class="form-group col-6">
+                <label>Cantidad:</label>
+                <input type="text" name="cantidad" id="cantidad" class="form-control" />
+            </div>
+        </div>
+            <!--El tipo del boton debe ser button para no recargar la página--->
+            <div class="form-group">
+                <input type="button" value="Agregar Detalle" id="btnAgregarDetalle" class="btn btn-success btnAgregarDetalle" />
+            </div>
+    </form>
+    <button id="btCerrarDetalle" class="btn btn-danger btnCancelarDetalle">Cancelar</button>
+</div>
 
 @section scripts{
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
