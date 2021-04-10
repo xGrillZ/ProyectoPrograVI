@@ -493,10 +493,12 @@ function validacionIngresaDetalle() {
                 required: true
             },
             precio: {
-                required: true
+                required: true,
+                number: true
             },
             cantidad: {
-                required: true
+                required: true,
+                number: true
             },
         }
     });
@@ -633,7 +635,7 @@ function creaEventoDialogDetalle() {
 function crearDialog() {
     $("#divDialogDetalleFactura").dialog({
         autoOpen: false,
-        height: 500,
+        height: 610,
         width: 800,
         modal: true,
         title: "Ingresar detalle factura",

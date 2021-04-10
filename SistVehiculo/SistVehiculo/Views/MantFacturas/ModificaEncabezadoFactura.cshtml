@@ -99,18 +99,52 @@
 
             <div class="form-group col-6">
                 <label>Precio:</label>
-                <input type="text" name="precio" id="precio" class="form-control" readonly />
+                <input type="text" name="precio" id="precio" class="form-control" readonly/>
             </div>
 
             <div class="form-group col-6">
                 <label>Cantidad:</label>
-                <input type="text" name="cantidad" id="cantidad" class="form-control" />
+                <input type="text" name="cantidad" id="cantidad" class="form-control"/>
             </div>
         </div>
             <!--El tipo del boton debe ser button para no recargar la página--->
             <div class="form-group">
                 <input type="button" value="Agregar Detalle" id="btnAgregarDetalle" class="btn btn-success btnAgregarDetalle" />
             </div>
+
+        <div class="tablaDetalle">
+            <table class="table" id="tablaFactura">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Servicio o Producto</th>
+                        <th>Tipo</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="contenidoTablaFactura">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td id="total_precio">0.00</td>
+                        <td id="total_cantidad">0.00</td>
+                        <td id="total_total">0.00</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </form>
     <button id="btCerrarDetalle" class="btn btn-danger btnCancelarDetalle">Cancelar</button>
 </div>
@@ -119,4 +153,5 @@
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
     <script src="~/Scripts/mantFacturas/mantFacturas.js"></script>
     <script src="~/Scripts/mantFacturas/estadoEncabezadoFactura.js"></script>
+    <script src="~/Scripts/mantFacturas/detalleFactura.js"></script>
 }
