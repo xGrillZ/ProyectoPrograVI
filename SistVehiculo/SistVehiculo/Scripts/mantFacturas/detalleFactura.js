@@ -65,12 +65,12 @@ function agregarNuevafila() {
 	var columna6 = row.insertCell(5);
 	var columna7 = row.insertCell(6);
 	///Valores de cada columna
-	columna1.innerHTML = '<td>'+codigo+'</td>';
-	columna2.innerHTML = '<td>' + servicioProducto +'</td>';
-	columna3.innerHTML = '<td>' + tipo +'</td>';
-	columna4.innerHTML = '<td>' + precio +'</td>';
-	columna5.innerHTML = '<td>' + cantidad +'</td>';
-	columna6.innerHTML = '<td>' + total +'</td>';
+	columna1.innerHTML = '<p>' + codigo +'</p>';
+	columna2.innerHTML = '<p>' + servicioProducto +'</p>';
+	columna3.innerHTML = '<p>' + tipo +'</p';
+	columna4.innerHTML = '<p>' + precio +'</p>';
+	columna5.innerHTML = '<p>' + cantidad +'</p>';
+	columna6.innerHTML = '<p>' + total +'</p>';
 	columna7.innerHTML = '<span class="fas fa-trash-alt"></span>';
 
 	///Se llama a la funcion calcularDatos para mostrar los datos calculados cuando se ingresan
@@ -105,15 +105,20 @@ function creaEventoDetalleFactura() {
 	});
 }
 
-function enviarDatosJson() {
+///Funciona de manera general
+/*function enviarDatosJson() {
 	var datosDetalleFactura = new Array();
 
 	var table = document.getElementById("tablaFactura");
+	var idCliente = $("#hdIdCliente").val();
+	var idVehiculo = $("#hdPlaca").val();
 
     for (var i = 1; i < table.rows.length; i++) {
 		var row = table.rows[i];
 
 		var datos = {};
+		datos.Cliente = idCliente;
+		datos.Vehiculo = idVehiculo;
 		datos.Codigo = row.cells[0].innerHTML;
 		datos.Servicio = row.cells[1].innerHTML;
 		datos.Tipo = row.cells[2].innerHTML;
@@ -125,4 +130,124 @@ function enviarDatosJson() {
 
 		console.log(datosDetalleFactura);
     }
+}*/
+
+///Logica de separación
+function enviarDatosJson() {
+	///Creación de array
+	var datosDetalleFacturaServicio = new Array();
+	var datosDetalleFacturaProducto = new Array();
+	var datosDetalleFacturaGeneral = new Array();
+
+	///Obtención de datos por medio de variables
+	var table = document.getElementById("tablaFactura");
+	var idCliente = $("#hdIdCliente").val();
+	var idVehiculo = $("#hdPlaca").val();
+	var totalGeneral = parseFloat(document.getElementById("total_total").innerHTML)
+	var numFactura = $("#numFactura").val();
+
+	///Recorrido de la tabla para obtener los datos
+	for (var i = 1; i < table.rows.length; i++) {
+		var row = table.rows[i];
+
+		///Arreglos que almacenan los datos del recorrido temporalmente
+		var datosServicio = {};
+		var datosProducto = {};
+		var datosGenerales = {};
+
+		///Recorrido para rellenar el Arreglo datosDetalleFacturaGeneral
+		///InnerText permite solo obtener el valor del texto a buscar
+		datosGenerales.Cliente = idCliente;
+		datosGenerales.Vehiculo = idVehiculo;
+		datosGenerales.Codigo = row.cells[0].innerText;
+		datosGenerales.Servicio = row.cells[1].innerText;
+		datosGenerales.Tipo = row.cells[2].innerText;
+		datosGenerales.Precio = row.cells[3].innerText;
+		datosGenerales.Cantidad = row.cells[4].innerText;
+		datosGenerales.Total = row.cells[5].innerText;
+
+		datosDetalleFacturaGeneral.push(datosGenerales);
+
+		///Verificador si el tipo es Servicio
+		///Y Almacenamiento en el arreglo correspondiente
+		if (row.cells[2].innerHTML == 1) {
+			datosServicio.Cliente = idCliente;
+			datosServicio.Vehiculo = idVehiculo;
+			datosServicio.Codigo = row.cells[0].innerText;
+			datosServicio.Servicio = row.cells[1].innerText;
+			datosServicio.Tipo = row.cells[2].innerText;
+			datosServicio.Precio = row.cells[3].innerText;
+			datosServicio.Cantidad = row.cells[4].innerText;
+			datosServicio.Total = row.cells[5].innerText;
+
+			datosDetalleFacturaServicio.push(datosServicio);
+
+			console.log(datosDetalleFacturaServicio);
+		} else {
+			datosProducto.Cliente = idCliente;
+			datosProducto.Vehiculo = idVehiculo;
+			datosProducto.Codigo = row.cells[0].innerText;
+			datosProducto.Servicio = row.cells[1].innerText;
+			datosProducto.Tipo = row.cells[2].innerText;
+			datosProducto.Precio = row.cells[3].innerText;
+			datosProducto.Cantidad = row.cells[4].innerText;
+			datosProducto.Total = row.cells[5].innerText;
+
+			datosDetalleFacturaProducto.push(datosProducto);
+
+			console.log(datosDetalleFacturaProducto);
+		}
+
+		///Enviar datos al procedimiento almacenado InsertaDetalleFactura
+		/*invocarMetodoInsertaDetalleFactura(datosDetalleFacturaGeneral);*/
+		test(datosDetalleFacturaGeneral);
+	}
+}
+
+function test(objetoJson) {
+	var jsonobject = objetoJson;
+
+    for (var i = 0; i < jsonobject.length; i++) {
+		var resultado = jsonobject[i].Codigo;
+		var resultadoDos = jsonobject[i].Precio;
+
+		console.log(resultado, resultadoDos);
+    }
+}
+
+function invocarMetodoInsertaDetalleFactura(pJsonDetalleFactura) {
+	/*Dirección a donde se enviarán los datos */
+	var url = '/MantFacturas/InsertaEncabezadoFactura';
+	/*Parámetros del método*/
+	var parametros = {
+		detalleFactura: pJsonDetalleFactura
+	};
+	/*Invocación del método*/
+	///Este método puede ser reciclado AVERIGUAR COMO
+	$.ajax({
+		///Dirección del método
+		url: url,
+		dataType: 'json', ///Formato en el que se envían y reciben los datos
+		type: 'post',
+		contentType: 'application/json',
+		data: JSON.parse(parametros), ///Parámetros convertidos en formato JSON
+		///Función que se ejecuta cuando ela respuesta fue satisfactoria
+		///data: contiene el valor retornado por el método del servidor
+		success: function (data, textStatus, jQxhr) {
+			procesarResultadoMetodoDetalleFactura(data);
+		},
+		///Función que se ejecuta cuando la respuesta tuvo errores
+		error: function (jQxhr, textStatus, errorThrown) {
+			alert(errorThrown);
+		}
+	});
+}
+
+function procesarResultadoMetodoDetalleFactura(data) {
+	///Es .resultado porque la función devuelve
+	///un objeto JSON que posee una propiedad
+	///llamada resultado 
+	var resultadoFuncion = data.resultado; /*.resultado es la propiedad del objeto que retorno el controlador*/
+	alert("Información: " + resultadoFuncion);
+	/*$("#divDialogPassword").dialog("close");*/
 }

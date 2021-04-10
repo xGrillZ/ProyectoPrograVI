@@ -210,5 +210,67 @@ namespace SistVehiculo.Controllers
 
             return Json(new { resultado = mensaje });
         }
+
+ /*       [HttpPost]
+        public ActionResult InsertaDetalleFactura(List<detalle_Factura> detalle_Facturas)
+        {
+            string mensaje = "";
+            int cantRegistrosAfectados = 0;
+
+            try
+            {
+                cantRegistrosAfectados = this.modeloBD.pa_InsertaDetalleFactura(detalle_Facturas);
+            }
+            catch (Exception error)
+            {
+                mensaje = "Ocurrió un error: " + error.Message;
+
+            }
+            ///Se ejecuta cuando haya o no haya un error, siempre se ejecutará
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    mensaje = "Encabezado de factura ingresado";
+                }
+                else
+                {
+                    mensaje += ".No se pudo ingresar el encabezado de factura";
+                }
+            }
+
+            return Json(new { resultado = mensaje });
+        }*/
+        
+        [HttpPost]
+        public ActionResult ModificaMontoEncabezado(int pId_factura, float pMontoTotal)
+        {
+            string mensaje = "";
+            int cantRegistrosAfectados = 0;
+
+            try
+            {
+                cantRegistrosAfectados = this.modeloBD.pa_ModificaMontoEncabezadoFactura(pId_factura, pMontoTotal);
+            }
+            catch (Exception error)
+            {
+                mensaje = "Ocurrió un error: " + error.Message;
+
+            }
+            /*Se ejecuta cuando haya o no haya un error, siempre se ejecutará*/
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    mensaje = "Monto de encabezado actualizado";
+                }
+                else
+                {
+                    mensaje += ".No se pudo actualizar el monto del encabezado";
+                }
+            }
+
+            return Json(new { resultado = mensaje });
+        }
     }
 }

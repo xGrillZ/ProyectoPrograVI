@@ -471,6 +471,12 @@
           <Parameter Name="ultimoIngreso" Type="datetime" Mode="In" />
           <Parameter Name="contrasena" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="pa_InsertaDetalleFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="num_factura" Type="nvarchar" Mode="In" />
+          <Parameter Name="tipoServicioProducto" Type="int" Mode="In" />
+          <Parameter Name="cantidadServicioProducto" Type="int" Mode="In" />
+          <Parameter Name="precio" Type="float" Mode="In" />
+        </Function>
         <Function Name="pa_InsertaEncabezadoFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="num_factura" Type="nvarchar" Mode="In" />
           <Parameter Name="fecha" Type="datetime" Mode="In" />
@@ -483,6 +489,14 @@
           <Parameter Name="codigo" Type="nvarchar" Mode="In" />
           <Parameter Name="idPaisFabricante" Type="int" Mode="In" />
           <Parameter Name="marca" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="pa_InsertaServicioCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipoServicioProducto" Type="int" Mode="In" />
+          <Parameter Name="idCliente" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_InsertaServicioVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipoServicioProducto" Type="int" Mode="In" />
+          <Parameter Name="idVehiculo" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_InsertaTipoServicioProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="codigo" Type="nvarchar" Mode="In" />
@@ -540,6 +554,10 @@
           <Parameter Name="codigo" Type="nvarchar" Mode="In" />
           <Parameter Name="idPaisFabricante" Type="int" Mode="In" />
           <Parameter Name="marca" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="pa_ModificaMontoEncabezadoFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_factura" Type="int" Mode="In" />
+          <Parameter Name="montoTotal" Type="float" Mode="In" />
         </Function>
         <Function Name="pa_ModificaPaisFabricante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idFabricante" Type="int" Mode="In" />
@@ -1497,10 +1515,28 @@
             <Parameter Name="idVehiculo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_ModificaEstadoOffEncabezadoFactura">
-            <Parameter Name="id_factura" Mode="In" Type="Int32" />
+          <Parameter Name="id_factura" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_ModificaEstadoOnEncabezadoFactura">
+          <Parameter Name="id_factura" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_InsertaDetalleFactura">
+            <Parameter Name="num_factura" Mode="In" Type="String" />
+            <Parameter Name="tipoServicioProducto" Mode="In" Type="Int32" />
+            <Parameter Name="cantidadServicioProducto" Mode="In" Type="Int32" />
+            <Parameter Name="precio" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="pa_InsertaServicioCliente">
+            <Parameter Name="tipoServicioProducto" Mode="In" Type="Int32" />
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_InsertaServicioVehiculo">
+            <Parameter Name="tipoServicioProducto" Mode="In" Type="Int32" />
+            <Parameter Name="idVehiculo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_ModificaMontoEncabezadoFactura">
             <Parameter Name="id_factura" Mode="In" Type="Int32" />
+            <Parameter Name="montoTotal" Mode="In" Type="Double" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -2809,6 +2845,10 @@
           <FunctionImportMapping FunctionImportName="pa_ModificaEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_ModificaEncabezadoFactura" />
           <FunctionImportMapping FunctionImportName="pa_ModificaEstadoOffEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_ModificaEstadoOffEncabezadoFactura" />
           <FunctionImportMapping FunctionImportName="pa_ModificaEstadoOnEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_ModificaEstadoOnEncabezadoFactura" />
+          <FunctionImportMapping FunctionImportName="pa_InsertaDetalleFactura" FunctionName="sistvehiculoviModel.Store.pa_InsertaDetalleFactura" />
+          <FunctionImportMapping FunctionImportName="pa_InsertaServicioCliente" FunctionName="sistvehiculoviModel.Store.pa_InsertaServicioCliente" />
+          <FunctionImportMapping FunctionImportName="pa_InsertaServicioVehiculo" FunctionName="sistvehiculoviModel.Store.pa_InsertaServicioVehiculo" />
+          <FunctionImportMapping FunctionImportName="pa_ModificaMontoEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_ModificaMontoEncabezadoFactura" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
