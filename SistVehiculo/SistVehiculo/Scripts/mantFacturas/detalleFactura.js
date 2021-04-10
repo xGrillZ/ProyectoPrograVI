@@ -1,5 +1,6 @@
 ﻿$(function () {
 	eventosPrincipales();
+	creaEventoDetalleFactura();
 });
 
 function eventosPrincipales() {
@@ -64,12 +65,12 @@ function agregarNuevafila() {
 	var columna6 = row.insertCell(5);
 	var columna7 = row.insertCell(6);
 	///Valores de cada columna
-	columna1.innerHTML = '<p name="codigo_servicio[]" class="non-margin">'+codigo+'</p>';
-	columna2.innerHTML = '<p name="nombre_servicio[]" class="non-margin">' + servicioProducto+'</p>';
-	columna3.innerHTML = '<p name="tipo_servicio[]" class="non-margin">' + tipo+'</p>';
-	columna4.innerHTML = '<p name="precio_servicio[]" class="non-margin">' + precio+'</p>';
-	columna5.innerHTML = '<p name="cantidad_servicio[]" class="non-margin">' + cantidad+'</p>';
-	columna6.innerHTML = '<p name="total_servicio[]" class="non-margin">' + total+'</p>';
+	columna1.innerHTML = '<td>'+codigo+'</td>';
+	columna2.innerHTML = '<td>' + servicioProducto +'</td>';
+	columna3.innerHTML = '<td>' + tipo +'</td>';
+	columna4.innerHTML = '<td>' + precio +'</td>';
+	columna5.innerHTML = '<td>' + cantidad +'</td>';
+	columna6.innerHTML = '<td>' + total +'</td>';
 	columna7.innerHTML = '<span class="fas fa-trash-alt"></span>';
 
 	///Se llama a la funcion calcularDatos para mostrar los datos calculados cuando se ingresan
@@ -95,4 +96,33 @@ function calcularDatos(cantidad, precio, total, accion) {
 	} else {
 		alert('Ha ocurrido un error, revisar valores');
 	}
+}
+
+/* Permite realizar una acción con el evento click */
+function creaEventoDetalleFactura() {
+	$("#btnGenerarDetalle").on("click", function () {
+		enviarDatosJson();
+	});
+}
+
+function enviarDatosJson() {
+	var datosDetalleFactura = new Array();
+
+	var table = document.getElementById("tablaFactura");
+
+    for (var i = 1; i < table.rows.length; i++) {
+		var row = table.rows[i];
+
+		var datos = {};
+		datos.Codigo = row.cells[0].innerHTML;
+		datos.Servicio = row.cells[1].innerHTML;
+		datos.Tipo = row.cells[2].innerHTML;
+		datos.Precio = row.cells[3].innerHTML;
+		datos.Cantidad = row.cells[4].innerHTML;
+		datos.Total = row.cells[5].innerHTML;
+
+		datosDetalleFactura.push(datos);
+
+		console.log(datosDetalleFactura);
+    }
 }

@@ -99,18 +99,18 @@
 
             <div class="form-group col-6">
                 <label>Precio:</label>
-                <input type="text" name="precio" id="precio" class="form-control" readonly/>
+                <input type="text" name="precio" id="precio" class="form-control" readonly />
             </div>
 
             <div class="form-group col-6">
                 <label>Cantidad:</label>
-                <input type="text" name="cantidad" id="cantidad" class="form-control"/>
+                <input type="text" name="cantidad" id="cantidad" class="form-control" />
             </div>
         </div>
-            <!--El tipo del boton debe ser button para no recargar la página--->
-            <div class="form-group">
-                <input type="button" value="Agregar Detalle" id="btnAgregarDetalle" class="btn btn-success btnAgregarDetalle" />
-            </div>
+        <!--El tipo del boton debe ser button para no recargar la página--->
+        <div class="form-group">
+            <input type="button" value="Agregar Detalle" id="btnAgregarDetalle" class="btn btn-success btnAgregarDetalle" />
+        </div>
 
         <div class="tablaDetalle">
             <table class="table" id="tablaFactura">
@@ -147,6 +147,7 @@
         </div>
     </form>
     <button id="btCerrarDetalle" class="btn btn-danger btnCancelarDetalle">Cancelar</button>
+    <button id="btnGenerarDetalle" class="btn btn-warning btnGenerarDetalle">Generar</button>
 </div>
 
 @section scripts{
