@@ -9,15 +9,14 @@
 }
 
 <h2>Mi Reporte Servicios</h2>
+@{
+    int dataUser = int.Parse(Session["idusuario"].ToString());
+}
+
+<input type="hidden" id="hdIdCliente" value="dataUser" />
 
 <div id="divKendoGrid">
-   
 
-        @{
-            int dataUser = int.Parse(Session["idusuario"].ToString());
-        }
-
-        <input type="hidden" id="hdIdCliente" value="dataUser" />    
 
 
 </div>
