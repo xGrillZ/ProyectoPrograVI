@@ -132,6 +132,10 @@
           <Property Name="idServiciosCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idTipoServiciosProducto" Type="int" Nullable="false" />
           <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="idClasificacionSP" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="precio" Type="float" Nullable="false" />
+          <Property Name="precioTotal" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="ServiciosVehiculo">
           <Key>
@@ -140,6 +144,10 @@
           <Property Name="idServiciosVehiculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idTipoServiciosProducto" Type="int" Nullable="false" />
           <Property Name="idVehiculo" Type="int" Nullable="false" />
+          <Property Name="idClasificacionSP" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="int" Nullable="false" />
+          <Property Name="precio" Type="float" Nullable="false" />
+          <Property Name="precioTotal" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="TipoCliente">
           <Key>
@@ -184,6 +192,7 @@
           <Property Name="idVehiculosCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idVehiculo" Type="int" Nullable="false" />
           <Property Name="idCliente" Type="int" Nullable="false" />
+          <Property Name="idTiposVehiculo" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="Canton_ref_Provincia">
           <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
@@ -341,6 +350,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ServiciosCliente_ClasificacionSP">
+          <End Role="clasificacionSP" Type="Self.clasificacionSP" Multiplicity="1" />
+          <End Role="ServiciosCliente" Type="Self.ServiciosCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clasificacionSP">
+              <PropertyRef Name="id_clasificacionSP" />
+            </Principal>
+            <Dependent Role="ServiciosCliente">
+              <PropertyRef Name="idClasificacionSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ServiciosCliente_Cliente">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
           <End Role="ServiciosCliente" Type="Self.ServiciosCliente" Multiplicity="*" />
@@ -425,6 +446,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_VehiculosCliente_TiposVehiculo">
+          <End Role="TiposVehiculo" Type="Self.TiposVehiculo" Multiplicity="1" />
+          <End Role="VehiculosCliente" Type="Self.VehiculosCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposVehiculo">
+              <PropertyRef Name="idTipoVehiculo" />
+            </Principal>
+            <Dependent Role="VehiculosCliente">
+              <PropertyRef Name="idTiposVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_VehiculosCliente_Vehiculo">
           <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="1" />
           <End Role="VehiculosCliente" Type="Self.VehiculosCliente" Multiplicity="*" />
@@ -493,10 +526,18 @@
         <Function Name="pa_InsertaServicioCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tipoServicioProducto" Type="int" Mode="In" />
           <Parameter Name="idCliente" Type="int" Mode="In" />
+          <Parameter Name="idClasificacion" Type="int" Mode="In" />
+          <Parameter Name="cantidad" Type="int" Mode="In" />
+          <Parameter Name="precio" Type="float" Mode="In" />
+          <Parameter Name="precioTotal" Type="float" Mode="In" />
         </Function>
         <Function Name="pa_InsertaServicioVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tipoServicioProducto" Type="int" Mode="In" />
           <Parameter Name="idVehiculo" Type="int" Mode="In" />
+          <Parameter Name="idClasificacion" Type="int" Mode="In" />
+          <Parameter Name="cantidad" Type="int" Mode="In" />
+          <Parameter Name="precio" Type="float" Mode="In" />
+          <Parameter Name="precioTotal" Type="float" Mode="In" />
         </Function>
         <Function Name="pa_InsertaTipoServicioProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="codigo" Type="nvarchar" Mode="In" />
@@ -518,6 +559,7 @@
         <Function Name="pa_InsertaVehiculosCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idVehiculo" Type="int" Mode="In" />
           <Parameter Name="idCliente" Type="int" Mode="In" />
+          <Parameter Name="idTipoVehiculo" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_ModificaCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idCliente" Type="int" Mode="In" />
@@ -593,12 +635,10 @@
           <Parameter Name="numeroRueda" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_ModificaVehiculosCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="idVehiculos" Type="int" Mode="In" />
-          <Parameter Name="placa" Type="nvarchar" Mode="In" />
-          <Parameter Name="tipoVehiculo" Type="int" Mode="In" />
-          <Parameter Name="marcaVehiculo" Type="int" Mode="In" />
-          <Parameter Name="numeroPuerta" Type="int" Mode="In" />
-          <Parameter Name="numeroRueda" Type="int" Mode="In" />
+          <Parameter Name="idVehiculoCliente" Type="int" Mode="In" />
+          <Parameter Name="idVehiculo" Type="int" Mode="In" />
+          <Parameter Name="idCliente" Type="int" Mode="In" />
+          <Parameter Name="idTipoVehiculo" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_RetornaClasificacionSP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="varchar" Mode="In" />
@@ -667,8 +707,16 @@
           <Parameter Name="codigo" Type="nvarchar" Mode="In" />
           <Parameter Name="tipo" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="pa_RetornaTiposVehiculoCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codigo" Type="nvarchar" Mode="In" />
+          <Parameter Name="tipo" Type="nvarchar" Mode="In" />
+          <Parameter Name="idVehiculo" Type="int" Mode="In" />
+        </Function>
         <Function Name="pa_RetornaTiposVehiculoID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idTipoVehiculo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_RetornaTiposVehiculoIDVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idVehiculo" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_RetornaTipoVehiculoxMarca" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="marcaVehiculo" Type="varchar" Mode="In" />
@@ -796,6 +844,10 @@
             <End Role="PaisFabricante" EntitySet="PaisFabricante" />
             <End Role="MarcaVehiculo" EntitySet="MarcaVehiculo" />
           </AssociationSet>
+          <AssociationSet Name="FK_ServiciosCliente_ClasificacionSP" Association="Self.FK_ServiciosCliente_ClasificacionSP">
+            <End Role="clasificacionSP" EntitySet="clasificacionSP" />
+            <End Role="ServiciosCliente" EntitySet="ServiciosCliente" />
+          </AssociationSet>
           <AssociationSet Name="FK_ServiciosCliente_Cliente" Association="Self.FK_ServiciosCliente_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="ServiciosCliente" EntitySet="ServiciosCliente" />
@@ -822,6 +874,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_VehiculosCliente_Cliente" Association="Self.FK_VehiculosCliente_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehiculosCliente_TiposVehiculo" Association="Self.FK_VehiculosCliente_TiposVehiculo">
+            <End Role="TiposVehiculo" EntitySet="TiposVehiculo" />
             <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
           </AssociationSet>
           <AssociationSet Name="FK_VehiculosCliente_Vehiculo" Association="Self.FK_VehiculosCliente_Vehiculo">
@@ -874,9 +930,9 @@
           <NavigationProperty Name="Genero1" Relationship="Self.FK_Cliente_Genero" FromRole="Cliente" ToRole="Genero" />
           <NavigationProperty Name="Provincia1" Relationship="Self.FK_Cliente_Provincia" FromRole="Cliente" ToRole="Provincia" />
           <NavigationProperty Name="TipoCliente1" Relationship="Self.FK_Cliente_TipoCliente" FromRole="Cliente" ToRole="TipoCliente" />
-          <NavigationProperty Name="VehiculosCliente" Relationship="Self.FK_VehiculosCliente_Cliente" FromRole="Cliente" ToRole="VehiculosCliente" />
-          <NavigationProperty Name="ServiciosCliente" Relationship="sistvehiculoviModel.FK_ServiciosCliente_Cliente" FromRole="Cliente" ToRole="ServiciosCliente" />
           <NavigationProperty Name="Factura" Relationship="sistvehiculoviModel.FK_Factura_idCliente" FromRole="Cliente" ToRole="Factura" />
+          <NavigationProperty Name="ServiciosCliente" Relationship="sistvehiculoviModel.FK_ServiciosCliente_Cliente" FromRole="Cliente" ToRole="ServiciosCliente" />
+          <NavigationProperty Name="VehiculosCliente" Relationship="sistvehiculoviModel.FK_VehiculosCliente_Cliente" FromRole="Cliente" ToRole="VehiculosCliente" />
         </EntityType>
         <EntityType Name="detalle_Factura">
           <Key>
@@ -972,6 +1028,7 @@
           <Property Name="codigo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Vehiculos" Relationship="Self.FK_Vehiculos_TiposVehiculo" FromRole="TiposVehiculo" ToRole="Vehiculos" />
+          <NavigationProperty Name="VehiculosCliente" Relationship="sistvehiculoviModel.FK_VehiculosCliente_TiposVehiculo" FromRole="TiposVehiculo" ToRole="VehiculosCliente" />
         </EntityType>
         <EntityType Name="Vehiculos">
           <Key>
@@ -985,19 +1042,8 @@
           <Property Name="numeroRueda" Type="Int32" Nullable="false" />
           <NavigationProperty Name="MarcaVehiculo1" Relationship="Self.FK_Vehiculos_MarcaVehiculo" FromRole="Vehiculos" ToRole="MarcaVehiculo" />
           <NavigationProperty Name="TiposVehiculo" Relationship="Self.FK_Vehiculos_TiposVehiculo" FromRole="Vehiculos" ToRole="TiposVehiculo" />
-          <NavigationProperty Name="VehiculosCliente" Relationship="Self.FK_VehiculosCliente_Vehiculo" FromRole="Vehiculos" ToRole="VehiculosCliente" />
-          <NavigationProperty Name="ServiciosVehiculo" Relationship="sistvehiculoviModel.FK_ServiciosVehiculo_Vehiculo" FromRole="Vehiculos" ToRole="ServiciosVehiculo" />
           <NavigationProperty Name="Factura" Relationship="sistvehiculoviModel.FK_Factura_idVehiculo" FromRole="Vehiculos" ToRole="Factura" />
-        </EntityType>
-        <EntityType Name="VehiculosCliente">
-          <Key>
-            <PropertyRef Name="idVehiculosCliente" />
-          </Key>
-          <Property Name="idVehiculosCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idVehiculo" Type="Int32" Nullable="false" />
-          <Property Name="idCliente" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cliente" Relationship="Self.FK_VehiculosCliente_Cliente" FromRole="VehiculosCliente" ToRole="Cliente" />
-          <NavigationProperty Name="Vehiculos" Relationship="Self.FK_VehiculosCliente_Vehiculo" FromRole="VehiculosCliente" ToRole="Vehiculos" />
+          <NavigationProperty Name="VehiculosCliente" Relationship="sistvehiculoviModel.FK_VehiculosCliente_Vehiculo" FromRole="Vehiculos" ToRole="VehiculosCliente" />
         </EntityType>
         <Association Name="Canton_ref_Provincia">
           <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
@@ -1083,18 +1129,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_VehiculosCliente_Cliente">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
-          <End Role="VehiculosCliente" Type="Self.VehiculosCliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="idCliente" />
-            </Principal>
-            <Dependent Role="VehiculosCliente">
-              <PropertyRef Name="idCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MarcaVehiculo_PaisFabricante">
           <End Role="PaisFabricante" Type="Self.PaisFabricante" Multiplicity="1" />
           <End Role="MarcaVehiculo" Type="Self.MarcaVehiculo" Multiplicity="*" />
@@ -1131,18 +1165,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_VehiculosCliente_Vehiculo">
-          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="1" />
-          <End Role="VehiculosCliente" Type="Self.VehiculosCliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vehiculos">
-              <PropertyRef Name="idVehiculos" />
-            </Principal>
-            <Dependent Role="VehiculosCliente">
-              <PropertyRef Name="idVehiculo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="sistvehiculoviEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Canton" EntityType="Self.Canton" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" />
@@ -1156,7 +1178,6 @@
           <EntitySet Name="TipoCliente" EntityType="Self.TipoCliente" />
           <EntitySet Name="TiposVehiculo" EntityType="Self.TiposVehiculo" />
           <EntitySet Name="Vehiculos" EntityType="Self.Vehiculos" />
-          <EntitySet Name="VehiculosCliente" EntityType="Self.VehiculosCliente" />
           <AssociationSet Name="Canton_ref_Provincia" Association="Self.Canton_ref_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Canton" EntitySet="Canton" />
@@ -1185,10 +1206,6 @@
             <End Role="TipoCliente" EntitySet="TipoCliente" />
             <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
-          <AssociationSet Name="FK_VehiculosCliente_Cliente" Association="Self.FK_VehiculosCliente_Cliente">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
-          </AssociationSet>
           <AssociationSet Name="FK_MarcaVehiculo_PaisFabricante" Association="Self.FK_MarcaVehiculo_PaisFabricante">
             <End Role="PaisFabricante" EntitySet="PaisFabricante" />
             <End Role="MarcaVehiculo" EntitySet="MarcaVehiculo" />
@@ -1200,10 +1217,6 @@
           <AssociationSet Name="FK_Vehiculos_TiposVehiculo" Association="Self.FK_Vehiculos_TiposVehiculo">
             <End Role="TiposVehiculo" EntitySet="TiposVehiculo" />
             <End Role="Vehiculos" EntitySet="Vehiculos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VehiculosCliente_Vehiculo" Association="Self.FK_VehiculosCliente_Vehiculo">
-            <End Role="Vehiculos" EntitySet="Vehiculos" />
-            <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
           </AssociationSet>
           <FunctionImport Name="pa_ModificaUltimaSesionCliente">
             <Parameter Name="idCliente" Mode="In" Type="Int32" />
@@ -1397,24 +1410,6 @@
           <FunctionImport Name="pa_RetornaVehiculosClienteID" ReturnType="Collection(sistvehiculoviModel.pa_RetornaVehiculosClienteID_Result)">
           <Parameter Name="idVehiculosCliente" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="ServiciosCliente" EntityType="sistvehiculoviModel.ServiciosCliente" />
-          <EntitySet Name="ServiciosVehiculo" EntityType="sistvehiculoviModel.ServiciosVehiculo" />
-          <AssociationSet Name="FK_ServiciosCliente_Cliente" Association="sistvehiculoviModel.FK_ServiciosCliente_Cliente">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="ServiciosCliente" EntitySet="ServiciosCliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ServiciosCliente_TipoServicioProducto" Association="sistvehiculoviModel.FK_ServiciosCliente_TipoServicioProducto">
-            <End Role="TipoServicioProducto" EntitySet="TipoServicioProducto" />
-            <End Role="ServiciosCliente" EntitySet="ServiciosCliente" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ServiciosVehiculo_TipoServicioProducto" Association="sistvehiculoviModel.FK_ServiciosVehiculo_TipoServicioProducto">
-            <End Role="TipoServicioProducto" EntitySet="TipoServicioProducto" />
-            <End Role="ServiciosVehiculo" EntitySet="ServiciosVehiculo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ServiciosVehiculo_Vehiculo" Association="sistvehiculoviModel.FK_ServiciosVehiculo_Vehiculo">
-            <End Role="Vehiculos" EntitySet="Vehiculos" />
-            <End Role="ServiciosVehiculo" EntitySet="ServiciosVehiculo" />
-          </AssociationSet>
           <FunctionImport Name="pa_RetornaServiciosCliente" ReturnType="Collection(sistvehiculoviModel.pa_RetornaServiciosCliente_Result)">
             <Parameter Name="tipo" Mode="In" Type="String" />
             <Parameter Name="nombreCliente" Mode="In" Type="String" />
@@ -1454,18 +1449,6 @@
           </FunctionImport>
           <FunctionImport Name="pa_EliminaVehiculosCliente">
           <Parameter Name="placa" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="pa_ModificaVehiculosCliente">
-            <Parameter Name="idVehiculos" Mode="In" Type="Int32" />
-            <Parameter Name="placa" Mode="In" Type="String" />
-            <Parameter Name="tipoVehiculo" Mode="In" Type="Int32" />
-            <Parameter Name="marcaVehiculo" Mode="In" Type="Int32" />
-            <Parameter Name="numeroPuerta" Mode="In" Type="Int32" />
-            <Parameter Name="numeroRueda" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="pa_InsertaVehiculosCliente">
-            <Parameter Name="idVehiculo" Mode="In" Type="Int32" />
-            <Parameter Name="idCliente" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Factura" EntityType="sistvehiculoviModel.Factura" />
           <AssociationSet Name="FK_Factura_idCliente" Association="sistvehiculoviModel.FK_Factura_idCliente">
@@ -1526,17 +1509,75 @@
             <Parameter Name="cantidadServicioProducto" Mode="In" Type="Int32" />
             <Parameter Name="precio" Mode="In" Type="Double" />
           </FunctionImport>
+          <FunctionImport Name="pa_ModificaMontoEncabezadoFactura">
+            <Parameter Name="id_factura" Mode="In" Type="Int32" />
+            <Parameter Name="montoTotal" Mode="In" Type="Double" />
+          </FunctionImport>
+          <EntitySet Name="ServiciosCliente" EntityType="sistvehiculoviModel.ServiciosCliente" />
+          <EntitySet Name="ServiciosVehiculo" EntityType="sistvehiculoviModel.ServiciosVehiculo" />
+          <AssociationSet Name="FK_ServiciosCliente_ClasificacionSP" Association="sistvehiculoviModel.FK_ServiciosCliente_ClasificacionSP">
+            <End Role="clasificacionSP" EntitySet="clasificacionSP" />
+            <End Role="ServiciosCliente" EntitySet="ServiciosCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiciosCliente_Cliente" Association="sistvehiculoviModel.FK_ServiciosCliente_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="ServiciosCliente" EntitySet="ServiciosCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiciosCliente_TipoServicioProducto" Association="sistvehiculoviModel.FK_ServiciosCliente_TipoServicioProducto">
+            <End Role="TipoServicioProducto" EntitySet="TipoServicioProducto" />
+            <End Role="ServiciosCliente" EntitySet="ServiciosCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiciosVehiculo_TipoServicioProducto" Association="sistvehiculoviModel.FK_ServiciosVehiculo_TipoServicioProducto">
+            <End Role="TipoServicioProducto" EntitySet="TipoServicioProducto" />
+            <End Role="ServiciosVehiculo" EntitySet="ServiciosVehiculo" />
+          </AssociationSet>
           <FunctionImport Name="pa_InsertaServicioCliente">
             <Parameter Name="tipoServicioProducto" Mode="In" Type="Int32" />
             <Parameter Name="idCliente" Mode="In" Type="Int32" />
+            <Parameter Name="idClasificacion" Mode="In" Type="Int32" />
+            <Parameter Name="cantidad" Mode="In" Type="Int32" />
+            <Parameter Name="precio" Mode="In" Type="Double" />
+            <Parameter Name="precioTotal" Mode="In" Type="Double" />
           </FunctionImport>
           <FunctionImport Name="pa_InsertaServicioVehiculo">
             <Parameter Name="tipoServicioProducto" Mode="In" Type="Int32" />
             <Parameter Name="idVehiculo" Mode="In" Type="Int32" />
+            <Parameter Name="idClasificacion" Mode="In" Type="Int32" />
+            <Parameter Name="cantidad" Mode="In" Type="Int32" />
+            <Parameter Name="precio" Mode="In" Type="Double" />
+            <Parameter Name="precioTotal" Mode="In" Type="Double" />
           </FunctionImport>
-          <FunctionImport Name="pa_ModificaMontoEncabezadoFactura">
-            <Parameter Name="id_factura" Mode="In" Type="Int32" />
-            <Parameter Name="montoTotal" Mode="In" Type="Double" />
+          <EntitySet Name="VehiculosCliente" EntityType="sistvehiculoviModel.VehiculosCliente" />
+          <AssociationSet Name="FK_VehiculosCliente_Cliente" Association="sistvehiculoviModel.FK_VehiculosCliente_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehiculosCliente_TiposVehiculo" Association="sistvehiculoviModel.FK_VehiculosCliente_TiposVehiculo">
+            <End Role="TiposVehiculo" EntitySet="TiposVehiculo" />
+            <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehiculosCliente_Vehiculo" Association="sistvehiculoviModel.FK_VehiculosCliente_Vehiculo">
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+            <End Role="VehiculosCliente" EntitySet="VehiculosCliente" />
+          </AssociationSet>
+          <FunctionImport Name="pa_InsertaVehiculosCliente">
+            <Parameter Name="idVehiculo" Mode="In" Type="Int32" />
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+            <Parameter Name="idTipoVehiculo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_ModificaVehiculosCliente">
+            <Parameter Name="idVehiculoCliente" Mode="In" Type="Int32" />
+            <Parameter Name="idVehiculo" Mode="In" Type="Int32" />
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+            <Parameter Name="idTipoVehiculo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_RetornaTiposVehiculoIDVehiculo">
+          <Parameter Name="idVehiculo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_RetornaTiposVehiculoCliente" ReturnType="Collection(sistvehiculoviModel.pa_RetornaTiposVehiculoCliente_Result)">
+            <Parameter Name="codigo" Mode="In" Type="String" />
+            <Parameter Name="tipo" Mode="In" Type="String" />
+            <Parameter Name="idVehiculo" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -1673,6 +1714,7 @@
           <Property Name="id_clasificacionSP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombreClasificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TipoServicioProducto" Relationship="sistvehiculoviModel.FK_TipoServicioProducto_clasificacionSP" FromRole="clasificacionSP" ToRole="TipoServicioProducto" />
+          <NavigationProperty Name="ServiciosCliente" Relationship="sistvehiculoviModel.FK_ServiciosCliente_ClasificacionSP" FromRole="clasificacionSP" ToRole="ServiciosCliente" />
         </EntityType>
         <EntityType Name="TipoServicioProducto">
           <Key>
@@ -1793,74 +1835,6 @@
           <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
         </ComplexType>
-        <EntityType Name="ServiciosCliente">
-          <Key>
-            <PropertyRef Name="idServiciosCliente" />
-          </Key>
-          <Property Name="idServiciosCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idTipoServiciosProducto" Type="Int32" Nullable="false" />
-          <Property Name="idCliente" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cliente" Relationship="sistvehiculoviModel.FK_ServiciosCliente_Cliente" FromRole="ServiciosCliente" ToRole="Cliente" />
-          <NavigationProperty Name="TipoServicioProducto" Relationship="sistvehiculoviModel.FK_ServiciosCliente_TipoServicioProducto" FromRole="ServiciosCliente" ToRole="TipoServicioProducto" />
-        </EntityType>
-        <EntityType Name="ServiciosVehiculo">
-          <Key>
-            <PropertyRef Name="idServiciosVehiculo" />
-          </Key>
-          <Property Name="idServiciosVehiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idTipoServiciosProducto" Type="Int32" Nullable="false" />
-          <Property Name="idVehiculo" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TipoServicioProducto" Relationship="sistvehiculoviModel.FK_ServiciosVehiculo_TipoServicioProducto" FromRole="ServiciosVehiculo" ToRole="TipoServicioProducto" />
-          <NavigationProperty Name="Vehiculos" Relationship="sistvehiculoviModel.FK_ServiciosVehiculo_Vehiculo" FromRole="ServiciosVehiculo" ToRole="Vehiculos" />
-        </EntityType>
-        <Association Name="FK_ServiciosCliente_Cliente">
-          <End Type="sistvehiculoviModel.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="sistvehiculoviModel.ServiciosCliente" Role="ServiciosCliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="idCliente" />
-            </Principal>
-            <Dependent Role="ServiciosCliente">
-              <PropertyRef Name="idCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ServiciosCliente_TipoServicioProducto">
-          <End Type="sistvehiculoviModel.TipoServicioProducto" Role="TipoServicioProducto" Multiplicity="1" />
-          <End Type="sistvehiculoviModel.ServiciosCliente" Role="ServiciosCliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoServicioProducto">
-              <PropertyRef Name="idTipoServicioProducto" />
-            </Principal>
-            <Dependent Role="ServiciosCliente">
-              <PropertyRef Name="idTipoServiciosProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ServiciosVehiculo_TipoServicioProducto">
-          <End Type="sistvehiculoviModel.TipoServicioProducto" Role="TipoServicioProducto" Multiplicity="1" />
-          <End Type="sistvehiculoviModel.ServiciosVehiculo" Role="ServiciosVehiculo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoServicioProducto">
-              <PropertyRef Name="idTipoServicioProducto" />
-            </Principal>
-            <Dependent Role="ServiciosVehiculo">
-              <PropertyRef Name="idTipoServiciosProducto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ServiciosVehiculo_Vehiculo">
-          <End Type="sistvehiculoviModel.Vehiculos" Role="Vehiculos" Multiplicity="1" />
-          <End Type="sistvehiculoviModel.ServiciosVehiculo" Role="ServiciosVehiculo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vehiculos">
-              <PropertyRef Name="idVehiculos" />
-            </Principal>
-            <Dependent Role="ServiciosVehiculo">
-              <PropertyRef Name="idVehiculo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="pa_RetornaServiciosCliente_Result">
           <Property Type="Int32" Name="idServiciosCliente" Nullable="false" />
           <Property Type="Int32" Name="idTipoServiciosProducto" Nullable="false" />
@@ -2103,6 +2077,136 @@
           <Property Type="Int32" Name="marcaVehiculo" Nullable="false" />
           <Property Type="String" Name="nomMarcaVehiculo" Nullable="false" MaxLength="100" />
         </ComplexType>
+        <EntityType Name="ServiciosCliente">
+          <Key>
+            <PropertyRef Name="idServiciosCliente" />
+          </Key>
+          <Property Name="idServiciosCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTipoServiciosProducto" Type="Int32" Nullable="false" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="idClasificacionSP" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="precio" Type="Double" Nullable="false" />
+          <Property Name="precioTotal" Type="Double" Nullable="false" />
+          <NavigationProperty Name="clasificacionSP" Relationship="sistvehiculoviModel.FK_ServiciosCliente_ClasificacionSP" FromRole="ServiciosCliente" ToRole="clasificacionSP" />
+          <NavigationProperty Name="Cliente" Relationship="sistvehiculoviModel.FK_ServiciosCliente_Cliente" FromRole="ServiciosCliente" ToRole="Cliente" />
+          <NavigationProperty Name="TipoServicioProducto" Relationship="sistvehiculoviModel.FK_ServiciosCliente_TipoServicioProducto" FromRole="ServiciosCliente" ToRole="TipoServicioProducto" />
+        </EntityType>
+        <EntityType Name="ServiciosVehiculo">
+          <Key>
+            <PropertyRef Name="idServiciosVehiculo" />
+          </Key>
+          <Property Name="idServiciosVehiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTipoServiciosProducto" Type="Int32" Nullable="false" />
+          <Property Name="idVehiculo" Type="Int32" Nullable="false" />
+          <Property Name="idClasificacionSP" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="precio" Type="Double" Nullable="false" />
+          <Property Name="precioTotal" Type="Double" Nullable="false" />
+          <NavigationProperty Name="TipoServicioProducto" Relationship="sistvehiculoviModel.FK_ServiciosVehiculo_TipoServicioProducto" FromRole="ServiciosVehiculo" ToRole="TipoServicioProducto" />
+        </EntityType>
+        <Association Name="FK_ServiciosCliente_ClasificacionSP">
+          <End Type="sistvehiculoviModel.clasificacionSP" Role="clasificacionSP" Multiplicity="1" />
+          <End Type="sistvehiculoviModel.ServiciosCliente" Role="ServiciosCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="clasificacionSP">
+              <PropertyRef Name="id_clasificacionSP" />
+            </Principal>
+            <Dependent Role="ServiciosCliente">
+              <PropertyRef Name="idClasificacionSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiciosCliente_Cliente">
+          <End Type="sistvehiculoviModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="sistvehiculoviModel.ServiciosCliente" Role="ServiciosCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="ServiciosCliente">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiciosCliente_TipoServicioProducto">
+          <End Type="sistvehiculoviModel.TipoServicioProducto" Role="TipoServicioProducto" Multiplicity="1" />
+          <End Type="sistvehiculoviModel.ServiciosCliente" Role="ServiciosCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoServicioProducto">
+              <PropertyRef Name="idTipoServicioProducto" />
+            </Principal>
+            <Dependent Role="ServiciosCliente">
+              <PropertyRef Name="idTipoServiciosProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiciosVehiculo_TipoServicioProducto">
+          <End Type="sistvehiculoviModel.TipoServicioProducto" Role="TipoServicioProducto" Multiplicity="1" />
+          <End Type="sistvehiculoviModel.ServiciosVehiculo" Role="ServiciosVehiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoServicioProducto">
+              <PropertyRef Name="idTipoServicioProducto" />
+            </Principal>
+            <Dependent Role="ServiciosVehiculo">
+              <PropertyRef Name="idTipoServiciosProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VehiculosCliente">
+          <Key>
+            <PropertyRef Name="idVehiculosCliente" />
+          </Key>
+          <Property Name="idVehiculosCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idVehiculo" Type="Int32" Nullable="false" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="idTiposVehiculo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="sistvehiculoviModel.FK_VehiculosCliente_Cliente" FromRole="VehiculosCliente" ToRole="Cliente" />
+          <NavigationProperty Name="TiposVehiculo" Relationship="sistvehiculoviModel.FK_VehiculosCliente_TiposVehiculo" FromRole="VehiculosCliente" ToRole="TiposVehiculo" />
+          <NavigationProperty Name="Vehiculos" Relationship="sistvehiculoviModel.FK_VehiculosCliente_Vehiculo" FromRole="VehiculosCliente" ToRole="Vehiculos" />
+        </EntityType>
+        <Association Name="FK_VehiculosCliente_Cliente">
+          <End Type="sistvehiculoviModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="sistvehiculoviModel.VehiculosCliente" Role="VehiculosCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="VehiculosCliente">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehiculosCliente_TiposVehiculo">
+          <End Type="sistvehiculoviModel.TiposVehiculo" Role="TiposVehiculo" Multiplicity="1" />
+          <End Type="sistvehiculoviModel.VehiculosCliente" Role="VehiculosCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposVehiculo">
+              <PropertyRef Name="idTipoVehiculo" />
+            </Principal>
+            <Dependent Role="VehiculosCliente">
+              <PropertyRef Name="idTiposVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehiculosCliente_Vehiculo">
+          <End Type="sistvehiculoviModel.Vehiculos" Role="Vehiculos" Multiplicity="1" />
+          <End Type="sistvehiculoviModel.VehiculosCliente" Role="VehiculosCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculos">
+              <PropertyRef Name="idVehiculos" />
+            </Principal>
+            <Dependent Role="VehiculosCliente">
+              <PropertyRef Name="idVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="pa_RetornaTiposVehiculoCliente_Result">
+          <Property Type="Int32" Name="idTipoVehiculo" Nullable="false" />
+          <Property Type="String" Name="codigo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="tipo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="idVehiculos" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2245,15 +2349,6 @@
                 <ScalarProperty Name="marcaVehiculo" ColumnName="marcaVehiculo" />
                 <ScalarProperty Name="numeroPuerta" ColumnName="numeroPuerta" />
                 <ScalarProperty Name="numeroRueda" ColumnName="numeroRueda" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VehiculosCliente">
-            <EntityTypeMapping TypeName="sistvehiculoviModel.VehiculosCliente">
-              <MappingFragment StoreEntitySet="VehiculosCliente">
-                <ScalarProperty Name="idVehiculosCliente" ColumnName="idVehiculosCliente" />
-                <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
-                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2580,24 +2675,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="ServiciosCliente">
-            <EntityTypeMapping TypeName="sistvehiculoviModel.ServiciosCliente">
-              <MappingFragment StoreEntitySet="ServiciosCliente">
-                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-                <ScalarProperty Name="idTipoServiciosProducto" ColumnName="idTipoServiciosProducto" />
-                <ScalarProperty Name="idServiciosCliente" ColumnName="idServiciosCliente" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ServiciosVehiculo">
-            <EntityTypeMapping TypeName="sistvehiculoviModel.ServiciosVehiculo">
-              <MappingFragment StoreEntitySet="ServiciosVehiculo">
-                <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
-                <ScalarProperty Name="idTipoServiciosProducto" ColumnName="idTipoServiciosProducto" />
-                <ScalarProperty Name="idServiciosVehiculo" ColumnName="idServiciosVehiculo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="pa_RetornaServiciosCliente" FunctionName="sistvehiculoviModel.Store.pa_RetornaServiciosCliente">
             <ResultMapping>
               <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaServiciosCliente_Result">
@@ -2740,8 +2817,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_EliminaVehiculosCliente" FunctionName="sistvehiculoviModel.Store.pa_EliminaVehiculosCliente" />
-          <FunctionImportMapping FunctionImportName="pa_ModificaVehiculosCliente" FunctionName="sistvehiculoviModel.Store.pa_ModificaVehiculosCliente" />
-          <FunctionImportMapping FunctionImportName="pa_InsertaVehiculosCliente" FunctionName="sistvehiculoviModel.Store.pa_InsertaVehiculosCliente" />
           <EntitySetMapping Name="Factura">
             <EntityTypeMapping TypeName="sistvehiculoviModel.Factura">
               <MappingFragment StoreEntitySet="Factura">
@@ -2846,9 +2921,58 @@
           <FunctionImportMapping FunctionImportName="pa_ModificaEstadoOffEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_ModificaEstadoOffEncabezadoFactura" />
           <FunctionImportMapping FunctionImportName="pa_ModificaEstadoOnEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_ModificaEstadoOnEncabezadoFactura" />
           <FunctionImportMapping FunctionImportName="pa_InsertaDetalleFactura" FunctionName="sistvehiculoviModel.Store.pa_InsertaDetalleFactura" />
+          <FunctionImportMapping FunctionImportName="pa_ModificaMontoEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_ModificaMontoEncabezadoFactura" />
+          <EntitySetMapping Name="ServiciosCliente">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.ServiciosCliente">
+              <MappingFragment StoreEntitySet="ServiciosCliente">
+                <ScalarProperty Name="precioTotal" ColumnName="precioTotal" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="idClasificacionSP" ColumnName="idClasificacionSP" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idTipoServiciosProducto" ColumnName="idTipoServiciosProducto" />
+                <ScalarProperty Name="idServiciosCliente" ColumnName="idServiciosCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiciosVehiculo">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.ServiciosVehiculo">
+              <MappingFragment StoreEntitySet="ServiciosVehiculo">
+                <ScalarProperty Name="precioTotal" ColumnName="precioTotal" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="idClasificacionSP" ColumnName="idClasificacionSP" />
+                <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
+                <ScalarProperty Name="idTipoServiciosProducto" ColumnName="idTipoServiciosProducto" />
+                <ScalarProperty Name="idServiciosVehiculo" ColumnName="idServiciosVehiculo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="pa_InsertaServicioCliente" FunctionName="sistvehiculoviModel.Store.pa_InsertaServicioCliente" />
           <FunctionImportMapping FunctionImportName="pa_InsertaServicioVehiculo" FunctionName="sistvehiculoviModel.Store.pa_InsertaServicioVehiculo" />
-          <FunctionImportMapping FunctionImportName="pa_ModificaMontoEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_ModificaMontoEncabezadoFactura" />
+          <EntitySetMapping Name="VehiculosCliente">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.VehiculosCliente">
+              <MappingFragment StoreEntitySet="VehiculosCliente">
+                <ScalarProperty Name="idTiposVehiculo" ColumnName="idTiposVehiculo" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
+                <ScalarProperty Name="idVehiculosCliente" ColumnName="idVehiculosCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pa_InsertaVehiculosCliente" FunctionName="sistvehiculoviModel.Store.pa_InsertaVehiculosCliente" />
+          <FunctionImportMapping FunctionImportName="pa_ModificaVehiculosCliente" FunctionName="sistvehiculoviModel.Store.pa_ModificaVehiculosCliente" />
+          <FunctionImportMapping FunctionImportName="pa_RetornaTiposVehiculoIDVehiculo" FunctionName="sistvehiculoviModel.Store.pa_RetornaTiposVehiculoIDVehiculo" />
+          <FunctionImportMapping FunctionImportName="pa_RetornaTiposVehiculoCliente" FunctionName="sistvehiculoviModel.Store.pa_RetornaTiposVehiculoCliente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaTiposVehiculoCliente_Result">
+                <ScalarProperty Name="idTipoVehiculo" ColumnName="idTipoVehiculo" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="idVehiculos" ColumnName="idVehiculos" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

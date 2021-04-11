@@ -119,14 +119,14 @@ namespace SistVehiculo.Controllers
         }
 
         [HttpPost]
-        public ActionResult ModificaEncabezadoFactura(int pId_factura, string pNum_factura, DateTime pFecha, float pMontoTotal, int pEstado, int pIdCliente, int pIdVehiculo)
+        public ActionResult ModificaFactura(int Id_factura, string Num_factura, DateTime Fecha, float MontoTotal, int Estado, int IdCliente, int IdVehiculo)
         {
             string mensaje = "";
             int cantRegistrosAfectados = 0;
 
             try
             {
-                cantRegistrosAfectados = this.modeloBD.pa_ModificaEncabezadoFactura(pId_factura,pNum_factura, pFecha, pMontoTotal, pEstado, pIdCliente, pIdVehiculo);
+                cantRegistrosAfectados = this.modeloBD.pa_ModificaEncabezadoFactura(Id_factura, Num_factura, Fecha, MontoTotal, Estado, IdCliente, IdVehiculo);
             }
             catch (Exception error)
             {
@@ -212,14 +212,14 @@ namespace SistVehiculo.Controllers
         }
 
         [HttpPost]
-        public ActionResult InsertaDetalleFactura(string pNumFactura, int pTipoServicio, int pCantidad, float pPrecio)
+        public ActionResult InsertaDetalleFactura(string NumFactura, int TipoServicio, int Cantidad, float Precio)
         {
             string mensaje = "";
             int cantRegistrosAfectados = 0;
 
             try
             {
-                cantRegistrosAfectados = this.modeloBD.pa_InsertaDetalleFactura(pNumFactura, pTipoServicio, pCantidad, pPrecio);
+                cantRegistrosAfectados = this.modeloBD.pa_InsertaDetalleFactura(NumFactura, TipoServicio, Cantidad, Precio);
             }
             catch (Exception error)
             {
@@ -243,14 +243,14 @@ namespace SistVehiculo.Controllers
         }
 
         [HttpPost]
-        public ActionResult InsertaDetalleFacturaCliente(int pTipoServicio, int pIdCliente)
+        public ActionResult InsertaDetalleFacturaCliente(int TipoServicio, int IdCliente, int IdClasificacion, int Cantidad, float Precio, float PrecioTotal)
         {
             string mensaje = "";
             int cantRegistrosAfectados = 0;
 
             try
             {
-                cantRegistrosAfectados = this.modeloBD.pa_InsertaServicioCliente(pTipoServicio, pIdCliente);
+                cantRegistrosAfectados = this.modeloBD.pa_InsertaServicioCliente(TipoServicio, IdCliente, IdClasificacion, Cantidad, Precio, PrecioTotal);
             }
             catch (Exception error)
             {
@@ -262,7 +262,7 @@ namespace SistVehiculo.Controllers
             {
                 if (cantRegistrosAfectados > 0)
                 {
-                    mensaje = $"Detalle de factura ingresado al Cliente";
+                    mensaje = "Detalle de factura ingresado al Cliente";
                 }
                 else
                 {
@@ -274,14 +274,14 @@ namespace SistVehiculo.Controllers
         }
 
         [HttpPost]
-        public ActionResult InsertaDetalleFacturaVehiculo(int pTipoServicio, int pIdVehiculo)
+        public ActionResult InsertaDetalleFacturaVehiculo(int TipoServicio, int IdVehiculo, int IdClasificacion, int Cantidad, float Precio, float PrecioTotal)
         {
             string mensaje = "";
             int cantRegistrosAfectados = 0;
 
             try
             {
-                cantRegistrosAfectados = this.modeloBD.pa_InsertaServicioVehiculo(pTipoServicio, pIdVehiculo);
+                cantRegistrosAfectados = this.modeloBD.pa_InsertaServicioVehiculo(TipoServicio, IdVehiculo, IdClasificacion, Cantidad, Precio, PrecioTotal);
             }
             catch (Exception error)
             {
@@ -293,7 +293,7 @@ namespace SistVehiculo.Controllers
             {
                 if (cantRegistrosAfectados > 0)
                 {
-                    mensaje = $"Detalle de factura ingresado al Vehiculo";
+                    mensaje = "Detalle de factura ingresado al Vehiculo";
                 }
                 else
                 {
@@ -305,14 +305,14 @@ namespace SistVehiculo.Controllers
         }
 
         [HttpPost]
-        public ActionResult ModificaMontoEncabezado(int pId_factura, float pMontoTotal)
+        public ActionResult ModificaFacturaMontos(int idFactura, float montoTotal)
         {
             string mensaje = "";
             int cantRegistrosAfectados = 0;
 
             try
             {
-                cantRegistrosAfectados = this.modeloBD.pa_ModificaMontoEncabezadoFactura(pId_factura, pMontoTotal);
+                cantRegistrosAfectados = this.modeloBD.pa_ModificaMontoEncabezadoFactura(idFactura, montoTotal);
             }
             catch (Exception error)
             {
@@ -324,11 +324,11 @@ namespace SistVehiculo.Controllers
             {
                 if (cantRegistrosAfectados > 0)
                 {
-                    mensaje = "Monto de encabezado actualizado";
+                    mensaje = "Monto Encabezado de factura modificado";
                 }
                 else
                 {
-                    mensaje += ".No se pudo actualizar el monto del encabezado";
+                    mensaje += ".No se pudo modificar el monto de encabezado de factura";
                 }
             }
 

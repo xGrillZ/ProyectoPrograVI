@@ -145,6 +145,7 @@ function enviarDatosJson() {
 	var idVehiculo = $("#hdPlaca").val();
 	var totalGeneral = parseFloat(document.getElementById("total_total").innerHTML)
 	var numFactura = $("#numFactura").val();
+	var idFactura = $("#hdIdFactura").val();
 
 	///Recorrido de la tabla para obtener los datos
 	for (var i = 1; i < table.rows.length; i++) {
@@ -199,9 +200,10 @@ function enviarDatosJson() {
 		}
 
 		///Enviar datos al procedimiento almacenado InsertaDetalleFactura
-		recorridoJsonDetalleFacturaGlobal(datosDetalleFacturaGeneral);
-		recorridoJsonDetalleFacturaCliente(datosDetalleFacturaServicio);
-		recorridoJsonDetalleFacturaVehiculo(datosDetalleFacturaProducto);
+		/*recorridoJsonDetalleFacturaGlobal(datosDetalleFacturaGeneral);
+		/*recorridoJsonDetalleFacturaCliente(datosDetalleFacturaProducto);
+		recorridoJsonDetalleFacturaVehiculo(datosDetalleFacturaServicio);*/
+		invocarMetodoModificaTotalFactura(idFactura, totalGeneral);
 	}
 }
 
@@ -239,10 +241,14 @@ function recorridoJsonDetalleFacturaCliente(objetoJson) {
 
 	for (var i = 0; i < jsonobject.length; i++) {
 		var TipoServicio = jsonobject[i].Servicio;
+		var Clasificacion = jsonobject[i].Tipo;
+		var Cantidad = jsonobject[i].Cantidad;
+		var Precio = jsonobject[i].Precio;
+		var PrecioTotal = jsonobject[i].Total;
 		/*console.log(resultado, resultadoDos);*/
 	}
 
-	invocarMetodoInsertaDetalleFacturaCliente(TipoServicio, idCliente);
+	invocarMetodoInsertaDetalleFacturaCliente(TipoServicio, idCliente, Clasificacion, Cantidad, Precio, PrecioTotal);
 }
 
 function recorridoJsonDetalleFacturaVehiculo(objetoJson) {
@@ -252,21 +258,25 @@ function recorridoJsonDetalleFacturaVehiculo(objetoJson) {
 
 	for (var i = 0; i < jsonobject.length; i++) {
 		var TipoServicio = jsonobject[i].Servicio;
+		var Clasificacion = jsonobject[i].Tipo;
+		var Cantidad = jsonobject[i].Cantidad;
+		var Precio = jsonobject[i].Precio;
+		var PrecioTotal = jsonobject[i].Total;
 		/*console.log(resultado, resultadoDos);*/
 	}
 
-	invocarMetodoInsertaDetalleFacturaVehiculo(TipoServicio, idVehiculo);
+	invocarMetodoInsertaDetalleFacturaVehiculo(TipoServicio, idVehiculo, Clasificacion, Cantidad, Precio, PrecioTotal);
 }
 
 function invocarMetodoInsertaDetalleFactura(pNumFactura, pTipoServicio, pCantidad, pPrecio) {
 	/*Dirección a donde se enviarán los datos */
-	var url = '/MantFacturas/InsertaEncabezadoFactura';
+	var url = '/MantFacturas/InsertaDetalleFactura';
 	/*Parámetros del método*/
 	var parametros = {
-		pNumFactura: pNumFactura,
-		pTipoServicio: pTipoServicio,
-		pCantidad: pCantidad,
-		pPrecio: pPrecio
+		NumFactura: pNumFactura,
+		TipoServicio: pTipoServicio,
+		Cantidad: pCantidad,
+		Precio: pPrecio
 	};
 	/*Invocación del método*/
 	///Este método puede ser reciclado AVERIGUAR COMO
@@ -332,13 +342,17 @@ function procesarResultadoMetodoJsonPrueba(data) {
 	alert("Información: " + resultadoFuncion);
 }
 
-function invocarMetodoInsertaDetalleFacturaCliente(pTipoServicio, pIdCliente) {
+function invocarMetodoInsertaDetalleFacturaCliente(pTipoServicio, pIdCliente, pIdClasificacion, pCantidad, pPrecio, pPrecioTotal) {
 	/*Dirección a donde se enviarán los datos */
 	var url = '/MantFacturas/InsertaDetalleFacturaCliente';
 	/*Parámetros del método*/
 	var parametros = {
-		pTipoServicio: pTipoServicio,
-		pIdCliente: pIdCliente
+		TipoServicio: pTipoServicio,
+		IdCliente: pIdCliente,
+		IdClasificacion: pIdClasificacion,
+		Cantidad: pCantidad,
+		Precio: pPrecio,
+		PrecioTotal: pPrecioTotal
 	};
 	/*Invocación del método*/
 	///Este método puede ser reciclado AVERIGUAR COMO
@@ -370,13 +384,17 @@ function procesarResultadoMetodoDetalleFacturaCliente(data) {
 	/*$("#divDialogPassword").dialog("close");*/
 }
 
-function invocarMetodoInsertaDetalleFacturaVehiculo(pTipoServicio, pIdVehiculo) {
+function invocarMetodoInsertaDetalleFacturaVehiculo(pTipoServicio, pIdVehiculo, pIdClasificacion, pCantidad, pPrecio, pPrecioTotal) {
 	/*Dirección a donde se enviarán los datos */
 	var url = '/MantFacturas/InsertaDetalleFacturaVehiculo';
 	/*Parámetros del método*/
 	var parametros = {
-		pTipoServicio: pTipoServicio,
-		pIdVehiculo: pIdVehiculo
+		TipoServicio: pTipoServicio,
+		IdVehiculo: pIdVehiculo,
+		IdClasificacion: pIdClasificacion,
+		Cantidad: pCantidad,
+		Precio: pPrecio,
+		PrecioTotal: pPrecioTotal
 	};
 	/*Invocación del método*/
 	///Este método puede ser reciclado AVERIGUAR COMO
@@ -408,13 +426,13 @@ function procesarResultadoMetodoDetalleFacturaVehiculo(data) {
 	/*$("#divDialogPassword").dialog("close");*/
 }
 
-function invocarMetodoModificaTotalFactura(pIdFactura, pIdFactura) {
+function invocarMetodoModificaTotalFactura(pIdFactura, pMontoTotal) {
 	/*Dirección a donde se enviarán los datos */
-	var url = '/MantFacturas/ModificaMontoEncabezado';
+	var url = '/MantFacturas/ModificaFacturaMontos';
 	/*Parámetros del método*/
 	var parametros = {
-		pIdFactura: pIdFactura,
-		pIdFactura: pIdFactura
+		idFactura: pIdFactura,
+		montoTotal: pMontoTotal
 	};
 	/*Invocación del método*/
 	///Este método puede ser reciclado AVERIGUAR COMO

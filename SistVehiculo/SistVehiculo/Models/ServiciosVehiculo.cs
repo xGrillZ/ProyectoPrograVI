@@ -17,8 +17,11 @@ namespace SistVehiculo.Models
         public int idServiciosVehiculo { get; set; }
         public int idTipoServiciosProducto { get; set; }
         public int idVehiculo { get; set; }
+        public int idClasificacionSP { get; set; }
+        public int cantidad { get; set; }
+        public double precio { get; set; }
+        public double precioTotal { get; set; }
     
         public virtual TipoServicioProducto TipoServicioProducto { get; set; }
-        public virtual Vehiculos Vehiculos { get; set; }
     }
 }

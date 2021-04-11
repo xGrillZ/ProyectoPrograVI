@@ -11,201 +11,69 @@ namespace SistVehiculo.Controllers
     {
         sistvehiculoviEntities modeloBD = new sistvehiculoviEntities();
         // GET: MantVehiculosCliente
-        public ActionResult ListaVehiculosCliente()
+        public ActionResult ListaVehiculosCliente(string placa = null, string nombreCliente = null, string marca = null, string numCedula = null)
         {
             ///Variable que contiene los registros obtenidos
-            List<pa_RetornaVehiculosxIDCliente_Result> modeloVista = new List<pa_RetornaVehiculosxIDCliente_Result>();
+            List<pa_RetornaVehiculosCliente_Result> modeloVista = new List<pa_RetornaVehiculosCliente_Result>();
             ///Asígnación a la variable el resultado de la invocación del procedimiento almacenado
-            modeloVista = this.modeloBD.pa_RetornaVehiculosxIDCliente(null).ToList();
+            modeloVista = this.modeloBD.pa_RetornaVehiculosCliente(placa, nombreCliente, marca, numCedula).ToList();
 
             ///Enviar a la vista el modelo
             return View(modeloVista);
         }
 
-        void AgregaTipoVehiculoViewBag()
-        {
-            this.ViewBag.ListaTipoVehiculo = this.modeloBD.pa_RetornaTiposVehiculo("", "").ToList();
-        }
-
-        void AgregaMarcaVehiculoViewBag()
-        {
-            this.ViewBag.ListaMarcaVehiculo = this.modeloBD.pa_RetornaMarcaVehiculo("", "", "").ToList();
-        }
-
-        void AgregaClienteViewBag()
-        {
-            this.ViewBag.ListaCliente = this.modeloBD.pa_RetornaCliente("", "", "", "").ToList();
-        }
-        void AgregaVehiculosViewBag()
-        {
-            this.ViewBag.ListaVehiculos = this.modeloBD.pa_RetornaVehiculos("").ToList();
-        }        
-
         public ActionResult InsertarVehiculosCliente()
         {
-
-            AgregaTipoVehiculoViewBag();
-            AgregaMarcaVehiculoViewBag();
-            AgregaClienteViewBag();
-            AgregaVehiculosViewBag();
-
             return View();
         }
 
-        [HttpPost]
-        public ActionResult InsertarVehiculosCliente(pa_RetornaVehiculosxIDCliente_Result modeloVista)
+        public ActionResult RetornaClientes()
         {
-            ///Variable que registra la cantidad de registros afectados
-            ///si un procedimiento que ejecuta insert, update o delete
-            ///no afecta registros implica que hubo un error
-            int cantRegistrosAfectados = 0;
+            List<pa_RetornaCliente_Result> clientes = this.modeloBD.pa_RetornaCliente("", "", "", "").ToList();
+            return Json(clientes, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult RetornaVehiculo()
+        {
+            List<pa_RetornaVehiculos_Result> vehiculos = this.modeloBD.pa_RetornaVehiculos("").ToList();
+            return Json(vehiculos, JsonRequestBehavior.AllowGet);
+        }
+
+       /* public ActionResult RetornaTipoVehiculo(int idVehiculo)
+        {
+            List<pa_RetornaTipo>
+            return Json(tipoVehiculo, JsonRequestBehavior.AllowGet);
+        }*/
+
+        [HttpPost]
+        public ActionResult InsertarVehiculosCliente(int idVehiculo, int idCliente, int idTipoVehiculo)
+        {
             string mensaje = "";
+            int cantRegistrosAfectados = 0;
 
             try
             {
-                cantRegistrosAfectados = this.modeloBD.pa_InsertaVehiculosCliente(
-                    modeloVista.idVehiculo,
-                    modeloVista.idCliente                    
-                    );
+                cantRegistrosAfectados = this.modeloBD.pa_InsertaVehiculosCliente(idVehiculo, idCliente, idTipoVehiculo);
+            }
+            catch (Exception error)
+            {
+                mensaje = "Ocurrió un error: " + error.Message;
 
             }
-            catch (Exception ex)
-            {
-                mensaje = "Ocurrió un error: " + ex.Message;
-            }
+            /*Se ejecuta cuando haya o no haya un error, siempre se ejecutará*/
             finally
             {
                 if (cantRegistrosAfectados > 0)
                 {
-                    mensaje = "Registro insertado";
+                    mensaje = "Vehiculo de Cliente ingresado";
                 }
                 else
                 {
-                    mensaje += " No se pudo insertar";
+                    mensaje += ".No se pudo ingresar el vehículo del cliente";
                 }
             }
 
-
-            Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
-
-            AgregaTipoVehiculoViewBag();
-            AgregaMarcaVehiculoViewBag();
-            AgregaClienteViewBag();
-            AgregaVehiculosViewBag();
-
-            return View();
-        }
-
-        public ActionResult ModificarVehiculosCliente(int idVehiculosCliente)
-        {
-            pa_RetornaVehiculosClienteID_Result modeloVista = new pa_RetornaVehiculosClienteID_Result();
-            modeloVista = this.modeloBD.pa_RetornaVehiculosClienteID(idVehiculosCliente).FirstOrDefault();
-
-            AgregaTipoVehiculoViewBag();
-            AgregaMarcaVehiculoViewBag();
-
-            return View(modeloVista);
-        }
-
-        [HttpPost]
-        public ActionResult ModificarVehiculosCliente(pa_RetornaVehiculosClienteID_Result modeloVista)
-        {
-            ///Variable que registra la cantidad de registros afectados
-            ///si un procedimiento que ejecuta insert, update o delete
-            ///no afecta registros implica que hubo un error
-            int cantRegistrosAfectados = 0;
-            string mensaje = "";
-
-            try
-            {
-                cantRegistrosAfectados = this.modeloBD.pa_ModificaVehiculosCliente(
-                    modeloVista.idVehiculosCliente,
-                    modeloVista.placa,
-                    modeloVista.tipoVehiculo,
-                    modeloVista.marcaVehiculo,
-                    modeloVista.numeroPuerta,
-                    modeloVista.numeroRueda
-                    );
-            }
-            catch (Exception ex)
-            {
-                mensaje = "Ocurrió un error: " + ex.Message;
-            }
-            finally
-            {
-                if (cantRegistrosAfectados > 0)
-                {
-                    mensaje = " Registro modificado";
-                }
-                else
-                {
-                    mensaje += " No se pudo modificar";
-                }
-            }
-
-
-            Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
-
-            AgregaTipoVehiculoViewBag();
-            AgregaMarcaVehiculoViewBag();
-
-            return View(modeloVista);
-        }
-
-        public ActionResult EliminarVehiculosCliente(int idVehiculosCliente)
-        {
-            pa_RetornaVehiculosClienteID_Result modeloVista = new pa_RetornaVehiculosClienteID_Result();
-            modeloVista = this.modeloBD.pa_RetornaVehiculosClienteID(idVehiculosCliente).FirstOrDefault();
-
-            return View(modeloVista);
-        }
-
-        [HttpPost]
-        public ActionResult EliminarVehiculosCliente(pa_RetornaVehiculosClienteID_Result modeloVista)
-        {
-            ///Variable que registra la cantidad de registros afectados
-            ///si un procedimiento que ejecuta insert, update o delete
-            ///no afecta registros implica que hubo un error
-            int cantRegistrosAfectados = 0;
-            string mensaje = "";
-
-            try
-            {
-                cantRegistrosAfectados = this.modeloBD.pa_EliminaVehiculosCliente(modeloVista.placa);
-            }
-            catch (Exception ex)
-            {
-                mensaje = "Ocurrió un error: " + ex.Message;
-            }
-            finally
-            {
-                if (cantRegistrosAfectados > 0)
-                {
-                    mensaje = "Registro Eliminado";
-                }
-                else
-                {
-                    mensaje += " No se pudo eliminar";
-                }
-            }
-
-            Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
-
-            ///Enviar el modelo a la vista
-            return View(modeloVista);
-        }
-
-        public ActionResult RpVehiculosCliente()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult RetornaVehiculosClienteLista()
-        {
-            List<pa_RetornaVehiculosCliente_Result> listaVehiculosCliente = 
-                this.modeloBD.pa_RetornaVehiculosCliente("","","","").ToList();
-            return Json(new { resultado = listaVehiculosCliente });
+            return Json(new { resultado = mensaje });
         }
     }
 }

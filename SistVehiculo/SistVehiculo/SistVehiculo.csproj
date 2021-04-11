@@ -225,6 +225,9 @@
     <Compile Include="Models\pa_RetornaTipoServicioProducto_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pa_RetornaTiposVehiculoCliente_Result.cs">
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pa_RetornaTiposVehiculoID_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>

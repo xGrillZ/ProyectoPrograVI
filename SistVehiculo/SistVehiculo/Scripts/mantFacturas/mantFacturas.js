@@ -578,16 +578,16 @@ function procesarResultadoMetodoEncabezado(data) {
 ///se encarga de llamar al método del controlador y procesar el resultado
 function invocarMetodoPostModificaEncabezadoFactura() {
     /*Dirección a donde se enviarán los datos */
-    var url = '/MantFacturas/ModificaEncabezadoFactura';
+    var url = '/MantFacturas/ModificaFactura';
     /*Parámetros del método*/
     var parametros = {
-        pId_factura: $("#hdIdCliente").val(),
-        pNum_factura: $("#numFactura").val(),
-        pFecha: $("#fecha").val(),
-        pMontoTotal: $("#montoTotal").val(),
-        pEstado: $("#estado").val(),
-        pIdCliente: $("#nomCliente").val(),
-        pIdVehiculo: $("#placaVehiculo").val()
+        Id_factura: $("#hdIdFactura").val(),
+        Num_factura: $("#numFactura").val(),
+        Fecha: $("#fecha").val(),
+        MontoTotal: $("#montoTotal").val(),
+        Estado: $("#estado").val(),
+        IdCliente: $("#hdIdCliente").val(),
+        IdVehiculo: $("#placaVehiculo").val()
     };
     /*Invocación del método*/
     ///Este método puede ser reciclado AVERIGUAR COMO
