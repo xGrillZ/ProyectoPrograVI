@@ -13,64 +13,21 @@
 
 <form id="frmModificaVehiculoCliente" method="post">
     <div class="form-group">
-        <label>Placa:</label>
-        <input type="text" name="placa" id="placa" class="form-control" value="@Model.placa" />
+        <label>Cliente:</label>
+        <select name="idCliente" id="idCliente" class="form-control"></select>
+        <input type="hidden" id="hdIdVehiculo" value="@Model.idVehiculo" />
+        <input type="hidden" id="hdTipoVehiculo" value="@Model.tipoVehiculo" />
+        <input type="hidden" id="hdIdVehiculoCliente" value="@Model.idVehiculosCliente" />
+        <input type="hidden" id="hdCliente" value="@Model.idCliente" />
     </div>
 
     <div class="form-group">
-        <label>Tipo de Vehiculo:</label>
-        <select name="tipoVehiculo" id="tipoVehiculo" class="form-control">
-            <option value="">SELECCIONE UN TIPO DE VEHICULO</option>
-            @{
-                foreach (SistVehiculo.Models.pa_RetornaTiposVehiculo_Result tipo in ViewBag.ListaTipoVehiculo)
-
-                {
-                    bool estipoVehiculo = tipo.idTipoVehiculo == Model.tipoVehiculo;
-
-                    if (estipoVehiculo)
-                    {
-                        <option value="@tipo.idTipoVehiculo" selected>@tipo.tipo.ToUpper()</option>
-                    }
-                    else
-                    {
-                        <option value="@tipo.idTipoVehiculo">@tipo.tipo.ToUpper()</option>
-                    }
-                }
-            }
-        </select>
+        <label>Vehículo:</label>
+        <select name="tipoVehiculo" id="tipoVehiculo" class="form-control"></select>
     </div>
     <div class="form-group">
-        <label>Marca de Vehiculo :</label>
-        <select name="marcaVehiculo" id="marcaVehiculo" class="form-control">
-            <option value="">SELECCIONE UNA MARCA</option>
-            @{
-                foreach (SistVehiculo.Models.pa_RetornaMarcaVehiculo_Result marca in ViewBag.ListaMarcaVehiculo)
-
-                {
-                    bool esMarcaVehiculo = marca.idMarcaVehiculo == Model.marcaVehiculo;
-
-                    if (esMarcaVehiculo)
-                    {
-                        <option value="@marca.idMarcaVehiculo" selected>@marca.marca.ToUpper()</option>
-                    }
-                    else
-                    {
-                        <option value="@marca.idMarcaVehiculo">@marca.marca.ToUpper()</option>
-                    }
-                }
-
-
-            }
-            }
-        </select>
-    </div>
-    <div class="form-group">
-        <label>Número de Puertas:</label>
-        <input type="text" name="numeroPuerta" id="numeroPuerta" class="form-control" value="@Model.numeroPuerta" />
-    </div>
-    <div class="form-group">
-        <label>Número de Ruedas:</label>
-        <input type="text" name="numeroRueda" id="numeroRueda" class="form-control" value="@Model.numeroRueda" />
+        <label>Tipo de Vehiculo :</label>
+        <select name="marcaVehiculo" id="marcaVehiculo" class="form-control"></select>
     </div>
     <div class="form-group">
         <input type="submit" value="Modificar" id="btnAceptar" />

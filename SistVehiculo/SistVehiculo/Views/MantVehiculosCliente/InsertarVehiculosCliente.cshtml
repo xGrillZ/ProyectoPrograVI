@@ -19,35 +19,15 @@
 
     <div class="form-group">
         <label>Cliente :</label>
-        <select name="idCliente" id="idCliente" class="form-control">
-            <option value="">SELECCIONE UN CLIENTE</option>
-            @{
-                foreach (SistVehiculo.Models.pa_RetornaCliente_Result Cliente in ViewBag.ListaCliente)
-
-
-
-                {
-
-
-                    <option value="@Cliente.idCliente">@Cliente.nomCliente.ToUpper()  @Cliente.ape1Cliente.ToUpper() @Cliente.ape2Cliente.ToUpper()</option>
-                }
-            }
-        </select>
+        <select name="idCliente" id="idCliente" class="form-control"></select>
     </div>
     <div class="form-group">
         <label>Vehiculo:</label>
-        <select name="idVehiculo" id="idVehiculo" class="form-control">
-            <option value="">SELECCIONE UN VEHICULO</option>
-            @{
-                foreach (SistVehiculo.Models.pa_RetornaVehiculos_Result Vehiculo in ViewBag.ListaVehiculos)
-
-                {
-
-
-                    <option value="@Vehiculo.idVehiculos">@Vehiculo.tipo.ToUpper() @Vehiculo.marca.ToUpper() </option>
-                }
-            }
-        </select>
+        <select name="idVehiculo" id="idVehiculo" class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label>Tipo Vehículo:</label>
+        <select name="idTipoVehiculo" id="idTipoVehiculo" class="form-control"></select>
     </div>
     <div class="form-group">
         <input type="submit" value="Registrar" id="btnAceptar" class="btn btn-success btnRegistrar" />

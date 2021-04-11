@@ -119,14 +119,14 @@ namespace SistVehiculo.Controllers
         }
 
         [HttpPost]
-        public ActionResult ModificaFactura(int Id_factura, string Num_factura, DateTime Fecha, float MontoTotal, int Estado, int IdCliente, int IdVehiculo)
+        public ActionResult ModificaFactura(int Id_factura, string Num_factura, DateTime Fecha, float MontoTotal, int Estado, int IdCliente, int IdVehiculo, int idTipoVehiculo)
         {
             string mensaje = "";
             int cantRegistrosAfectados = 0;
 
             try
             {
-                cantRegistrosAfectados = this.modeloBD.pa_ModificaEncabezadoFactura(Id_factura, Num_factura, Fecha, MontoTotal, Estado, IdCliente, IdVehiculo);
+                cantRegistrosAfectados = this.modeloBD.pa_ModificaEncabezadoFactura(Id_factura, Num_factura, Fecha, MontoTotal, Estado, IdCliente, IdVehiculo , idTipoVehiculo);
             }
             catch (Exception error)
             {

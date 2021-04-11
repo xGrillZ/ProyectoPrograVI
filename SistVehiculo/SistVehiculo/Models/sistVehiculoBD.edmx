@@ -88,6 +88,7 @@
           <Property Name="estado" Type="int" Nullable="false" />
           <Property Name="idCliente" Type="int" Nullable="false" />
           <Property Name="idVehiculo" Type="int" Nullable="false" />
+          <Property Name="idTipoVehiculo" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Genero">
           <Key>
@@ -338,6 +339,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Factura_TiposVehiculo">
+          <End Role="TiposVehiculo" Type="Self.TiposVehiculo" Multiplicity="1" />
+          <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposVehiculo">
+              <PropertyRef Name="idTipoVehiculo" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="idTipoVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_MarcaVehiculo_PaisFabricante">
           <End Role="PaisFabricante" Type="Self.PaisFabricante" Multiplicity="1" />
           <End Role="MarcaVehiculo" Type="Self.MarcaVehiculo" Multiplicity="*" />
@@ -584,6 +597,7 @@
           <Parameter Name="estado" Type="int" Mode="In" />
           <Parameter Name="idCliente" Type="int" Mode="In" />
           <Parameter Name="idVehiculo" Type="int" Mode="In" />
+          <Parameter Name="idTipoVehiculo" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_ModificaEstadoOffEncabezadoFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_factura" Type="int" Mode="In" />
@@ -840,6 +854,10 @@
             <End Role="Vehiculos" EntitySet="Vehiculos" />
             <End Role="Factura" EntitySet="Factura" />
           </AssociationSet>
+          <AssociationSet Name="FK_Factura_TiposVehiculo" Association="Self.FK_Factura_TiposVehiculo">
+            <End Role="TiposVehiculo" EntitySet="TiposVehiculo" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
           <AssociationSet Name="FK_MarcaVehiculo_PaisFabricante" Association="Self.FK_MarcaVehiculo_PaisFabricante">
             <End Role="PaisFabricante" EntitySet="PaisFabricante" />
             <End Role="MarcaVehiculo" EntitySet="MarcaVehiculo" />
@@ -930,9 +948,9 @@
           <NavigationProperty Name="Genero1" Relationship="Self.FK_Cliente_Genero" FromRole="Cliente" ToRole="Genero" />
           <NavigationProperty Name="Provincia1" Relationship="Self.FK_Cliente_Provincia" FromRole="Cliente" ToRole="Provincia" />
           <NavigationProperty Name="TipoCliente1" Relationship="Self.FK_Cliente_TipoCliente" FromRole="Cliente" ToRole="TipoCliente" />
-          <NavigationProperty Name="Factura" Relationship="sistvehiculoviModel.FK_Factura_idCliente" FromRole="Cliente" ToRole="Factura" />
           <NavigationProperty Name="ServiciosCliente" Relationship="sistvehiculoviModel.FK_ServiciosCliente_Cliente" FromRole="Cliente" ToRole="ServiciosCliente" />
           <NavigationProperty Name="VehiculosCliente" Relationship="sistvehiculoviModel.FK_VehiculosCliente_Cliente" FromRole="Cliente" ToRole="VehiculosCliente" />
+          <NavigationProperty Name="Factura" Relationship="sistvehiculoviModel.FK_Factura_idCliente" FromRole="Cliente" ToRole="Factura" />
         </EntityType>
         <EntityType Name="detalle_Factura">
           <Key>
@@ -1029,6 +1047,7 @@
           <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Vehiculos" Relationship="Self.FK_Vehiculos_TiposVehiculo" FromRole="TiposVehiculo" ToRole="Vehiculos" />
           <NavigationProperty Name="VehiculosCliente" Relationship="sistvehiculoviModel.FK_VehiculosCliente_TiposVehiculo" FromRole="TiposVehiculo" ToRole="VehiculosCliente" />
+          <NavigationProperty Name="Factura" Relationship="sistvehiculoviModel.FK_Factura_TiposVehiculo" FromRole="TiposVehiculo" ToRole="Factura" />
         </EntityType>
         <EntityType Name="Vehiculos">
           <Key>
@@ -1042,8 +1061,8 @@
           <Property Name="numeroRueda" Type="Int32" Nullable="false" />
           <NavigationProperty Name="MarcaVehiculo1" Relationship="Self.FK_Vehiculos_MarcaVehiculo" FromRole="Vehiculos" ToRole="MarcaVehiculo" />
           <NavigationProperty Name="TiposVehiculo" Relationship="Self.FK_Vehiculos_TiposVehiculo" FromRole="Vehiculos" ToRole="TiposVehiculo" />
-          <NavigationProperty Name="Factura" Relationship="sistvehiculoviModel.FK_Factura_idVehiculo" FromRole="Vehiculos" ToRole="Factura" />
           <NavigationProperty Name="VehiculosCliente" Relationship="sistvehiculoviModel.FK_VehiculosCliente_Vehiculo" FromRole="Vehiculos" ToRole="VehiculosCliente" />
+          <NavigationProperty Name="Factura" Relationship="sistvehiculoviModel.FK_Factura_idVehiculo" FromRole="Vehiculos" ToRole="Factura" />
         </EntityType>
         <Association Name="Canton_ref_Provincia">
           <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
@@ -1450,23 +1469,6 @@
           <FunctionImport Name="pa_EliminaVehiculosCliente">
           <Parameter Name="placa" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="Factura" EntityType="sistvehiculoviModel.Factura" />
-          <AssociationSet Name="FK_Factura_idCliente" Association="sistvehiculoviModel.FK_Factura_idCliente">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Factura" EntitySet="Factura" />
-          </AssociationSet>
-          <AssociationSet Name="FK_factura" Association="sistvehiculoviModel.FK_factura">
-            <End Role="Factura" EntitySet="Factura" />
-            <End Role="detalle_Factura" EntitySet="detalle_Factura" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Factura_Estado" Association="sistvehiculoviModel.FK_Factura_Estado">
-            <End Role="Estado" EntitySet="Estado" />
-            <End Role="Factura" EntitySet="Factura" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Factura_idVehiculo" Association="sistvehiculoviModel.FK_Factura_idVehiculo">
-            <End Role="Vehiculos" EntitySet="Vehiculos" />
-            <End Role="Factura" EntitySet="Factura" />
-          </AssociationSet>
           <FunctionImport Name="pa_RetornaEstadoFactura" ReturnType="Collection(sistvehiculoviModel.pa_RetornaEstadoFactura_Result)">
           <Parameter Name="nomEstado" Mode="In" Type="String" />
           </FunctionImport>
@@ -1487,15 +1489,6 @@
           </FunctionImport>
           <FunctionImport Name="pa_RetornaEncabezadoFacturaID" ReturnType="Collection(sistvehiculoviModel.pa_RetornaEncabezadoFacturaID_Result)">
           <Parameter Name="id_Factura" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="pa_ModificaEncabezadoFactura">
-            <Parameter Name="id_factura" Mode="In" Type="Int32" />
-            <Parameter Name="num_factura" Mode="In" Type="String" />
-            <Parameter Name="fecha" Mode="In" Type="DateTime" />
-            <Parameter Name="montoTotal" Mode="In" Type="Double" />
-            <Parameter Name="estado" Mode="In" Type="Int32" />
-            <Parameter Name="idCliente" Mode="In" Type="Int32" />
-            <Parameter Name="idVehiculo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_ModificaEstadoOffEncabezadoFactura">
           <Parameter Name="id_factura" Mode="In" Type="Int32" />
@@ -1578,6 +1571,37 @@
             <Parameter Name="codigo" Mode="In" Type="String" />
             <Parameter Name="tipo" Mode="In" Type="String" />
             <Parameter Name="idVehiculo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Factura" EntityType="sistvehiculoviModel.Factura" />
+          <AssociationSet Name="FK_Factura_idCliente" Association="sistvehiculoviModel.FK_Factura_idCliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_factura" Association="sistvehiculoviModel.FK_factura">
+            <End Role="Factura" EntitySet="Factura" />
+            <End Role="detalle_Factura" EntitySet="detalle_Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_Estado" Association="sistvehiculoviModel.FK_Factura_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_idVehiculo" Association="sistvehiculoviModel.FK_Factura_idVehiculo">
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Factura_TiposVehiculo" Association="sistvehiculoviModel.FK_Factura_TiposVehiculo">
+            <End Role="TiposVehiculo" EntitySet="TiposVehiculo" />
+            <End Role="Factura" EntitySet="Factura" />
+          </AssociationSet>
+          <FunctionImport Name="pa_ModificaEncabezadoFactura">
+            <Parameter Name="id_factura" Mode="In" Type="Int32" />
+            <Parameter Name="num_factura" Mode="In" Type="String" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="montoTotal" Mode="In" Type="Double" />
+            <Parameter Name="estado" Mode="In" Type="Int32" />
+            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+            <Parameter Name="idVehiculo" Mode="In" Type="Int32" />
+            <Parameter Name="idTipoVehiculo" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -1943,70 +1967,6 @@
           <Property Type="String" Name="marca" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="tipo" Nullable="false" MaxLength="50" />
         </ComplexType>
-        <EntityType Name="Factura">
-          <Key>
-            <PropertyRef Name="id_factura" />
-          </Key>
-          <Property Name="id_factura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="num_factura" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="montoTotal" Type="Double" Nullable="false" />
-          <Property Name="estado" Type="Int32" Nullable="false" />
-          <Property Name="idCliente" Type="Int32" Nullable="false" />
-          <Property Name="idVehiculo" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cliente" Relationship="sistvehiculoviModel.FK_Factura_idCliente" FromRole="Factura" ToRole="Cliente" />
-          <NavigationProperty Name="detalle_Factura" Relationship="sistvehiculoviModel.FK_factura" FromRole="Factura" ToRole="detalle_Factura" />
-          <NavigationProperty Name="Estado1" Relationship="sistvehiculoviModel.FK_Factura_Estado" FromRole="Factura" ToRole="Estado" />
-          <NavigationProperty Name="Vehiculos" Relationship="sistvehiculoviModel.FK_Factura_idVehiculo" FromRole="Factura" ToRole="Vehiculos" />
-        </EntityType>
-        <Association Name="FK_Factura_idCliente">
-          <End Type="sistvehiculoviModel.Cliente" Role="Cliente" Multiplicity="1" />
-          <End Type="sistvehiculoviModel.Factura" Role="Factura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="idCliente" />
-            </Principal>
-            <Dependent Role="Factura">
-              <PropertyRef Name="idCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_factura">
-          <End Type="sistvehiculoviModel.Factura" Role="Factura" Multiplicity="1" />
-          <End Type="sistvehiculoviModel.detalle_Factura" Role="detalle_Factura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Factura">
-              <PropertyRef Name="id_factura" />
-            </Principal>
-            <Dependent Role="detalle_Factura">
-              <PropertyRef Name="num_factura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Factura_Estado">
-          <End Type="sistvehiculoviModel.Estado" Role="Estado" Multiplicity="1" />
-          <End Type="sistvehiculoviModel.Factura" Role="Factura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estado">
-              <PropertyRef Name="id_estado" />
-            </Principal>
-            <Dependent Role="Factura">
-              <PropertyRef Name="estado" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Factura_idVehiculo">
-          <End Type="sistvehiculoviModel.Vehiculos" Role="Vehiculos" Multiplicity="1" />
-          <End Type="sistvehiculoviModel.Factura" Role="Factura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Vehiculos">
-              <PropertyRef Name="idVehiculos" />
-            </Principal>
-            <Dependent Role="Factura">
-              <PropertyRef Name="idVehiculo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="pa_RetornaEstadoFactura_Result">
           <Property Type="Int32" Name="id_estado" Nullable="false" />
           <Property Type="String" Name="nomEstado" Nullable="false" MaxLength="50" />
@@ -2207,6 +2167,84 @@
           <Property Type="String" Name="tipo" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="idVehiculos" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Factura">
+          <Key>
+            <PropertyRef Name="id_factura" />
+          </Key>
+          <Property Name="id_factura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="num_factura" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="montoTotal" Type="Double" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <Property Name="idCliente" Type="Int32" Nullable="false" />
+          <Property Name="idVehiculo" Type="Int32" Nullable="false" />
+          <Property Name="idTipoVehiculo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="sistvehiculoviModel.FK_Factura_idCliente" FromRole="Factura" ToRole="Cliente" />
+          <NavigationProperty Name="detalle_Factura" Relationship="sistvehiculoviModel.FK_factura" FromRole="Factura" ToRole="detalle_Factura" />
+          <NavigationProperty Name="Estado1" Relationship="sistvehiculoviModel.FK_Factura_Estado" FromRole="Factura" ToRole="Estado" />
+          <NavigationProperty Name="Vehiculos" Relationship="sistvehiculoviModel.FK_Factura_idVehiculo" FromRole="Factura" ToRole="Vehiculos" />
+          <NavigationProperty Name="TiposVehiculo" Relationship="sistvehiculoviModel.FK_Factura_TiposVehiculo" FromRole="Factura" ToRole="TiposVehiculo" />
+        </EntityType>
+        <Association Name="FK_Factura_idCliente">
+          <End Type="sistvehiculoviModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="sistvehiculoviModel.Factura" Role="Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_factura">
+          <End Type="sistvehiculoviModel.Factura" Role="Factura" Multiplicity="1" />
+          <End Type="sistvehiculoviModel.detalle_Factura" Role="detalle_Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factura">
+              <PropertyRef Name="id_factura" />
+            </Principal>
+            <Dependent Role="detalle_Factura">
+              <PropertyRef Name="num_factura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_Estado">
+          <End Type="sistvehiculoviModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="sistvehiculoviModel.Factura" Role="Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_idVehiculo">
+          <End Type="sistvehiculoviModel.Vehiculos" Role="Vehiculos" Multiplicity="1" />
+          <End Type="sistvehiculoviModel.Factura" Role="Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculos">
+              <PropertyRef Name="idVehiculos" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="idVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Factura_TiposVehiculo">
+          <End Type="sistvehiculoviModel.TiposVehiculo" Role="TiposVehiculo" Multiplicity="1" />
+          <End Type="sistvehiculoviModel.Factura" Role="Factura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposVehiculo">
+              <PropertyRef Name="idTipoVehiculo" />
+            </Principal>
+            <Dependent Role="Factura">
+              <PropertyRef Name="idTipoVehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2817,19 +2855,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_EliminaVehiculosCliente" FunctionName="sistvehiculoviModel.Store.pa_EliminaVehiculosCliente" />
-          <EntitySetMapping Name="Factura">
-            <EntityTypeMapping TypeName="sistvehiculoviModel.Factura">
-              <MappingFragment StoreEntitySet="Factura">
-                <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
-                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="montoTotal" ColumnName="montoTotal" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
-                <ScalarProperty Name="id_factura" ColumnName="id_factura" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="pa_RetornaEstadoFactura" FunctionName="sistvehiculoviModel.Store.pa_RetornaEstadoFactura">
             <ResultMapping>
               <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaEstadoFactura_Result">
@@ -2917,7 +2942,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="pa_ModificaEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_ModificaEncabezadoFactura" />
           <FunctionImportMapping FunctionImportName="pa_ModificaEstadoOffEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_ModificaEstadoOffEncabezadoFactura" />
           <FunctionImportMapping FunctionImportName="pa_ModificaEstadoOnEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_ModificaEstadoOnEncabezadoFactura" />
           <FunctionImportMapping FunctionImportName="pa_InsertaDetalleFactura" FunctionName="sistvehiculoviModel.Store.pa_InsertaDetalleFactura" />
@@ -2973,6 +2997,21 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Factura">
+            <EntityTypeMapping TypeName="sistvehiculoviModel.Factura">
+              <MappingFragment StoreEntitySet="Factura">
+                <ScalarProperty Name="idTipoVehiculo" ColumnName="idTipoVehiculo" />
+                <ScalarProperty Name="idVehiculo" ColumnName="idVehiculo" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="montoTotal" ColumnName="montoTotal" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="num_factura" ColumnName="num_factura" />
+                <ScalarProperty Name="id_factura" ColumnName="id_factura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pa_ModificaEncabezadoFactura" FunctionName="sistvehiculoviModel.Store.pa_ModificaEncabezadoFactura" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

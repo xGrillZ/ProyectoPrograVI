@@ -16,8 +16,8 @@ namespace SistVehiculo.Models
     {
         public Vehiculos()
         {
-            this.Factura = new HashSet<Factura>();
             this.VehiculosCliente = new HashSet<VehiculosCliente>();
+            this.Factura = new HashSet<Factura>();
         }
     
         public int idVehiculos { get; set; }
@@ -29,7 +29,7 @@ namespace SistVehiculo.Models
     
         public virtual MarcaVehiculo MarcaVehiculo1 { get; set; }
         public virtual TiposVehiculo TiposVehiculo { get; set; }
-        public virtual ICollection<Factura> Factura { get; set; }
         public virtual ICollection<VehiculosCliente> VehiculosCliente { get; set; }
+        public virtual ICollection<Factura> Factura { get; set; }
     }
 }

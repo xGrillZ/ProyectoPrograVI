@@ -26,10 +26,12 @@ namespace SistVehiculo.Models
         public int estado { get; set; }
         public int idCliente { get; set; }
         public int idVehiculo { get; set; }
+        public int idTipoVehiculo { get; set; }
     
         public virtual Cliente Cliente { get; set; }
         public virtual ICollection<detalle_Factura> detalle_Factura { get; set; }
         public virtual Estado Estado1 { get; set; }
         public virtual Vehiculos Vehiculos { get; set; }
+        public virtual TiposVehiculo TiposVehiculo { get; set; }
     }
 }

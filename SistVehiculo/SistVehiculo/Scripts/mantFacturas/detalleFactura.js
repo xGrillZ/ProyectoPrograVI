@@ -102,6 +102,12 @@ function calcularDatos(cantidad, precio, total, accion) {
 function creaEventoDetalleFactura() {
 	$("#btnGenerarDetalle").on("click", function () {
 		enviarDatosJson();
+		/*test1();*/
+		/*enviarDatosJSONFacturaGlobal();
+	
+		enviarDatosJSONFacturaServiciosCliente();
+
+		enviarDatosJSONFacturaServiciosVehiculo();*/
 	});
 }
 
@@ -184,7 +190,9 @@ function enviarDatosJson() {
 			datosDetalleFacturaServicio.push(datosServicio);
 
 			/*console.log(datosDetalleFacturaServicio);*/
-		} else {
+		}
+
+		if (row.cells[2].innerHTML == 2){
 			datosProducto.Cliente = idCliente;
 			datosProducto.Vehiculo = idVehiculo;
 			datosProducto.Codigo = row.cells[0].innerText;
@@ -200,11 +208,107 @@ function enviarDatosJson() {
 		}
 
 		///Enviar datos al procedimiento almacenado InsertaDetalleFactura
-		/*recorridoJsonDetalleFacturaGlobal(datosDetalleFacturaGeneral);
-		/*recorridoJsonDetalleFacturaCliente(datosDetalleFacturaProducto);
-		recorridoJsonDetalleFacturaVehiculo(datosDetalleFacturaServicio);*/
+		recorridoJsonDetalleFacturaGlobal(datosDetalleFacturaGeneral);
+		recorridoJsonDetalleFacturaCliente(datosDetalleFacturaProducto);
+		recorridoJsonDetalleFacturaVehiculo(datosDetalleFacturaServicio);
 		invocarMetodoModificaTotalFactura(idFactura, totalGeneral);
 	}
+}
+
+function enviarDatosJSONFacturaGlobal() {
+
+	var datosDetalleFacturaGeneral = new Array();
+
+	var table = document.getElementById("tablaFactura");
+
+	for (var i = 1; i < table.rows.length; i++) {
+		var row = table.rows[i];
+
+		///Arreglos que almacenan los datos del recorrido temporalmente
+		var datosGenerales = {};
+
+		///Recorrido para rellenar el Arreglo datosDetalleFacturaGeneral
+		///InnerText permite solo obtener el valor del texto a buscar
+		datosGenerales.Codigo = row.cells[0].innerText;
+		datosGenerales.Servicio = row.cells[1].innerText;
+		datosGenerales.Tipo = row.cells[2].innerText;
+		datosGenerales.Precio = row.cells[3].innerText;
+		datosGenerales.Cantidad = row.cells[4].innerText;
+		datosGenerales.Total = row.cells[5].innerText;
+
+		datosDetalleFacturaGeneral.push(datosGenerales);
+
+		recorridoJsonDetalleFacturaGlobal(datosDetalleFacturaGeneral);
+	}
+
+}
+
+function enviarDatosJSONFacturaServiciosCliente() {
+
+	var datosDetalleFacturaServicio = new Array();
+
+	var table = document.getElementById("tablaFactura");
+
+	for (var i = 1; i < table.rows.length; i++) {
+		var row = table.rows[i];
+
+		///Arreglos que almacenan los datos del recorrido temporalmente
+		var datosServicio = {};
+
+		///Recorrido para rellenar el Arreglo datosDetalleFacturaGeneral
+		///InnerText permite solo obtener el valor del texto a buscar
+		if (row.cells[2].innerText === 1) {
+			datosServicio.Codigo = row.cells[0].innerText;
+			datosServicio.Servicio = row.cells[1].innerText;
+			datosServicio.Tipo = row.cells[2].innerText;
+			datosServicio.Precio = row.cells[3].innerText;
+			datosServicio.Cantidad = row.cells[4].innerText;
+			datosServicio.Total = row.cells[5].innerText;
+
+			datosDetalleFacturaServicio.push(datosServicio);
+
+			recorridoJsonDetalleFacturaVehiculo(datosDetalleFacturaServicio);
+		}
+	}
+
+}
+
+function enviarDatosJSONFacturaServiciosVehiculo() {
+
+	var datosDetalleFacturaProducto = new Array();
+
+	var table = document.getElementById("tablaFactura");
+
+	for (var i = 1; i < table.rows.length; i++) {
+		var row = table.rows[i];
+
+		///Arreglos que almacenan los datos del recorrido temporalmente
+		var datosProducto = {};
+
+		///Recorrido para rellenar el Arreglo datosDetalleFacturaGeneral
+		///InnerText permite solo obtener el valor del texto a buscar
+		if (row.cells[2].innerText === "2") {
+			datosProducto.Codigo = row.cells[0].innerText;
+			datosProducto.Servicio = row.cells[1].innerText;
+			datosProducto.Tipo = row.cells[2].innerText;
+			datosProducto.Precio = row.cells[3].innerText;
+			datosProducto.Cantidad = row.cells[4].innerText;
+			datosProducto.Total = row.cells[5].innerText;
+
+			datosDetalleFacturaProducto.push(datosProducto);
+
+			recorridoJsonDetalleFacturaCliente(datosDetalleFacturaProducto);
+		}
+	}
+
+}
+
+function test1() {
+
+	var totalGeneral = parseFloat(document.getElementById("total_total").innerHTML)
+	var idFactura = $("#hdIdFactura").val();
+
+	invocarMetodoModificaTotalFactura(idFactura, totalGeneral);
 }
 
 /*function test(objetoJson) {

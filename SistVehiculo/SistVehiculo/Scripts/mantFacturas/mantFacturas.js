@@ -271,7 +271,7 @@ function procesarResultadoTipoVehiculo(data) {
     });
 
     ///Obtiene el valor del hidden
-    var hiddenTipoVehiculo = $("#hdTipoVechiculo").val();
+    var hiddenTipoVehiculo = $("#hdMarca").val();
 
     if (hiddenTipoVehiculo != undefined) {
         ddlTipoVehiculo.val(hiddenTipoVehiculo);
@@ -587,7 +587,8 @@ function invocarMetodoPostModificaEncabezadoFactura() {
         MontoTotal: $("#montoTotal").val(),
         Estado: $("#estado").val(),
         IdCliente: $("#hdIdCliente").val(),
-        IdVehiculo: $("#placaVehiculo").val()
+        IdVehiculo: $("#placaVehiculo").val(),
+        idTipoVehiculo: $("#tipoVehiculo").val()
     };
     /*Invocación del método*/
     ///Este método puede ser reciclado AVERIGUAR COMO

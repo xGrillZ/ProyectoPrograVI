@@ -39,11 +39,11 @@ namespace SistVehiculo.Controllers
             return Json(vehiculos, JsonRequestBehavior.AllowGet);
         }
 
-       /* public ActionResult RetornaTipoVehiculo(int idVehiculo)
+        public ActionResult RetornaTipoVehiculo(int idVehiculo)
         {
-            List<pa_RetornaTipo>
+            List<pa_RetornaTiposVehiculoCliente_Result> tipoVehiculo = this.modeloBD.pa_RetornaTiposVehiculoCliente(null, null, idVehiculo).ToList();
             return Json(tipoVehiculo, JsonRequestBehavior.AllowGet);
-        }*/
+        }
 
         [HttpPost]
         public ActionResult InsertarVehiculosCliente(int idVehiculo, int idCliente, int idTipoVehiculo)
@@ -73,6 +73,88 @@ namespace SistVehiculo.Controllers
                 }
             }
 
+            return Json(new { resultado = mensaje });
+        }
+
+        bool verificarVehiculo(string idVehiculo, string idCliente)
+        {
+            ///Resultado de la operación
+            bool resultado = true;
+            try
+            {
+                ///Variable que almacenará el dato solicitado
+                int idVehiculoCliente = Convert.ToInt32(idVehiculo);
+                ///Resultado de la operación
+                if (string.IsNullOrEmpty(idCliente))
+                {
+                    resultado = this.modeloBD.VehiculosCliente.Count(VehiculoCliente => VehiculoCliente.idVehiculo == idVehiculoCliente) <= 0;
+                }
+                else
+                {
+                    int idVehiculoCliente2 = Convert.ToInt32(idCliente);
+                    resultado = this.modeloBD.VehiculosCliente.Count(VehiculoCliente => VehiculoCliente.idVehiculo == idVehiculoCliente && VehiculoCliente.idCliente != idVehiculoCliente2) <= 0;
+                }
+            }
+            catch
+            {
+                ///Mensaje de error
+                string mensaje = "Error al verificar la cédula.";
+                Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
+            }
+            ///Retorno del resultado
+            return resultado;
+        }
+
+        public ActionResult ModificarVehiculosCliente(int idVehiculosCliente)
+        {
+            ///Obtener el registro que se desea modificar
+            ///utilizando el parámetro del método idCliente
+            pa_RetornaVehiculosClienteID_Result modeloVista = new pa_RetornaVehiculosClienteID_Result();
+            modeloVista = this.modeloBD.pa_RetornaVehiculosClienteID(idVehiculosCliente).FirstOrDefault();
+
+            ///Enviar el modelo a la vista
+            return View(modeloVista);
+        }
+
+        [HttpPost]
+        public ActionResult ModificarVehiculosCliente(int idVehiculoCliente, int idVehiculo, int idCliente, int idTipoVehiculo)
+        {
+
+            ///Variable que registra la cantidad de registros afectados
+            ///si un procedimiento que ejecuta insert, update o delete
+            ///no afecta registros implica que hubo un error
+            int cantRegistrosAfectados = 0;
+            string mensaje = "";
+
+            if (this.verificarVehiculo(idVehiculo.ToString(), idCliente.ToString()))
+            {
+                try
+                {
+
+                    cantRegistrosAfectados = this.modeloBD.pa_ModificaVehiculosCliente(idVehiculoCliente, idVehiculo, idCliente, idTipoVehiculo);
+                }
+                catch (Exception ex)
+                {
+                    mensaje = "Ocurrió un error: " + ex.Message;
+                }
+                finally
+                {
+                    if (cantRegistrosAfectados > 0)
+                    {
+                        mensaje = "Registro Modificado";
+                    }
+                    else
+                    {
+                        mensaje += ".No se pudo modificar";
+                    }
+                }
+            }
+            else
+            {
+                mensaje = "Este vehiculo ya existe en tu cuenta, debes ingresar otra";
+            }
+
+            ///Enviar el modelo a la vista
             return Json(new { resultado = mensaje });
         }
     }

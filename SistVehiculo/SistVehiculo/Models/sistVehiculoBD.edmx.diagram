@@ -31,11 +31,6 @@
         <EntityTypeShape EntityType="sistvehiculoviModel.TipoServicioProducto" Width="1.5" PointX="3" PointY="11" />
         <AssociationConnector Association="sistvehiculoviModel.FK_TipoServicioProducto_clasificacionSP" />
         <AssociationConnector Association="sistvehiculoviModel.FK_detalleFactura_TipoServicio" />
-        <EntityTypeShape EntityType="sistvehiculoviModel.Factura" Width="1.5" PointX="12.75" PointY="7.75" />
-        <AssociationConnector Association="sistvehiculoviModel.FK_Factura_idCliente" />
-        <AssociationConnector Association="sistvehiculoviModel.FK_factura" />
-        <AssociationConnector Association="sistvehiculoviModel.FK_Factura_Estado" />
-        <AssociationConnector Association="sistvehiculoviModel.FK_Factura_idVehiculo" />
         <EntityTypeShape EntityType="sistvehiculoviModel.ServiciosCliente" Width="1.5" PointX="9.75" PointY="7" />
         <EntityTypeShape EntityType="sistvehiculoviModel.ServiciosVehiculo" Width="1.5" PointX="5.25" PointY="15.125" />
         <AssociationConnector Association="sistvehiculoviModel.FK_ServiciosCliente_ClasificacionSP" />
@@ -46,6 +41,12 @@
         <AssociationConnector Association="sistvehiculoviModel.FK_VehiculosCliente_Cliente" />
         <AssociationConnector Association="sistvehiculoviModel.FK_VehiculosCliente_TiposVehiculo" />
         <AssociationConnector Association="sistvehiculoviModel.FK_VehiculosCliente_Vehiculo" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.Factura" Width="1.5" PointX="12.75" PointY="6.5" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_Factura_idCliente" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_factura" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_Factura_Estado" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_Factura_idVehiculo" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_Factura_TiposVehiculo" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
