@@ -235,6 +235,72 @@ namespace SistVehiculo.Controllers
                 this.modeloBD.pa_RetornaServiciosVehiculo("","","").ToList();
             return Json(new { resultado = serviciosVehiculo });
         }
+        public ActionResult RpServiciosCliente()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public ActionResult RetornaServiciosClienteLista()
+        {
+            List<pa_RetornaServiciosCliente_Result> serviciosCliente =
+                this.modeloBD.pa_RetornaServiciosCliente("", "", "").ToList();
+
+            return Json(new { resultado = serviciosCliente });
+        }
+
+        public ActionResult RpServiciosClienteConsultor()
+        {
+            return View();
+        }
+
+        public ActionResult RpServicioVehiculoConsultor()
+        {
+            return View();
+        }
+
+        public ActionResult RpVehiculosClienteConsultor()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult RetornaServiciosClienteConsutorLista()
+        {
+            int dataUser = int.Parse(Session["idusuario"].ToString());
+
+            List<pa_RetornaServiciosClienteConsultorID_Result> serviciosCliente =
+                this.modeloBD.pa_RetornaServiciosClienteConsultorID(dataUser).ToList();
+
+            return Json(new { resultado = serviciosCliente });
+        }
+
+
+        [HttpPost]
+        public ActionResult RetornaVehiculosClienteConsutorLista()
+        {
+            int dataUser = int.Parse(Session["idusuario"].ToString());
+
+            List<pa_RetornaServiciosClienteConsultorID_Result> serviciosCliente =
+                this.modeloBD.pa_RetornaServiciosClienteConsultorID(dataUser).ToList();
+
+            return Json(new { resultado = serviciosCliente });
+        }
+
+
+        [HttpPost]
+        public ActionResult RetornaServiciosVehiculoConsutorLista()
+        {
+            int dataUser = int.Parse(Session["idusuario"].ToString());
+
+            List<pa_RetornaServiciosClienteConsultorID_Result> serviciosCliente =
+                this.modeloBD.pa_RetornaServiciosClienteConsultorID(dataUser).ToList();
+
+            return Json(new { resultado = serviciosCliente });
+        }
 
     }
 }

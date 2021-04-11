@@ -430,9 +430,43 @@ namespace SistVehiculo.Controllers
             return View();
         }
 
+        public ActionResult RpServicioVehiculoConsultor()
+        {
+            return View();
+        }
+
+        public ActionResult RpVehiculosClienteConsultor()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         public ActionResult RetornaServiciosClienteConsutorLista()
+        {
+            int dataUser = int.Parse(Session["idusuario"].ToString());
+
+            List<pa_RetornaServiciosClienteConsultorID_Result> serviciosCliente =
+                this.modeloBD.pa_RetornaServiciosClienteConsultorID(dataUser).ToList();
+
+            return Json(new { resultado = serviciosCliente });
+        }
+
+
+        [HttpPost]
+        public ActionResult RetornaVehiculosClienteConsutorLista()
+        {
+            int dataUser = int.Parse(Session["idusuario"].ToString());
+
+            List<pa_RetornaServiciosClienteConsultorID_Result> serviciosCliente =
+                this.modeloBD.pa_RetornaServiciosClienteConsultorID(dataUser).ToList();
+
+            return Json(new { resultado = serviciosCliente });
+        }
+
+
+        [HttpPost]
+        public ActionResult RetornaServiciosVehiculoConsutorLista()
         {
             int dataUser = int.Parse(Session["idusuario"].ToString());
 
