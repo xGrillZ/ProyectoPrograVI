@@ -4,8 +4,8 @@
 
 function obtenerRegistrosServiciosClientesKendo() {
     /////construir la dirección del método del servidor
-    var urlMetodo = '/MantClientes/RetornaServiciosClienteConsultarLista'
-    var parametros = {};
+    var urlMetodo = '/MantClientes/RetornaServiciosClienteConsultorLista'
+    var parametros = {numCedula};
     var funcion = creaGridKendo;
     ///ejecuta la función $.ajax utilizando un método genérico
     //para no declarar toda la instrucción siempre

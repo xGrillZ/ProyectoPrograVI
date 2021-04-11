@@ -425,13 +425,13 @@ namespace SistVehiculo.Controllers
             return Json(new { resultado = serviciosCliente });
         }
 
-        public ActionResult RpServiciosClienteConsultor()
+        public ActionResult RpServiciosClienteConsultor(string numCedula)
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult RetornaServiciosClienteConsutorLista()
+        public ActionResult RetornaServiciosClienteConsutorLista(string numCedula)
         {
             List<pa_RetornaServiciosCliente_Result> serviciosCliente =
                 this.modeloBD.pa_RetornaServiciosCliente("", "", "").ToList();
