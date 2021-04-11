@@ -108,7 +108,7 @@ function creaEventoDetalleFactura() {
 		enviarDatosJSONFacturaServiciosCliente();
 
 		enviarDatosJSONFacturaServiciosVehiculo();*/
-		enviarDatosJson();
+		test1();
 		enviarDatosJSONFacturaGlobal();
 	});
 	$("#btnEnviarServicioCliente").on("click", function () {
@@ -147,7 +147,7 @@ function creaEventoDetalleFactura() {
 }*/
 
 ///Logica de separación
-function enviarDatosJson() {
+/*function enviarDatosJson() {
 	///Creación de array
 	var datosDetalleFacturaServicio = new Array();
 	var datosDetalleFacturaProducto = new Array();
@@ -197,7 +197,7 @@ function enviarDatosJson() {
 
 			datosDetalleFacturaServicio.push(datosServicio);
 
-			/*console.log(datosDetalleFacturaServicio);*/
+			///console.log(datosDetalleFacturaServicio);
 		}
 
 		if (row.cells[2].innerHTML == 2){
@@ -212,7 +212,7 @@ function enviarDatosJson() {
 
 			datosDetalleFacturaProducto.push(datosProducto);
 
-			/*console.log(datosDetalleFacturaProducto);*/
+			///console.log(datosDetalleFacturaProducto);
 		}
 
 		///Enviar datos al procedimiento almacenado InsertaDetalleFactura
@@ -221,7 +221,7 @@ function enviarDatosJson() {
 		recorridoJsonDetalleFacturaVehiculo(datosDetalleFacturaServicio);
 		invocarMetodoModificaTotalFactura(idFactura, totalGeneral);
 	}
-}
+}*/
 
 function enviarDatosJSONFacturaGlobal() {
 
@@ -258,24 +258,24 @@ function enviarDatosJSONFacturaServiciosCliente() {
 	var table = document.getElementById("tablaFactura");
 
 	for (var i = 1; i < table.rows.length; i++) {
-		var row = table.rows[i];
+		var rowServicio = table.rows[i];
 
 		///Arreglos que almacenan los datos del recorrido temporalmente
 		var datosServicio = {};
 
 		///Recorrido para rellenar el Arreglo datosDetalleFacturaGeneral
 		///InnerText permite solo obtener el valor del texto a buscar
-		if (row.cells[2].innerText === 1) {
-			datosServicio.Codigo = row.cells[0].innerText;
-			datosServicio.Servicio = row.cells[1].innerText;
-			datosServicio.Tipo = row.cells[2].innerText;
-			datosServicio.Precio = row.cells[3].innerText;
-			datosServicio.Cantidad = row.cells[4].innerText;
-			datosServicio.Total = row.cells[5].innerText;
+		if (rowServicio.cells[2].innerText === "2") {
+			datosServicio.Codigo = rowServicio.cells[0].innerText;
+			datosServicio.Servicio = rowServicio.cells[1].innerText;
+			datosServicio.Tipo = rowServicio.cells[2].innerText;
+			datosServicio.Precio = rowServicio.cells[3].innerText;
+			datosServicio.Cantidad = rowServicio.cells[4].innerText;
+			datosServicio.Total = rowServicio.cells[5].innerText;
 
 			datosDetalleFacturaServicio.push(datosServicio);
 
-			recorridoJsonDetalleFacturaVehiculo(datosDetalleFacturaServicio);
+			recorridoJsonDetalleFacturaCliente(datosDetalleFacturaServicio);
 		}
 	}
 
@@ -291,21 +291,21 @@ function enviarDatosJSONFacturaServiciosVehiculo() {
 		var row = table.rows[i];
 
 		///Arreglos que almacenan los datos del recorrido temporalmente
-		var datosProducto = {};
+		var datosServicio = {};
 
 		///Recorrido para rellenar el Arreglo datosDetalleFacturaGeneral
 		///InnerText permite solo obtener el valor del texto a buscar
-		if (row.cells[2].innerText === "2") {
-			datosProducto.Codigo = row.cells[0].innerText;
-			datosProducto.Servicio = row.cells[1].innerText;
-			datosProducto.Tipo = row.cells[2].innerText;
-			datosProducto.Precio = row.cells[3].innerText;
-			datosProducto.Cantidad = row.cells[4].innerText;
-			datosProducto.Total = row.cells[5].innerText;
+		if (row.cells[2].innerText === "1") {
+			datosServicio.Codigo = row.cells[0].innerText;
+			datosServicio.Servicio = row.cells[1].innerText;
+			datosServicio.Tipo = row.cells[2].innerText;
+			datosServicio.Precio = row.cells[3].innerText;
+			datosServicio.Cantidad = row.cells[4].innerText;
+			datosServicio.Total = row.cells[5].innerText;
 
-			datosDetalleFacturaProducto.push(datosProducto);
+			datosDetalleFacturaProducto.push(datosServicio);
 
-			recorridoJsonDetalleFacturaCliente(datosDetalleFacturaProducto);
+			recorridoJsonDetalleFacturaVehiculo(datosDetalleFacturaProducto);
 		}
 	}
 
