@@ -171,5 +171,18 @@ namespace SistVehiculo.Controllers
             AgregaMarcaVehiculoViewBag();
             return Json(new { resultado = mensaje });
         }
+
+        public ActionResult RpVehiculosCliente()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RetornaVehiculosClienteLista()
+        {
+            List<pa_RetornaVehiculosCliente_Result> vehiculoCliente =
+                this.modeloBD.pa_RetornaVehiculosCliente("","","","").ToList();
+            return Json(new { resultado = vehiculoCliente });
+        }
     }
 }
