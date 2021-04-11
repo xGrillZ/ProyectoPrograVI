@@ -12,6 +12,12 @@
 
 
 <h2>Mi Reporte de Servicios por Vehículo</h2>
+@{
+    int dataUser = int.Parse(Session["idusuario"].ToString());
+}
+
+<input type="hidden" id="hdIdCliente" value="dataUser" />
+
 
 <div id="divKendoGrid">
 
@@ -21,7 +27,6 @@
     <script src="https://kendo.cdn.telerik.com/2020.2.617/js/kendo.all.min.js"></script>
     <script src="https://kendo.cdn.telerik.com/2020.2.617/js/jszip.min.js"></script>
     <script src="~/Scripts/reutilizacionScript.js"></script>
-    <script src="~/Scripts/mantClientesConsultores/reporteClientesConsultor.js"></script>
-    
+    <script src="~/Scripts/mantClientesConsultores/RpServicioVehiculoConsultor.js"></script>
 }
 
