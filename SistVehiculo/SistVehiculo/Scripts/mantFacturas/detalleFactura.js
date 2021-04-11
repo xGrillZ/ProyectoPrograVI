@@ -101,13 +101,21 @@ function calcularDatos(cantidad, precio, total, accion) {
 /* Permite realizar una acción con el evento click */
 function creaEventoDetalleFactura() {
 	$("#btnGenerarDetalle").on("click", function () {
-		enviarDatosJson();
+		/*enviarDatosJson();*/
 		/*test1();*/
 		/*enviarDatosJSONFacturaGlobal();
 	
 		enviarDatosJSONFacturaServiciosCliente();
 
 		enviarDatosJSONFacturaServiciosVehiculo();*/
+		enviarDatosJson();
+		enviarDatosJSONFacturaGlobal();
+	});
+	$("#btnEnviarServicioCliente").on("click", function () {
+		enviarDatosJSONFacturaServiciosCliente();
+	});
+	$("#btnEnviarServicioVehiculo").on("click", function () {
+		enviarDatosJSONFacturaServiciosVehiculo();
 	});
 }
 
