@@ -167,18 +167,6 @@ namespace SistVehiculo.Controllers
                 return View();
             }
         }
-        public ActionResult RpServiciosClienteConsultor(int idCliente)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult RetornaServiciosClienteConsutorLista(int idCliente)
-        {
-            List<pa_RetornaServiciosCliente_Result> serviciosCliente =
-                this.modeloBD.pa_RetornaServiciosCliente("", "", "").ToList();
-
-            return Json(new { resultado = serviciosCliente });
-        }
+        
     }
 }

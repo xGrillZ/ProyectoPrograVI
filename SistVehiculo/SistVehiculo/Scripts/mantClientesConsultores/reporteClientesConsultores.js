@@ -1,16 +1,27 @@
 ﻿$(function () {
-    obtenerRegistrosServiciosClientesKendo();
+    pruebaTest();
+    //obtenerRegistrosServiciosClientesKendo();
 });
 
-function obtenerRegistrosServiciosClientesKendo() {
+function pruebaTest() {
+
+    var prueba = $("#hdIdCliente");
+
+    obtenerRegistrosServiciosClientesKendo(prueba);
+
+}
+
+function obtenerRegistrosServiciosClientesKendo(pIdCliente) {
     /////construir la dirección del método del servidor
     var urlMetodo = '/MantClientes/RetornaServiciosClienteConsutorLista'
-    var parametros = { idCliente};
+    var parametros = { idCliente: pIdCliente};
     var funcion = creaGridKendo;
     ///ejecuta la función $.ajax utilizando un método genérico
     //para no declarar toda la instrucción siempre
     ejecutaAjax(urlMetodo, parametros, funcion);
 }
+
+
 
 function creaGridKendo(data) {
     ///Selector por ID
