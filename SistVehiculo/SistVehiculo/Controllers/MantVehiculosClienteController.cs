@@ -184,5 +184,62 @@ namespace SistVehiculo.Controllers
                 this.modeloBD.pa_RetornaVehiculosCliente("","","","").ToList();
             return Json(new { resultado = vehiculoCliente });
         }
+
+        public ActionResult EliminarVehiculosCliente(int idVehiculosCliente)
+        {
+            ///Obtener el registro que se desea modificar
+            ///utilizando el parámetro del método idCliente
+            pa_RetornaVehiculosClienteID_Result modeloVista = new pa_RetornaVehiculosClienteID_Result();
+            modeloVista = this.modeloBD.pa_RetornaVehiculosClienteID(idVehiculosCliente).FirstOrDefault();
+
+            ///Enviar el modelo a la vista
+            AgregaTipoVehiculoViewBag();
+            AgregaMarcaVehiculoViewBag();
+            return View(modeloVista);
+        }
+
+        [HttpPost]
+        public ActionResult EliminarVehiculosCliente(int idVehiculoCliente, int idVehiculo, int idCliente, int idTipoVehiculo)
+        {
+
+            ///Variable que registra la cantidad de registros afectados
+            ///si un procedimiento que ejecuta insert, update o delete
+            ///no afecta registros implica que hubo un error
+            int cantRegistrosAfectados = 0;
+            string mensaje = "";
+
+            if (this.verificarVehiculo(idVehiculo.ToString(), idCliente.ToString()))
+            {
+                try
+                {
+
+                    cantRegistrosAfectados = this.modeloBD.pa_ModificaVehiculosCliente(idVehiculoCliente, idVehiculo, idCliente, idTipoVehiculo);
+                }
+                catch (Exception ex)
+                {
+                    mensaje = "Ocurrió un error: " + ex.Message;
+                }
+                finally
+                {
+                    if (cantRegistrosAfectados > 0)
+                    {
+                        mensaje = "Registro Modificado";
+                    }
+                    else
+                    {
+                        mensaje += ".No se pudo modificar";
+                    }
+                }
+            }
+            else
+            {
+                mensaje = "Este vehiculo ya existe en tu cuenta, debes ingresar otra";
+            }
+
+            ///Enviar el modelo a la vista
+            AgregaTipoVehiculoViewBag();
+            AgregaMarcaVehiculoViewBag();
+            return Json(new { resultado = mensaje });
+        }
     }
 }
