@@ -399,7 +399,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Logeo\Logeo.js" />
     <Content Include="Scripts\Logeo\verificacion.js" />
-    <Content Include="Scripts\mantClientesConsultores\reporteClientesConsultores.js" />
+    <Content Include="Scripts\mantClientesConsultores\RpServiciosClienteConsultor.js" />
+    <Content Include="Scripts\mantClientesConsultores\RpServicioVehiculoConsultor.js" />
+    <Content Include="Scripts\mantClientesConsultores\RpVehiculosClienteConsultor.js" />
     <Content Include="Scripts\mantClientes\mantClientes.js" />
     <Content Include="Scripts\mantClientes\modificaClientes.js" />
     <Content Include="Scripts\mantClientes\reporteClientes.js" />
