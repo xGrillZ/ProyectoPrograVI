@@ -167,5 +167,18 @@ namespace SistVehiculo.Controllers
                 return View();
             }
         }
+        public ActionResult RpServiciosClienteConsultor(string numCedula)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RetornaServiciosClienteConsutorLista(string numCedula)
+        {
+            List<pa_RetornaServiciosCliente_Result> serviciosCliente =
+                this.modeloBD.pa_RetornaServiciosCliente("", "", "").ToList();
+
+            return Json(new { resultado = serviciosCliente });
+        }
     }
 }
