@@ -27,6 +27,16 @@ namespace SistVehiculo.Controllers
             return View();
         }
 
+        void AgregaTipoVehiculoViewBag()
+        {
+            this.ViewBag.ListaTipoVehiculo = this.modeloBD.pa_RetornaTiposVehiculo("", "").ToList();
+        }
+
+        void AgregaMarcaVehiculoViewBag()
+        {
+            this.ViewBag.ListaMarcaVehiculo = this.modeloBD.pa_RetornaMarcaVehiculo("", "", "").ToList();
+        }
+
         public ActionResult RetornaClientes()
         {
             List<pa_RetornaCliente_Result> clientes = this.modeloBD.pa_RetornaCliente("", "", "", "").ToList();
@@ -113,6 +123,8 @@ namespace SistVehiculo.Controllers
             modeloVista = this.modeloBD.pa_RetornaVehiculosClienteID(idVehiculosCliente).FirstOrDefault();
 
             ///Enviar el modelo a la vista
+            AgregaTipoVehiculoViewBag();
+            AgregaMarcaVehiculoViewBag();
             return View(modeloVista);
         }
 
@@ -155,6 +167,8 @@ namespace SistVehiculo.Controllers
             }
 
             ///Enviar el modelo a la vista
+            AgregaTipoVehiculoViewBag();
+            AgregaMarcaVehiculoViewBag();
             return Json(new { resultado = mensaje });
         }
     }
