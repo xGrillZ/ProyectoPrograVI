@@ -1,13 +1,13 @@
 ﻿$(function () {
 
-    obtenerRegistrosServiciosClientesKendo();
+    obtenerRegistrosVehiculosClienteConsultorKendo();
 });
 
 
 
-function obtenerRegistrosServiciosClientesKendo() {
+function obtenerRegistrosVehiculosClienteConsultorKendo() {
     /////construir la dirección del método del servidor
-    var urlMetodo = '/MantClientes/RetornaVehiculosClienteConsutorLista'
+    var urlMetodo = '/MantVehiculosCliente/RetornaVehiculosClienteConsutorLista'
     var parametros = {};
     var funcion = creaGridKendo;
     ///ejecuta la función $.ajax utilizando un método genérico

@@ -241,5 +241,43 @@ namespace SistVehiculo.Controllers
             AgregaMarcaVehiculoViewBag();
             return Json(new { resultado = mensaje });
         }
+        public ActionResult RpServiciosCliente()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public ActionResult RetornaServiciosClienteLista()
+        {
+            List<pa_RetornaServiciosCliente_Result> serviciosCliente =
+                this.modeloBD.pa_RetornaServiciosCliente("", "", "").ToList();
+
+            return Json(new { resultado = serviciosCliente });
+        }
+
+        
+
+       
+
+        public ActionResult RpVehiculosClienteConsultor()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult RetornaVehiculosClienteConsutorLista()
+        {
+            int dataUser = int.Parse(Session["idusuario"].ToString());
+
+            List<pa_RetornaServiciosClienteConsultorID_Result> serviciosCliente =
+                this.modeloBD.pa_RetornaServiciosClienteConsultorID(dataUser).ToList();
+
+            return Json(new { resultado = serviciosCliente });
+        }
+
+
     }
 }
