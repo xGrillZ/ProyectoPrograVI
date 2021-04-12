@@ -82,8 +82,9 @@ namespace SistVehiculo.Controllers
                     mensaje += ".No se pudo ingresar el vehículo del cliente";
                 }
             }
+            Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
 
-            return Json(new { resultado = mensaje });
+            return View();
         }
 
         bool verificarVehiculo(string idVehiculo, string idCliente)
@@ -199,7 +200,7 @@ namespace SistVehiculo.Controllers
         }
 
         [HttpPost]
-        public ActionResult EliminarVehiculosCliente(int idVehiculoCliente, int idVehiculo, int idCliente, int idTipoVehiculo)
+        public ActionResult EliminarVehiculosCliente(pa_RetornaVehiculosClienteID_Result modeloVista)
         {
 
             ///Variable que registra la cantidad de registros afectados
@@ -208,12 +209,10 @@ namespace SistVehiculo.Controllers
             int cantRegistrosAfectados = 0;
             string mensaje = "";
 
-            if (this.verificarVehiculo(idVehiculo.ToString(), idCliente.ToString()))
-            {
                 try
                 {
 
-                    cantRegistrosAfectados = this.modeloBD.pa_ModificaVehiculosCliente(idVehiculoCliente, idVehiculo, idCliente, idTipoVehiculo);
+                    cantRegistrosAfectados = this.modeloBD.pa_EliminaVehiculosCliente(modeloVista.idVehiculosCliente);
                 }
                 catch (Exception ex)
                 {
@@ -223,24 +222,22 @@ namespace SistVehiculo.Controllers
                 {
                     if (cantRegistrosAfectados > 0)
                     {
-                        mensaje = "Registro Modificado";
+                        mensaje = "Registro Eliminado";
                     }
                     else
                     {
-                        mensaje += ".No se pudo modificar";
+                        mensaje += ".No se pudo Eliminar";
                     }
                 }
-            }
-            else
-            {
-                mensaje = "Este vehiculo ya existe en tu cuenta, debes ingresar otra";
-            }
+
+            Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
 
             ///Enviar el modelo a la vista
             AgregaTipoVehiculoViewBag();
             AgregaMarcaVehiculoViewBag();
-            return Json(new { resultado = mensaje });
+            return View();
         }
+
         public ActionResult RpServiciosCliente()
         {
             return View();

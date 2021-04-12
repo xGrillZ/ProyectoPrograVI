@@ -212,3 +212,58 @@ function procesarResultadoTipoVehiculo(data) {
         ddlTipoVehiculo.val(hiddenTipoVehiculo);
     }
 }
+
+/* Permite realizar una acción con el evento click */
+function creaEventoFormularioEliminar() {
+    $("#btnInsertarVehiculoCliente").on("click", function () {
+        /*Asignar a la variable formulario
+          el resultado del selector*/
+        var formulario = $("#frmNuevoVehiculoCliente");
+        /*Ejecutar el método de validación*/
+        formulario.validate();
+        /*Si el formulario es valido, proceder a
+         ejecutar la función invocarMetodoPost*/
+        if (formulario.valid()) {
+            invocarMetodoPostInsertar();
+        }
+    });
+}
+
+///se encarga de llamar al método del controlador y procesar el resultado
+function invocarMetodoPostInsertar() {
+    /*Dirección a donde se enviarán los datos */
+    var url = '/MantVehiculosCliente/InsertarVehiculosCliente';
+    /*Parámetros del método*/
+    var parametros = {
+        idVehiculo: $("#idCliente").val(),
+        idCliente: $("#idVehiculo").val(),
+        idTipoVehiculo: $("#idTipoVehiculo").val()
+    };
+    /*Invocación del método*/
+    ///Este método puede ser reciclado AVERIGUAR COMO
+    $.ajax({
+        ///Dirección del método
+        url: url,
+        dataType: 'json', ///Formato en el que se envían y reciben los datos
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(parametros), ///Parámetros convertidos en formato JSON
+        ///Función que se ejecuta cuando ela respuesta fue satisfactoria
+        ///data: contiene el valor retornado por el método del servidor
+        success: function (data, textStatus, jQxhr) {
+            procesarResultadoMetodoInsertar(data);
+        },
+        ///Función que se ejecuta cuando la respuesta tuvo errores
+        error: function (jQxhr, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });
+}
+
+function procesarResultadoMetodoInsertar(data) {
+    ///Es .resultado porque la función devuelve
+    ///un objeto JSON que posee una propiedad
+    ///llamada resultado 
+    var resultadoFuncion = data.resultado; /*.resultado es la propiedad del objeto que retorno el controlador*/
+    alert("Información: " + resultadoFuncion);
+}

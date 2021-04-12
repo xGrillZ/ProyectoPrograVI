@@ -216,7 +216,7 @@
     <Compile Include="Models\pa_RetornaServiciosCliente_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\pa_RetornaServiciosVehiculosConsutorID_Result.cs">
+    <Compile Include="Models\pa_RetornaServiciosVehiculosConsutorID1_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaServiciosVehiculo_Result.cs">
@@ -243,7 +243,7 @@
     <Compile Include="Models\pa_RetornaTipoVehiculoxMarca_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\pa_RetornaVehiculosClienteIdConsutorID_Result.cs">
+    <Compile Include="Models\pa_RetornaVehiculosClienteIdConsutorID1_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaVehiculosClienteID_Result.cs">

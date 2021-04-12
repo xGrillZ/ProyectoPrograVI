@@ -499,7 +499,7 @@
           <Parameter Name="idVehiculos" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_EliminaVehiculosCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="placa" Type="nvarchar" Mode="In" />
+          <Parameter Name="idVehiculosCliente" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_InsertaCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nomCliente" Type="nvarchar" Mode="In" />
@@ -1475,9 +1475,6 @@
           <FunctionImport Name="pa_RetornaVehiculosList" ReturnType="Collection(sistvehiculoviModel.pa_RetornaVehiculosList_Result)">
           <Parameter Name="placa" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="pa_EliminaVehiculosCliente">
-          <Parameter Name="placa" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="pa_RetornaEstadoFactura" ReturnType="Collection(sistvehiculoviModel.pa_RetornaEstadoFactura_Result)">
           <Parameter Name="nomEstado" Mode="In" Type="String" />
           </FunctionImport>
@@ -1622,10 +1619,13 @@
           <Parameter Name="idCliente" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_RetornaServiciosVehiculosConsutorID1" ReturnType="Collection(sistvehiculoviModel.pa_RetornaServiciosVehiculosConsutorID1_Result)">
-            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+          <Parameter Name="idCliente" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_RetornaVehiculosClienteIdConsutorID1" ReturnType="Collection(sistvehiculoviModel.pa_RetornaVehiculosClienteIdConsutorID1_Result)">
-            <Parameter Name="idCliente" Mode="In" Type="Int32" />
+          <Parameter Name="idCliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_EliminaVehiculosCliente">
+            <Parameter Name="idVehiculosCliente" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -2929,7 +2929,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="pa_EliminaVehiculosCliente" FunctionName="sistvehiculoviModel.Store.pa_EliminaVehiculosCliente" />
           <FunctionImportMapping FunctionImportName="pa_RetornaEstadoFactura" FunctionName="sistvehiculoviModel.Store.pa_RetornaEstadoFactura">
             <ResultMapping>
               <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaEstadoFactura_Result">
@@ -3150,6 +3149,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_EliminaVehiculosCliente" FunctionName="sistvehiculoviModel.Store.pa_EliminaVehiculosCliente" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
