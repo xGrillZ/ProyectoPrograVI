@@ -649,13 +649,13 @@ namespace SistVehiculo.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaVehiculosCliente_Result>("pa_RetornaVehiculosCliente", placaParameter, nombreClienteParameter, marcaParameter, numCedulaParameter);
         }
     
-        public virtual ObjectResult<pa_RetornaVehiculosClienteID_Result> pa_RetornaVehiculosClienteID(Nullable<int> idVehiculosCliente)
+        public virtual int pa_RetornaVehiculosClienteID(Nullable<int> idVehiculosCliente)
         {
             var idVehiculosClienteParameter = idVehiculosCliente.HasValue ?
                 new ObjectParameter("idVehiculosCliente", idVehiculosCliente) :
                 new ObjectParameter("idVehiculosCliente", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaVehiculosClienteID_Result>("pa_RetornaVehiculosClienteID", idVehiculosClienteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_RetornaVehiculosClienteID", idVehiculosClienteParameter);
         }
     
         public virtual ObjectResult<pa_RetornaServiciosCliente_Result> pa_RetornaServiciosCliente(string tipo, string nombreCliente, string numCedula)
@@ -1075,24 +1075,6 @@ namespace SistVehiculo.Models
                 new ObjectParameter("idCliente", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaServiciosClienteConsultorID_Result>("pa_RetornaServiciosClienteConsultorID", idClienteParameter);
-        }
-    
-        public virtual ObjectResult<pa_RetornaServiciosVehiculosConsutorID_Result> pa_RetornaServiciosVehiculosConsutorID(Nullable<int> idCliente)
-        {
-            var idClienteParameter = idCliente.HasValue ?
-                new ObjectParameter("idCliente", idCliente) :
-                new ObjectParameter("idCliente", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaServiciosVehiculosConsutorID_Result>("pa_RetornaServiciosVehiculosConsutorID", idClienteParameter);
-        }
-    
-        public virtual ObjectResult<pa_RetornaVehiculosClienteIdConsutorID_Result> pa_RetornaVehiculosClienteIdConsutorID(Nullable<int> idCliente)
-        {
-            var idClienteParameter = idCliente.HasValue ?
-                new ObjectParameter("idCliente", idCliente) :
-                new ObjectParameter("idCliente", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaVehiculosClienteIdConsutorID_Result>("pa_RetornaVehiculosClienteIdConsutorID", idClienteParameter);
         }
     }
 }
