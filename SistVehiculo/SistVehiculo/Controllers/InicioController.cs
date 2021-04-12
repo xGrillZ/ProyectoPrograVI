@@ -13,7 +13,7 @@ namespace SistVehiculo.Controllers
     public class InicioController : Controller
     {
         /// <summary>
-        /// Instancia del modelo de base de datos
+        /// Instancia del modelo de base de datos PRUEBA
         /// </summary>
         sistvehiculoviEntities modeloBD = new sistvehiculoviEntities();
 
