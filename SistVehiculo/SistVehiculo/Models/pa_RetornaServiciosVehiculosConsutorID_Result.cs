@@ -11,7 +11,7 @@ namespace SistVehiculo.Models
 {
     using System;
     
-    public partial class pa_RetornaVehiculosClienteIdConsutorID1_Result
+    public partial class pa_RetornaServiciosVehiculosConsutorID_Result
     {
         public int idServiciosVehiculo { get; set; }
         public int idTipoServiciosProducto { get; set; }
