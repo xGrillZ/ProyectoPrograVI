@@ -11,9 +11,9 @@ namespace SistVehiculo.Models
 {
     using System;
     
-    public partial class pa_RetornaServiciosVehiculosConsutorID_Result
+    public partial class pa_RetornaServiciosVehiculosConsutorID1_Result
     {
-        public int idServiciosCliente { get; set; }
+        public int idServiciosVehiculo { get; set; }
         public int idTipoServiciosProducto { get; set; }
         public string codigoServicioProducto { get; set; }
         public string descripcion { get; set; }
@@ -26,5 +26,8 @@ namespace SistVehiculo.Models
         public string numCedula { get; set; }
         public string email { get; set; }
         public string pTelefono { get; set; }
+        public string placa { get; set; }
+        public string tipo1 { get; set; }
+        public string marca { get; set; }
     }
 }
