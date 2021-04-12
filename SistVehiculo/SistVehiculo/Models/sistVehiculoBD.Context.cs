@@ -779,13 +779,13 @@ namespace SistVehiculo.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaVehiculosList_Result>("pa_RetornaVehiculosList", placaParameter);
         }
     
-        public virtual int pa_EliminaVehiculosCliente(Nullable<int> idVehiculosCliente)
+        public virtual int pa_EliminaVehiculosCliente(string placa)
         {
-            var idVehiculosClienteParameter = idVehiculosCliente.HasValue ?
-                new ObjectParameter("idVehiculosCliente", idVehiculosCliente) :
-                new ObjectParameter("idVehiculosCliente", typeof(int));
+            var placaParameter = placa != null ?
+                new ObjectParameter("placa", placa) :
+                new ObjectParameter("placa", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_EliminaVehiculosCliente", idVehiculosClienteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_EliminaVehiculosCliente", placaParameter);
         }
     
         public virtual ObjectResult<pa_RetornaEstadoFactura_Result> pa_RetornaEstadoFactura(string nomEstado)
@@ -1077,22 +1077,40 @@ namespace SistVehiculo.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaServiciosClienteConsultorID_Result>("pa_RetornaServiciosClienteConsultorID", idClienteParameter);
         }
     
-        public virtual ObjectResult<pa_RetornaServiciosVehiculosConsutorID_Result> pa_RetornaServiciosVehiculosConsutorID(Nullable<int> idCliente)
+        public virtual int pa_RetornaServiciosVehiculosConsutorID(Nullable<int> idCliente)
         {
             var idClienteParameter = idCliente.HasValue ?
                 new ObjectParameter("idCliente", idCliente) :
                 new ObjectParameter("idCliente", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaServiciosVehiculosConsutorID_Result>("pa_RetornaServiciosVehiculosConsutorID", idClienteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_RetornaServiciosVehiculosConsutorID", idClienteParameter);
         }
     
-        public virtual ObjectResult<pa_RetornaVehiculosClienteIdConsutorID_Result> pa_RetornaVehiculosClienteIdConsutorID(Nullable<int> idCliente)
+        public virtual int pa_RetornaVehiculosClienteIdConsutorID(Nullable<int> idCliente)
         {
             var idClienteParameter = idCliente.HasValue ?
                 new ObjectParameter("idCliente", idCliente) :
                 new ObjectParameter("idCliente", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaVehiculosClienteIdConsutorID_Result>("pa_RetornaVehiculosClienteIdConsutorID", idClienteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_RetornaVehiculosClienteIdConsutorID", idClienteParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaServiciosVehiculosConsutorID1_Result> pa_RetornaServiciosVehiculosConsutorID1(Nullable<int> idCliente)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("idCliente", idCliente) :
+                new ObjectParameter("idCliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaServiciosVehiculosConsutorID1_Result>("pa_RetornaServiciosVehiculosConsutorID1", idClienteParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaVehiculosClienteIdConsutorID1_Result> pa_RetornaVehiculosClienteIdConsutorID1(Nullable<int> idCliente)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("idCliente", idCliente) :
+                new ObjectParameter("idCliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaVehiculosClienteIdConsutorID1_Result>("pa_RetornaVehiculosClienteIdConsutorID1", idClienteParameter);
         }
     }
 }
