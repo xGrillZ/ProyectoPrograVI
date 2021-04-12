@@ -710,6 +710,9 @@
           <Parameter Name="marca" Type="nvarchar" Mode="In" />
           <Parameter Name="tipoVehiculo" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="pa_RetornaServiciosVehiculosConsutorID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCliente" Type="int" Mode="In" />
+        </Function>
         <Function Name="pa_RetornaTipoCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nombre" Type="varchar" Mode="In" />
         </Function>
@@ -749,6 +752,9 @@
         </Function>
         <Function Name="pa_RetornaVehiculosClienteID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idVehiculosCliente" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_RetornaVehiculosClienteIdConsutorID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idCliente" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_RetornaVehiculosID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idVehiculos" Type="int" Mode="In" />
@@ -1607,6 +1613,12 @@
             <Parameter Name="idTipoVehiculo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_RetornaServiciosClienteConsultorID" ReturnType="Collection(sistvehiculoviModel.pa_RetornaServiciosClienteConsultorID_Result)">
+          <Parameter Name="idCliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_RetornaServiciosVehiculosConsutorID" ReturnType="Collection(sistvehiculoviModel.pa_RetornaServiciosVehiculosConsutorID_Result)">
+          <Parameter Name="idCliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_RetornaVehiculosClienteIdConsutorID" ReturnType="Collection(sistvehiculoviModel.pa_RetornaVehiculosClienteIdConsutorID_Result)">
             <Parameter Name="idCliente" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -2252,6 +2264,36 @@
           </ReferentialConstraint>
         </Association>
         <ComplexType Name="pa_RetornaServiciosClienteConsultorID_Result">
+          <Property Type="Int32" Name="idServiciosCliente" Nullable="false" />
+          <Property Type="Int32" Name="idTipoServiciosProducto" Nullable="false" />
+          <Property Type="String" Name="codigoServicioProducto" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="precio" Nullable="false" />
+          <Property Type="Int32" Name="tipo" Nullable="false" />
+          <Property Type="String" Name="nombreClasificacion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="numCedula" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaServiciosVehiculosConsutorID_Result">
+          <Property Type="Int32" Name="idServiciosCliente" Nullable="false" />
+          <Property Type="Int32" Name="idTipoServiciosProducto" Nullable="false" />
+          <Property Type="String" Name="codigoServicioProducto" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="descripcion" Nullable="false" MaxLength="50" />
+          <Property Type="Double" Name="precio" Nullable="false" />
+          <Property Type="Int32" Name="tipo" Nullable="false" />
+          <Property Type="String" Name="nombreClasificacion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="numCedula" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="pTelefono" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaVehiculosClienteIdConsutorID_Result">
           <Property Type="Int32" Name="idServiciosCliente" Nullable="false" />
           <Property Type="Int32" Name="idTipoServiciosProducto" Nullable="false" />
           <Property Type="String" Name="codigoServicioProducto" Nullable="false" MaxLength="50" />
@@ -3036,6 +3078,44 @@
           <FunctionImportMapping FunctionImportName="pa_RetornaServiciosClienteConsultorID" FunctionName="sistvehiculoviModel.Store.pa_RetornaServiciosClienteConsultorID">
             <ResultMapping>
               <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaServiciosClienteConsultorID_Result">
+                <ScalarProperty Name="idServiciosCliente" ColumnName="idServiciosCliente" />
+                <ScalarProperty Name="idTipoServiciosProducto" ColumnName="idTipoServiciosProducto" />
+                <ScalarProperty Name="codigoServicioProducto" ColumnName="codigoServicioProducto" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="nombreClasificacion" ColumnName="nombreClasificacion" />
+                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
+                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
+                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
+                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_RetornaServiciosVehiculosConsutorID" FunctionName="sistvehiculoviModel.Store.pa_RetornaServiciosVehiculosConsutorID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaServiciosVehiculosConsutorID_Result">
+                <ScalarProperty Name="idServiciosCliente" ColumnName="idServiciosCliente" />
+                <ScalarProperty Name="idTipoServiciosProducto" ColumnName="idTipoServiciosProducto" />
+                <ScalarProperty Name="codigoServicioProducto" ColumnName="codigoServicioProducto" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="nombreClasificacion" ColumnName="nombreClasificacion" />
+                <ScalarProperty Name="nomCliente" ColumnName="nomCliente" />
+                <ScalarProperty Name="ape1Cliente" ColumnName="ape1Cliente" />
+                <ScalarProperty Name="ape2Cliente" ColumnName="ape2Cliente" />
+                <ScalarProperty Name="numCedula" ColumnName="numCedula" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="pTelefono" ColumnName="pTelefono" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_RetornaVehiculosClienteIdConsutorID" FunctionName="sistvehiculoviModel.Store.pa_RetornaVehiculosClienteIdConsutorID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaVehiculosClienteIdConsutorID_Result">
                 <ScalarProperty Name="idServiciosCliente" ColumnName="idServiciosCliente" />
                 <ScalarProperty Name="idTipoServiciosProducto" ColumnName="idTipoServiciosProducto" />
                 <ScalarProperty Name="codigoServicioProducto" ColumnName="codigoServicioProducto" />

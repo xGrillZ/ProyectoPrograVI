@@ -269,10 +269,9 @@ namespace SistVehiculo.Controllers
         public ActionResult RetornaVehiculosClienteConsutorLista()
         {
             int dataUser = int.Parse(Session["idusuario"].ToString());
-
             
-            List<pa_RetornaVehiculosCliente_Result> vehiculoCliente =
-                this.modeloBD.pa_RetornaVehiculosCliente("", "", "", "").ToList();
+            List<pa_RetornaVehiculosClienteIdConsutorID_Result> vehiculoCliente =
+                this.modeloBD.pa_RetornaVehiculosClienteIdConsutorID(dataUser).ToList();
             return Json(new { resultado = vehiculoCliente });
           
         }

@@ -1076,5 +1076,23 @@ namespace SistVehiculo.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaServiciosClienteConsultorID_Result>("pa_RetornaServiciosClienteConsultorID", idClienteParameter);
         }
+    
+        public virtual ObjectResult<pa_RetornaServiciosVehiculosConsutorID_Result> pa_RetornaServiciosVehiculosConsutorID(Nullable<int> idCliente)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("idCliente", idCliente) :
+                new ObjectParameter("idCliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaServiciosVehiculosConsutorID_Result>("pa_RetornaServiciosVehiculosConsutorID", idClienteParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaVehiculosClienteIdConsutorID_Result> pa_RetornaVehiculosClienteIdConsutorID(Nullable<int> idCliente)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("idCliente", idCliente) :
+                new ObjectParameter("idCliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaVehiculosClienteIdConsutorID_Result>("pa_RetornaVehiculosClienteIdConsutorID", idClienteParameter);
+        }
     }
 }

@@ -265,8 +265,8 @@ namespace SistVehiculo.Controllers
         {
             int dataUser = int.Parse(Session["idusuario"].ToString());
 
-            List<pa_RetornaServiciosVehiculo_Result> serviciosVehiculo =
-                 this.modeloBD.pa_RetornaServiciosVehiculo("", "", "").ToList();
+            List<pa_RetornaServiciosVehiculosConsutorID_Result > serviciosVehiculo =
+                 this.modeloBD.pa_RetornaServiciosVehiculosConsutorID(dataUser).ToList();
             return Json(new { resultado = serviciosVehiculo });
 
           
