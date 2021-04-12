@@ -358,6 +358,8 @@ namespace SistVehiculo.Controllers
                 }
             }
 
+            Response.Write("<script language=javascript>alert('" + resultado + "');</script>");
+
             this.AgregaGeneroViewBag();
             this.AgregaTipoClienteViewBag();
             ///Enviar el modelo a la vista
