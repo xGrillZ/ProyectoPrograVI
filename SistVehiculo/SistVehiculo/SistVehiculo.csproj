@@ -344,6 +344,8 @@
     <Content Include="Content\mantVehiculos\mantVehiculos.css" />
     <Content Include="Content\Principal.css" />
     <Content Include="Content\Principal\pagPrincipal.css" />
+    <Content Include="Content\viva-saprissa-cancion-del-deportivo-saprissa.mp3" />
+    <Content Include="Content\y2mate.com - Yokasta Valle Soluciones  Universidad Castro Carazo 2020_480p.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
