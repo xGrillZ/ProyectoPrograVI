@@ -30,9 +30,25 @@ function creaGridKendo(data) {
             ///Cada columna se agrega por llaves
             {
                 ///Propiedad de la fuenta de datos a mostrar
-                field: "nomCliente",
+                field: "placa",
                 ///Texto del encabezado
-                title: "Nombre del Cliente"
+                title: "Placa"
+            },
+            {
+                field: "tipo",
+                title: "Tipo de Vehículo"
+            },
+            {
+                field: "marca",
+                title: "Marca"
+            },
+            {
+                field: "idCliente",
+                title: "ID Cliente",
+            },
+            {
+                field: "nomCliente",
+                title: "Nombre Cliente"
             },
             {
                 field: "ape1Cliente",
@@ -41,31 +57,7 @@ function creaGridKendo(data) {
             {
                 field: "ape2Cliente",
                 title: "Segundo Apellido"
-            },
-            {
-                field: "email",
-                title: "Correo Electrónico",
-            },
-            {
-                field: "pTelefono",
-                title: "Teléfono"
-            },
-            {
-                field: "codigoServicioProducto",
-                title: "Código Servicio"
-            },
-            {
-                field: "descripcion",
-                title: "Descripción"
-            },
-            {
-                field: "precio",
-                title: "Precio"
-            },
-            {
-                field: "nombreClasificacion",
-                title: "Tipo Servicio"
-            }
+            }            
         ],
         filterable: true, ///Permite al usurio filtrar la información
         toolbar: ["excel", "pdf"], ///Permite exporar la información

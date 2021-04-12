@@ -28,35 +28,24 @@ function creaGridKendo(data) {
         pageable: true, ///Permite crear un menu de páginas
         columns: [ ///Se muestra el nombre de las columnas por un array
             ///Cada columna se agrega por llaves
+
             {
                 ///Propiedad de la fuenta de datos a mostrar
-                field: "nomCliente",
-                ///Texto del encabezado
-                title: "Nombre del Cliente"
-            },
-            {
-                field: "ape1Cliente",
-                title: "Primer Apellido"
-            },
-            {
-                field: "ape2Cliente",
-                title: "Segundo Apellido"
-            },
-            {
-                field: "email",
-                title: "Correo Electrónico",
-            },
-            {
-                field: "pTelefono",
-                title: "Teléfono"
-            },
-            {
-                field: "codigoServicioProducto",
-                title: "Código Servicio"
-            },
-            {
                 field: "descripcion",
-                title: "Descripción"
+                ///Texto del encabezado
+                title: "Descripcion del Servicio"
+            },
+            {
+                field: "placa",
+                title: "Placa"
+            },
+            {
+                field: "tipoDeVehiculo",
+                title: "Tipo de Vehículo"
+            },
+            {
+                field: "marca",
+                title: "Marca",
             },
             {
                 field: "precio",
@@ -64,7 +53,7 @@ function creaGridKendo(data) {
             },
             {
                 field: "nombreClasificacion",
-                title: "Tipo Servicio"
+                title: "Nombre Clasifición"
             }
         ],
         filterable: true, ///Permite al usurio filtrar la información

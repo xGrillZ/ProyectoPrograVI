@@ -255,9 +255,7 @@ namespace SistVehiculo.Controllers
                 this.modeloBD.pa_RetornaServiciosCliente("", "", "").ToList();
 
             return Json(new { resultado = serviciosCliente });
-        }
-
-        
+        }       
 
        
 
@@ -272,10 +270,11 @@ namespace SistVehiculo.Controllers
         {
             int dataUser = int.Parse(Session["idusuario"].ToString());
 
-            List<pa_RetornaServiciosClienteConsultorID_Result> serviciosCliente =
-                this.modeloBD.pa_RetornaServiciosClienteConsultorID(dataUser).ToList();
-
-            return Json(new { resultado = serviciosCliente });
+            
+            List<pa_RetornaVehiculosCliente_Result> vehiculoCliente =
+                this.modeloBD.pa_RetornaVehiculosCliente("", "", "", "").ToList();
+            return Json(new { resultado = vehiculoCliente });
+          
         }
 
 
