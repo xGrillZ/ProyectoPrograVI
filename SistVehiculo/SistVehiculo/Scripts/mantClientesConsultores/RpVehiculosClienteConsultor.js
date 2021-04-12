@@ -35,16 +35,12 @@ function creaGridKendo(data) {
                 title: "Placa"
             },
             {
-                field: "tipo",
+                field: "tipodeVehiculo",
                 title: "Tipo de Vehículo"
             },
             {
                 field: "marca",
                 title: "Marca"
-            },
-            {
-                field: "idCliente",
-                title: "ID Cliente",
             },
             {
                 field: "nomCliente",
