@@ -783,15 +783,6 @@ namespace SistVehiculo.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaEncabezadoFactura_Result>("pa_RetornaEncabezadoFactura", num_facturaParameter, estadoParameter);
         }
     
-        public virtual ObjectResult<pa_RetornaEncabezadoFacturaID_Result> pa_RetornaEncabezadoFacturaID(Nullable<int> id_Factura)
-        {
-            var id_FacturaParameter = id_Factura.HasValue ?
-                new ObjectParameter("id_Factura", id_Factura) :
-                new ObjectParameter("id_Factura", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaEncabezadoFacturaID_Result>("pa_RetornaEncabezadoFacturaID", id_FacturaParameter);
-        }
-    
         public virtual int pa_ModificaEstadoOffEncabezadoFactura(Nullable<int> id_factura)
         {
             var id_facturaParameter = id_factura.HasValue ?
@@ -808,27 +799,6 @@ namespace SistVehiculo.Models
                 new ObjectParameter("id_factura", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ModificaEstadoOnEncabezadoFactura", id_facturaParameter);
-        }
-    
-        public virtual int pa_InsertaDetalleFactura(string num_factura, Nullable<int> tipoServicioProducto, Nullable<int> cantidadServicioProducto, Nullable<double> precio)
-        {
-            var num_facturaParameter = num_factura != null ?
-                new ObjectParameter("num_factura", num_factura) :
-                new ObjectParameter("num_factura", typeof(string));
-    
-            var tipoServicioProductoParameter = tipoServicioProducto.HasValue ?
-                new ObjectParameter("tipoServicioProducto", tipoServicioProducto) :
-                new ObjectParameter("tipoServicioProducto", typeof(int));
-    
-            var cantidadServicioProductoParameter = cantidadServicioProducto.HasValue ?
-                new ObjectParameter("cantidadServicioProducto", cantidadServicioProducto) :
-                new ObjectParameter("cantidadServicioProducto", typeof(int));
-    
-            var precioParameter = precio.HasValue ?
-                new ObjectParameter("precio", precio) :
-                new ObjectParameter("precio", typeof(double));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_InsertaDetalleFactura", num_facturaParameter, tipoServicioProductoParameter, cantidadServicioProductoParameter, precioParameter);
         }
     
         public virtual int pa_ModificaMontoEncabezadoFactura(Nullable<int> id_factura, Nullable<double> montoTotal)
@@ -1030,15 +1000,6 @@ namespace SistVehiculo.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaServiciosVehiculosConsutorID_Result>("pa_RetornaServiciosVehiculosConsutorID", idClienteParameter);
         }
     
-        public virtual ObjectResult<pa_RetornaVehiculosClienteIdConsutorID_Result> pa_RetornaVehiculosClienteIdConsutorID(Nullable<int> idCliente)
-        {
-            var idClienteParameter = idCliente.HasValue ?
-                new ObjectParameter("idCliente", idCliente) :
-                new ObjectParameter("idCliente", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaVehiculosClienteIdConsutorID_Result>("pa_RetornaVehiculosClienteIdConsutorID", idClienteParameter);
-        }
-    
         public virtual ObjectResult<pa_RetornaMarcaVehiculoxPlaca_Result> pa_RetornaMarcaVehiculoxPlaca(Nullable<int> idCliente)
         {
             var idClienteParameter = idCliente.HasValue ?
@@ -1097,6 +1058,54 @@ namespace SistVehiculo.Models
                 new ObjectParameter("idTipoVehiculo", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_InsertaEncabezadoFactura", num_facturaParameter, fechaParameter, montoTotalParameter, estadoParameter, idClienteParameter, idVehiculoParameter, idTipoVehiculoParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaEncabezadoFacturaID_Result> pa_RetornaEncabezadoFacturaID(Nullable<int> id_Factura)
+        {
+            var id_FacturaParameter = id_Factura.HasValue ?
+                new ObjectParameter("id_Factura", id_Factura) :
+                new ObjectParameter("id_Factura", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaEncabezadoFacturaID_Result>("pa_RetornaEncabezadoFacturaID", id_FacturaParameter);
+        }
+    
+        public virtual int pa_EliminaEncabezadoFactura(Nullable<int> idFactura)
+        {
+            var idFacturaParameter = idFactura.HasValue ?
+                new ObjectParameter("idFactura", idFactura) :
+                new ObjectParameter("idFactura", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_EliminaEncabezadoFactura", idFacturaParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaVehiculosClienteIdConsutorID_Result> pa_RetornaVehiculosClienteIdConsutorID(Nullable<int> idCliente)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("idCliente", idCliente) :
+                new ObjectParameter("idCliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaVehiculosClienteIdConsutorID_Result>("pa_RetornaVehiculosClienteIdConsutorID", idClienteParameter);
+        }
+    
+        public virtual int pa_InsertaDetalleFactura(Nullable<int> num_factura, Nullable<int> tipoServicioProducto, Nullable<int> cantidadServicioProducto, Nullable<double> precio)
+        {
+            var num_facturaParameter = num_factura.HasValue ?
+                new ObjectParameter("num_factura", num_factura) :
+                new ObjectParameter("num_factura", typeof(int));
+    
+            var tipoServicioProductoParameter = tipoServicioProducto.HasValue ?
+                new ObjectParameter("tipoServicioProducto", tipoServicioProducto) :
+                new ObjectParameter("tipoServicioProducto", typeof(int));
+    
+            var cantidadServicioProductoParameter = cantidadServicioProducto.HasValue ?
+                new ObjectParameter("cantidadServicioProducto", cantidadServicioProducto) :
+                new ObjectParameter("cantidadServicioProducto", typeof(int));
+    
+            var precioParameter = precio.HasValue ?
+                new ObjectParameter("precio", precio) :
+                new ObjectParameter("precio", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_InsertaDetalleFactura", num_facturaParameter, tipoServicioProductoParameter, cantidadServicioProductoParameter, precioParameter);
         }
     }
 }

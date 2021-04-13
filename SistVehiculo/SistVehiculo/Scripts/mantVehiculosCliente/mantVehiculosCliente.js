@@ -185,7 +185,7 @@ function cargaDropdownListTipoVehiculo(pIdVehiculo){
 
 function procesarResultadoTipoVehiculo(data) {
     ///Mediante un selector nos posicionamos sobre la lista de provincias
-    var ddlTipoVehiculo = $("#tipoVehiculo");
+    var ddlTipoVehiculo = $("#idTipoVehiculo");
     ///Limpiamos todas las opcionesd e la lista de provincias
     ddlTipoVehiculo.empty();
 

@@ -13,21 +13,21 @@ namespace SistVehiculo.Models
     
     public partial class pa_RetornaVehiculosClienteIdConsutorID_Result
     {
-        public int idServiciosVehiculo { get; set; }
-        public int idTipoServiciosProducto { get; set; }
-        public string codigoServicioProducto { get; set; }
-        public string descripcion { get; set; }
-        public double precio { get; set; }
-        public int tipo { get; set; }
-        public string nombreClasificacion { get; set; }
+        public int idCliente { get; set; }
+        public int idTiposVehiculo { get; set; }
+        public int idVehiculo { get; set; }
+        public int idVehiculosCliente { get; set; }
+        public int numeroPuerta { get; set; }
+        public int numeroRueda { get; set; }
+        public string placa { get; set; }
+        public int tipoVehiculo { get; set; }
+        public int idTipoVehiculo { get; set; }
+        public string codigo { get; set; }
+        public string tipo { get; set; }
+        public int idMarcaVehiculo { get; set; }
+        public string marca { get; set; }
         public string nomCliente { get; set; }
         public string ape1Cliente { get; set; }
         public string ape2Cliente { get; set; }
-        public string numCedula { get; set; }
-        public string email { get; set; }
-        public string pTelefono { get; set; }
-        public string placa { get; set; }
-        public string tipodeVehiculo { get; set; }
-        public string marca { get; set; }
     }
 }

@@ -334,7 +334,7 @@ function test1() {
 function recorridoJsonDetalleFacturaGlobal(objetoJson) {
 	var jsonobject = objetoJson;
 
-	var numFactura = $("#numFactura").val();
+	var numFactura = $("#hdIdFactura").val();
 
 	for (var i = 0; i < jsonobject.length; i++) {
 		var TipoServicio = jsonobject[i].Servicio;
@@ -382,12 +382,12 @@ function recorridoJsonDetalleFacturaVehiculo(objetoJson) {
 
 function invocarMetodoInsertaDetalleFactura(pNumFactura, pTipoServicio, pCantidad, pPrecio) {
 	/*Dirección a donde se enviarán los datos */
-	var url = '/MantFacturas/InsertaDetalleFactura';
+	var url = '/MantFacturas/InsertaDetalleFacturas';
 	/*Parámetros del método*/
 	var parametros = {
-		NumFactura: pNumFactura,
-		TipoServicio: pTipoServicio,
-		Cantidad: pCantidad,
+		num_factura: pNumFactura,
+		idTipoServicioProducto: pTipoServicio,
+		cantidadServicioProducto: pCantidad,
 		Precio: pPrecio
 	};
 	/*Invocación del método*/

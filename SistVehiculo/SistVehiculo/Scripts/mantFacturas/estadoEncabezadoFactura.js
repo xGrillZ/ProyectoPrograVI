@@ -39,6 +39,8 @@ function validacionEstadoEncabezado() {
     var fechaEncabezado = $("#fecha").val();
     var fechaEditEncabezado = new Date(fechaEncabezado);
 
+    var estado = $("#hdEstado").val();
+
     var fechaActual = new Date();
 
     var tiempo = fechaActual.getTime() - fechaEditEncabezado.getTime();
@@ -73,7 +75,42 @@ function validacionEstadoEncabezado() {
         var botonDetalle = $("#btnDetalle");
         botonDetalle.attr("disabled", "disabled");
 
-    } else {
+        var botonElimina = $("#btnEliminar");
+        botonElimina.attr("disabled", "disabled");
+
+    } else if (estado == 1) {
+        invocarMetodoInhabilitarEncabezadoFactura();
+
+        /*alert("Encabezado Vencido");*/
+
+        var ddlCliente = $("#numFactura");
+        ddlCliente.attr("readonly", "readonly");
+
+        var ddlCliente = $("#nomCliente");
+        ddlCliente.attr("readonly", "readonly");
+
+        var ddlPlacaVehiculo = $("#placaVehiculo");
+        ddlPlacaVehiculo.attr("readonly", "readonly");
+
+        var ddlMarcaVehiculo = $("#marcaVehiculo");
+        ddlMarcaVehiculo.attr("readonly", "readonly");
+
+        var ddlTipoVehiculo = $("#tipoVehiculo");
+        ddlTipoVehiculo.attr("readonly", "readonly");
+
+        var ddlEstado = $("#estado");
+        ddlEstado.attr("readonly", "readonly");
+
+        var botonModificar = $("#btnModificar");
+        botonModificar.attr("disabled", "disabled");
+
+        var botonDetalle = $("#btnDetalle");
+        botonDetalle.attr("disabled", "disabled");
+
+        var botonElimina = $("#btnEliminar");
+        botonElimina.attr("disabled", "disabled");
+    }
+    else {
         alert("Encabezado No Vencido");
     }
 

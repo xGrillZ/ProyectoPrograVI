@@ -32,6 +32,19 @@
     align-items: center;
 }
 
+.btnEliminar {
+    margin: 0px 0px 10px 0px;
+}
+
+#frmEliminarEncabezadoFactura {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #frmAgregaDetalleFactura {
     width: 100%;
     margin: 0 auto;

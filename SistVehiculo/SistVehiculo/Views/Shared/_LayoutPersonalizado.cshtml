@@ -94,10 +94,11 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li class="dropdown-item"> @Html.ActionLink("Modificar datos", "ModificarClientesConsultor", "MantClientes", new { @idCliente = Session["idusuario"] }, null)</li>
-                           
+
                         </ul>
                     </li>
                 </ul>
+                <li class="logout">@Html.ActionLink("Cerrar Sesión", "Logout", "Sesion")</li>
             </div>
         </nav>
     </div>

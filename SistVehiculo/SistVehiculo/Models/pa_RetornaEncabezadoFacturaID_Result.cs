@@ -14,6 +14,7 @@ namespace SistVehiculo.Models
     public partial class pa_RetornaEncabezadoFacturaID_Result
     {
         public int id_factura { get; set; }
+        public int idTipoVehiculo { get; set; }
         public string num_factura { get; set; }
         public System.DateTime fecha { get; set; }
         public double montoTotal { get; set; }

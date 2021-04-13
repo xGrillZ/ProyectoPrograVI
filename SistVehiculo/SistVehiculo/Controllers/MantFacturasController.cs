@@ -106,7 +106,7 @@ namespace SistVehiculo.Controllers
         }
 
         [HttpPost]
-        public ActionResult InsertaEncabezadoFactura(string Num_factura, DateTime Fecha, float MontoTotal, int Estado, int IdCliente, int IdVehiculo, int IdTipoVehiculo)
+        public ActionResult InsertaEncabezadoFacturas(string Num_factura, DateTime Fecha, float MontoTotal, int Estado, int IdCliente, int IdVehiculo, int IdTipoVehiculo)
         {
             string mensaje = "";
             int cantRegistrosAfectados = 0;
@@ -160,26 +160,33 @@ namespace SistVehiculo.Controllers
             string mensaje = "";
             int cantRegistrosAfectados = 0;
 
-            try
+            if (this.verificaNumFactura(Num_factura, Id_factura.ToString()))
             {
-                cantRegistrosAfectados = this.modeloBD.pa_ModificaEncabezadoFactura(Id_factura, Num_factura, Fecha, MontoTotal, Estado, IdCliente, IdVehiculo , idTipoVehiculo);
-            }
-            catch (Exception error)
-            {
-                mensaje = "Ocurrió un error: " + error.Message;
+                try
+                {
+                    cantRegistrosAfectados = this.modeloBD.pa_ModificaEncabezadoFactura(Id_factura, Num_factura, Fecha, MontoTotal, Estado, IdCliente, IdVehiculo, idTipoVehiculo);
+                }
+                catch (Exception error)
+                {
+                    mensaje = "Ocurrió un error: " + error.Message;
 
+                }
+                /*Se ejecuta cuando haya o no haya un error, siempre se ejecutará*/
+                finally
+                {
+                    if (cantRegistrosAfectados > 0)
+                    {
+                        mensaje = "Encabezado de factura modificado";
+                    }
+                    else
+                    {
+                        mensaje += ".No se pudo modificar el encabezado de factura";
+                    }
+                }
             }
-            /*Se ejecuta cuando haya o no haya un error, siempre se ejecutará*/
-            finally
+            else
             {
-                if (cantRegistrosAfectados > 0)
-                {
-                    mensaje = "Encabezado de factura modificado";
-                }
-                else
-                {
-                    mensaje += ".No se pudo modificar el encabezado de factura";
-                }
+                mensaje = "Este número de factura ya existe, debes ingresar otra";
             }
 
             return Json(new { resultado = mensaje });
@@ -247,15 +254,59 @@ namespace SistVehiculo.Controllers
             return Json(new { resultado = mensaje });
         }
 
+        public ActionResult EliminarEncabezadoFactura(int id_Factura)
+        {
+            ///Obtener el registro que se desea modificar
+            ///utilizando el parámetro del método idFactura
+            pa_RetornaEncabezadoFacturaID_Result modeloVista = new pa_RetornaEncabezadoFacturaID_Result();
+            modeloVista = this.modeloBD.pa_RetornaEncabezadoFacturaID(id_Factura).FirstOrDefault();
+
+            ///Enviar el modelo a la vista
+            return View(modeloVista);
+        }
+
         [HttpPost]
-        public ActionResult InsertaDetalleFactura(string NumFactura, int TipoServicio, int Cantidad, float Precio)
+        public ActionResult EliminaFactura(int Id_factura)
         {
             string mensaje = "";
             int cantRegistrosAfectados = 0;
 
             try
             {
-                cantRegistrosAfectados = this.modeloBD.pa_InsertaDetalleFactura(NumFactura, TipoServicio, Cantidad, Precio);
+                cantRegistrosAfectados = this.modeloBD.pa_EliminaEncabezadoFactura(Id_factura);
+            }
+            catch (Exception error)
+            {
+                mensaje = "Ocurrió un error: " + error.Message;
+
+            }
+            /*Se ejecuta cuando haya o no haya un error, siempre se ejecutará*/
+            finally
+            {
+                if (cantRegistrosAfectados > 0)
+                {
+                    mensaje = "Encabezado de factura eliminado";
+                }
+                else
+                {
+                    mensaje += ".No se pudo eliminar el encabezado de factura";
+                }
+            }
+
+            return Json(new { resultado = mensaje });
+        }
+
+
+        [HttpPost]
+        public ActionResult InsertaDetalleFacturas(int num_factura, int idTipoServicioProducto, int cantidadServicioProducto, float Precio)
+        {
+
+            string mensaje = "";
+            int cantRegistrosAfectados = 0;
+
+            try
+            {
+                cantRegistrosAfectados = this.modeloBD.pa_InsertaDetalleFactura(num_factura, idTipoServicioProducto, cantidadServicioProducto, Precio);
             }
             catch (Exception error)
             {
@@ -267,7 +318,7 @@ namespace SistVehiculo.Controllers
             {
                 if (cantRegistrosAfectados > 0)
                 {
-                    mensaje = $"Detalle de factura ingresado";
+                    mensaje = "Detalle de factura ingresada";
                 }
                 else
                 {

@@ -104,7 +104,7 @@ function procesarResultadoClientes(data) {
 
     if (hiddenCliente != undefined) {
         ddlCliente.val(hiddenCliente);
-        cargaDropdownListPlacaVehiculo(hiddenCliente);
+        cargaDropdownListMarcaVehiculo(hiddenCliente);
     }
 }
 
@@ -160,7 +160,7 @@ function procesarResultadoMarcaVehiculo(data) {
 
     if (hiddenMarca != undefined) {
         ddlMarcaVehiculo.val(hiddenMarca);
-        cargaDropdownListTipoVehiculo(hiddenMarca);
+        cargaDropdownListPlacaVehiculo(hiddenMarca);
     }
 }
 
@@ -222,7 +222,7 @@ function procesarResultadoPlacaVehiculos(data) {
 
     if (hiddenPlaca != undefined) {
         ddlVehiculo.val(hiddenPlaca);
-        cargaDropdownListMarcaVehiculo(hiddenPlaca);
+        cargaDropdownListTipoVehiculo(hiddenPlaca);
     }
 }
 
@@ -268,13 +268,13 @@ function procesarResultadoTipoVehiculo(data) {
         ///cantonActual.nombre nos retorna el nombre del canton
         var tipoVehiculoActual = this;
         ///Creación de la nueva opción de la lista, con el valor ID de provincia y Nombre de la provincia
-        nuevaOpcion = "<option value='" + tipoVehiculoActual.tipoVehiculo + "'>" + tipoVehiculoActual.tipo + "</option>";
+        nuevaOpcion = "<option value='" + tipoVehiculoActual.idTipoVehiculo + "'>" + tipoVehiculoActual.tipo + "</option>";
         ///Agregamos la opción al dropdownlist
         ddlTipoVehiculo.append(nuevaOpcion);
     });
 
     ///Obtiene el valor del hidden
-    var hiddenTipoVehiculo = $("#hdMarca").val();
+    var hiddenTipoVehiculo = $("#hdTipoVehiculo").val();
 
     if (hiddenTipoVehiculo != undefined) {
         ddlTipoVehiculo.val(hiddenTipoVehiculo);
@@ -534,12 +534,25 @@ function creaEventoFormularioEncabezado() {
             invocarMetodoPostModificaEncabezadoFactura();
         }
     });
+
+    $("#btnEliminar").on("click", function () {
+        /*Asignar a la variable formulario
+          el resultado del selector*/
+        var formulario = $("#frmEliminarEncabezadoFactura");
+        /*Ejecutar el método de validación*/
+        formulario.validate();
+        /*Si el formulario es valido, proceder a
+         ejecutar la función invocarMetodoPost*/
+        if (formulario.valid()) {
+            invocarMetodoPostEliminaEncabezadoFactura();
+        }
+    });
 }
 
 ///se encarga de llamar al método del controlador y procesar el resultado
 function invocarMetodoPostEncabezadoFactura() {
     /*Dirección a donde se enviarán los datos */
-    var url = '/MantFacturas/InsertaEncabezadoFactura';
+    var url = '/MantFacturas/InsertaEncabezadoFacturas/';
     /*Parámetros del método*/
     var parametro = {
         Num_factura: $("#numFactura").val(),
@@ -616,6 +629,42 @@ function invocarMetodoPostModificaEncabezadoFactura() {
 }
 
 function procesarResultadoMetodoModificaEncabezado(data) {
+    ///Es .resultado porque la función devuelve
+    ///un objeto JSON que posee una propiedad
+    ///llamada resultado 
+    var resultadoFuncion = data.resultado; /*.resultado es la propiedad del objeto que retorno el controlador*/
+    alert("Información: " + resultadoFuncion);
+}
+
+function invocarMetodoPostEliminaEncabezadoFactura() {
+    /*Dirección a donde se enviarán los datos */
+    var url = '/MantFacturas/EliminaFactura';
+    /*Parámetros del método*/
+    var parametros = {
+        Id_factura: $("#hdIdFactura").val()
+    };
+    /*Invocación del método*/
+    ///Este método puede ser reciclado AVERIGUAR COMO
+    $.ajax({
+        ///Dirección del método
+        url: url,
+        dataType: 'json', ///Formato en el que se envían y reciben los datos
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(parametros), ///Parámetros convertidos en formato JSON
+        ///Función que se ejecuta cuando ela respuesta fue satisfactoria
+        ///data: contiene el valor retornado por el método del servidor
+        success: function (data, textStatus, jQxhr) {
+            procesarResultadoMetodoEliminaEncabezado(data);
+        },
+        ///Función que se ejecuta cuando la respuesta tuvo errores
+        error: function (jQxhr, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });
+}
+
+function procesarResultadoMetodoEliminaEncabezado(data) {
     ///Es .resultado porque la función devuelve
     ///un objeto JSON que posee una propiedad
     ///llamada resultado 
