@@ -27,7 +27,7 @@ function validacionRegistro() {
 
 ///crea las validaciones para el formulario
 function validacionModifica() {
-    $("#frmModificaVehiculo").validate({
+    $("#frmModificaVehiculoCliente").validate({
         ///objeto que contiene "las condiciones" que el formulario
         ///debe cumplir para ser considerado válido
         rules: {
@@ -37,7 +37,7 @@ function validacionModifica() {
             idVehiculo: {
                 required: true
             },
-            idTipoVehiculo: {
+            tipoVehiculo: {
                 required: true
             },
         }
@@ -101,7 +101,7 @@ function procesarResultadoClientes(data) {
     });
 
     ///Obtiene el valor del hidden
-    var hiddenCliente = $("#hdCliente").val();
+    var hiddenCliente = $("#hdIdCliente").val();
 
     if (hiddenCliente != undefined) {
         ddlCliente.val(hiddenCliente);
@@ -157,6 +157,7 @@ function procesarResultadoVehiculo(data) {
 
     if (hiddenVehiculos != undefined) {
         ddlVehiculo.val(hiddenVehiculos);
+        cargaDropdownListTipoVehiculo(hiddenVehiculos);
     }
 }
 
@@ -184,8 +185,7 @@ function cargaDropdownListTipoVehiculo(pIdVehiculo){
 
 function procesarResultadoTipoVehiculo(data) {
     ///Mediante un selector nos posicionamos sobre la lista de provincias
-    var ddlTipoVehiculo = $("#idTipoVehiculo");
-
+    var ddlTipoVehiculo = $("#tipoVehiculo");
     ///Limpiamos todas las opcionesd e la lista de provincias
     ddlTipoVehiculo.empty();
 
@@ -206,11 +206,26 @@ function procesarResultadoTipoVehiculo(data) {
     });
 
     ///Obtiene el valor del hidden
-    var hiddenTipoVehiculo = $("#hdTipoVehiculo").val();
+    var hdTipoVehiculo = $("#hdIdTipoVehiculo").val();
 
-    if (hiddenTipoVehiculo != undefined) {
-        ddlTipoVehiculo.val(hiddenTipoVehiculo);
+    if (hdTipoVehiculo != undefined) {
+        ddlTipoVehiculo.val(hdTipoVehiculo);
     }
+}
+
+function creaEventoModificaVehiculoCliente() {
+    $("#btnModificar").on("click", function () {
+        /*Asignar a la variable formulario
+          el resultado del selector*/
+        var formulario = $("#frmModificaVehiculoCliente");
+        /*Ejecutar el método de validación*/
+        formulario.validate();
+        /*Si el formulario es valido, proceder a
+         ejecutar la función invocarMetodoPost*/
+        if (formulario.valid()) {
+            invocarMetodoPostModificar();
+        }
+    });
 }
 
 function invocarMetodoPostModificar() {
@@ -218,12 +233,10 @@ function invocarMetodoPostModificar() {
     var url = '/MantVehiculosCliente/ModificarVehiculosCliente';
     /*Parámetros del método*/
     var parametros = {
-        idVehiculoCliente: $("#hdIdVehiculosCliente").val(),
-        idVehiculo: $("#hdIdVehiculo").val(),
-        idCliente: $("#hdCliente").val(),
-        idTipoVehiculo: $("#hdIdTiposVehiculo").val()
-
-        
+        idVehiculosCliente: $("#idVehiculosCliente").val(),
+        idVehiculo: $("#idVehiculo").val(),
+        idCliente: $("#idCliente").val(),
+        idTipoVehiculo: $("#idTipoVehiculo").val()
     };
     /*Invocación del método*/
     ///Este método puede ser reciclado AVERIGUAR COMO
@@ -244,8 +257,6 @@ function invocarMetodoPostModificar() {
             alert(errorThrown);
         }
     });
-
-      
 }
 
 function procesarResultadoMetodoModificarVehiculo(data) {

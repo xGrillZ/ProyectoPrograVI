@@ -130,14 +130,11 @@ namespace SistVehiculo.Controllers
             pa_RetornaVehiculosClienteID_Result modeloVista = new pa_RetornaVehiculosClienteID_Result();
             modeloVista = this.modeloBD.pa_RetornaVehiculosClienteID(idVehiculosCliente).FirstOrDefault();
 
-            ///Enviar el modelo a la vista
-            AgregaTipoVehiculoViewBag();
-            AgregaMarcaVehiculoViewBag();
             return View(modeloVista);
         }
 
         [HttpPost]
-        public ActionResult ModificarVehiculosCliente(int idVehiculosCliente, int idVehiculo, int idCliente, int idTipoVehiculo)
+        public ActionResult ModificarVehiculosCliente(pa_RetornaVehiculosClienteID_Result modeloVista)
         {
 
             ///Variable que registra la cantidad de registros afectados
@@ -146,12 +143,12 @@ namespace SistVehiculo.Controllers
             int cantRegistrosAfectados = 0;
             string mensaje = "";
 
-            if (this.verificarVehiculo(idVehiculo.ToString(), idCliente.ToString()))
+            if (this.verificarVehiculo(modeloVista.idVehiculo.ToString(), modeloVista.idCliente.ToString()))
             {
                 try
                 {
 
-                    cantRegistrosAfectados = this.modeloBD.pa_ModificaVehiculosCliente(idVehiculosCliente, idVehiculo, idCliente, idTipoVehiculo);
+                    cantRegistrosAfectados = this.modeloBD.pa_ModificaVehiculosCliente(modeloVista.idVehiculosCliente, modeloVista.idVehiculo, modeloVista.idCliente, modeloVista.tipoVehiculo);
                 }
                 catch (Exception ex)
                 {
@@ -173,11 +170,9 @@ namespace SistVehiculo.Controllers
             {
                 mensaje = "Este vehiculo ya existe en tu cuenta, debes ingresar otra";
             }
+            Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
 
-            ///Enviar el modelo a la vista
-            AgregaTipoVehiculoViewBag();
-            AgregaMarcaVehiculoViewBag();
-            return Json(new { resultado = mensaje });
+            return View(modeloVista);
         }
 
         public ActionResult RpVehiculosCliente()

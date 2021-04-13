@@ -2,6 +2,7 @@
 
 @section css{
     <link href="~/Content/mantVehiculosxCliente/mantVehiculosxCliente.css" rel="stylesheet" />
+    <link href="~/Content/mantVehiculosxCliente/mantVehiculosxCliente.css" rel="stylesheet" />
 }
 
 @{
@@ -13,22 +14,28 @@
 
 <form id="frmModificaVehiculoCliente" method="post">
     <div class="form-group">
-        <label>Cliente:</label>
+        <label>Cliente :</label>
         <select name="idCliente" id="idCliente" class="form-control"></select>
-        <input type="hidden" id="hdCliente" value="@Model.idCliente" />
+        <input type="hidden" id="hdIdVehiculoCliente" value="@Model.idVehiculosCliente" />
+        <input type="hidden" id="hdIdCliente" value="@Model.idCliente" />
+        <input type="hidden" id="hdIdVehiculo" value="@Model.idVehiculo" />
+        <input type="hidden" id="hdIdTipoVehiculo" value="@Model.tipoVehiculo" />
     </div>
-
-    <input type="hidden" id="hdIdVehiculoCliente" value="34" />
-    <input type="hidden" id="hdIdVehiculo" value="@Model.idVehiculo" />
-
-    <input type="hidden" name="hdIdTiposVehiculo" id="hdIdTiposVehiculo" class="form-control" value="@Model.idVehiculosCliente" />
+    <div class="form-group">
+        <label>Vehiculo:</label>
+        <select name="idVehiculo" id="idVehiculo" class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label>Tipo Vehículo:</label>
+        <select name="tipoVehiculo" id="tipoVehiculo" class="form-control"></select>
+    </div>
 
 
     <div class="form-group">
-        <input type="submit" value="Modificar" id="btnAceptar" />
+        <button type="submit" id="btnModificar" name="btnModificar" class="btn btn-success btnModificar">Modificar</button>
     </div>
-    <a href="~/MantVehiculosCliente/ListaVehiculosCliente">Regresar a la lista</a>
 </form>
+<a href="~/MantVehiculosCliente/ListaVehiculosCliente" class="btn btn-warning">Regresar a la lista</a>
 
 @section scripts{
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
