@@ -1,5 +1,4 @@
-﻿
-@model SistVehiculo.Models.pa_RetornaVehiculosClienteID_Result
+﻿@model SistVehiculo.Models.pa_RetornaVehiculosClienteID_Result
 
 @section css{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
@@ -19,6 +18,7 @@
         <div class="form-group col-6">
             <label>Nombre Cliente:</label>
             <input type="text" name="nomCliente" id="nomCliente" class="form-control" value="@Model.nomCliente" readonly />
+            <input type="hidden" id="hdIdVehiculoCliente" value="@Model.idVehiculosCliente" />
         </div>
         <div class="form-group col-6">
             <label>Número Cédula:</label>
@@ -39,7 +39,7 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Eliminar" id="btnAceptar" class="form-control btn btn-success btnEliminarVehiculoCliente"/>
+        <input type="submit" value="Eliminar" id="btnEliminar" class="form-control btn btn-success btnEliminarVehiculoCliente">
     </div>
 </form>
 <a href="~/MantVehiculosCliente/ListaVehiculosCliente" class="btn btn-primary">Regresar a la lista</a>

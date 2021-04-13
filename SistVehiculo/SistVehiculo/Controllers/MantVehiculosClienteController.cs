@@ -61,29 +61,37 @@ namespace SistVehiculo.Controllers
             string mensaje = "";
             int cantRegistrosAfectados = 0;
 
-            try
+            if (this.verificarVehiculo(idVehiculo.ToString(), idCliente.ToString()))
             {
-                cantRegistrosAfectados = this.modeloBD.pa_InsertaVehiculosCliente(idVehiculo, idCliente, idTipoVehiculo);
-            }
-            catch (Exception error)
-            {
-                mensaje = "Ocurrió un error: " + error.Message;
-
-            }
-            /*Se ejecuta cuando haya o no haya un error, siempre se ejecutará*/
-            finally
-            {
-                if (cantRegistrosAfectados > 0)
+                try
                 {
-                    mensaje = "Vehiculo de Cliente ingresado";
+                    cantRegistrosAfectados = this.modeloBD.pa_InsertaVehiculosCliente(idVehiculo, idCliente, idTipoVehiculo);
                 }
-                else
+                catch (Exception error)
                 {
-                    mensaje += ".No se pudo ingresar el vehículo del cliente";
+                    mensaje = "Ocurrió un error: " + error.Message;
+
+                }
+                /*Se ejecuta cuando haya o no haya un error, siempre se ejecutará*/
+                finally
+                {
+                    if (cantRegistrosAfectados > 0)
+                    {
+                        mensaje = "Vehiculo de Cliente ingresado";
+                    }
+                    else
+                    {
+                        mensaje += ".No se pudo ingresar el vehículo del cliente";
+                    }
                 }
             }
+            else
+            {
+                mensaje += "Ya tienes registrado este vehículo, ingresa otro.";
+            }
 
-            return Json(new { resultado = mensaje });
+            Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
+            return View();
         }
 
         bool verificarVehiculo(string idVehiculo, string idCliente)
@@ -94,14 +102,14 @@ namespace SistVehiculo.Controllers
             {
                 ///Variable que almacenará el dato solicitado
                 int idVehiculoCliente = Convert.ToInt32(idVehiculo);
+                int idVehiculoCliente2 = Convert.ToInt32(idCliente);
                 ///Resultado de la operación
-                if (string.IsNullOrEmpty(idCliente))
+                if (!string.IsNullOrEmpty(idCliente))
                 {
-                    resultado = this.modeloBD.VehiculosCliente.Count(VehiculoCliente => VehiculoCliente.idVehiculo == idVehiculoCliente) <= 0;
+                    resultado = this.modeloBD.VehiculosCliente.Count(VehiculoCliente => VehiculoCliente.idVehiculo == idVehiculoCliente && VehiculoCliente.idCliente == idVehiculoCliente2) <= 0;
                 }
                 else
                 {
-                    int idVehiculoCliente2 = Convert.ToInt32(idCliente);
                     resultado = this.modeloBD.VehiculosCliente.Count(VehiculoCliente => VehiculoCliente.idVehiculo == idVehiculoCliente && VehiculoCliente.idCliente != idVehiculoCliente2) <= 0;
                 }
             }
@@ -199,7 +207,7 @@ namespace SistVehiculo.Controllers
         }
 
         [HttpPost]
-        public ActionResult EliminarVehiculosCliente(int idVehiculoCliente, int idVehiculo, int idCliente, int idTipoVehiculo)
+        public ActionResult EliminarVehiculosCliente(pa_RetornaVehiculosClienteID_Result modeloVista)
         {
 
             ///Variable que registra la cantidad de registros afectados
@@ -207,13 +215,10 @@ namespace SistVehiculo.Controllers
             ///no afecta registros implica que hubo un error
             int cantRegistrosAfectados = 0;
             string mensaje = "";
-
-            if (this.verificarVehiculo(idVehiculo.ToString(), idCliente.ToString()))
-            {
                 try
                 {
 
-                    cantRegistrosAfectados = this.modeloBD.pa_ModificaVehiculosCliente(idVehiculoCliente, idVehiculo, idCliente, idTipoVehiculo);
+                    cantRegistrosAfectados = this.modeloBD.pa_EliminaVehiculosCliente(modeloVista.idVehiculosCliente);
                 }
                 catch (Exception ex)
                 {
@@ -223,24 +228,22 @@ namespace SistVehiculo.Controllers
                 {
                     if (cantRegistrosAfectados > 0)
                     {
-                        mensaje = "Registro Modificado";
+                        mensaje = "Registro Eliminado";
                     }
                     else
                     {
-                        mensaje += ".No se pudo modificar";
+                        mensaje += ".No se pudo Eliminado";
                     }
                 }
-            }
-            else
-            {
-                mensaje = "Este vehiculo ya existe en tu cuenta, debes ingresar otra";
-            }
+
+            Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
 
             ///Enviar el modelo a la vista
             AgregaTipoVehiculoViewBag();
             AgregaMarcaVehiculoViewBag();
-            return Json(new { resultado = mensaje });
+            return View(modeloVista);
         }
+
         public ActionResult RpServiciosCliente()
         {
             return View();

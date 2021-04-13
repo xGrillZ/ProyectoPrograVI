@@ -212,3 +212,42 @@ function procesarResultadoTipoVehiculo(data) {
         ddlTipoVehiculo.val(hiddenTipoVehiculo);
     }
 }
+
+function invocarMetodoPostModificar() {
+    /*Dirección a donde se enviarán los datos */
+    var url = '/MantVehiculosCliente/ModificarVehiculosCliente';
+    /*Parámetros del método*/
+    var parametros = {
+        idVehiculoCliente: $("#idVehiculosCliente").val(),
+        idVehiculo: $("#hdIdVehiculo").val(),
+        idCliente: $("#hdCliente").val(),
+        idTipoVehiculo: $("#tipoVehiculo").val()
+    };
+    /*Invocación del método*/
+    ///Este método puede ser reciclado AVERIGUAR COMO
+    $.ajax({
+        ///Dirección del método
+        url: url,
+        dataType: 'json', ///Formato en el que se envían y reciben los datos
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(parametros), ///Parámetros convertidos en formato JSON
+        ///Función que se ejecuta cuando ela respuesta fue satisfactoria
+        ///data: contiene el valor retornado por el método del servidor
+        success: function (data, textStatus, jQxhr) {
+            procesarResultadoMetodoModificarVehiculo(data);
+        },
+        ///Función que se ejecuta cuando la respuesta tuvo errores
+        error: function (jQxhr, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });
+}
+
+function procesarResultadoMetodoModificarVehiculo(data) {
+    ///Es .resultado porque la función devuelve
+    ///un objeto JSON que posee una propiedad
+    ///llamada resultado 
+    var resultadoFuncion = data.resultado; /*.resultado es la propiedad del objeto que retorno el controlador*/
+    alert("Información: " + resultadoFuncion);
+}
