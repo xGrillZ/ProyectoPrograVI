@@ -743,24 +743,6 @@ namespace SistVehiculo.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaVehiculosInsert_Result>("pa_RetornaVehiculosInsert", placaParameter);
         }
     
-        public virtual ObjectResult<pa_RetornaVehiculosxIDCliente_Result> pa_RetornaVehiculosxIDCliente(Nullable<int> idCliente)
-        {
-            var idClienteParameter = idCliente.HasValue ?
-                new ObjectParameter("idCliente", idCliente) :
-                new ObjectParameter("idCliente", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaVehiculosxIDCliente_Result>("pa_RetornaVehiculosxIDCliente", idClienteParameter);
-        }
-    
-        public virtual ObjectResult<pa_RetornaTipoVehiculoxMarca_Result> pa_RetornaTipoVehiculoxMarca(string marcaVehiculo)
-        {
-            var marcaVehiculoParameter = marcaVehiculo != null ?
-                new ObjectParameter("marcaVehiculo", marcaVehiculo) :
-                new ObjectParameter("marcaVehiculo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaTipoVehiculoxMarca_Result>("pa_RetornaTipoVehiculoxMarca", marcaVehiculoParameter);
-        }
-    
         public virtual ObjectResult<pa_RetornaVehiculosList_Result> pa_RetornaVehiculosList(string placa)
         {
             var placaParameter = placa != null ?
@@ -799,44 +781,6 @@ namespace SistVehiculo.Models
                 new ObjectParameter("estado", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaEncabezadoFactura_Result>("pa_RetornaEncabezadoFactura", num_facturaParameter, estadoParameter);
-        }
-    
-        public virtual int pa_InsertaEncabezadoFactura(string num_factura, Nullable<System.DateTime> fecha, Nullable<double> montoTotal, Nullable<int> estado, Nullable<int> idCliente, Nullable<int> idVehiculo)
-        {
-            var num_facturaParameter = num_factura != null ?
-                new ObjectParameter("num_factura", num_factura) :
-                new ObjectParameter("num_factura", typeof(string));
-    
-            var fechaParameter = fecha.HasValue ?
-                new ObjectParameter("fecha", fecha) :
-                new ObjectParameter("fecha", typeof(System.DateTime));
-    
-            var montoTotalParameter = montoTotal.HasValue ?
-                new ObjectParameter("montoTotal", montoTotal) :
-                new ObjectParameter("montoTotal", typeof(double));
-    
-            var estadoParameter = estado.HasValue ?
-                new ObjectParameter("estado", estado) :
-                new ObjectParameter("estado", typeof(int));
-    
-            var idClienteParameter = idCliente.HasValue ?
-                new ObjectParameter("idCliente", idCliente) :
-                new ObjectParameter("idCliente", typeof(int));
-    
-            var idVehiculoParameter = idVehiculo.HasValue ?
-                new ObjectParameter("idVehiculo", idVehiculo) :
-                new ObjectParameter("idVehiculo", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_InsertaEncabezadoFactura", num_facturaParameter, fechaParameter, montoTotalParameter, estadoParameter, idClienteParameter, idVehiculoParameter);
-        }
-    
-        public virtual ObjectResult<pa_RetornaMarcaVehiculoxPlaca_Result> pa_RetornaMarcaVehiculoxPlaca(Nullable<int> idVehiculo)
-        {
-            var idVehiculoParameter = idVehiculo.HasValue ?
-                new ObjectParameter("idVehiculo", idVehiculo) :
-                new ObjectParameter("idVehiculo", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaMarcaVehiculoxPlaca_Result>("pa_RetornaMarcaVehiculoxPlaca", idVehiculoParameter);
         }
     
         public virtual ObjectResult<pa_RetornaEncabezadoFacturaID_Result> pa_RetornaEncabezadoFacturaID(Nullable<int> id_Factura)
@@ -1093,6 +1037,66 @@ namespace SistVehiculo.Models
                 new ObjectParameter("idCliente", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaVehiculosClienteIdConsutorID_Result>("pa_RetornaVehiculosClienteIdConsutorID", idClienteParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaMarcaVehiculoxPlaca_Result> pa_RetornaMarcaVehiculoxPlaca(Nullable<int> idCliente)
+        {
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("idCliente", idCliente) :
+                new ObjectParameter("idCliente", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaMarcaVehiculoxPlaca_Result>("pa_RetornaMarcaVehiculoxPlaca", idClienteParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaVehiculosxIDCliente_Result> pa_RetornaVehiculosxIDCliente(Nullable<int> idVehiculo)
+        {
+            var idVehiculoParameter = idVehiculo.HasValue ?
+                new ObjectParameter("idVehiculo", idVehiculo) :
+                new ObjectParameter("idVehiculo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaVehiculosxIDCliente_Result>("pa_RetornaVehiculosxIDCliente", idVehiculoParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaTipoVehiculoxMarca_Result> pa_RetornaTipoVehiculoxMarca(Nullable<int> idTipoVehiculo)
+        {
+            var idTipoVehiculoParameter = idTipoVehiculo.HasValue ?
+                new ObjectParameter("idTipoVehiculo", idTipoVehiculo) :
+                new ObjectParameter("idTipoVehiculo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaTipoVehiculoxMarca_Result>("pa_RetornaTipoVehiculoxMarca", idTipoVehiculoParameter);
+        }
+    
+        public virtual int pa_InsertaEncabezadoFactura(string num_factura, Nullable<System.DateTime> fecha, Nullable<double> montoTotal, Nullable<int> estado, Nullable<int> idCliente, Nullable<int> idVehiculo, Nullable<int> idTipoVehiculo)
+        {
+            var num_facturaParameter = num_factura != null ?
+                new ObjectParameter("num_factura", num_factura) :
+                new ObjectParameter("num_factura", typeof(string));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            var montoTotalParameter = montoTotal.HasValue ?
+                new ObjectParameter("montoTotal", montoTotal) :
+                new ObjectParameter("montoTotal", typeof(double));
+    
+            var estadoParameter = estado.HasValue ?
+                new ObjectParameter("estado", estado) :
+                new ObjectParameter("estado", typeof(int));
+    
+            var idClienteParameter = idCliente.HasValue ?
+                new ObjectParameter("idCliente", idCliente) :
+                new ObjectParameter("idCliente", typeof(int));
+    
+            var idVehiculoParameter = idVehiculo.HasValue ?
+                new ObjectParameter("idVehiculo", idVehiculo) :
+                new ObjectParameter("idVehiculo", typeof(int));
+    
+            var idTipoVehiculoParameter = idTipoVehiculo.HasValue ?
+                new ObjectParameter("idTipoVehiculo", idTipoVehiculo) :
+                new ObjectParameter("idTipoVehiculo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_InsertaEncabezadoFactura", num_facturaParameter, fechaParameter, montoTotalParameter, estadoParameter, idClienteParameter, idVehiculoParameter, idTipoVehiculoParameter);
         }
     }
 }

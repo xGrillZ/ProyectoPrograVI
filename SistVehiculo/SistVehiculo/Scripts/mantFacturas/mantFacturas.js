@@ -20,7 +20,7 @@ function estableceEventosChangeCliente() {
         var cliente = $("#nomCliente").val();
         ///Funcion que permitie cargar todos los vehículos
         ///del cliente seleccionado
-        cargaDropdownListPlacaVehiculo(cliente);
+        cargaDropdownListMarcaVehiculo(cliente);
         cargaDropdownListDatosCliente(cliente);
     });
 
@@ -29,7 +29,8 @@ function estableceEventosChangeCliente() {
         ///Obtener el ID del canton seleccionado
         var placaVehiculo = $("#placaVehiculo").val();
         ///Funcion que permite cargar todos los distritos asociados al cantón seleccionado
-        cargaDropdownListMarcaVehiculo(placaVehiculo);
+        /*cargaDropdownListMarcaVehiculo(placaVehiculo);*/
+        cargaDropdownListTipoVehiculo(placaVehiculo);
     });
 
     ///Evento change de la lista de MarcaVehiculo
@@ -37,7 +38,9 @@ function estableceEventosChangeCliente() {
         ///Obtener el ID del canton seleccionado
         var marcaVehiculo = $("#marcaVehiculo").val();
         ///Funcion que permite cargar todos los distritos asociados al cantón seleccionado
-        cargaDropdownListTipoVehiculo(marcaVehiculo);
+        /*cargaDropdownListTipoVehiculo(marcaVehiculo);*/
+        cargaDropdownListPlacaVehiculo(marcaVehiculo);
+
     });
 
     ///Evento change de la lista de ServiciosProductos
@@ -105,14 +108,70 @@ function procesarResultadoClientes(data) {
     }
 }
 
+///carga los registros de las marcas de vehículos
+function cargaDropdownListMarcaVehiculo(pIdCliente) {
+
+    ///dirección a donde se enviarán los datos
+    var url = '/MantFacturas/RetornaMarcaVehiculo'; /*Controlador/Metodo*/
+    ///parámetros del método, es CASE-SENSITIVE
+    var parametros = {
+        idCliente: pIdCliente
+    };
+    ///invocar el método
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(parametros),
+        success: function (data, textStatus, jQxhr) {
+            procesarResultadoMarcaVehiculo(data);
+        },
+        error: function (jQxhr, textStatus, errorThrown) {
+            alert(errorThrown);
+        },
+    });
+}
+
+function procesarResultadoMarcaVehiculo(data) {
+    ///Declarar un selector donde nos posicionamos sobre la lista de cantones
+    var ddlMarcaVehiculo = $("#marcaVehiculo");
+    ///Limpiamos todas las opciones de la lista de cantones
+    ddlMarcaVehiculo.empty();
+    ///Creación de la primera opción de la lista, con un valor vacio
+    var nuevaOpcion = "<option value=''>Seleccione una marca de vehículo</option>";
+    ///Agregar la opción al dropdownlist
+    ddlMarcaVehiculo.append(nuevaOpcion);
+
+    ///Recorrido de los registros obtenidos
+    $(data).each(function () {
+        ///Obtenemos el objeto de tipo Canton haciendo uso de la claúsula "this"
+        ///ahora podemos acceder a todas las propiedades por ejemplo
+        ///cantonActual.nombre nos retorna el nombre del canton
+        var marcaVehiculoActual = this;
+        ///Creación de la nueva opción de la lista, con el valor ID de provincia y Nombre de la provincia
+        nuevaOpcion = "<option value='" + marcaVehiculoActual.idVehiculo + "'>" + marcaVehiculoActual.marca + "</option>";
+        ///Agregamos la opción al dropdownlist
+        ddlMarcaVehiculo.append(nuevaOpcion);
+    });
+
+    ///Obtiene el valor del hidden
+    var hiddenMarca = $("#hdMarca").val();
+
+    if (hiddenMarca != undefined) {
+        ddlMarcaVehiculo.val(hiddenMarca);
+        cargaDropdownListTipoVehiculo(hiddenMarca);
+    }
+}
+
 ///carga los registros de los vehículos
-function cargaDropdownListPlacaVehiculo(pIdCliente) {
+function cargaDropdownListPlacaVehiculo(pIdVehiculo) {
 
     ///dirección a donde se enviarán los datos
     var url = '/MantFacturas/RetornaPlacaVehiculo'; /*Controlador/Metodo*/
     ///parámetros del método, es CASE-SENSITIVE
     var parametros = {
-        idCliente: pIdCliente
+        idVehiculo: pIdVehiculo
     };
     ///invocar el método
     $.ajax({
@@ -152,7 +211,7 @@ function procesarResultadoPlacaVehiculos(data) {
             ///cantonActual.nombre nos retorna el nombre del canton
             var placaVehiculoActual = this;
             ///Creación de la nueva opción de la lista, con el valor ID de provincia y Nombre de la provincia
-            nuevaOpcion = "<option value='" + placaVehiculoActual.idVehiculo + "'>" + placaVehiculoActual.placa + "</option>";
+            nuevaOpcion = "<option value='" + placaVehiculoActual.tipoVehiculo + "'>" + placaVehiculoActual.placa + "</option>";
             ///Agregamos la opción al dropdownlist
             ddlVehiculo.append(nuevaOpcion);
         });
@@ -167,70 +226,14 @@ function procesarResultadoPlacaVehiculos(data) {
     }
 }
 
-///carga los registros de las marcas de vehículos
-function cargaDropdownListMarcaVehiculo(pPlacaVehiculo) {
-
-    ///dirección a donde se enviarán los datos
-    var url = '/MantFacturas/RetornaMarcaVehiculo'; /*Controlador/Metodo*/
-    ///parámetros del método, es CASE-SENSITIVE
-    var parametros = {
-        idVehiculo: pPlacaVehiculo
-    };
-    ///invocar el método
-    $.ajax({
-        url: url,
-        dataType: 'json',
-        type: 'post',
-        contentType: 'application/json',
-        data: JSON.stringify(parametros),
-        success: function (data, textStatus, jQxhr) {
-            procesarResultadoMarcaVehiculo(data);
-        },
-        error: function (jQxhr, textStatus, errorThrown) {
-            alert(errorThrown);
-        },
-    });
-}
-
-function procesarResultadoMarcaVehiculo(data) {
-    ///Declarar un selector donde nos posicionamos sobre la lista de cantones
-    var ddlMarcaVehiculo = $("#marcaVehiculo");
-    ///Limpiamos todas las opciones de la lista de cantones
-    ddlMarcaVehiculo.empty();
-    ///Creación de la primera opción de la lista, con un valor vacio
-    var nuevaOpcion = "<option value=''>Seleccione una marca de vehículo</option>";
-    ///Agregar la opción al dropdownlist
-    ddlMarcaVehiculo.append(nuevaOpcion);
-
-    ///Recorrido de los registros obtenidos
-    $(data).each(function () {
-        ///Obtenemos el objeto de tipo Canton haciendo uso de la claúsula "this"
-        ///ahora podemos acceder a todas las propiedades por ejemplo
-        ///cantonActual.nombre nos retorna el nombre del canton
-        var marcaVehiculoActual = this;
-        ///Creación de la nueva opción de la lista, con el valor ID de provincia y Nombre de la provincia
-        nuevaOpcion = "<option value='" + marcaVehiculoActual.marca + "'>" + marcaVehiculoActual.marca + "</option>";
-        ///Agregamos la opción al dropdownlist
-        ddlMarcaVehiculo.append(nuevaOpcion);
-    });
-
-    ///Obtiene el valor del hidden
-    var hiddenMarca = $("#hdMarca").val();
-
-    if (hiddenMarca != undefined) {
-        ddlMarcaVehiculo.val(hiddenMarca);
-        cargaDropdownListTipoVehiculo(hiddenMarca);
-    }
-}
-
 ///carga los registros de los tipos de vehículo
-function cargaDropdownListTipoVehiculo(pMarcaVehiculo) {
+function cargaDropdownListTipoVehiculo(pIdTipoVehiculo) {
 
     ///dirección a donde se enviarán los datos
     var url = '/MantFacturas/RetornaTipoVehiculo'; /*Controlador/Metodo*/
     ///parámetros del método, es CASE-SENSITIVE
     var parametros = {
-        marcaVehiculo: pMarcaVehiculo
+        idTipoVehiculo: pIdTipoVehiculo
     };
     ///invocar el método
     $.ajax({
@@ -265,7 +268,7 @@ function procesarResultadoTipoVehiculo(data) {
         ///cantonActual.nombre nos retorna el nombre del canton
         var tipoVehiculoActual = this;
         ///Creación de la nueva opción de la lista, con el valor ID de provincia y Nombre de la provincia
-        nuevaOpcion = "<option value='" + tipoVehiculoActual.idTipoVehiculo + "'>" + tipoVehiculoActual.tipo + "</option>";
+        nuevaOpcion = "<option value='" + tipoVehiculoActual.tipoVehiculo + "'>" + tipoVehiculoActual.tipo + "</option>";
         ///Agregamos la opción al dropdownlist
         ddlTipoVehiculo.append(nuevaOpcion);
     });
@@ -431,7 +434,7 @@ function validacionRegistro() {
             },
             estado: {
                 required: true
-            },
+            }
         }
     });
 }
@@ -538,13 +541,14 @@ function invocarMetodoPostEncabezadoFactura() {
     /*Dirección a donde se enviarán los datos */
     var url = '/MantFacturas/InsertaEncabezadoFactura';
     /*Parámetros del método*/
-    var parametros = {
-        pNum_factura: $("#numFactura").val(),
-        pFecha: $("#fecha").val(),
-        pMontoTotal: $("#montoTotal").val(),
-        pEstado: $("#estado").val(),
-        pIdCliente: $("#nomCliente").val(),
-        pIdVehiculo: $("#placaVehiculo").val()
+    var parametro = {
+        Num_factura: $("#numFactura").val(),
+        Fecha: $("#fecha").val(),
+        MontoTotal: $("#montoTotal").val(),
+        Estado: $("#estado").val(),
+        IdCliente: $("#nomCliente").val(),
+        IdVehiculo: $("#marcaVehiculo").val(),
+        IdTipoVehiculo: $("#tipoVehiculo").val()
     };
     /*Invocación del método*/
     ///Este método puede ser reciclado AVERIGUAR COMO
@@ -554,7 +558,7 @@ function invocarMetodoPostEncabezadoFactura() {
         dataType: 'json', ///Formato en el que se envían y reciben los datos
         type: 'post',
         contentType: 'application/json',
-        data: JSON.stringify(parametros), ///Parámetros convertidos en formato JSON
+        data: JSON.stringify(parametro), ///Parámetros convertidos en formato JSON
         ///Función que se ejecuta cuando ela respuesta fue satisfactoria
         ///data: contiene el valor retornado por el método del servidor
         success: function (data, textStatus, jQxhr) {

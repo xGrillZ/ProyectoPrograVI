@@ -28,22 +28,22 @@ namespace SistVehiculo.Controllers
             return Json(clientes, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult RetornaPlacaVehiculo(int idCliente)
+        public ActionResult RetornaPlacaVehiculo(int idVehiculo)
         {
 
-            List<pa_RetornaVehiculosxIDCliente_Result> vehiculos = this.modeloBD.pa_RetornaVehiculosxIDCliente(idCliente).ToList();
-            return Json(vehiculos);
+            List<pa_RetornaVehiculosxIDCliente_Result> placaVehiculo = this.modeloBD.pa_RetornaVehiculosxIDCliente(idVehiculo).ToList();
+            return Json(placaVehiculo);
         }
 
-        public ActionResult RetornaMarcaVehiculo(int idVehiculo)
+        public ActionResult RetornaMarcaVehiculo(int idCliente)
         {
-            List<pa_RetornaMarcaVehiculoxPlaca_Result> marcaVehiculo = this.modeloBD.pa_RetornaMarcaVehiculoxPlaca(idVehiculo).ToList();
+            List<pa_RetornaMarcaVehiculoxPlaca_Result> marcaVehiculo = this.modeloBD.pa_RetornaMarcaVehiculoxPlaca(idCliente).ToList();
             return Json(marcaVehiculo);
         }
 
-        public ActionResult RetornaTipoVehiculo(string marcaVehiculo)
+        public ActionResult RetornaTipoVehiculo(int idTipoVehiculo)
         {
-            List<pa_RetornaTipoVehiculoxMarca_Result> tipoVehiculo = this.modeloBD.pa_RetornaTipoVehiculoxMarca(marcaVehiculo).ToList();
+            List<pa_RetornaTipoVehiculoxMarca_Result> tipoVehiculo = this.modeloBD.pa_RetornaTipoVehiculoxMarca(idTipoVehiculo).ToList();
             return Json(tipoVehiculo);
         }
 
@@ -71,37 +71,73 @@ namespace SistVehiculo.Controllers
             return Json(servicioProductoID, JsonRequestBehavior.AllowGet);
         }
 
+        bool verificaNumFactura(string pNumFactura, string idFactura)
+        {
+            ///Resultado de la operación
+            bool resultado = true;
+            try
+            {
+                ///Variable que almacenará el dato solicitado
+                string ced = pNumFactura;
+                ///Resultado de la operación
+                if (string.IsNullOrEmpty(idFactura))
+                {
+                    resultado = this.modeloBD.Factura.Count(Factura => Factura.num_factura == ced) <= 0;
+                }
+                else
+                {
+                    int cod2 = Convert.ToInt32(idFactura);
+                    resultado = this.modeloBD.Factura.Count(Factura => Factura.num_factura == ced && Factura.id_factura != cod2) <= 0;
+                }
+            }
+            catch
+            {
+                ///Mensaje de error
+                string mensaje = "Error al verificar el número de factura";
+                Response.Write("<script language=javascript>alert('" + mensaje + "');</script>");
+            }
+            ///Retorno del resultado
+            return resultado;
+        }
+
         public ActionResult InsertaEncabezado()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult InsertaEncabezadoFactura(string pNum_factura, DateTime pFecha, float pMontoTotal, int pEstado, int pIdCliente, int pIdVehiculo)
+        public ActionResult InsertaEncabezadoFactura(string Num_factura, DateTime Fecha, float MontoTotal, int Estado, int IdCliente, int IdVehiculo, int IdTipoVehiculo)
         {
             string mensaje = "";
             int cantRegistrosAfectados = 0;
 
-            try
+            if (this.verificaNumFactura(Num_factura, null))
             {
-                cantRegistrosAfectados = this.modeloBD.pa_InsertaEncabezadoFactura(pNum_factura, pFecha, pMontoTotal, pEstado, pIdCliente, pIdVehiculo);
-            }
-            catch (Exception error)
-            {
-                mensaje = "Ocurrió un error: " + error.Message;
+                try
+                {
+                    cantRegistrosAfectados = this.modeloBD.pa_InsertaEncabezadoFactura(Num_factura, Fecha, MontoTotal, Estado, IdCliente, IdVehiculo, IdTipoVehiculo);
+                }
+                catch (Exception error)
+                {
+                    mensaje = "Ocurrió un error: " + error.Message;
 
+                }
+                /*Se ejecuta cuando haya o no haya un error, siempre se ejecutará*/
+                finally
+                {
+                    if (cantRegistrosAfectados > 0)
+                    {
+                        mensaje = "Encabezado de factura ingresado";
+                    }
+                    else
+                    {
+                        mensaje += ".No se pudo ingresar el encabezado de factura";
+                    }
+                }
             }
-            /*Se ejecuta cuando haya o no haya un error, siempre se ejecutará*/
-            finally
+            else
             {
-                if (cantRegistrosAfectados > 0)
-                {
-                    mensaje = "Encabezado de factura ingresado";
-                }
-                else
-                {
-                    mensaje += ".No se pudo ingresar el encabezado de factura";
-                }
+                mensaje = "Este número de factura ya existe, debes ingresar otra";
             }
 
             return Json(new { resultado = mensaje });
