@@ -218,10 +218,12 @@ function invocarMetodoPostModificar() {
     var url = '/MantVehiculosCliente/ModificarVehiculosCliente';
     /*Parámetros del método*/
     var parametros = {
-        idVehiculoCliente: $("#idVehiculosCliente").val(),
+        idVehiculoCliente: $("#hdIdVehiculosCliente").val(),
         idVehiculo: $("#hdIdVehiculo").val(),
         idCliente: $("#hdCliente").val(),
-        idTipoVehiculo: $("#tipoVehiculo").val()
+        idTipoVehiculo: $("#hdIdTiposVehiculo").val()
+
+        
     };
     /*Invocación del método*/
     ///Este método puede ser reciclado AVERIGUAR COMO
@@ -242,6 +244,8 @@ function invocarMetodoPostModificar() {
             alert(errorThrown);
         }
     });
+
+      
 }
 
 function procesarResultadoMetodoModificarVehiculo(data) {

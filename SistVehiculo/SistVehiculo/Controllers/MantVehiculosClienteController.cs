@@ -137,7 +137,7 @@ namespace SistVehiculo.Controllers
         }
 
         [HttpPost]
-        public ActionResult ModificarVehiculosCliente(int idVehiculoCliente, int idVehiculo, int idCliente, int idTipoVehiculo)
+        public ActionResult ModificarVehiculosCliente(int idVehiculosCliente, int idVehiculo, int idCliente, int idTipoVehiculo)
         {
 
             ///Variable que registra la cantidad de registros afectados
@@ -151,7 +151,7 @@ namespace SistVehiculo.Controllers
                 try
                 {
 
-                    cantRegistrosAfectados = this.modeloBD.pa_ModificaVehiculosCliente(idVehiculoCliente, idVehiculo, idCliente, idTipoVehiculo);
+                    cantRegistrosAfectados = this.modeloBD.pa_ModificaVehiculosCliente(idVehiculosCliente, idVehiculo, idCliente, idTipoVehiculo);
                 }
                 catch (Exception ex)
                 {
