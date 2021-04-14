@@ -37,7 +37,7 @@ namespace SistVehiculo.Controllers
             this.ViewBag.ListaPaises = this.modeloBD.pa_RetornaPaisFabricante("").ToList();
         }
 
-        bool verificaCodigo(string pCodigo, string pCodigoDos)
+        bool verificaCodigo(string pCodigo, string pIdPaisFabricante)
         {
             ///Resultado de la operación
             bool resultado = true;
@@ -46,14 +46,14 @@ namespace SistVehiculo.Controllers
                 ///Variable que almacenará el dato solicitado
                 string cod = pCodigo;
                 ///Resultado de la operación
-                if (string.IsNullOrEmpty(pCodigoDos))
+                if (string.IsNullOrEmpty(pIdPaisFabricante))
                 {
-                    resultado = this.modeloBD.MarcaVehiculo.Count(MarcaVehiculo => MarcaVehiculo.codigo == cod) <= 0;
+                    resultado = this.modeloBD.PaisFabricante.Count(PaisFabricante => PaisFabricante.codigo == cod) <= 0;
                 }
                 else
                 {
-                    int cod2 = Convert.ToInt32(pCodigoDos);
-                    resultado = this.modeloBD.MarcaVehiculo.Count(MarcaVehiculo => MarcaVehiculo.codigo == cod && MarcaVehiculo.idMarcaVehiculo != cod2) <= 0;
+                    int cod2 = Convert.ToInt32(pIdPaisFabricante);
+                    resultado = this.modeloBD.PaisFabricante.Count(PaisFabricante => PaisFabricante.codigo == cod && PaisFabricante.idFabricante != cod2) <= 0;
                 }
             }
             catch
@@ -108,12 +108,12 @@ namespace SistVehiculo.Controllers
             return View();
         }
 
-        public ActionResult ModificarFabricante(int idMarcaVehiculo)
+        public ActionResult ModificarFabricante(int idFabricante)
         {
             ///Obtener el registro que se desea modificar
             ///utilizando el parámetro del método idCliente
-            pa_RetornaMarcaVehiculoID_Result modeloVista = new pa_RetornaMarcaVehiculoID_Result();
-            modeloVista = this.modeloBD.pa_RetornaMarcaVehiculoID(idMarcaVehiculo).FirstOrDefault();
+            pa_RetornaPaisFabricanteID_Result modeloVista = new pa_RetornaPaisFabricanteID_Result();
+            modeloVista = this.modeloBD.pa_RetornaPaisFabricanteID(idFabricante).FirstOrDefault();
 
             this.AgregaPaisViewBag();
             ///Enviar el modelo a la vista
@@ -121,7 +121,7 @@ namespace SistVehiculo.Controllers
         }
 
         [HttpPost]
-        public ActionResult ModificarFabricante(pa_RetornaMarcaVehiculoID_Result modeloVista)
+        public ActionResult ModificarFabricante(pa_RetornaPaisFabricanteID_Result modeloVista)
         {
             ///Variable que registra la cantidad de registros afectados
             ///si un procedimiento que ejecuta insert, update o delete
@@ -129,11 +129,11 @@ namespace SistVehiculo.Controllers
             int cantRegistrosAfectados = 0;
             string mensaje = "";
 
-            if (this.verificaCodigo(modeloVista.codigo, modeloVista.idMarcaVehiculo.ToString()))
+            if (this.verificaCodigo(modeloVista.codigo, modeloVista.idFabricante.ToString()))
             {
                 try
                 {
-                    cantRegistrosAfectados = this.modeloBD.pa_ModificaMarcaVehiculo(modeloVista.idMarcaVehiculo, modeloVista.codigo, modeloVista.idPaisFabricante, modeloVista.marca);
+                    cantRegistrosAfectados = this.modeloBD.pa_ModificaPaisFabricante(modeloVista.idFabricante, modeloVista.codigo, modeloVista.pais);
                 }
                 catch (Exception ex)
                 {

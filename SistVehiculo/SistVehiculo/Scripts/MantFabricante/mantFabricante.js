@@ -34,11 +34,7 @@ function validacionModifica() {
                 required: true,
                 maxlength: 50
             },
-            idPaisFabricante: {
-                required: true,
-                maxlength: 50
-            },
-            marca: {
+            pais: {
                 required: true,
                 maxlength: 50
             },

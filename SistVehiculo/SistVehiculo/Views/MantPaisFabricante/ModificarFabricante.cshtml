@@ -1,4 +1,4 @@
-﻿@model SistVehiculo.Models.pa_RetornaMarcaVehiculoID_Result
+﻿@model SistVehiculo.Models.pa_RetornaPaisFabricanteID_Result
 
 @section css{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
@@ -20,30 +20,7 @@
 
     <div class="form-group">
         <label>País Fabricante:</label>
-        <select name="idPaisFabricante" id="idPaisFabricante" class="form-control">
-            <option value="">Seleccione un País Fabricante</option>
-            @{
-                foreach (SistVehiculo.Models.pa_RetornaPaisFabricante_Result paises in this.ViewBag.ListaPaises)
-                {
-
-                    ///Verifica si el ID es igual al ID del genero que viene en el modelo
-                    bool esIdPaisFabricanteModelo = paises.idFabricante == Model.idPaisFabricante;
-
-
-                    ///Incluir la propiedad selected para que la opcion aparezca seleccionada.
-                    ///Se compara la propiedad id_Genero del objeto del ViewBag contra la propiedad
-                    ///id_Genero del modelo de la vista
-                    if (esIdPaisFabricanteModelo)
-                    {
-                        <option value="@paises.idFabricante" selected>@paises.pais</option>
-                    }
-                    else
-                    {
-                        <option value="@paises.idFabricante">@paises.pais</option>
-                    }
-                }
-            }
-        </select>
+        <input type="text" name="pais" id="pais" class="form-control" value="@Model.pais" />
     </div>
     <div class="form-group">
         <input type="submit" value="Modificar" id="btnAceptar" class="btn btn-success btnModificarMarca" />
