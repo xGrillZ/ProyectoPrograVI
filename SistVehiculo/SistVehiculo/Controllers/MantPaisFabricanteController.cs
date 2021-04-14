@@ -163,12 +163,12 @@ namespace SistVehiculo.Controllers
             return View(modeloVista);
         }
 
-        public ActionResult EliminarFabricante(int idMarcaVehiculo)
+        public ActionResult EliminarFabricante(int idFabricante)
         {
             ///Obtener el registro que se desea modificar
             ///utilizando el parámetro del método idCliente
-            pa_RetornaMarcaVehiculoID_Result modeloVista = new pa_RetornaMarcaVehiculoID_Result();
-            modeloVista = this.modeloBD.pa_RetornaMarcaVehiculoID(idMarcaVehiculo).FirstOrDefault();
+            pa_RetornaPaisFabricanteID_Result modeloVista = new pa_RetornaPaisFabricanteID_Result();
+            modeloVista = this.modeloBD.pa_RetornaPaisFabricanteID(idFabricante).FirstOrDefault();
 
             this.AgregaPaisViewBag();
             ///Enviar el modelo a la vista
@@ -176,7 +176,7 @@ namespace SistVehiculo.Controllers
         }
 
         [HttpPost]
-        public ActionResult EliminarFabricante(pa_RetornaMarcaVehiculoID_Result modeloVista)
+        public ActionResult EliminarFabricante(pa_RetornaPaisFabricanteID_Result modeloVista)
         {
             ///Variable que registra la cantidad de registros afectados
             ///si un procedimiento que ejecuta insert, update o delete
@@ -186,7 +186,7 @@ namespace SistVehiculo.Controllers
 
             try
             {
-                cantRegistrosAfectados = this.modeloBD.pa_EliminaMarcaVehiculo(modeloVista.idMarcaVehiculo);
+                cantRegistrosAfectados = this.modeloBD.pa_EliminaFabricante(modeloVista.idFabricante);
             }
             catch (Exception ex)
             {

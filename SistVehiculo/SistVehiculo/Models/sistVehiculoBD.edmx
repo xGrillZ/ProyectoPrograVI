@@ -489,6 +489,9 @@
         <Function Name="pa_EliminaEncabezadoFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idFactura" Type="int" Mode="In" />
         </Function>
+        <Function Name="pa_EliminaFabricante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFabricante" Type="int" Mode="In" />
+        </Function>
         <Function Name="pa_EliminaMarcaVehiculo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idMarcaVehiculo" Type="int" Mode="In" />
         </Function>
@@ -1642,6 +1645,9 @@
           <FunctionImport Name="pa_InsertaPaisFabricante">
             <Parameter Name="codigo" Mode="In" Type="String" />
             <Parameter Name="pais" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_EliminaFabricante">
+            <Parameter Name="idFabricante" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -3134,6 +3140,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_InsertaPaisFabricante" FunctionName="sistvehiculoviModel.Store.pa_InsertaPaisFabricante" />
+          <FunctionImportMapping FunctionImportName="pa_EliminaFabricante" FunctionName="sistvehiculoviModel.Store.pa_EliminaFabricante" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
