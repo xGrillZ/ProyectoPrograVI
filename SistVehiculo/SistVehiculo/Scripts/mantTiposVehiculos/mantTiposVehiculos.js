@@ -35,6 +35,10 @@ function validacionModificaTipoVehiculo() {
                 required: true,
                 maxlength: 50
             },
+            idTipoVehiculo: {
+                required: true,
+                maxlength: 50
+            },
         }
     });
 }

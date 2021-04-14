@@ -14,14 +14,15 @@
 
 
 <form id="frmModificaTiposVehiculo" method="post">
+    <input type="hidden" name="idTipoVehiculo" id="idTipoVehiculo" class="form-control" value="@Model.idTipoVehiculo" />
     <div class="form-group">
         <label>Código:</label>
-        <input type="text" name="codigo" id="codigo" class="form-control" value="@Model.codigo"/>
+        <input type="text" name="codigo" id="codigo" class="form-control" value="@Model.codigo" />
     </div>
 
     <div class="form-group">
         <label>Tipo:</label>
-        <input type="text" name="tipo" id="tipo" class="form-control" value="@Model.tipo"/>
+        <input type="text" name="tipo" id="tipo" class="form-control" value="@Model.tipo" />
     </div>
     <div class="form-group">
         <input type="submit" value="Modificar" id="btnAceptar" class="btn btn-success btnModificarTipoVehiculo" />
