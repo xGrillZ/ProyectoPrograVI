@@ -6,7 +6,7 @@
 
 ///crea las validaciones para el formulario
 function validacionRegistro() {
-    $("#frmNuevoMarcaVehiculo").validate({
+    $("#frmNuevoFabricante").validate({
         ///objeto que contiene "las condiciones" que el formulario
         ///debe cumplir para ser considerado válido
         rules: {
@@ -14,11 +14,7 @@ function validacionRegistro() {
                 required: true,
                 maxlength: 50
             },
-            idPaisFabricante: {
-                required: true,
-                maxlength: 50
-            },
-            marca: {
+            pais: {
                 required: true,
                 maxlength: 50
             },
