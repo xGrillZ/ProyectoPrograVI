@@ -1,6 +1,7 @@
 ﻿$(function () {
     validacionRegistro();
     validacionModifica();
+    validacionModificaTipoVehiculo();
 });
 
 ///crea las validaciones para el formulario
@@ -20,6 +21,24 @@ function validacionRegistro() {
         }
     });
 }
+
+function validacionModificaTipoVehiculo() {
+    $("#frmModificaTiposVehiculo").validate({
+        ///objeto que contiene "las condiciones" que el formulario
+        ///debe cumplir para ser considerado válido
+        rules: {
+            codigo: {
+                required: true,
+                maxlength: 50
+            },
+            tipo: {
+                required: true,
+                maxlength: 50
+            },
+        }
+    });
+}
+
 
 ///crea las validaciones para el formulario
 function validacionModifica() {
