@@ -1,5 +1,5 @@
 ﻿<!--Indicar a la vista el modelo-->
-@model List<SistVehiculo.Models.pa_RetornaMarcaVehiculo_Result>
+@model List<SistVehiculo.Models.pa_RetornaPaisFabricante_Result>
 
 @section css{
     <link href="~/Content/mantMarcaVehiculos/mantMarcaVehiculos.css" rel="stylesheet" />
@@ -18,12 +18,6 @@
             <label>Código:</label>
             <input type="text" name="codigo" id="codigo" class="form-control" />
         </div>
-
-        <div class="form-group col">
-            <label>Marca:</label>
-            <input type="text" name="marca" id="marca" class="form-control" />
-        </div>
-
         <div class="form-group col">
             <label>País:</label>
             <input type="text" name="pais" id="pais" class="form-control" />
@@ -38,23 +32,21 @@
     <tr>
         <th>Código</th>
         <th>País Fabricante</th>
-        <th>Marca</th>
         <th>Acciones</th>
     </tr>
     <!--Incluir código .net
         Recorrido para la vista
         -->
     @{
-        foreach (SistVehiculo.Models.pa_RetornaMarcaVehiculo_Result posicionModelo in this.Model)
+        foreach (SistVehiculo.Models.pa_RetornaPaisFabricante_Result posicionModelo in this.Model)
         {
             <tr>
                 <td>@posicionModelo.codigo</td>
                 <td>@posicionModelo.pais</td>
-                <td>@posicionModelo.marca</td>
                 <td>
-                    <a href="~/MantPaisFabricante/ModificarFabricante?idMarcaVehiculo=@posicionModelo.idMarcaVehiculo" class="btn btn-warning btnModificar col-md-6">Modificar</a>
+                    <a href="~/MantPaisFabricante/ModificarFabricante?idFabricante=@posicionModelo.idFabricante" class="btn btn-warning btnModificar col-md-6">Modificar</a>
                     <br />
-                    <a href="~/MantPaisFabricante/EliminarFabricante?idMarcaVehiculo=@posicionModelo.idMarcaVehiculo" class="btn btn-danger btnEliminar col-md-6">Eliminar</a>
+                    <a href="~/MantPaisFabricante/EliminarFabricante?idFabricante=@posicionModelo.idFabricante" class="btn btn-danger btnEliminar col-md-6">Eliminar</a>
                 </td>
             </tr>
         }

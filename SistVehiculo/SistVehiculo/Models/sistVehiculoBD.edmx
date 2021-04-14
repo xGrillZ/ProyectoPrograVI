@@ -701,6 +701,9 @@
         <Function Name="pa_RetornaPaisFabricante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="pais" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="pa_RetornaPaisFabricanteID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idFabricante" Type="int" Mode="In" />
+        </Function>
         <Function Name="pa_RetornaServiciosCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tipo" Type="varchar" Mode="In" />
           <Parameter Name="nombreCliente" Type="nvarchar" Mode="In" />
@@ -1629,6 +1632,9 @@
             <Parameter Name="cantidadServicioProducto" Mode="In" Type="Int32" />
             <Parameter Name="precio" Mode="In" Type="Double" />
           </FunctionImport>
+          <FunctionImport Name="pa_RetornaPaisFabricanteID" ReturnType="Collection(sistvehiculoviModel.pa_RetornaPaisFabricanteID_Result)">
+          <Parameter Name="idFabricante" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
           <Property Type="Int32" Name="idCliente" Nullable="false" />
@@ -2297,6 +2303,11 @@
           <Property Type="String" Name="nomCliente" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="ape1Cliente" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="ape2Cliente" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaPaisFabricanteID_Result">
+          <Property Type="Int32" Name="idFabricante" Nullable="false" />
+          <Property Type="String" Name="codigo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="pais" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3105,6 +3116,15 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_InsertaDetalleFactura" FunctionName="sistvehiculoviModel.Store.pa_InsertaDetalleFactura" />
+          <FunctionImportMapping FunctionImportName="pa_RetornaPaisFabricanteID" FunctionName="sistvehiculoviModel.Store.pa_RetornaPaisFabricanteID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="sistvehiculoviModel.pa_RetornaPaisFabricanteID_Result">
+                <ScalarProperty Name="idFabricante" ColumnName="idFabricante" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

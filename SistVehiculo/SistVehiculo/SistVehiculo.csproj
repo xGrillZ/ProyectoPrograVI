@@ -208,6 +208,9 @@
     <Compile Include="Models\pa_RetornaMarcaVehiculo_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pa_RetornaPaisFabricanteID_Result.cs">
+      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pa_RetornaPaisFabricante_Result.cs">
       <DependentUpon>sistVehiculoBD.tt</DependentUpon>
     </Compile>
