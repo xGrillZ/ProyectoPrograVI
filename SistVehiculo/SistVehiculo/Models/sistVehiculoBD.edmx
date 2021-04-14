@@ -540,6 +540,10 @@
           <Parameter Name="idPaisFabricante" Type="int" Mode="In" />
           <Parameter Name="marca" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="pa_InsertaPaisFabricante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codigo" Type="nvarchar" Mode="In" />
+          <Parameter Name="pais" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="pa_InsertaServicioCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tipoServicioProducto" Type="int" Mode="In" />
           <Parameter Name="idCliente" Type="int" Mode="In" />
@@ -1634,6 +1638,10 @@
           </FunctionImport>
           <FunctionImport Name="pa_RetornaPaisFabricanteID" ReturnType="Collection(sistvehiculoviModel.pa_RetornaPaisFabricanteID_Result)">
           <Parameter Name="idFabricante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_InsertaPaisFabricante">
+            <Parameter Name="codigo" Mode="In" Type="String" />
+            <Parameter Name="pais" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_RetornaCliente_Result">
@@ -3125,6 +3133,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_InsertaPaisFabricante" FunctionName="sistvehiculoviModel.Store.pa_InsertaPaisFabricante" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -1116,5 +1116,18 @@ namespace SistVehiculo.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaPaisFabricanteID_Result>("pa_RetornaPaisFabricanteID", idFabricanteParameter);
         }
+    
+        public virtual int pa_InsertaPaisFabricante(string codigo, string pais)
+        {
+            var codigoParameter = codigo != null ?
+                new ObjectParameter("codigo", codigo) :
+                new ObjectParameter("codigo", typeof(string));
+    
+            var paisParameter = pais != null ?
+                new ObjectParameter("pais", pais) :
+                new ObjectParameter("pais", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_InsertaPaisFabricante", codigoParameter, paisParameter);
+        }
     }
 }

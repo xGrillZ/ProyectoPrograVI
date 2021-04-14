@@ -67,7 +67,7 @@ namespace SistVehiculo.Controllers
         }
 
         [HttpPost]
-        public ActionResult InsertarFabricante(pa_RetornaMarcaVehiculo_Result modeloVista)
+        public ActionResult InsertarFabricante(pa_RetornaPaisFabricante_Result modeloVista)
         {
             ///Variable que registra la cantidad de registros afectados
             ///si un procedimiento que ejecuta insert, update o delete
@@ -79,7 +79,7 @@ namespace SistVehiculo.Controllers
             {
                 try
                 {
-                    cantRegistrosAfectados = this.modeloBD.pa_InsertaMarcaVehiculo(modeloVista.codigo, modeloVista.idPaisFabricante, modeloVista.marca);
+                    cantRegistrosAfectados = this.modeloBD.pa_InsertaPaisFabricante( modeloVista.codigo, modeloVista.pais);
                 }
                 catch (Exception ex)
                 {
