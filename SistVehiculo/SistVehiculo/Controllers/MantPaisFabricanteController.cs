@@ -36,7 +36,7 @@ namespace SistVehiculo.Controllers
         {
             this.ViewBag.ListaPaises = this.modeloBD.pa_RetornaPaisFabricante("").ToList();
         }
-
+        #region VerificaCodigo
         bool verificaCodigo(string pCodigo, string pIdPaisFabricante)
         {
             ///Resultado de la operación
@@ -65,6 +65,7 @@ namespace SistVehiculo.Controllers
             ///Retorno del resultado
             return resultado;
         }
+        #endregion
 
         [HttpPost]
         public ActionResult InsertarFabricante(pa_RetornaPaisFabricante_Result modeloVista)
