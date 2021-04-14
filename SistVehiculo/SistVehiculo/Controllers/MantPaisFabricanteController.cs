@@ -108,7 +108,7 @@ namespace SistVehiculo.Controllers
             return View();
         }
 
-        public ActionResult ModificarMarcaVehiculos(int idMarcaVehiculo)
+        public ActionResult ModificarFabricante(int idMarcaVehiculo)
         {
             ///Obtener el registro que se desea modificar
             ///utilizando el parámetro del método idCliente
@@ -121,7 +121,7 @@ namespace SistVehiculo.Controllers
         }
 
         [HttpPost]
-        public ActionResult ModificarMarcaVehiculos(pa_RetornaMarcaVehiculoID_Result modeloVista)
+        public ActionResult ModificarFabricante(pa_RetornaMarcaVehiculoID_Result modeloVista)
         {
             ///Variable que registra la cantidad de registros afectados
             ///si un procedimiento que ejecuta insert, update o delete
@@ -163,7 +163,7 @@ namespace SistVehiculo.Controllers
             return View(modeloVista);
         }
 
-        public ActionResult EliminarMarcaVehiculos(int idMarcaVehiculo)
+        public ActionResult EliminarFabricante(int idMarcaVehiculo)
         {
             ///Obtener el registro que se desea modificar
             ///utilizando el parámetro del método idCliente
@@ -176,7 +176,7 @@ namespace SistVehiculo.Controllers
         }
 
         [HttpPost]
-        public ActionResult EliminarMarcaVehiculos(pa_RetornaMarcaVehiculoID_Result modeloVista)
+        public ActionResult EliminarFabricante(pa_RetornaMarcaVehiculoID_Result modeloVista)
         {
             ///Variable que registra la cantidad de registros afectados
             ///si un procedimiento que ejecuta insert, update o delete
