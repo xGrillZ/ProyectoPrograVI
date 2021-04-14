@@ -567,6 +567,7 @@
     <Content Include="Views\MantPaisFabricante\InsertarFabricante.cshtml" />
     <Content Include="Views\MantPaisFabricante\EliminarFabricante.cshtml" />
     <Content Include="Views\MantPaisFabricante\ModificarFabricante.cshtml" />
+    <Content Include="Views\MantFacturas\RpCierreCajas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

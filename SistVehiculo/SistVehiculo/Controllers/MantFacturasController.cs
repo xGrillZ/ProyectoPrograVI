@@ -432,5 +432,21 @@ namespace SistVehiculo.Controllers
 
             return Json(new { resultado = mensaje });
         }
+
+        public ActionResult RpCierreCajas()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        public ActionResult RetornaCierreCajasLista()
+        {
+            List<pa_RetornaEncabezadoFactura_Result> cierreCaja =
+                this.modeloBD.pa_RetornaEncabezadoFactura("","").ToList();
+
+            return Json(new { resultado = cierreCaja });
+        }
     }
 }
