@@ -22,6 +22,9 @@ namespace SistVehiculo.Controllers
             ///Cerrar la sesión
             this.Session.Add("idusuario", null);
             this.Session.Add("tipousuario", null);
+            this.Session.Add("nombreUsuario", null);
+            this.Session.Add("ape1Usuario", null);
+            this.Session.Add("ape2Usuario", null);
             this.Session.Add("usuariologueado", null);
             ///Retorna a la vista de logeo
             return RedirectToAction("Inicio","Inicio");

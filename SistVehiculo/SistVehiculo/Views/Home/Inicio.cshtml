@@ -36,12 +36,18 @@
                     <div class="col info">
                         <div class="contenidoinfo">
                             <div class="titles">
+                                @{
+                                    string nombreUsuario = Session["nombreUsuario"].ToString();
+                                    string ape1Usuario = Session["ape1Usuario"].ToString();
+                                    string ape2Usuario = Session["ape2Usuario"].ToString();
+                                }
                                 <h3>SmartVehicle</h3>
                                 <p>
                                     Disfruta de todos los beneficios exclusivos para
                                     todos nuestros clientes. Contamos con un servicio
                                     estrictamente Luxury y económico.
                                 </p>
+                                <p>Bienvenido @nombreUsuario @ape1Usuario @ape2Usuario</p>
                             </div>
                             <button type="button" class="btn btn-signup">¡Descúbrenos!</button>
                         </div>

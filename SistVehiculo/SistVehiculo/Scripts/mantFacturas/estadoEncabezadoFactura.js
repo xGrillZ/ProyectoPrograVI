@@ -75,6 +75,9 @@ function validacionEstadoEncabezado() {
         var botonDetalle = $("#btnDetalle");
         botonDetalle.attr("disabled", "disabled");
 
+        var botonDetalleModifica = $("#btnMostrarDetalle");
+        botonDetalleModifica.attr("disabled", "disabled");
+
         var botonElimina = $("#btnEliminar");
         botonElimina.attr("disabled", "disabled");
 
@@ -109,6 +112,9 @@ function validacionEstadoEncabezado() {
 
         var botonElimina = $("#btnEliminar");
         botonElimina.attr("disabled", "disabled");
+
+        var botonDetalleModifica = $("#btnMostrarDetalle");
+        botonDetalleModifica.attr("disabled", "disabled");
     }
     else {
         alert("Encabezado No Vencido");

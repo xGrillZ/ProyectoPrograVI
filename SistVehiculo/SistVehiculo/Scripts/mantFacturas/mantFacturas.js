@@ -9,6 +9,7 @@
     creaEventoDialogDetalle();
     cargaDropdownListServicioProducto();
     validacionIngresaDetalle();
+    validacionModificaEncabezado();
 });
 
 //función que registrará los eventos necesarios para "monitorear"
@@ -475,7 +476,7 @@ function validacionModificaEncabezado() {
             },
             estado: {
                 required: true
-            },
+            }
         }
     });
 }
@@ -604,7 +605,7 @@ function invocarMetodoPostModificaEncabezadoFactura() {
         MontoTotal: $("#montoTotal").val(),
         Estado: $("#estado").val(),
         IdCliente: $("#hdIdCliente").val(),
-        IdVehiculo: $("#placaVehiculo").val(),
+        IdVehiculo: $("#marcaVehiculo").val(),
         idTipoVehiculo: $("#tipoVehiculo").val()
     };
     /*Invocación del método*/

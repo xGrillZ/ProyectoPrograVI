@@ -41,7 +41,11 @@ namespace SistVehiculo.Controllers
                 {
                     this.Session.Add("idusuario", null);
                     this.Session.Add("tipousuario", null);
+                    this.Session.Add("nombreUsuario", null);
+                    this.Session.Add("ape1Usuario", null);
+                    this.Session.Add("ape2Usuario", null);
                     this.Session.Add("usuariologueado", null);
+
 
                     mensaje = $"Correo electrónico o Contraseña inválida";
                     ///Mensaje de error si cumple lo contrario del verificado de datos nulos
@@ -53,6 +57,9 @@ namespace SistVehiculo.Controllers
                     /*Session["User"] = resultadoSp;*/
                     this.Session.Add("idusuario", resultadoSp.idCliente);
                     this.Session.Add("tipousuario", resultadoSp.tipoCliente);
+                    this.Session.Add("nombreUsuario", resultadoSp.nomCliente);
+                    this.Session.Add("ape1Usuario", resultadoSp.ape1Cliente);
+                    this.Session.Add("ape2Usuario", resultadoSp.ape2Cliente);
                     this.Session.Add("usuariologueado", true);
 
                     this.envioCorreoElectronico();
