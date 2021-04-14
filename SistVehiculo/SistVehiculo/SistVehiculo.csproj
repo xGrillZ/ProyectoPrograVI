@@ -416,6 +416,7 @@
     <Content Include="Scripts\mantFacturas\detalleFactura.js" />
     <Content Include="Scripts\mantFacturas\estadoEncabezadoFactura.js" />
     <Content Include="Scripts\mantFacturas\mantFacturas.js" />
+    <Content Include="Scripts\MantMarcaVehiculos\mantMarcaVehiculos.js" />
     <Content Include="Scripts\mantServiciosProductos\mantServiciosProductos.js" />
     <Content Include="Scripts\mantTiposVehiculos\mantTiposVehiculos.js" />
     <Content Include="Scripts\mantVehiculoCliente\mantVehiculoCliente.js" />
