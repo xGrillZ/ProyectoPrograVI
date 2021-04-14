@@ -134,6 +134,7 @@
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\MantClientesController.cs" />
     <Compile Include="Controllers\MantFacturasController.cs" />
+    <Compile Include="Controllers\MantPaisFabricanteController.cs" />
     <Compile Include="Controllers\MantMarcaVehiculosController.cs" />
     <Compile Include="Controllers\MantServiciosProductosController.cs" />
     <Compile Include="Controllers\MantTipoVehiculosController.cs" />
@@ -413,6 +414,7 @@
     <Content Include="Scripts\mantClientes\mantClientes.js" />
     <Content Include="Scripts\mantClientes\modificaClientes.js" />
     <Content Include="Scripts\mantClientes\reporteClientes.js" />
+    <Content Include="Scripts\MantFabricante\mantFabricante.js" />
     <Content Include="Scripts\mantFacturas\detalleFactura.js" />
     <Content Include="Scripts\mantFacturas\estadoEncabezadoFactura.js" />
     <Content Include="Scripts\mantFacturas\mantFacturas.js" />
@@ -561,6 +563,10 @@
     <Content Include="Views\MantFacturas\ModificaEncabezadoFactura.cshtml" />
     <Content Include="Views\MantClientes\ModificarClientesConsultor.cshtml" />
     <Content Include="Views\MantFacturas\EliminarEncabezadoFactura.cshtml" />
+    <Content Include="Views\MantPaisFabricante\ListaFabricante.cshtml" />
+    <Content Include="Views\MantPaisFabricante\InsertarFabricante.cshtml" />
+    <Content Include="Views\MantPaisFabricante\EliminarFabricante.cshtml" />
+    <Content Include="Views\MantPaisFabricante\ModificarFabricante.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

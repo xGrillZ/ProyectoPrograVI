@@ -1,0 +1,62 @@
+﻿<!--Indicar a la vista el modelo-->
+@model List<SistVehiculo.Models.pa_RetornaMarcaVehiculo_Result>
+
+@section css{
+    <link href="~/Content/mantMarcaVehiculos/mantMarcaVehiculos.css" rel="stylesheet" />
+}
+
+@{
+    ViewBag.Title = "Lista de Fabricantes";
+    Layout = "~/Views/Shared/_LayoutPersonalizado.cshtml";
+}
+
+<h2>Lista de Fabricantes</h2>
+<a href="~/MantPaisFabricante/InsertarFabricante" class="btn btn-success"><i class="fas fa-user-plus"></i> Agregar País Fabricante</a>
+<form id="frmBusquedaMarcaVehiculos" method="post">
+    <div class="row">
+        <div class="form-group col">
+            <label>Código:</label>
+            <input type="text" name="codigo" id="codigo" class="form-control" />
+        </div>
+
+        <div class="form-group col">
+            <label>Marca:</label>
+            <input type="text" name="marca" id="marca" class="form-control" />
+        </div>
+
+        <div class="form-group col">
+            <label>País:</label>
+            <input type="text" name="pais" id="pais" class="form-control" />
+        </div>
+
+        <div class="form-group col">
+            <button type="submit" id="btnAceptar" class="btn btn-info"><i class="fas fa-search"></i> Buscar</button>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <tr>
+        <th>Código</th>
+        <th>País Fabricante</th>
+        <th>Marca</th>
+        <th>Acciones</th>
+    </tr>
+    <!--Incluir código .net
+        Recorrido para la vista
+        -->
+    @{
+        foreach (SistVehiculo.Models.pa_RetornaMarcaVehiculo_Result posicionModelo in this.Model)
+        {
+            <tr>
+                <td>@posicionModelo.codigo</td>
+                <td>@posicionModelo.pais</td>
+                <td>@posicionModelo.marca</td>
+                <td>
+                    <a href="~/MantMarcaVehiculos/ModificarMarcaVehiculos?idMarcaVehiculo=@posicionModelo.idMarcaVehiculo" class="btn btn-warning btnModificar col-md-6">Modificar</a>
+                    <br />
+                    <a href="~/MantMarcaVehiculos/EliminarMarcaVehiculos?idMarcaVehiculo=@posicionModelo.idMarcaVehiculo" class="btn btn-danger btnEliminar col-md-6">Eliminar</a>
+                </td>
+            </tr>
+        }
+    }
+</table>
