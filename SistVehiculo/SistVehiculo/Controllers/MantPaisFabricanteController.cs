@@ -9,7 +9,7 @@ namespace SistVehiculo.Controllers
 {
     public class MantPaisFabricanteController : Controller
     {
-        sistvehiculoviEntities modeloBD = new sistvehiculoviEntities();
+        sistvehiculoviEntities1 modeloBD = new sistvehiculoviEntities1();
         // GET: MantMarcaVehiculos
         public ActionResult ListaFabricante(string pais)
         {

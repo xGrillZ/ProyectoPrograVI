@@ -146,181 +146,184 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Canton.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\clasificacionSP.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cliente.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\detalle_Factura.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Distrito.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Estado.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Factura.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Genero.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MarcaVehiculo.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModeloDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModeloDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModeloDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\PaisFabricante.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaClasificacionSP_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaClienteCorreoPwd_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaClienteID_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaCliente_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaEncabezadoFacturaID_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaEncabezadoFactura_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaEstadoFactura_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaGenero_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaMarcaVehiculoID_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaMarcaVehiculoxPlaca_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaMarcaVehiculo_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaPaisFabricanteID_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaPaisFabricante_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaServiciosClienteConsultorID_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaServiciosCliente_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaServiciosVehiculosConsutorID_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaServiciosVehiculo_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaTipoCliente_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaTipoServicioProductoID_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaTipoServicioProducto_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaTiposVehiculoCliente_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaTiposVehiculoID_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaTiposVehiculo_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaTipoVehiculoxMarca_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaVehiculosClienteIdConsutorID_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaVehiculosClienteID_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaVehiculosCliente_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaVehiculosID_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaVehiculosInsert_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaVehiculosList_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaVehiculosxIDCliente_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaVehiculos_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Provincia.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RetornaCantonesID_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RetornaCantones_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RetornaDistritos_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RetornaProvincias_Result.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ServiciosCliente.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ServiciosVehiculo.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sistVehiculoBD.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>sistVehiculoBD.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sistVehiculoBD.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sistVehiculoBD.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>sistVehiculoBD.edmx</DependentUpon>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoCliente.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TipoServicioProducto.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TiposVehiculo.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vehiculos.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VehiculosCliente.cs">
-      <DependentUpon>sistVehiculoBD.tt</DependentUpon>
+      <DependentUpon>ModeloDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -359,15 +362,15 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\sistVehiculoBD.Context.tt">
+    <Content Include="Models\ModeloDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sistVehiculoBD.edmx</DependentUpon>
-      <LastGenOutput>sistVehiculoBD.Context.cs</LastGenOutput>
+      <DependentUpon>ModeloDB.edmx</DependentUpon>
+      <LastGenOutput>ModeloDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\sistVehiculoBD.tt">
+    <Content Include="Models\ModeloDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>sistVehiculoBD.edmx</DependentUpon>
-      <LastGenOutput>sistVehiculoBD.cs</LastGenOutput>
+      <DependentUpon>ModeloDB.edmx</DependentUpon>
+      <LastGenOutput>ModeloDB.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -392,12 +395,12 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <EntityDeploy Include="Models\sistVehiculoBD.edmx">
+    <EntityDeploy Include="Models\ModeloDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>sistVehiculoBD.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModeloDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\sistVehiculoBD.edmx.diagram">
-      <DependentUpon>sistVehiculoBD.edmx</DependentUpon>
+    <Content Include="Models\ModeloDB.edmx.diagram">
+      <DependentUpon>ModeloDB.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

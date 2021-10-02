@@ -12,7 +12,7 @@ namespace SistVehiculo.Controllers
         /// <summary>
         /// Instancia del modelo de base de datos
         /// </summary>
-        sistvehiculoviEntities modeloBD = new sistvehiculoviEntities();
+        sistvehiculoviEntities1 modeloBD = new sistvehiculoviEntities1();
 
         // GET: Sesion
         public ActionResult Logout()

@@ -16,14 +16,14 @@ namespace SistVehiculo.Models
     {
         public clasificacionSP()
         {
-            this.TipoServicioProducto = new HashSet<TipoServicioProducto>();
             this.ServiciosCliente = new HashSet<ServiciosCliente>();
+            this.TipoServicioProducto = new HashSet<TipoServicioProducto>();
         }
     
         public int id_clasificacionSP { get; set; }
         public string nombreClasificacion { get; set; }
     
-        public virtual ICollection<TipoServicioProducto> TipoServicioProducto { get; set; }
         public virtual ICollection<ServiciosCliente> ServiciosCliente { get; set; }
+        public virtual ICollection<TipoServicioProducto> TipoServicioProducto { get; set; }
     }
 }

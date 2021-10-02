@@ -10,7 +10,7 @@ namespace SistVehiculo.Controllers
     public class MantFacturasController : Controller
     {
         // GET: MantFacturas
-        sistvehiculoviEntities modeloBD = new sistvehiculoviEntities();
+        sistvehiculoviEntities1 modeloBD = new sistvehiculoviEntities1();
 
         public ActionResult ListaEncabezado(string num_factura = null, string estado = null)
         {

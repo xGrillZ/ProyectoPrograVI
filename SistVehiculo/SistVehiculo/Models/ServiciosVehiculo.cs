@@ -14,6 +14,11 @@ namespace SistVehiculo.Models
     
     public partial class ServiciosVehiculo
     {
+        public ServiciosVehiculo()
+        {
+            this.Vehiculos = new HashSet<Vehiculos>();
+        }
+    
         public int idServiciosVehiculo { get; set; }
         public int idTipoServiciosProducto { get; set; }
         public int idVehiculo { get; set; }
@@ -23,5 +28,6 @@ namespace SistVehiculo.Models
         public double precioTotal { get; set; }
     
         public virtual TipoServicioProducto TipoServicioProducto { get; set; }
+        public virtual ICollection<Vehiculos> Vehiculos { get; set; }
     }
 }

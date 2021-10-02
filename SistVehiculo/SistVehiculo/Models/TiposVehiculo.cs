@@ -16,17 +16,17 @@ namespace SistVehiculo.Models
     {
         public TiposVehiculo()
         {
+            this.Factura = new HashSet<Factura>();
             this.Vehiculos = new HashSet<Vehiculos>();
             this.VehiculosCliente = new HashSet<VehiculosCliente>();
-            this.Factura = new HashSet<Factura>();
         }
     
         public int idTipoVehiculo { get; set; }
         public string codigo { get; set; }
         public string tipo { get; set; }
     
+        public virtual ICollection<Factura> Factura { get; set; }
         public virtual ICollection<Vehiculos> Vehiculos { get; set; }
         public virtual ICollection<VehiculosCliente> VehiculosCliente { get; set; }
-        public virtual ICollection<Factura> Factura { get; set; }
     }
 }

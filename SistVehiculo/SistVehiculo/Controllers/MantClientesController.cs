@@ -15,7 +15,7 @@ namespace SistVehiculo.Controllers
         /// <summary>
         /// Creación de la instancia del modelo BD
         /// </summary>
-        sistvehiculoviEntities modeloBD = new sistvehiculoviEntities();
+        sistvehiculoviEntities1 modeloBD = new sistvehiculoviEntities1();
         // GET: MantClientes
         public ActionResult ListaClientes(string numCedula = null, string nomCliente = null, string ape1Cliente = null, string ape2Cliente = null)
         {

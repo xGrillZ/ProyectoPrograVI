@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="06f4c08a4d0e43518de7abd55334055a" Name="Diagram1">
+        <EntityTypeShape EntityType="sistvehiculoviModel.Canton" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.clasificacionSP" Width="1.5" PointX="0.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.Cliente" Width="1.5" PointX="7.5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.detalle_Factura" Width="1.5" PointX="15" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.Distrito" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.Estado" Width="1.5" PointX="7.5" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.Factura" Width="1.5" PointX="9.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.Genero" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.MarcaVehiculo" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.PaisFabricante" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.Provincia" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.ServiciosCliente" Width="1.5" PointX="12.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.ServiciosVehiculo" Width="1.5" PointX="5.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.TipoCliente" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.TipoServicioProducto" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.TiposVehiculo" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.Vehiculos" Width="1.5" PointX="7.5" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistvehiculoviModel.VehiculosCliente" Width="1.5" PointX="9.75" PointY="1.625" IsExpanded="true" />
+        <AssociationConnector Association="sistvehiculoviModel.Canton_ref_Provincia" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.Distrito_ref_Canton" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_Cliente_Canton" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_ServiciosCliente_ClasificacionSP" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_TipoServicioProducto_clasificacionSP" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_Cliente_Distrito" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_Cliente_Genero" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_Cliente_Provincia" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_Cliente_TipoCliente" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_Factura_idCliente" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_ServiciosCliente_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_VehiculosCliente_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_detalleFactura_TipoServicio" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_factura" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_Factura_Estado" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_Factura_idVehiculo" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_Factura_TiposVehiculo" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_MarcaVehiculo_PaisFabricante" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_Vehiculos_MarcaVehiculo" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_ServiciosCliente_TipoServicioProducto" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_ServiciosVehiculo_TipoServicioProducto" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_Vehiculos_TiposVehiculo" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_VehiculosCliente_TiposVehiculo" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.FK_VehiculosCliente_Vehiculo" ManuallyRouted="false" />
+        <AssociationConnector Association="sistvehiculoviModel.Vehiculos_ServiciosVehiculo" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
